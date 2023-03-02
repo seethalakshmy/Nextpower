@@ -1,0 +1,44 @@
+{
+  "list_items": [
+    {
+      "item_id": 1,
+      "item": "noodles",
+      "item_quantity": 1,
+      "item_measure": "no",
+      "is_bought": false
+
+    },
+    {
+      "item_id": 2,
+      "item": "cake",
+      "item_quantity": 1,
+      "item_measure": "kg",
+      "is_bought": false
+
+    },
+    {
+      "item_id": 3,
+      "item": "uzhunu",
+      "item_quantity": 250,
+      "item_measure": "gm",
+      "is_bought": false
+
+    },
+    {
+      "item_id": 4,
+      "item": "ladoo",
+      "item_quantity": 5,
+      "item_measure": "nos",
+      "is_bought": false
+
+    },
+    {
+      "item_id": 5,
+      "item": "milk",
+      "item_quantity": 1,
+      "item_measure": "ltr",
+      "is_bought": false
+
+    }
+  ]
+}
