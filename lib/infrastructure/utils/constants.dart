@@ -1,1 +1,4 @@
-class AppConstants {}
+class AppConstants {
+
+  List<String> countryCodeList =["+91","+353"];
+}
