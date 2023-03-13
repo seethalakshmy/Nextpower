@@ -1,6 +1,6 @@
 class Routes {
   static Future<String> get initialRoute async {
-    return LOGIN;
+    return SPLASH_SCREEN;
   }
 
   static const HOME = '/home';

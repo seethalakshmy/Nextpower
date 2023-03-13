@@ -13,6 +13,7 @@ dependencies:
   cached_network_image: ^3.2.1
   flutter_svg: ^1.1.6
   file_picker: ^5.2.4
+  package_info_plus: ^3.0.3
 
   flutter:
     sdk: flutter
@@ -29,3 +30,4 @@ flutter:
     - assets/json/
     - assets/icons/
     - assets/locales/
+    - assets/logo/

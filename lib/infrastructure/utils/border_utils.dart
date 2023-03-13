@@ -1,16 +1,26 @@
-
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 
-class CustomBorders{
-
+class CustomBorders {
   OutlineInputBorder textFieldBorder() {
     return OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(5.0),
+        borderRadius: borderCircularRadius5(),
+        borderSide: BorderSide(color: AppColors.textBoxBorder));
+  }
+
+  BoxDecoration containerBorder() {
+    return BoxDecoration(
+        border: Border.all(
+          color: AppColors.textBoxBorder,
         ),
-        borderSide:BorderSide(color:AppColors.textBoxBorder)
+        borderRadius: borderCircularRadius5());
+  }
+
+  BorderRadius borderCircularRadius5() {
+    return const BorderRadius.all(
+      Radius.circular(5.0),
     );
   }
+
 }
