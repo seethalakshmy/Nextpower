@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+import 'package:project/infrastructure/utils/snackbar_utils.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
 
 class TermsAndConditionsTextWidget extends StatelessWidget {
   const TermsAndConditionsTextWidget({
@@ -13,15 +15,25 @@ class TermsAndConditionsTextWidget extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: "${LocaleKeys.byContinuingYouAgreeToOur.tr} ",
+        text: "${translate(LocaleKeys.byContinuingYouAgreeToOur)} ",
         style: TextStyle(color: AppColors.titleLabelTextColor),
         children: [
           TextSpan(
-              text: LocaleKeys.termsAndConditions.tr,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  print('tapped');
+                  CustomSnackBar.showErrorSnackBar('Not yet done', "");
+                },
+              text: translate(LocaleKeys.termsAndConditions),
               style: TextStyle(color: AppColors.labelGreenTextColor)),
           const TextSpan(text: ". "),
           TextSpan(
-              text: LocaleKeys.privacyPolicy.tr,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  print('tapped');
+                  CustomSnackBar.showErrorSnackBar('Not yet done', "");
+                },
+              text: translate(LocaleKeys.privacyPolicy),
               style: TextStyle(color: AppColors.labelGreenTextColor))
         ],
       ),

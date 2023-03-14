@@ -7,6 +7,7 @@ import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/decoration_utils.dart';
 import 'package:project/infrastructure/utils/input_formatter_utils.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/utils/validation_utils.dart';
 
 import '../controllers/login.controller.dart';
@@ -52,6 +53,9 @@ class MobileNumberWidget extends GetView<LoginController> {
             const SizedBox(width: 10),
             Expanded(
               child: TextFormField(
+                onTapOutside: (event) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
                 keyboardType: TextInputType.number,
                 inputFormatters: InputFormatterUtils().onlyNumber(),
                 validator: (value) {
@@ -59,8 +63,8 @@ class MobileNumberWidget extends GetView<LoginController> {
                       ValidationUtils().mobileNumberValidation(value) ?? "");
                   return null;
                 },
-                decoration: CustomDecorationUtils()
-                    .textFieldDecoration(hintText: LocaleKeys.mobileNumber.tr),
+                decoration: CustomDecorationUtils().textFieldDecoration(
+                    hintText: translate(LocaleKeys.mobileNumber)),
                 onChanged: (value) {
                   controller.mobileNumber = value;
                 },

@@ -19,6 +19,12 @@ class LocaleKeys {
   static const continueLabel = 'continueLabel';
   static const termsAndConditions = 'termsAndConditions';
   static const privacyPolicy = 'privacyPolicy';
+  static const enterOtp = 'enterOtp';
+  static const enterOtpSentTo = 'enterOtpSentTo';
+  static const enterValidOtp = 'enterValidOtp';
+  static const invalidOtp = 'invalidOtp';
+  static const resendOtp = 'resendOtp';
+  static const changePhoneNumber = 'changePhoneNumber';
   static const a = 'a';
 }
 
@@ -33,6 +39,12 @@ class Locales {
     'continueLabel': 'Continue',
     'termsAndConditions': 'Terms & Conditions',
     'privacyPolicy': 'Privacy Policy',
+    'enterOtp': 'Enter OTP',
+    'enterOtpSentTo': 'Enter the 4-digit OTP that was sent to',
+    'enterValidOtp': 'Enter valid OTP',
+    'invalidOtp': 'Invalid OTP',
+    'resendOtp': 'Resend OTP',
+    'changePhoneNumber': 'Change Phone Number',
     'a': '',
   };
 }

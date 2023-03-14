@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,14 @@ class Utility {
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regExp = RegExp(pattern);
     return regExp.hasMatch(value);
+  }
+
+  static String generate4DigitOTP() {
+    int random = Random().nextInt(9999);
+    String otp = random.toString().length < 3
+        ? (random + 1000).toString()
+        : random.toString();
+    return otp;
   }
 
   Future<String> showDatePickerAlert({required BuildContext context}) async {
