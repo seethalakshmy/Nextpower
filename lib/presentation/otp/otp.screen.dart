@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/widgets/buttons/back_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
 
@@ -19,15 +20,9 @@ class OtpScreen extends GetView<OtpController> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          leading: IconButton(
-            onPressed: () {
-              controller.changePhoneNumber();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
-          ),
+          leading: BackButtonAppbar(onBackPressed: () {
+            controller.changePhoneNumber();
+          }),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -44,7 +39,7 @@ class OtpScreen extends GetView<OtpController> {
                 Obx(() {
                   return SubtitleWidget(
                       subtitle:
-                          "${translate(LocaleKeys.enterOtpSentTo)} ${controller.mobileNumber.value}");
+                          "${translate(LocaleKeys.enterOtpSentTo)} ${controller.numberToDisplay.value}");
                 }),
                 const SizedBox(height: 30),
                 OtpWidget(),
@@ -52,7 +47,8 @@ class OtpScreen extends GetView<OtpController> {
                 RoundedRectangleButton(
                     onPressed: () {
                       if (controller.formKey.currentState!.validate()) {
-                        NavigationUtils().callHomePage();
+                        NavigationUtils().callRegistration(
+                            controller.countryCode, controller.mobileNumber);
                       }
                     },
                     text: translate(LocaleKeys.login)),

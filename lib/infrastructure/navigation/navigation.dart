@@ -46,5 +46,10 @@ class Nav {
       page: () => const OtpScreen(),
       binding: OtpControllerBinding(),
     ),
+    GetPage(
+      name: Routes.REGISTRATION,
+      page: () => const RegistrationScreen(),
+      binding: RegistrationControllerBinding(),
+    ),
   ];
 }

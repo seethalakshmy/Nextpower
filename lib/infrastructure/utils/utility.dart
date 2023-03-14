@@ -42,7 +42,7 @@ class Utility {
 
   static String generate4DigitOTP() {
     int random = Random().nextInt(9999);
-    String otp = random.toString().length < 3
+    String otp = random.toString().length <= 3
         ? (random + 1000).toString()
         : random.toString();
     return otp;

@@ -25,6 +25,18 @@ class LocaleKeys {
   static const invalidOtp = 'invalidOtp';
   static const resendOtp = 'resendOtp';
   static const changePhoneNumber = 'changePhoneNumber';
+  static const createAnAccount = 'createAnAccount';
+  static const pleaseEnterTheFollowingDetailsToCreateAnAccount =
+      'pleaseEnterTheFollowingDetailsToCreateAnAccount';
+  static const name = 'name';
+  static const emailAddress = 'emailAddress';
+  static const register = 'register';
+  static const alreadyHaveAnAccount = 'alreadyHaveAnAccount';
+  static const nameShouldntBeEmpty = 'nameShouldntBeEmpty';
+  static const enterValidName = 'enterValidName';
+  static const enterValidEmailAddress = 'enterValidEmailAddress';
+  static const emailShouldntBeEmpty = 'emailShouldntBeEmpty';
+  static const mobileNumberShouldntBeEmpty = 'mobileNumberShouldntBeEmpty';
   static const a = 'a';
 }
 
@@ -35,7 +47,7 @@ class Locales {
     'pleaseEnterTheDetailsBelowToContinue':
         'Please enter the details below to continue',
     'byContinuingYouAgreeToOur': 'By continuing, you agree to our',
-    'mobileNumber': 'Mobile Number',
+    'mobileNumber': 'Mobile number',
     'continueLabel': 'Continue',
     'termsAndConditions': 'Terms & Conditions',
     'privacyPolicy': 'Privacy Policy',
@@ -44,7 +56,19 @@ class Locales {
     'enterValidOtp': 'Enter valid OTP',
     'invalidOtp': 'Invalid OTP',
     'resendOtp': 'Resend OTP',
-    'changePhoneNumber': 'Change Phone Number',
+    'changePhoneNumber': 'Change phone number',
+    'createAnAccount': 'Create an account',
+    'pleaseEnterTheFollowingDetailsToCreateAnAccount':
+        'Please enter the following details to create an account',
+    'name': 'Name',
+    'emailAddress': 'Email address',
+    'register': 'Register',
+    'alreadyHaveAnAccount': 'Already have an account?',
+    'nameShouldntBeEmpty': 'Name shouldn\'t be empty',
+    'enterValidName': 'Enter a valid name',
+    'enterValidEmailAddress': 'Enter a valid email address',
+    'emailShouldntBeEmpty': 'Email address shouldn\'t be empty',
+    'mobileNumberShouldntBeEmpty': 'Mobile Number should n\'t be empty',
     'a': '',
   };
 }

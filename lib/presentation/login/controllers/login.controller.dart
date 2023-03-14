@@ -51,11 +51,14 @@ class LoginController extends GetxController {
     isLoading(true);
     await Future.delayed(const Duration(seconds: 2));
     formKey.currentState!.validate();
-    isLoading(false);
-
-    String otp = Utility.generate4DigitOTP();
-    CustomSnackBar.showSuccessSnackBar("OTP", otp);
-    NavigationUtils()
-        .callOTPPage(selectedCountryCode + " " + mobileNumber, otp);
+    if (mobileNumberError.value.isEmpty) {
+      String otp = Utility.generate4DigitOTP();
+      CustomSnackBar.showSuccessSnackBar("OTP", otp);
+      NavigationUtils()
+          .callOTPPage(selectedCountryCode.value, mobileNumber, otp);
+      isLoading(false);
+    } else {
+      isLoading(false);
+    }
   }
 }

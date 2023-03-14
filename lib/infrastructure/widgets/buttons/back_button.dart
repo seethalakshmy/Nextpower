@@ -1,17 +1,25 @@
-
 import 'package:flutter/material.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 
 class BackButtonAppbar extends StatelessWidget {
   const BackButtonAppbar({
-    Key? key, required this.onBackPressed,
+    Key? key,
+    this.onBackPressed,
   }) : super(key: key);
 
-  final VoidCallback onBackPressed;
+  final VoidCallback? onBackPressed;
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.arrow_back_ios),
-      onPressed: onBackPressed,
+      icon: const Icon(
+        Icons.arrow_back_ios,
+        color: Colors.black,
+      ),
+      onPressed: onBackPressed ??
+          () {
+            NavigationUtils().goBack();
+          },
     );
   }
 }
