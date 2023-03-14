@@ -4,12 +4,13 @@ import '../../../config.dart';
 import '../../../infrastructure/dal/services/api_service.dart';
 import '../../../infrastructure/storage/app_storage.dart';
 
-class CommonBindings {
-  static init() {
-    Get.lazyPut<ApiService>(
-          () => ApiService(
+class CommonBindings implements Bindings{
+  @override
+  void dependencies() {
+    Get.put<ApiService>(
+          ApiService(
           baseUrl: ConfigEnvironments.getEnvironments()['url'] ?? ""),
     );
-    Get.lazyPut<AppStorage>(() => AppStorage());
+    Get.put<AppStorage>(AppStorage());
   }
 }
