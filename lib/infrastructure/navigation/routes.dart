@@ -6,6 +6,7 @@ class Routes {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const OTP = '/otp';
-  static const SPLASH_SCREEN = '/splash-screen';
   static const REGISTRATION = '/registration';
+  static const SPLASH_SCREEN = '/splash-screen';
+  static const PROFILE = '/profile';
 }

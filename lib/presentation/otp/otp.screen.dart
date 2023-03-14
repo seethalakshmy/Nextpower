@@ -47,8 +47,12 @@ class OtpScreen extends GetView<OtpController> {
                 RoundedRectangleButton(
                     onPressed: () {
                       if (controller.formKey.currentState!.validate()) {
-                        NavigationUtils().callRegistration(
-                            controller.countryCode, controller.mobileNumber);
+                        if (controller.isAccountCreated) {
+                          NavigationUtils().callProfile();
+                        } else {
+                          NavigationUtils().callRegistration(
+                              controller.countryCode, controller.mobileNumber);
+                        }
                       }
                     },
                     text: translate(LocaleKeys.login)),

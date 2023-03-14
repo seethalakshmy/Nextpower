@@ -9,8 +9,11 @@ class OtpController extends GetxController {
   RxString numberToDisplay = "".obs;
   String countryCode = "";
   String mobileNumber = "";
-  String otp = "";
   final formKey = GlobalKey<FormState>();
+
+  //dummy variables
+  String otp = "";
+  bool isAccountCreated = true;
 
   @override
   void onInit() {

@@ -5,6 +5,7 @@ class Assets {
   static const String iconsSubtract = 'assets/icons/subtract.svg';
   static const String iconsSuccessTick = 'assets/icons/success_tick.svg';
   static const String jsonMeasuresList = 'assets/json/measures_list.json';
+  static const String jsonProfile = 'assets/json/profile.json';
   static const String jsonRegistration = 'assets/json/registration.json';
   static const String jsonStocks = 'assets/json/stocks.json';
   static const String localesEnUS = 'assets/locales/en_US.json';

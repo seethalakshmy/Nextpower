@@ -40,7 +40,12 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    Get.offAllNamed(Routes.LOGIN);
+    // Get.offAllNamed(Routes.LOGIN);
     // Get.offAllNamed(Routes.REGISTRATION);
+    Get.offAllNamed(Routes.PROFILE);
+  }
+
+  void callProfile() {
+    Get.offAllNamed(Routes.PROFILE);
   }
 }
