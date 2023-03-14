@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:project/domain/di/common_bindings.dart';
+import 'package:project/infrastructure/theme/app_theme.dart';
 
 import 'generated/locales.g.dart';
 import 'infrastructure/navigation/navigation.dart';
@@ -19,6 +20,7 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialBinding: CommonBindings(),
       initialRoute: initialRoute,
       getPages: Nav.routes,
@@ -28,7 +30,7 @@ class Main extends StatelessWidget {
       ],
       locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
-
+      theme: AppThemes.light,
     );
   }
 }

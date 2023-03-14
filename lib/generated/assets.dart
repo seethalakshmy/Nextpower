@@ -7,5 +7,5 @@ class Assets {
   static const String jsonMeasuresList = 'assets/json/measures_list.json';
   static const String jsonStocks = 'assets/json/stocks.json';
   static const String localesEnUS = 'assets/locales/en_US.json';
-
+  static const String logoLogo = 'assets/logo/logo.png';
 }

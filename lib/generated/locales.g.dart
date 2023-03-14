@@ -11,10 +11,28 @@ class AppTranslation {
 class LocaleKeys {
   LocaleKeys._();
   static const appName = 'appName';
+  static const login = 'login';
+  static const pleaseEnterTheDetailsBelowToContinue =
+      'pleaseEnterTheDetailsBelowToContinue';
+  static const byContinuingYouAgreeToOur = 'byContinuingYouAgreeToOur';
+  static const mobileNumber = 'mobileNumber';
+  static const continueLabel = 'continueLabel';
+  static const termsAndConditions = 'termsAndConditions';
+  static const privacyPolicy = 'privacyPolicy';
+  static const a = 'a';
 }
 
 class Locales {
   static const en_US = {
-    'appName': 'Demo App',
+    'appName': 'Next Power',
+    'login': 'Login',
+    'pleaseEnterTheDetailsBelowToContinue':
+        'Please enter the details below to continue',
+    'byContinuingYouAgreeToOur': 'By continuing, you agree to our',
+    'mobileNumber': 'Mobile Number',
+    'continueLabel': 'Continue',
+    'termsAndConditions': 'Terms & Conditions',
+    'privacyPolicy': 'Privacy Policy',
+    'a': '',
   };
 }
