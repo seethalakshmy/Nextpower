@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
+import 'package:project/infrastructure/utils/snackbar_utils.dart';
+import 'package:project/infrastructure/utils/utility.dart';
 
 class LoginController extends GetxController {
   final selectedCountryCode = "".obs;
@@ -43,12 +46,16 @@ class LoginController extends GetxController {
         lineNumber: lineNumber);
   }
 
-  gotoNextPage() {
+  gotoNextPage() async {
     printData(message: "Mobile number:", value: mobileNumber);
     isLoading(true);
-    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
-      formKey.currentState!.validate();
-      isLoading(false);
-    });
+    await Future.delayed(const Duration(seconds: 2));
+    formKey.currentState!.validate();
+    isLoading(false);
+
+    String otp = Utility.generate4DigitOTP();
+    CustomSnackBar.showSuccessSnackBar("OTP", otp);
+    NavigationUtils()
+        .callOTPPage(selectedCountryCode + " " + mobileNumber, otp);
   }
 }
