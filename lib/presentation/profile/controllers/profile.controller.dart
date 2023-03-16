@@ -25,13 +25,15 @@ class ProfileController extends GetxController {
   String previousEmail = "";
   String previousMobileNumber = "";
   String previousCountryCode = "";
+  RxString userImagePath = "".obs;
+
 
   @override
   void onInit() {
     isLoading(true);
     print('profileController init called');
     ProfileProvider().getProfile(0).then((value) async {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       currentProfileData.value = value;
       previousEmail = value.emailId ?? "";
       previousMobileNumber = value.mobileNumber ?? "";
@@ -122,5 +124,9 @@ class ProfileController extends GetxController {
   void submit() {
     isEditable(false);
     print("Data to pass:${jsonEncode(currentProfileData)}");
+  }
+
+  void gotoLogin() {
+    NavigationUtils().callLoginPage(isLoginPage: false);
   }
 }

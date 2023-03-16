@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/infrastructure/utils/file_picker_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/widgets/buttons/back_button.dart';
@@ -25,44 +28,46 @@ class ProfileScreen extends GetView<ProfileController> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : IgnorePointer(
-              ignoring: !controller.isEditable.value,
-              child: Form(
-                key: controller.formKey,
-                child: ListView(
-                  children: [
-                    _EditIconWidget(controller: controller),
-                    _ImageWidget(controller: controller),
-                    const SizedBox(height: 30),
-                    Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      elevation: 50,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            _NameWidget(controller: controller),
-                            const SizedBox(height: 10),
-                            _MobileNumberWidget(controller: controller),
-                            const SizedBox(height: 10),
-                            _EmailWidget(controller: controller),
-                            const SizedBox(height: 30),
-                            Obx(() => controller.isEditable.value
-                                ? _DoneButtonWidget(controller: controller)
-                                : Text(
-                                    translate(LocaleKeys.changePhoneNumber),
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ))
-                          ],
-                        ),
+          : Form(
+              key: controller.formKey,
+              child: ListView(
+                children: [
+                  _EditIconWidget(controller: controller),
+                  // controller.isEditable.value
+                  //     ? const SizedBox(height: 30)
+                  //     : const SizedBox.shrink(),
+                  _ImageWidget(controller: controller),
+                  const SizedBox(height: 30),
+                  Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    elevation: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          IgnorePointer(
+                            ignoring: !controller.isEditable.value,
+                            child: Column(
+                              children: [
+                                _NameWidget(controller: controller),
+                                const SizedBox(height: 10),
+                                _MobileNumberWidget(controller: controller),
+                                const SizedBox(height: 10),
+                                _EmailWidget(controller: controller),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          Obx(() => controller.isEditable.value
+                              ? _DoneButtonWidget(controller: controller)
+                              : _ChangePhoneNumberWidget(
+                                  controller: controller))
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  )
+                ],
               ),
             )),
     );
@@ -90,6 +95,31 @@ class ProfileScreen extends GetView<ProfileController> {
   }
 }
 
+class _ChangePhoneNumberWidget extends StatelessWidget {
+  const _ChangePhoneNumberWidget({
+    super.key,
+    required this.controller,
+  });
+
+  final ProfileController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        controller.gotoLogin();
+      },
+      child: Text(
+        translate(LocaleKeys.changePhoneNumber),
+        style: const TextStyle(
+          decoration: TextDecoration.underline,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
 class _ImageWidget extends StatelessWidget {
   const _ImageWidget({
     super.key,
@@ -101,36 +131,49 @@ class _ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Stack(children: [
-      CircleAvatar(
-        radius: 50,
-        backgroundColor: Colors.black,
-        child: ClipOval(
-          child: SizedBox(
-            width: 180.0,
-            height: 180.0,
-            child: Image.network(
-              controller.currentProfileData.value.userImage ?? "",
-              fit: BoxFit.fill,
+        child: GestureDetector(
+      onTap: () async {
+        File? file = await FilePickerUtils.pickImage();
+        if (file != null) {
+          controller.userImagePath.value = file.path ?? "";
+        }
+      },
+      child: Stack(children: [
+        CircleAvatar(
+          radius: 50,
+          backgroundColor: Colors.black,
+          child: ClipOval(
+            child: SizedBox(
+              width: 180.0,
+              height: 180.0,
+              child: Obx(() => controller.userImagePath.isNotEmpty
+                  ? Image.file(
+                      File(controller.userImagePath.value),
+                      fit: BoxFit.fill,
+                    )
+                  : Image.network(
+                      controller.currentProfileData.value.userImage ?? "",
+                      fit: BoxFit.fill,
+                    )),
             ),
           ),
         ),
-      ),
-      Obx(() => controller.isEditable.value
-          ? Positioned(
-              bottom: -5,
-              right: -5,
-              child: ClipOval(
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  // color: Colors.blue.withOpacity(0.8),
-                  child:
-                      SvgImageUtils().showSvgFromAsset(Assets.iconsCameraIcon),
+        Obx(() => controller.isEditable.value
+            ? Positioned(
+                bottom: -5,
+                right: -5,
+                child: ClipOval(
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    // color: Colors.blue.withOpacity(0.8),
+                    child: SvgImageUtils()
+                        .showSvgFromAsset(Assets.iconsCameraIcon),
+                  ),
                 ),
-              ),
-            )
-          : const SizedBox.shrink()),
-    ]));
+              )
+            : const SizedBox.shrink()),
+      ]),
+    ));
   }
 }
 
@@ -144,16 +187,20 @@ class _EditIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isEditable.value
-        ? const SizedBox.shrink()
-        : Align(
+    return Obx(() => Visibility(
+          visible: !controller.isEditable.value,
+          maintainSize: true,
+          maintainAnimation: true,
+          maintainState: true,
+          child: Align(
             alignment: Alignment.centerRight,
             child: IconButton(
                 onPressed: () {
                   controller.setProfileEditable();
                 },
                 icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit)),
-          ));
+          ),
+        ));
   }
 }
 

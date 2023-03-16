@@ -45,6 +45,7 @@ class LocaleKeys {
       'kindlyValidateAllFieldsAndTryAgain';
   static const verify = 'verify';
   static const profile = 'profile';
+  static const pleaseEnterTheNumberToChange = 'pleaseEnterTheNumberToChange';
   static const a = 'a';
 }
 
@@ -85,6 +86,7 @@ class Locales {
         'Kindly validate all fields and try again',
     'verify': 'Verify',
     'profile': 'Profile',
+    'pleaseEnterTheNumberToChange': 'Please enter the number to change',
     'a': '',
   };
 }

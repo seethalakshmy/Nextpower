@@ -4,4 +4,6 @@ class ParamName {
   static String otp = "otp";
 
   static var isVerify = "is_verify";
+
+  static var isLoginPage = "is_login_page";
 }

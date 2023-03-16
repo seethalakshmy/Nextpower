@@ -4,15 +4,13 @@ import 'package:project/infrastructure/navigation/routes.dart';
 import '../utils/param_name.dart';
 
 class NavigationUtils {
-  void callLoginPage({bool clearStack = false}) {
+  void callLoginPage({bool clearStack = false, bool isLoginPage = true}) {
     if (clearStack) {
-      Get.offAllNamed(
-        Routes.LOGIN,
-      );
+      Get.offAllNamed(Routes.LOGIN,
+          parameters: {ParamName.isLoginPage: isLoginPage.toString()});
     } else {
-      Get.toNamed(
-        Routes.LOGIN,
-      );
+      Get.toNamed(Routes.LOGIN,
+          parameters: {ParamName.isLoginPage: isLoginPage.toString()});
     }
   }
 
@@ -46,7 +44,7 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    // Get.offAllNamed(Routes.LOGIN);
+    // callLoginPage(isLoginPage: false);
     // Get.offAllNamed(Routes.REGISTRATION);
     Get.offAllNamed(Routes.PROFILE);
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
+import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/utility.dart';
@@ -16,9 +17,16 @@ class LoginController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
+  bool isLoginPage = true; //Page reused for change phone number
 
   @override
   void onInit() {
+    isLoginPage = (Get.parameters[ParamName.isLoginPage] ?? "")
+                .toString()
+                .compareTo("true") ==
+            0
+        ? true
+        : false;
     setCountryCode();
     super.onInit();
   }
