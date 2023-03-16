@@ -54,8 +54,11 @@ class LoginController extends GetxController {
     if (mobileNumberError.value.isEmpty) {
       String otp = Utility.generate4DigitOTP();
       CustomSnackBar.showSuccessSnackBar("OTP", otp);
-      NavigationUtils()
-          .callOTPPage(selectedCountryCode.value, mobileNumber, otp);
+      NavigationUtils().callOTPPage(
+          countryCode: selectedCountryCode.value,
+          mobileNumber: mobileNumber,
+          otp: otp,
+          isVerify: false);
       isLoading(false);
     } else {
       isLoading(false);

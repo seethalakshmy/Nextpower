@@ -18,6 +18,7 @@ class MobileNumberWidget extends StatelessWidget {
     required this.title,
     this.isEnabled = true,
     this.mobileNumber = "",
+    this.suffix,
   });
 
   final Function onCountryCodeChanged;
@@ -28,6 +29,8 @@ class MobileNumberWidget extends StatelessWidget {
   final String title;
   final bool isEnabled;
   final String mobileNumber;
+
+  final Widget? suffix;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +74,7 @@ class MobileNumberWidget extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: TextFormField(
+                style: TextStyle(color: isEnabled ? null : Colors.grey),
                 initialValue: mobileNumber,
                 enabled: isEnabled,
                 onTapOutside: (event) {
@@ -83,7 +87,8 @@ class MobileNumberWidget extends StatelessWidget {
                     hintText: translate(
                       LocaleKeys.mobileNumber,
                     ),
-                    color: errorText.isNotEmpty ? AppColors.errorRed : null),
+                    color: errorText.isNotEmpty ? AppColors.errorRed : null,
+                    suffix: suffix),
                 onChanged: (value) {
                   onMobileNumberChanged(value);
                 },

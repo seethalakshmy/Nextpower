@@ -36,7 +36,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
                   subtitle: translate(LocaleKeys
                       .pleaseEnterTheFollowingDetailsToCreateAnAccount)),
               const SizedBox(height: 10),
-              NameWidget(
+              CommonTextFieldWidget(
                   title: translate(LocaleKeys.name),
                   onNameChanged: (value) {},
                   validator: (value) {
@@ -71,7 +71,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
                         controller.registrationModel.value.countryCode ?? "",
                   )),
               const SizedBox(height: 10),
-              NameWidget(
+              CommonTextFieldWidget(
                 title: 'Email address',
                 onNameChanged: (value) {},
                 validator: (value) => ValidationUtils().emailValidation(value),

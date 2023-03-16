@@ -37,6 +37,14 @@ class LocaleKeys {
   static const enterValidEmailAddress = 'enterValidEmailAddress';
   static const emailShouldntBeEmpty = 'emailShouldntBeEmpty';
   static const mobileNumberShouldntBeEmpty = 'mobileNumberShouldntBeEmpty';
+  static const done = 'done';
+  static const error = 'error';
+  static const somethingWentWrongPleaseTryAgainLater =
+      'somethingWentWrongPleaseTryAgainLater';
+  static const kindlyValidateAllFieldsAndTryAgain =
+      'kindlyValidateAllFieldsAndTryAgain';
+  static const verify = 'verify';
+  static const profile = 'profile';
   static const a = 'a';
 }
 
@@ -69,6 +77,14 @@ class Locales {
     'enterValidEmailAddress': 'Enter a valid email address',
     'emailShouldntBeEmpty': 'Email address shouldn\'t be empty',
     'mobileNumberShouldntBeEmpty': 'Mobile Number should n\'t be empty',
+    'done': 'Done',
+    'error': 'Error',
+    'somethingWentWrongPleaseTryAgainLater':
+        'Something went wrong. Please try again later',
+    'kindlyValidateAllFieldsAndTryAgain':
+        'Kindly validate all fields and try again',
+    'verify': 'Verify',
+    'profile': 'Profile',
     'a': '',
   };
 }

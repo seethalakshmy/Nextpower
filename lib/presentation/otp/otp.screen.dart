@@ -21,68 +21,90 @@ class OtpScreen extends GetView<OtpController> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: BackButtonAppbar(onBackPressed: () {
-            controller.changePhoneNumber();
+            if (controller.isVerify.value) {
+              Get.back(result: false);
+            } else {
+              controller.changePhoneNumber();
+            }
           }),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Form(
-            key: controller.formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                HeadingTextWidget(
-                  title: translate(LocaleKeys.enterOtp),
-                ),
-                const SizedBox(height: 10),
-                Obx(() {
-                  return SubtitleWidget(
-                      subtitle:
-                          "${translate(LocaleKeys.enterOtpSentTo)} ${controller.numberToDisplay.value}");
-                }),
-                const SizedBox(height: 30),
-                OtpWidget(),
-                const SizedBox(height: 20),
-                RoundedRectangleButton(
-                    onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {
-                        if (controller.isAccountCreated) {
-                          NavigationUtils().callProfile();
-                        } else {
-                          NavigationUtils().callRegistration(
-                              controller.countryCode, controller.mobileNumber);
-                        }
-                      }
-                    },
-                    text: translate(LocaleKeys.login)),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        controller.resendOTP();
-                      },
-                      child: Text(
-                        translate(LocaleKeys.resendOtp),
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline),
+          child: Obx(() =>
+              IgnorePointer(
+                ignoring: controller.isLoading.value,
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      HeadingTextWidget(
+                        title: translate(LocaleKeys.enterOtp),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        controller.changePhoneNumber();
-                      },
-                      child: Text(translate(LocaleKeys.changePhoneNumber),
-                          style: const TextStyle(
-                              decoration: TextDecoration.underline)),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
+                      const SizedBox(height: 10),
+                      Obx(() {
+                        return SubtitleWidget(
+                            subtitle:
+                            "${translate(
+                                LocaleKeys.enterOtpSentTo)} ${controller
+                                .numberToDisplay.value}");
+                      }),
+                      const SizedBox(height: 30),
+                      OtpWidget(),
+                      const SizedBox(height: 20),
+                      Obx(() =>
+                          RoundedRectangleButton(
+                              onPressed: () async {
+                                controller.isLoading(true);
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  await Future.delayed(
+                                      const Duration(seconds: 2));
+                                  if (controller.isVerify.value) {
+                                    controller.isLoading(false);
+                                    Get.back(result: true);
+                                  } else if (controller.isAccountCreated) {
+                                    NavigationUtils().callProfile();
+                                  } else {
+                                    NavigationUtils().callRegistration(
+                                        controller.countryCode,
+                                        controller.mobileNumber);
+                                  }
+                                }
+                              },
+                              isLoading: controller.isLoading.value,
+                              text: controller.isVerify.value
+                                  ? translate(LocaleKeys.verify)
+                                  : translate(LocaleKeys.login))),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              controller.resendOTP();
+                            },
+                            child: Text(
+                              translate(LocaleKeys.resendOtp),
+                              style: const TextStyle(
+                                  decoration: TextDecoration.underline),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              controller.changePhoneNumber();
+                            },
+                            child: Text(translate(LocaleKeys.changePhoneNumber),
+                                style: const TextStyle(
+                                    decoration: TextDecoration.underline)),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )),
         ));
   }
 }
