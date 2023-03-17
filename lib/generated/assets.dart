@@ -71,10 +71,21 @@ class Assets {
   static const String iconsWalletIcon = 'assets/icons/wallet_icon.svg';
   static const String iconsWalletVector = 'assets/icons/wallet_vector.svg';
   static const String iconsWebsite = 'assets/icons/website.svg';
+  static const String jsonAddEditAddress = 'assets/json/add_edit_address.json';
+  static const String jsonChargingSessionDetails = 'assets/json/charging_session_details.json';
+  static const String jsonEditRfidNameStatus = 'assets/json/edit_rfid_name_status.json';
+  static const String jsonFavoritesList = 'assets/json/favorites_list.json';
   static const String jsonMeasuresList = 'assets/json/measures_list.json';
   static const String jsonProfile = 'assets/json/profile.json';
   static const String jsonRegistration = 'assets/json/registration.json';
+  static const String jsonRfidTagList = 'assets/json/rfid_tag_list.json';
+  static const String jsonStationBrief = 'assets/json/station_brief.json';
+  static const String jsonStationConnectorsList = 'assets/json/station_connectors_list.json';
+  static const String jsonStationListInput = 'assets/json/station_list_input.json';
+  static const String jsonStationsList = 'assets/json/stations_list.json';
   static const String jsonStocks = 'assets/json/stocks.json';
+  static const String jsonUsageHistoryDetails = 'assets/json/usage_history_details.json';
+  static const String jsonUsageHistoryList = 'assets/json/usage_history_list.json';
   static const String localesEnUS = 'assets/locales/en_US.json';
   static const String logoLogo = 'assets/logo/logo.png';
 

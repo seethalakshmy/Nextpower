@@ -1,0 +1,10 @@
+{
+  "id": 5172,
+  "total_cost": 97.73,
+  "total_unit": 2.55,
+  "connector": "connector name",
+  "start_time": "01 DEC 2022, 7.34 AM",
+  "end_time": "01 DEC 2022, 8.00 AM",
+  "status": "success",
+  "transaction_status": "inactive"
+}

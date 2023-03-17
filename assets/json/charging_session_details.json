@@ -1,0 +1,16 @@
+{
+  "station_name": "Next Power 1",
+  "charging_point_name": "next power point 2",
+  "connector_name": "connector #3",
+  "connector_type": "CCS | Plug",
+  "pricing": {
+    "power": "60KW",
+    "type": "DC",
+    "tariff": "$15 /kwh + tax"
+  },
+  "kw": "15",
+  "status": "available",
+  "has_reserve": true,
+  "charge_option": 1,
+  "charge_option_value": "50"
+}

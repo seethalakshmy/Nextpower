@@ -1,0 +1,50 @@
+{
+  "station_id": 1,
+  "station_name": "Next Power 1",
+  "station_status": "available",
+  "overview": {
+    "lat": "1234567",
+    "long": "123456786543",
+    "share_text": "",
+    "mobile_number": "",
+    "is_favorite": true,
+    "address": "",
+    "mail_id": "",
+    "amenities": [
+      "Wifi",
+      "Parking",
+      "Mall",
+      "Cafe",
+      "Restaurant"
+    ]
+  },
+  "connectors_list": [
+    {
+      "connector_id": 1,
+      "charging_point_name": "next power point 1",
+      "kw": "15",
+      "status": "available",
+      "connector_name": "connector #1",
+      "tariff": "$15 /kwh + tax",
+      "has_reserve": false
+    },
+    {
+      "connector_id": 2,
+      "charging_point_name": "next power point 1",
+      "kw": "15",
+      "status": "available",
+      "connector_name": "connector #2",
+      "tariff": "$15 /kwh + tax",
+      "has_reserve": true
+    },
+    {
+      "connector_id": 3,
+      "charging_point_name": "next power point 2",
+      "kw": "15",
+      "status": "available",
+      "connector_name": "connector #3",
+      "tariff": "$15 /kwh + tax",
+      "has_reserve": true
+    }
+  ]
+}
