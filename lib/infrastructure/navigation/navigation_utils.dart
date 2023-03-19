@@ -45,7 +45,7 @@ class NavigationUtils {
 
   void goFromSplash() {
     // callLoginPage(isLoginPage: false);
-    Get.offAllNamed(Routes.MY_VEHICLES);
+    Get.offAllNamed(Routes.MY_ADDRESS);
     // Get.offAllNamed(Routes.HOME);
   }
 
@@ -57,8 +57,17 @@ class NavigationUtils {
     Get.toNamed(Routes.MY_VEHICLES);
   }
 
-  void callMyVehiclesAddEditPage(int vehicleId) {
+  void callMyVehiclesAddEditPage(int id) {
     Get.toNamed(Routes.MY_VEHICLES_ADD_EDIT,
-        parameters: {ParamName.vehicleId: vehicleId.toString()});
+        parameters: {ParamName.vehicleId: id.toString()});
+  }
+
+  void callMyAddress() {
+    Get.toNamed(Routes.MY_ADDRESS);
+  }
+
+  void callMyAddressAddEditPage(int id) {
+    Get.toNamed(Routes.MY_ADDRESS_ADD_EDIT,
+        parameters: {ParamName.addressId: id.toString()});
   }
 }

@@ -10,7 +10,6 @@ class AppTranslation {
 
 class LocaleKeys {
   LocaleKeys._();
-
   static const appName = 'appName';
   static const login = 'login';
   static const pleaseEnterTheDetailsBelowToContinue =
@@ -52,6 +51,18 @@ class LocaleKeys {
   static const model = 'model';
   static const number = 'number';
   static const vehicle = 'vehicle';
+  static const myAddress = 'myAddress';
+  static const address = 'address';
+  static const addressLine1 = 'addressLine1';
+  static const addressLine2 = 'addressLine2';
+  static const city = 'city';
+  static const state = 'state';
+  static const country = 'country';
+  static const company = 'company';
+  static const gstNo = 'gstNo';
+  static const postalCode = 'postalCode';
+  static const shouldntBeEmpty = 'shouldntBeEmpty';
+  static const choose = 'choose';
   static const a = 'a';
 }
 
@@ -98,6 +109,18 @@ class Locales {
     'model': 'Model',
     'number': 'Number',
     'vehicle': 'Vehicle',
+    'myAddress': 'My Address',
+    'address': 'Address',
+    'addressLine1': 'Address line 1',
+    'addressLine2': 'Address line 2',
+    'city': 'City',
+    'state': 'State',
+    'country': 'Country',
+    'company': 'Company',
+    'gstNo': 'GST no.',
+    'postalCode': 'Postal code',
+    'shouldntBeEmpty': 'should n\'t be empty',
+    'choose': 'Choose',
     'a': '',
   };
 }
