@@ -9,7 +9,9 @@ import 'routes.dart';
 
 class EnvironmentsBadge extends StatelessWidget {
   final Widget child;
+
   const EnvironmentsBadge({super.key, required this.child});
+
   @override
   Widget build(BuildContext context) {
     var env = ConfigEnvironments.getEnvironments()['env'];
@@ -65,6 +67,16 @@ class Nav {
       name: Routes.MY_VEHICLES_ADD_EDIT,
       page: () => const MyVehiclesAddEditScreen(),
       binding: MyVehiclesAddEditControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MY_ADDRESS,
+      page: () => const MyAddressScreen(),
+      binding: MyAddressControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MY_ADDRESS_ADD_EDIT,
+      page: () => const MyAddressAddEditScreen(),
+      binding: MyAddressAddEditControllerBinding(),
     ),
   ];
 }

@@ -36,5 +36,17 @@
   "model": "Model",
   "number": "Number",
   "vehicle": "Vehicle",
+  "myAddress": "My Address",
+  "address": "Address",
+  "addressLine1": "Address line 1",
+  "addressLine2": "Address line 2",
+  "city": "City",
+  "state": "State",
+  "country": "Country",
+  "company": "Company",
+  "gstNo": "GST no.",
+  "postalCode": "Postal code",
+  "shouldntBeEmpty": "should n't be empty",
+  "choose": "Choose",
   "a": ""
 }

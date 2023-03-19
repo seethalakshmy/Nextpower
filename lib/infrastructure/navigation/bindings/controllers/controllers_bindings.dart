@@ -1,5 +1,7 @@
 export 'package:project/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/login.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/my_address.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/my_address_add_edit.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicles.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicles_add_edit.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/otp.controller.binding.dart'; 

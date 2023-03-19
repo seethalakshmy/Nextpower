@@ -1,0 +1,14 @@
+{
+  "status": true,
+  "message": "Success",
+  "states": [
+    {
+      "id": 1,
+      "name": "Andaman And Nicobar Islands"
+    },
+    {
+      "id": 2,
+      "name": "Andhra Pradesh"
+    }
+  ]
+}

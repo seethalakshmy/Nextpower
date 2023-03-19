@@ -39,6 +39,12 @@ class HomeScreen extends GetView<HomeController> {
                 NavigationUtils().callMyVehicles();
               },
             ),
+            ListTile(
+              title: Text(translate(LocaleKeys.myAddress)),
+              onTap: () {
+                NavigationUtils().callMyAddress();
+              },
+            ),
           ],
         ),
       ),

@@ -1,0 +1,15 @@
+{
+  "address": [
+    {
+      "address_id": 1,
+      "address_line1": "XIII/399",
+      "address_line2": "Edappilly junction",
+      "city": "Kochi",
+      "state_id": 1,
+      "postal_code": "682024",
+      "country_id": 1,
+      "company_name": "Seeroo",
+      "gst_no": "GSTIN1234589"
+    }
+  ]
+}

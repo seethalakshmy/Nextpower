@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/decoration_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class CommonTextFieldWidget extends StatelessWidget {
   const CommonTextFieldWidget({
@@ -27,12 +27,7 @@ class CommonTextFieldWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (title.isNotEmpty)
-          Text(
-            title,
-            style:
-                TextStyle(fontSize: 18, color: AppColors.titleLabelTextColor),
-          ),
+        if (title.isNotEmpty) TitleWidget(title: title),
         if (title.isNotEmpty) const SizedBox(height: 10),
         TextFormField(
           initialValue: initialValue,

@@ -8,4 +8,6 @@ class ParamName {
   static var isLoginPage = "is_login_page";
 
   static var vehicleId = "vehicle_id";
+
+  static var addressId = "address_id";
 }
