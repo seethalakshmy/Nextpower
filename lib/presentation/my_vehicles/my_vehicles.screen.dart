@@ -35,7 +35,7 @@ class MyVehiclesScreen extends GetView<MyVehiclesController> {
                 children: [
                   const SizedBox(height: 10),
                   Image.asset(
-                    Assets.iconsMicrosoftTeamsImage,
+                    Assets.iconsMyVehicleCar,
                     height: 150,
                     width: 150,
                   ),
