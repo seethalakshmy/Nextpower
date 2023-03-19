@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+
+import '../buttons/back_button.dart';
+
+class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppbar(
+      {Key? key,
+      required this.title,
+      this.leading,
+      this.onBackPressed,
+      this.centerTitle})
+      : super(key: key);
+
+  final String title;
+  final Widget? leading;
+  final VoidCallback? onBackPressed;
+  final bool? centerTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.black),
+      ),
+      centerTitle: centerTitle ?? true,
+      leading: leading ??
+          BackButtonAppbar(
+            onBackPressed: onBackPressed,
+          ),
+      // actions: [
+      //   Obx(() => controller.isEditable.value
+      //       ? const SizedBox.shrink()
+      //       : IconButton(
+      //           onPressed: () {
+      //             controller.setProfileEditable();
+      //           },
+      //           icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit)))
+      // ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

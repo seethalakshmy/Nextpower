@@ -56,5 +56,15 @@ class Nav {
       page: () => const ProfileScreen(),
       binding: ProfileControllerBinding(),
     ),
+    GetPage(
+      name: Routes.MY_VEHICLES,
+      page: () => const MyVehiclesScreen(),
+      binding: MyVehiclesControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MY_VEHICLES_ADD_EDIT,
+      page: () => const MyVehiclesAddEditScreen(),
+      binding: MyVehiclesAddEditControllerBinding(),
+    ),
   ];
 }

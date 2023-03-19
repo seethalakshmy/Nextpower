@@ -6,7 +6,9 @@ import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/utils/file_picker_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
-import 'package:project/infrastructure/widgets/buttons/back_button.dart';
+import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
+import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
+import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 
 import '../../generated/locales.g.dart';
 import '../../infrastructure/utils/print_utils.dart';
@@ -25,9 +27,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return Scaffold(
       appBar: profileAppBar(),
       body: Obx(() => controller.isLoading.value
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const LoadingWidget()
           : Form(
               key: controller.formKey,
               child: ListView(
@@ -38,9 +38,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   //     : const SizedBox.shrink(),
                   _ImageWidget(controller: controller),
                   const SizedBox(height: 30),
-                  Card(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    elevation: 50,
+                  CustomCardView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -73,24 +71,9 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
-  AppBar profileAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      title: Text(
-        translate(LocaleKeys.profile),
-        style: const TextStyle(color: Colors.black),
-      ),
-      centerTitle: true,
-      leading: const BackButtonAppbar(),
-      // actions: [
-      //   Obx(() => controller.isEditable.value
-      //       ? const SizedBox.shrink()
-      //       : IconButton(
-      //           onPressed: () {
-      //             controller.setProfileEditable();
-      //           },
-      //           icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit)))
-      // ],
+  CustomAppbar profileAppBar() {
+    return CustomAppbar(
+      title: translate(LocaleKeys.profile),
     );
   }
 }

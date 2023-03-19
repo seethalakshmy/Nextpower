@@ -6,4 +6,6 @@ class ParamName {
   static var isVerify = "is_verify";
 
   static var isLoginPage = "is_login_page";
+
+  static var vehicleId = "vehicle_id";
 }

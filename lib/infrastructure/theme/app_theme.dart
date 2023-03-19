@@ -4,11 +4,11 @@ import 'package:project/infrastructure/theme/app_colors.dart';
 class AppThemes {
   static ThemeData light = ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    primaryColor: AppColors.primaryColor,
+    primaryColor: AppColors.primaryBlue,
   );
 
   static ThemeData dark = ThemeData(
     scaffoldBackgroundColor: Colors.black,
-      primaryColor: AppColors.errorRed,
+    primaryColor: AppColors.primaryBlue,
   );
 }

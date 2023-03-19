@@ -31,5 +31,10 @@
   "verify": "Verify",
   "profile": "Profile",
   "pleaseEnterTheNumberToChange": "Please enter the number to change",
+  "myVehicles": "My Vehicles",
+  "make": "Make",
+  "model": "Model",
+  "number": "Number",
+  "vehicle": "Vehicle",
   "a": ""
 }

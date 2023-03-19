@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String assetsIconsAboutusImage = 'assets/icons/aboutus_image.svg';
+  static const String icons0001 = 'assets/icons/0001.svg';
   static const String iconsAboutusImage = 'assets/icons/aboutus_image.jpg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
   static const String iconsArrowUp = 'assets/icons/arrow_up.svg';
@@ -43,6 +44,7 @@ class Assets {
   static const String iconsMenuSupport = 'assets/icons/menu_support.svg';
   static const String iconsMenuVehicle = 'assets/icons/menu_vehicle.svg';
   static const String iconsMenuWallet = 'assets/icons/menu_wallet.svg';
+  static const String iconsMicrosoftTeamsImage = 'assets/icons/MicrosoftTeams-image.png';
   static const String iconsMyAddressLocation = 'assets/icons/my_address_location.svg';
   static const String iconsMyVehicleCar = 'assets/icons/my_vehicle_car.svg';
   static const String iconsNotification = 'assets/icons/notification.svg';
@@ -86,6 +88,7 @@ class Assets {
   static const String jsonStocks = 'assets/json/stocks.json';
   static const String jsonUsageHistoryDetails = 'assets/json/usage_history_details.json';
   static const String jsonUsageHistoryList = 'assets/json/usage_history_list.json';
+  static const String jsonVehiclesList = 'assets/json/vehicles_list.json';
   static const String localesEnUS = 'assets/locales/en_US.json';
   static const String logoLogo = 'assets/logo/logo.png';
 

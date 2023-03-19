@@ -10,6 +10,7 @@ class AppTranslation {
 
 class LocaleKeys {
   LocaleKeys._();
+
   static const appName = 'appName';
   static const login = 'login';
   static const pleaseEnterTheDetailsBelowToContinue =
@@ -46,6 +47,11 @@ class LocaleKeys {
   static const verify = 'verify';
   static const profile = 'profile';
   static const pleaseEnterTheNumberToChange = 'pleaseEnterTheNumberToChange';
+  static const myVehicles = 'myVehicles';
+  static const make = 'make';
+  static const model = 'model';
+  static const number = 'number';
+  static const vehicle = 'vehicle';
   static const a = 'a';
 }
 
@@ -87,6 +93,11 @@ class Locales {
     'verify': 'Verify',
     'profile': 'Profile',
     'pleaseEnterTheNumberToChange': 'Please enter the number to change',
+    'myVehicles': 'My Vehicles',
+    'make': 'Make',
+    'model': 'Model',
+    'number': 'Number',
+    'vehicle': 'Vehicle',
     'a': '',
   };
 }

@@ -40,16 +40,25 @@ class NavigationUtils {
   }
 
   void goBack() {
-    Get.back();
+    Get.back(closeOverlays: true);
   }
 
   void goFromSplash() {
     // callLoginPage(isLoginPage: false);
-    // Get.offAllNamed(Routes.REGISTRATION);
-    Get.offAllNamed(Routes.PROFILE);
+    Get.offAllNamed(Routes.MY_VEHICLES);
+    // Get.offAllNamed(Routes.HOME);
   }
 
   void callProfile() {
     Get.offAllNamed(Routes.PROFILE);
+  }
+
+  void callMyVehicles() {
+    Get.toNamed(Routes.MY_VEHICLES);
+  }
+
+  void callMyVehiclesAddEditPage(int vehicleId) {
+    Get.toNamed(Routes.MY_VEHICLES_ADD_EDIT,
+        parameters: {ParamName.vehicleId: vehicleId.toString()});
   }
 }
