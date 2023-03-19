@@ -42,7 +42,7 @@ class Utility {
 
   static String generate4DigitOTP() {
     int random = Random().nextInt(9999);
-    String otp = random.toString().length < 3
+    String otp = random.toString().length <= 3
         ? (random + 1000).toString()
         : random.toString();
     return otp;
@@ -110,19 +110,6 @@ class Utility {
   static Future<File?> pickFile() async {
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(allowMultiple: false);
-    if (result != null) {
-      File file = File(result.files.single.path ?? "");
-      return Future.value(file);
-    } else {
-      // User canceled the picker
-      return null;
-    }
-  }
-
-  static Future<File?> pickImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        allowedExtensions: ['jpg', 'JPG', 'png', 'PNG', 'jpeg', 'JPEG']);
     if (result != null) {
       File file = File(result.files.single.path ?? "");
       return Future.value(file);

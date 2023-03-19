@@ -46,5 +46,25 @@ class Nav {
       page: () => const OtpScreen(),
       binding: OtpControllerBinding(),
     ),
+    GetPage(
+      name: Routes.REGISTRATION,
+      page: () => const RegistrationScreen(),
+      binding: RegistrationControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PROFILE,
+      page: () => const ProfileScreen(),
+      binding: ProfileControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MY_VEHICLES,
+      page: () => const MyVehiclesScreen(),
+      binding: MyVehiclesControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MY_VEHICLES_ADD_EDIT,
+      page: () => const MyVehiclesAddEditScreen(),
+      binding: MyVehiclesAddEditControllerBinding(),
+    ),
   ];
 }

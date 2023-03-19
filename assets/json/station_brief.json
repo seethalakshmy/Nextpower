@@ -1,0 +1,10 @@
+{
+  "station_name": "",
+  "kwh": "3.3 KW",
+  "distance": "13 km",
+  "lat": "123456",
+  "long": "2134567",
+  "free": 1,
+  "active": 2,
+  "status": "available"
+}

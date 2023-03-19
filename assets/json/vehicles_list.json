@@ -1,0 +1,16 @@
+{
+  "vehicles": [
+    {
+      "vehicle_id": 1,
+      "vehicle_number": "KL 04 AH 8827",
+      "vehicle_make": "kia",
+      "vehicle_model": "EV6"
+    },
+    {
+      "vehicle_id": 2,
+      "vehicle_number": "KL 04 AH 4891",
+      "vehicle_make": "BMW",
+      "vehicle_model": "17"
+    }
+  ]
+}

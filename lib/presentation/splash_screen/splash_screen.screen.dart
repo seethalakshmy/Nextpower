@@ -21,7 +21,7 @@ class _SplashScreenScreenState extends State<SplashScreenScreen> {
     getVersionNumber();
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      NavigationUtils().callLoginPage();
+      NavigationUtils().goFromSplash();
     });
   }
 

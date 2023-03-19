@@ -1,0 +1,10 @@
+{
+  "rfid_list": [
+    {
+      "tag_id": 1,
+      "tag_name": "test",
+      "tag_issued_date": "12 JAN 2023",
+      "tag_status": true
+    }
+  ]
+}

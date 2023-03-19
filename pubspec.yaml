@@ -11,10 +11,10 @@ dependencies:
   intl: ^0.18.0
   get_storage: ^2.0.3
   cached_network_image: ^3.2.1
-  flutter_svg: ^1.1.6
-  file_picker: ^5.2.4
+  file_picker: ^5.2.6
   package_info_plus: ^3.0.3
   pinput: ^2.2.31
+  flutter_svg: ^2.0.4
 
   flutter:
     sdk: flutter
