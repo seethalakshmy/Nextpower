@@ -48,5 +48,15 @@
   "postalCode": "Postal code",
   "shouldntBeEmpty": "should n't be empty",
   "choose": "Choose",
+  "station": "Station",
+  "wallet": "Wallet",
+  "chargingHistory": "Charging history",
+  "rfidTag": "RFID tag",
+  "support": "Support",
+  "aboutUs": "About us",
+  "logout": "Logout",
+  "a": "",
+  "a": "",
+  "a": "",
   "a": ""
 }

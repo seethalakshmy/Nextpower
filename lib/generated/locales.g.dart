@@ -63,6 +63,13 @@ class LocaleKeys {
   static const postalCode = 'postalCode';
   static const shouldntBeEmpty = 'shouldntBeEmpty';
   static const choose = 'choose';
+  static const station = 'station';
+  static const wallet = 'wallet';
+  static const chargingHistory = 'chargingHistory';
+  static const rfidTag = 'rfidTag';
+  static const support = 'support';
+  static const aboutUs = 'aboutUs';
+  static const logout = 'logout';
   static const a = 'a';
 }
 
@@ -121,6 +128,13 @@ class Locales {
     'postalCode': 'Postal code',
     'shouldntBeEmpty': 'should n\'t be empty',
     'choose': 'Choose',
+    'station': 'Station',
+    'wallet': 'Wallet',
+    'chargingHistory': 'Charging history',
+    'rfidTag': 'RFID tag',
+    'support': 'Support',
+    'aboutUs': 'About us',
+    'logout': 'Logout',
     'a': '',
   };
 }

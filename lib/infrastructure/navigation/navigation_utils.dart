@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:project/infrastructure/navigation/routes.dart';
+import 'package:project/infrastructure/utils/snackbar_utils.dart';
 
 import '../utils/param_name.dart';
 
@@ -28,8 +29,12 @@ class NavigationUtils {
     return verified;
   }
 
-  void callHomePage() {
-    Get.toNamed(Routes.HOME);
+  void callHomePage({bool clearStack = false}) {
+    if (clearStack) {
+      Get.offAllNamed(Routes.HOME);
+    } else {
+      Get.toNamed(Routes.HOME);
+    }
   }
 
   void callRegistration(String countryCode, String mobileNumber) {
@@ -39,18 +44,29 @@ class NavigationUtils {
     });
   }
 
-  void goBack() {
+  Future<bool> goBack() async {
     Get.back(closeOverlays: true);
+    return true;
+  }
+
+  void callLogout() async {
+    callLoginPage(
+      clearStack: true,
+    );
   }
 
   void goFromSplash() {
     // callLoginPage(isLoginPage: false);
-    Get.offAllNamed(Routes.MY_ADDRESS);
-    // Get.offAllNamed(Routes.HOME);
+    // Get.offAllNamed(Routes.MY_ADDRESS);
+    Get.offAllNamed(Routes.HOME);
   }
 
-  void callProfile() {
-    Get.offAllNamed(Routes.PROFILE);
+  void callProfile({bool clearStack = false}) {
+    if (clearStack) {
+      Get.offAllNamed(Routes.PROFILE);
+    } else {
+      Get.toNamed(Routes.PROFILE);
+    }
   }
 
   void callMyVehicles() {
@@ -69,5 +85,9 @@ class NavigationUtils {
   void callMyAddressAddEditPage(int id) {
     Get.toNamed(Routes.MY_ADDRESS_ADD_EDIT,
         parameters: {ParamName.addressId: id.toString()});
+  }
+
+  callScreenYetToBeDone() {
+    CustomSnackBar.showErrorSnackBar('Error', "Screen yet to be done");
   }
 }
