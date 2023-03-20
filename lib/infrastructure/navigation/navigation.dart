@@ -78,5 +78,15 @@ class Nav {
       page: () => const MyAddressAddEditScreen(),
       binding: MyAddressAddEditControllerBinding(),
     ),
+    GetPage(
+      name: Routes.STATION_LIST,
+      page: () => const StationListScreen(),
+      binding: StationListControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.STATION_DETAILS,
+      page: () => const StationDetailsScreen(),
+      binding: StationDetailsControllerBinding(),
+    ),
   ];
 }

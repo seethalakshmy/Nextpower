@@ -8,17 +8,20 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       required this.title,
       this.leading,
       this.onBackPressed,
-      this.centerTitle})
+      this.centerTitle,
+      this.elevation})
       : super(key: key);
 
   final String title;
   final Widget? leading;
   final VoidCallback? onBackPressed;
   final bool? centerTitle;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: elevation,
       backgroundColor: Colors.white,
       title: Text(
         title,

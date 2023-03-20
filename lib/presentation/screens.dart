@@ -8,3 +8,5 @@ export 'package:project/presentation/otp/otp.screen.dart';
 export 'package:project/presentation/profile/profile.screen.dart';
 export 'package:project/presentation/registration/registration.screen.dart';
 export 'package:project/presentation/splash_screen/splash_screen.screen.dart';
+export 'package:project/presentation/station.details/station_details.screen.dart';
+export 'package:project/presentation/station_list/station_list.screen.dart';

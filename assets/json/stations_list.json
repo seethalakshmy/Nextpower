@@ -2,11 +2,13 @@
   "station_list": [
     {
       "station_id": 1,
+      "station_name": "Station name 1",
       "lat": "85.479344",
       "long": "4.5323434"
     },
     {
       "station_id": 2,
+      "station_name": "Station name 2",
       "lat": "85.479344",
       "long": "4.5323434"
     }

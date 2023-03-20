@@ -70,6 +70,10 @@ class LocaleKeys {
   static const support = 'support';
   static const aboutUs = 'aboutUs';
   static const logout = 'logout';
+  static const connectors = 'connectors';
+  static const overview = 'overview';
+  static const all = 'all';
+  static const free = 'free';
   static const a = 'a';
 }
 
@@ -135,6 +139,10 @@ class Locales {
     'support': 'Support',
     'aboutUs': 'About us',
     'logout': 'Logout',
+    'connectors': 'Connectors',
+    'overview': 'Overview',
+    'all': 'All',
+    'free': 'Free',
     'a': '',
   };
 }

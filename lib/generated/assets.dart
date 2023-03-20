@@ -83,7 +83,7 @@ class Assets {
   static const String jsonRfidTagList = 'assets/json/rfid_tag_list.json';
   static const String jsonStateList = 'assets/json/state_list.json';
   static const String jsonStationBrief = 'assets/json/station_brief.json';
-  static const String jsonStationConnectorsList = 'assets/json/station_connectors_list.json';
+  static const String jsonStationDetails = 'assets/json/station_details.json';
   static const String jsonStationListInput = 'assets/json/station_list_input.json';
   static const String jsonStationsList = 'assets/json/stations_list.json';
   static const String jsonStocks = 'assets/json/stocks.json';

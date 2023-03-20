@@ -45,7 +45,7 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.station,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils().callStationList(),
             asset: Assets.iconsMenuStation,
           ),
           _DrawerItem(

@@ -90,4 +90,12 @@ class NavigationUtils {
   callScreenYetToBeDone() {
     CustomSnackBar.showErrorSnackBar('Error', "Screen yet to be done");
   }
+
+  callStationList() {
+    Get.toNamed(Routes.STATION_LIST);
+  }
+
+  void callStationDetails() {
+    Get.toNamed(Routes.STATION_DETAILS);
+  }
 }
