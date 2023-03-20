@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/file_picker_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
@@ -24,50 +25,53 @@ class ProfileScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: profileAppBar(),
-      body: Obx(() => controller.isLoading.value
-          ? const LoadingWidget()
-          : Form(
-              key: controller.formKey,
-              child: ListView(
-                children: [
-                  _EditIconWidget(controller: controller),
-                  // controller.isEditable.value
-                  //     ? const SizedBox(height: 30)
-                  //     : const SizedBox.shrink(),
-                  _ImageWidget(controller: controller),
-                  const SizedBox(height: 30),
-                  CustomCardView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          IgnorePointer(
-                            ignoring: !controller.isEditable.value,
-                            child: Column(
-                              children: [
-                                _NameWidget(controller: controller),
-                                const SizedBox(height: 10),
-                                _MobileNumberWidget(controller: controller),
-                                const SizedBox(height: 10),
-                                _EmailWidget(controller: controller),
-                              ],
+    return WillPopScope(
+      onWillPop: NavigationUtils().goBack,
+      child: Scaffold(
+        appBar: profileAppBar(),
+        body: Obx(() => controller.isLoading.value
+            ? const LoadingWidget()
+            : Form(
+                key: controller.formKey,
+                child: ListView(
+                  children: [
+                    _EditIconWidget(controller: controller),
+                    // controller.isEditable.value
+                    //     ? const SizedBox(height: 30)
+                    //     : const SizedBox.shrink(),
+                    _ImageWidget(controller: controller),
+                    const SizedBox(height: 30),
+                    CustomCardView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            IgnorePointer(
+                              ignoring: !controller.isEditable.value,
+                              child: Column(
+                                children: [
+                                  _NameWidget(controller: controller),
+                                  const SizedBox(height: 10),
+                                  _MobileNumberWidget(controller: controller),
+                                  const SizedBox(height: 10),
+                                  _EmailWidget(controller: controller),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 30),
-                          Obx(() => controller.isEditable.value
-                              ? _DoneButtonWidget(controller: controller)
-                              : _ChangePhoneNumberWidget(
-                                  controller: controller))
-                        ],
+                            const SizedBox(height: 30),
+                            Obx(() => controller.isEditable.value
+                                ? _DoneButtonWidget(controller: controller)
+                                : _ChangePhoneNumberWidget(
+                                    controller: controller))
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-            )),
+                    )
+                  ],
+                ),
+              )),
+      ),
     );
   }
 

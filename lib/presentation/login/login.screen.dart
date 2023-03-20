@@ -22,7 +22,7 @@ class LoginScreen extends GetView<LoginController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: const BackButtonAppbar(),
+        leading: !controller.isLoginPage ? const BackButtonAppbar() : null,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),

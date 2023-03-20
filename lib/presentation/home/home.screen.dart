@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/drawer/custom_drawer.dart';
 
 import 'controllers/home.controller.dart';
 
@@ -16,38 +14,7 @@ class HomeScreen extends GetView<HomeController> {
         title: const Text('HomeScreen'),
         centerTitle: true,
       ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: Text(translate(LocaleKeys.profile)),
-              onTap: () {
-                NavigationUtils().callProfile();
-              },
-            ),
-            ListTile(
-              title: Text(translate(LocaleKeys.myVehicles)),
-              onTap: () {
-                NavigationUtils().callMyVehicles();
-              },
-            ),
-            ListTile(
-              title: Text(translate(LocaleKeys.myAddress)),
-              onTap: () {
-                NavigationUtils().callMyAddress();
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawerWidget(),
       body: Center(
         child: Text(
           'HomeScreen is working',

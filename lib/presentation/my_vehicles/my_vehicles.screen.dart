@@ -17,34 +17,37 @@ class MyVehiclesScreen extends GetView<MyVehiclesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppbar(
-          title: translate(LocaleKeys.myVehicles),
-          centerTitle: false,
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            NavigationUtils().callMyVehiclesAddEditPage(0);
-          },
-          backgroundColor: AppColors.primaryGreen,
-          child: const Icon(Icons.add),
-        ),
-        body: Obx(() => controller.isLoading.value
-            ? const LoadingWidget()
-            : Column(
-                children: [
-                  const SizedBox(height: 10),
-                  Image.asset(
-                    Assets.iconsMyVehicleCar,
-                    height: 150,
-                    width: 150,
-                  ),
-                  const SizedBox(height: 10),
-                  _ContentView(
-                    controller: controller,
-                  ),
-                ],
-              )));
+    return WillPopScope(
+      onWillPop: NavigationUtils().goBack,
+      child: Scaffold(
+          appBar: CustomAppbar(
+            title: translate(LocaleKeys.myVehicles),
+            centerTitle: false,
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              NavigationUtils().callMyVehiclesAddEditPage(0);
+            },
+            backgroundColor: AppColors.primaryGreen,
+            child: const Icon(Icons.add),
+          ),
+          body: Obx(() => controller.isLoading.value
+              ? const LoadingWidget()
+              : Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Image.asset(
+                      Assets.iconsMyVehicleCar,
+                      height: 150,
+                      width: 150,
+                    ),
+                    const SizedBox(height: 10),
+                    _ContentView(
+                      controller: controller,
+                    ),
+                  ],
+                ))),
+    );
   }
 }
 
