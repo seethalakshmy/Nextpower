@@ -43,26 +43,27 @@ class CustomDrawerWidget extends StatelessWidget {
               ],
             ),
           ),
-          _DrawerItem(
-            title: LocaleKeys.station,
-            onPressed: () => NavigationUtils().callStationList(),
-            asset: Assets.iconsMenuStation,
-          ),
+          // _DrawerItem(
+          //   title: LocaleKeys.station,
+          //   onPressed: () => NavigationUtils().callStationList(),
+          //   asset: Assets.iconsMenuStation,
+          // ),
           _DrawerItem(
             title: LocaleKeys.profile,
-            onPressed: () => NavigationUtils().callProfile(),
+            onPressed: () =>
+                NavigationUtils().callProfile(isCalledFrom: 'drawer'),
             asset: Assets.iconsMenuProfile,
           ),
-          _DrawerItem(
-            title: LocaleKeys.wallet,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
-            asset: Assets.iconsMenuWallet,
-          ),
-          _DrawerItem(
-            title: LocaleKeys.chargingHistory,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
-            asset: Assets.iconsMenuChargingHistory,
-          ),
+          // _DrawerItem(
+          //   title: LocaleKeys.wallet,
+          //   onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+          //   asset: Assets.iconsMenuWallet,
+          // ),
+          // _DrawerItem(
+          //   title: LocaleKeys.chargingHistory,
+          //   onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+          //   asset: Assets.iconsMenuChargingHistory,
+          // ),
           _DrawerItem(
             title: LocaleKeys.myVehicles,
             onPressed: () => NavigationUtils().callMyVehicles(),
@@ -73,29 +74,29 @@ class CustomDrawerWidget extends StatelessWidget {
             onPressed: () => NavigationUtils().callMyAddress(),
             asset: Assets.iconsMenuMyAddress,
           ),
-          _DrawerItem(
-            title: LocaleKeys.rfidTag,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
-            asset: Assets.iconsMenuRfidTag,
-          ),
-          _DrawerItem(
-            title: LocaleKeys.support,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
-            asset: Assets.iconsMenuSupport,
-          ),
-          const Divider(),
-          _DrawerItem(
-            title: LocaleKeys.aboutUs,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
-            asset: Assets.iconsMenuAboutus,
-          ),
-          _DrawerItem(
-            title: LocaleKeys.logout,
-            onPressed: () => NavigationUtils().callLogout(),
-            asset: Assets.iconsMenuLogout,
-          ),
-          const SizedBox(height: 30),
-          SvgImageUtils().showSvgFromAsset(Assets.iconsMenuNextPowerLogo)
+          // _DrawerItem(
+          //   title: LocaleKeys.rfidTag,
+          //   onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+          //   asset: Assets.iconsMenuRfidTag,
+          // ),
+          // _DrawerItem(
+          //   title: LocaleKeys.support,
+          //   onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+          //   asset: Assets.iconsMenuSupport,
+          // ),
+          // const Divider(),
+          // _DrawerItem(
+          //   title: LocaleKeys.aboutUs,
+          //   onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+          //   asset: Assets.iconsMenuAboutus,
+          // ),
+          // _DrawerItem(
+          //   title: LocaleKeys.logout,
+          //   onPressed: () => NavigationUtils().callLogout(),
+          //   asset: Assets.iconsMenuLogout,
+          // ),
+          // const SizedBox(height: 30),
+          // SvgImageUtils().showSvgFromAsset(Assets.iconsMenuNextPowerLogo)
         ],
       ),
     );

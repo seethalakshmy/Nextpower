@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/utility.dart';
 
@@ -26,12 +27,13 @@ class ProfileController extends GetxController {
   String previousMobileNumber = "";
   String previousCountryCode = "";
   RxString userImagePath = "".obs;
-
+  String from = ""; //not used now
 
   @override
   void onInit() {
-    isLoading(true);
     print('profileController init called');
+    isLoading(true);
+    from = Get.parameters[ParamName.from].toString();
     ProfileProvider().getProfile(0).then((value) async {
       await Future.delayed(const Duration(seconds: 2));
       currentProfileData.value = value;

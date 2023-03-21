@@ -15,6 +15,9 @@ class AppColors {
   static Color titleLabelTextColor = fromHex('#5A6077');
   static Color labelGreenTextColor = fromHex('#80B720');
 
+  //color picked
+  static Color subTitleTextColor2 = fromHex('#585F83');
+
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');

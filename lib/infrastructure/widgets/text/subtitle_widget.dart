@@ -6,10 +6,12 @@ class SubtitleWidget extends StatelessWidget {
     super.key,
     required this.subtitle,
     this.fontWeight,
+    this.textColor,
   });
 
   final String subtitle;
   final FontWeight? fontWeight;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SubtitleWidget extends StatelessWidget {
       subtitle,
       style: TextStyle(
           fontSize: 16,
-          color: AppColors.descriptionTextColor,
+          color: textColor ?? AppColors.descriptionTextColor,
           fontWeight: fontWeight),
     );
   }

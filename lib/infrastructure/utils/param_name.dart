@@ -12,4 +12,6 @@ class ParamName {
   static var addressId = "address_id";
 
   static var stationId = "station_id";
+
+  static var from = "from";
 }

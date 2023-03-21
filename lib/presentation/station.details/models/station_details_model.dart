@@ -5,19 +5,18 @@ class StationDetails {
   Overview? overview;
   List<ConnectorsList>? connectorsList;
 
-  StationDetails(
-      {this.stationId,
-      this.stationName,
-      this.stationStatus,
-      this.overview,
-      this.connectorsList});
+  StationDetails({this.stationId,
+    this.stationName,
+    this.stationStatus,
+    this.overview,
+    this.connectorsList});
 
   StationDetails.fromJson(Map<String, dynamic> json) {
     stationId = json['station_id'];
     stationName = json['station_name'];
     stationStatus = json['station_status'];
     overview =
-        json['overview'] != null ? Overview?.fromJson(json['overview']) : null;
+    json['overview'] != null ? Overview?.fromJson(json['overview']) : null;
     if (json['connectors_list'] != null) {
       connectorsList = <ConnectorsList>[];
       json['connectors_list'].forEach((v) {
@@ -51,15 +50,14 @@ class Overview {
   String? mailId;
   List<String>? amenities;
 
-  Overview(
-      {this.lat,
-      this.long,
-      this.shareText,
-      this.mobileNumber,
-      this.isFavorite,
-      this.address,
-      this.mailId,
-      this.amenities});
+  Overview({this.lat,
+    this.long,
+    this.shareText,
+    this.mobileNumber,
+    this.isFavorite,
+    this.address,
+    this.mailId,
+    this.amenities});
 
   Overview.fromJson(Map<String, dynamic> json) {
     lat = json['lat'];
@@ -92,17 +90,17 @@ class ConnectorsList {
   String? kw;
   String? status;
   String? connectorName;
+  String? connectorType;
   String? tariff;
   bool? hasReserve;
 
-  ConnectorsList(
-      {this.connectorId,
-      this.chargingPointName,
-      this.kw,
-      this.status,
-      this.connectorName,
-      this.tariff,
-      this.hasReserve});
+  ConnectorsList({this.connectorId,
+    this.chargingPointName,
+    this.kw,
+    this.status,
+    this.connectorName,
+    this.tariff,
+    this.hasReserve});
 
   ConnectorsList.fromJson(Map<String, dynamic> json) {
     connectorId = json['connector_id'];
@@ -110,6 +108,7 @@ class ConnectorsList {
     kw = json['kw'];
     status = json['status'];
     connectorName = json['connector_name'];
+    connectorType = json['connector_type'];
     tariff = json['tariff'];
     hasReserve = json['has_reserve'];
   }
@@ -121,6 +120,7 @@ class ConnectorsList {
     data['kw'] = kw;
     data['status'] = status;
     data['connector_name'] = connectorName;
+    data['connector_type'] = connectorType;
     data['tariff'] = tariff;
     data['has_reserve'] = hasReserve;
     return data;

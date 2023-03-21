@@ -59,7 +59,7 @@ class OtpScreen extends GetView<OtpController> {
                                 controller.isLoading(false);
                                 Get.back(result: true);
                               } else if (controller.isAccountCreated) {
-                                NavigationUtils().callProfile(clearStack: true);
+                                NavigationUtils().callHomePage();
                               } else {
                                 NavigationUtils().callRegistration(
                                     controller.countryCode,

@@ -10,6 +10,8 @@ class StationDetailsController extends GetxController {
   RxBool isSelectedConnectorView = true.obs;
   RxBool isAllFilterChosen = true.obs;
 
+  RxList<int> openedIndexes = <int>[].obs;
+
   @override
   void onInit() {
     isLoading(true);
@@ -29,5 +31,13 @@ class StationDetailsController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  setIndexesData(index) {
+    if (openedIndexes.contains(index)) {
+      openedIndexes.remove(index);
+    } else {
+      openedIndexes.add(index);
+    }
   }
 }

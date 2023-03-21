@@ -25,6 +25,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #1",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": false
     },
@@ -34,6 +35,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #2",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": true
     },
@@ -43,6 +45,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #3",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": true
     }

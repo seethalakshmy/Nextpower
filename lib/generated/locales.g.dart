@@ -74,6 +74,10 @@ class LocaleKeys {
   static const overview = 'overview';
   static const all = 'all';
   static const free = 'free';
+  static const kw = 'kw';
+  static const tariff = 'tariff';
+  static const charge = 'charge';
+  static const reserve = 'reserve';
   static const a = 'a';
 }
 
@@ -143,6 +147,10 @@ class Locales {
     'overview': 'Overview',
     'all': 'All',
     'free': 'Free',
+    'kw': 'KW',
+    'tariff': 'Tariff',
+    'charge': 'Charge',
+    'reserve': 'Reserve',
     'a': '',
   };
 }
