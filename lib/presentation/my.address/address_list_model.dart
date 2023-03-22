@@ -25,6 +25,8 @@ class Address {
   int? addressId;
   String? addressLine1;
   String? addressLine2;
+  String? countryName;
+  String? stateName;
   String? city;
   int? stateId;
   String? postalCode;
@@ -49,8 +51,10 @@ class Address {
     addressLine2 = json['address_line2'];
     city = json['city'];
     stateId = json['state_id'];
+    stateName = json['state_name'];
     postalCode = json['postal_code'];
     countryId = json['country_id'];
+    countryName = json['country_name'];
     companyName = json['company_name'];
     gstNo = json['gst_no'];
   }
@@ -62,8 +66,10 @@ class Address {
     data['address_line2'] = addressLine2;
     data['city'] = city;
     data['state_id'] = stateId;
+    data['state_name'] = stateName;
     data['postal_code'] = postalCode;
     data['country_id'] = countryId;
+    data['country_name'] = countryName;
     data['company_name'] = companyName;
     data['gst_no'] = gstNo;
     return data;

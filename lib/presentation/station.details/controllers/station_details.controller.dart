@@ -40,4 +40,17 @@ class StationDetailsController extends GetxController {
       openedIndexes.add(index);
     }
   }
+
+  String getAmenities() {
+    String amenities = "";
+
+    var list = details?.overview?.amenities ?? [];
+    for (int i = 0; i < list.length; i++) {
+      amenities = amenities + list[i];
+      if (i != list.length - 1) {
+        amenities = "$amenities | ";
+      }
+    }
+    return amenities;
+  }
 }

@@ -63,6 +63,13 @@
   "tariff": "Tariff",
   "charge": "Charge",
   "reserve": "Reserve",
+  "direction": "Direction",
+  "share": "Share",
+  "call": "Call",
+  "favourites": "Favorites",
+  "amenities": "Amenities",
+  "noSuchStationsFound": "No such stations found",
+  "oops": "Oops",
   "a": "",
   "a": "",
   "a": ""

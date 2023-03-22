@@ -20,7 +20,9 @@ class HeaderView extends GetView<StationDetailsController> {
       color: AppColors.primaryBlue,
       width: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // BackButtonAppbar(),
           SvgImageUtils().showSvgFromAsset(Assets.iconsStationCarIllustration),
           Container(
             width: double.infinity,

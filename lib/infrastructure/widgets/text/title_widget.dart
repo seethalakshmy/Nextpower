@@ -6,10 +6,12 @@ class TitleWidget extends StatelessWidget {
     super.key,
     required this.title,
     this.fontWeight,
+    this.color,
   });
 
   final String title;
   final FontWeight? fontWeight;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class TitleWidget extends StatelessWidget {
       title,
       style: TextStyle(
           fontSize: 18,
-          color: AppColors.titleLabelTextColor,
+          color: color ?? AppColors.titleTextColor,
           fontWeight: fontWeight),
     );
   }

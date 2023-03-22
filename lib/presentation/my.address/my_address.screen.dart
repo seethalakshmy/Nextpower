@@ -12,6 +12,7 @@ import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 
 import 'controllers/my_address.controller.dart';
+import 'widgets/show_address_widget.dart';
 
 class MyAddressScreen extends GetView<MyAddressController> {
   const MyAddressScreen({Key? key}) : super(key: key);
@@ -99,28 +100,13 @@ class _ContentView extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgImageUtils().showSvgFromAsset(Assets.iconsLocation),
-                    const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Wrap(
-                          children: [
-                            Text(controller.address[index].addressLine1 ?? ""),
-                            Text(
-                                "${(controller.address[index].addressLine2 != null || controller.address[index].addressLine2!.isNotEmpty) ? "," : ""} ${controller.address[index].addressLine2 ?? ""}"),
-                            Text(
-                                "${(controller.address[index].city != null || controller.address[index].city!.isNotEmpty) ? "," : ""} ${controller.address[index].city ?? ""}"),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(controller.address[index].postalCode ?? "")
-                      ],
-                    )
-                  ],
+                ShowAddressWidget(
+                  addressLine1: controller.address[index].addressLine1 ?? "",
+                  addressLine2: controller.address[index].addressLine2 ?? "",
+                  city: controller.address[index].city ?? "",
+                  country: controller.address[index].countryName ?? "",
+                  state: controller.address[index].stateName ?? "",
+                  postalCode: controller.address[index].postalCode ?? "",
                 ),
                 const SizedBox(height: 10),
               ],

@@ -6,8 +6,10 @@
       "address_line2": "Edappilly junction",
       "city": "Kochi",
       "state_id": 1,
+      "State_name": "Kerala",
       "postal_code": "682024",
       "country_id": 1,
+      "country_name": "India",
       "company_name": "Seeroo",
       "gst_no": "GSTIN1234589"
     }

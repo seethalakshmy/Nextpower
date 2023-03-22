@@ -78,6 +78,13 @@ class LocaleKeys {
   static const tariff = 'tariff';
   static const charge = 'charge';
   static const reserve = 'reserve';
+  static const direction = 'direction';
+  static const share = 'share';
+  static const call = 'call';
+  static const favourites = 'favourites';
+  static const amenities = 'amenities';
+  static const noSuchStationsFound = 'noSuchStationsFound';
+  static const oops = 'oops';
   static const a = 'a';
 }
 
@@ -151,6 +158,13 @@ class Locales {
     'tariff': 'Tariff',
     'charge': 'Charge',
     'reserve': 'Reserve',
+    'direction': 'Direction',
+    'share': 'Share',
+    'call': 'Call',
+    'favourites': 'Favorites',
+    'amenities': 'Amenities',
+    'noSuchStationsFound': 'No such stations found',
+    'oops': 'Oops',
     'a': '',
   };
 }

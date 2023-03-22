@@ -1,3 +1,5 @@
+import '../../my.address/address_list_model.dart';
+
 class StationDetails {
   int? stationId;
   String? stationName;
@@ -5,18 +7,19 @@ class StationDetails {
   Overview? overview;
   List<ConnectorsList>? connectorsList;
 
-  StationDetails({this.stationId,
-    this.stationName,
-    this.stationStatus,
-    this.overview,
-    this.connectorsList});
+  StationDetails(
+      {this.stationId,
+      this.stationName,
+      this.stationStatus,
+      this.overview,
+      this.connectorsList});
 
   StationDetails.fromJson(Map<String, dynamic> json) {
     stationId = json['station_id'];
     stationName = json['station_name'];
     stationStatus = json['station_status'];
     overview =
-    json['overview'] != null ? Overview?.fromJson(json['overview']) : null;
+        json['overview'] != null ? Overview?.fromJson(json['overview']) : null;
     if (json['connectors_list'] != null) {
       connectorsList = <ConnectorsList>[];
       json['connectors_list'].forEach((v) {
@@ -44,28 +47,33 @@ class Overview {
   String? lat;
   String? long;
   String? shareText;
+  String? openTime;
   String? mobileNumber;
   bool? isFavorite;
-  String? address;
+  Address? address;
   String? mailId;
   List<String>? amenities;
 
-  Overview({this.lat,
-    this.long,
-    this.shareText,
-    this.mobileNumber,
-    this.isFavorite,
-    this.address,
-    this.mailId,
-    this.amenities});
+  Overview(
+      {this.lat,
+      this.long,
+      this.shareText,
+      this.mobileNumber,
+      this.isFavorite,
+      this.address,
+      this.mailId,
+      this.amenities});
 
   Overview.fromJson(Map<String, dynamic> json) {
     lat = json['lat'];
     long = json['long'];
     shareText = json['share_text'];
     mobileNumber = json['mobile_number'];
+    openTime = json['open_time'];
     isFavorite = json['is_favorite'];
-    address = json['address'];
+    address =
+        json['address'] != null ? Address?.fromJson(json['address']) : null;
+
     mailId = json['mail_id'];
     amenities = json['amenities'].cast<String>();
   }
@@ -76,8 +84,11 @@ class Overview {
     data['long'] = long;
     data['share_text'] = shareText;
     data['mobile_number'] = mobileNumber;
+    data['open_time'] = openTime;
     data['is_favorite'] = isFavorite;
-    data['address'] = address;
+    if (address != null) {
+      data['address'] = address?.toJson();
+    }
     data['mail_id'] = mailId;
     data['amenities'] = amenities;
     return data;
@@ -94,13 +105,14 @@ class ConnectorsList {
   String? tariff;
   bool? hasReserve;
 
-  ConnectorsList({this.connectorId,
-    this.chargingPointName,
-    this.kw,
-    this.status,
-    this.connectorName,
-    this.tariff,
-    this.hasReserve});
+  ConnectorsList(
+      {this.connectorId,
+      this.chargingPointName,
+      this.kw,
+      this.status,
+      this.connectorName,
+      this.tariff,
+      this.hasReserve});
 
   ConnectorsList.fromJson(Map<String, dynamic> json) {
     connectorId = json['connector_id'];
