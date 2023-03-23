@@ -6,13 +6,13 @@ class CustomBorders {
   OutlineInputBorder textFieldBorder({Color? color}) {
     return OutlineInputBorder(
         borderRadius: borderCircularRadius5(),
-        borderSide: BorderSide(color: color ?? AppColors.textBoxBorder));
+        borderSide: BorderSide(color: color ?? AppColors.fieldColor));
   }
 
   BoxDecoration containerBorder({Color? color}) {
     return BoxDecoration(
         border: Border.all(
-          color: color ?? AppColors.textBoxBorder,
+          color: color ?? AppColors.fieldColor,
         ),
         borderRadius: borderCircularRadius5());
   }

@@ -32,8 +32,10 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
               child: ListView(
                 children: [
                   const SizedBox(height: 10),
-                  SvgImageUtils()
-                      .showSvgFromAsset(Assets.iconsMyAddressLocation),
+                  SvgImageUtils().showSvgFromAsset(
+                      Assets.iconsMyAddressLocation,
+                      width: 150,
+                      height: 150),
                   const SizedBox(height: 10),
                   CustomCardView(
                       padding: const EdgeInsets.all(20),
@@ -191,6 +193,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               text: translate(LocaleKeys.done))
                         ],
                       )),
+                  const SizedBox(height: 20),
                 ],
               ),
             )),

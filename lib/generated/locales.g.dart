@@ -12,6 +12,7 @@ class LocaleKeys {
   LocaleKeys._();
   static const appName = 'appName';
   static const login = 'login';
+  static const signup = 'signup';
   static const pleaseEnterTheDetailsBelowToContinue =
       'pleaseEnterTheDetailsBelowToContinue';
   static const byContinuingYouAgreeToOur = 'byContinuingYouAgreeToOur';
@@ -92,6 +93,7 @@ class Locales {
   static const en_US = {
     'appName': 'Next Power',
     'login': 'Login',
+    'signup': 'Signup',
     'pleaseEnterTheDetailsBelowToContinue':
         'Please enter the details below to continue',
     'byContinuingYouAgreeToOur': 'By continuing, you agree to our',

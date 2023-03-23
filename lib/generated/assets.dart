@@ -39,6 +39,7 @@ class Assets {
   static const String iconsMenuMyAddress = 'assets/icons/menu_my_address.svg';
   static const String iconsMenuNextPowerLogo = 'assets/icons/menu_next_power_logo.svg';
   static const String iconsMenuProfile = 'assets/icons/menu_profile.svg';
+  static const String iconsMenuProfileImage = 'assets/icons/menu_profile_image.png';
   static const String iconsMenuRfidTag = 'assets/icons/menu_rfid_tag.svg';
   static const String iconsMenuStation = 'assets/icons/menu_station.svg';
   static const String iconsMenuSupport = 'assets/icons/menu_support.svg';

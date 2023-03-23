@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 
 class RoundedRectangleButton extends StatelessWidget {
   const RoundedRectangleButton({
@@ -21,11 +22,11 @@ class RoundedRectangleButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            backgroundColor: AppColors.primaryBlue),
         child: isLoading
             ? SizedBox(
                 height: loaderSize,
@@ -35,6 +36,10 @@ class RoundedRectangleButton extends StatelessWidget {
                   strokeWidth: 2,
                 ),
               )
-            : Text(text));
+            : Text(
+                text.toUpperCase(),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ));
   }
 }

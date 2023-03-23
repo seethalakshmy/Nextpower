@@ -143,7 +143,7 @@ class _LabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: TextStyle(color: AppColors.labelTextColor1),
+      style: TextStyle(color: AppColors.iconColor),
     );
   }
 }

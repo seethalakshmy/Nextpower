@@ -14,8 +14,8 @@ class OtpWidget extends GetView<OtpController> {
   });
 
   final defaultPinTheme = PinTheme(
-    width: 56,
-    height: 56,
+    width: double.infinity,
+    height: 50,
     textStyle: const TextStyle(
         fontSize: 20,
         color: Color.fromRGBO(30, 60, 87, 1),

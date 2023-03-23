@@ -56,10 +56,10 @@ class LoginController extends GetxController {
 
   gotoNextPage() async {
     printData(message: "Mobile number:", value: mobileNumber);
-    isLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
     formKey.currentState!.validate();
     if (mobileNumberError.value.isEmpty) {
+      isLoading(true);
+      await Future.delayed(const Duration(seconds: 2));
       String otp = Utility.generate4DigitOTP();
       CustomSnackBar.showSuccessSnackBar("OTP", otp);
       NavigationUtils().callOTPPage(

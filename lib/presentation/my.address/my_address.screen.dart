@@ -28,8 +28,7 @@ class MyAddressScreen extends GetView<MyAddressController> {
             !controller.isLoading.value && controller.address.isEmpty
                 ? FloatingActionButton(
                     onPressed: () {
-                      // NavigationUtils().callMyAddressAddEditPage(0);
-                      NavigationUtils().callScreenYetToBeDone();
+                      NavigationUtils().callMyAddressAddEditPage(0);
                     },
                     backgroundColor: AppColors.primaryGreen,
                     child: const Icon(Icons.add),
@@ -48,7 +47,7 @@ class MyAddressScreen extends GetView<MyAddressController> {
                           Assets.iconsMyAddressLocation,
                           width: 150,
                           height: 150),
-                      const SizedBox(height: 10),
+                      // const SizedBox(height: 10),
                       _ContentView(
                         controller: controller,
                       ),
@@ -91,9 +90,9 @@ class _ContentView extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // NavigationUtils().callMyAddressAddEditPage(
-                        //     controller.address[index].addressId ?? 0);
-                        NavigationUtils().callScreenYetToBeDone();
+                        NavigationUtils().callMyAddressAddEditPage(
+                            controller.address[index].addressId ?? 0);
+                        // NavigationUtils().callScreenYetToBeDone();
                       },
                       child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
                     ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/file_picker_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
@@ -28,7 +29,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return WillPopScope(
       onWillPop: NavigationUtils().goBack,
       child: Scaffold(
-        appBar: profileAppBar(),
+        appBar: CustomAppbar(title: translate(LocaleKeys.profile)),
         body: Obx(() => controller.isLoading.value
             ? const LoadingWidget()
             : Form(
@@ -74,12 +75,6 @@ class ProfileScreen extends GetView<ProfileController> {
       ),
     );
   }
-
-  CustomAppbar profileAppBar() {
-    return CustomAppbar(
-      title: translate(LocaleKeys.profile),
-    );
-  }
 }
 
 class _ChangePhoneNumberWidget extends StatelessWidget {
@@ -98,9 +93,8 @@ class _ChangePhoneNumberWidget extends StatelessWidget {
       },
       child: Text(
         translate(LocaleKeys.changePhoneNumber),
-        style: const TextStyle(
-          decoration: TextDecoration.underline,
-        ),
+        style: TextStyle(
+            decoration: TextDecoration.underline, color: AppColors.labelColor),
         textAlign: TextAlign.center,
       ),
     );
@@ -138,8 +132,8 @@ class _ImageWidget extends StatelessWidget {
                       File(controller.userImagePath.value),
                       fit: BoxFit.fill,
                     )
-                  : Image.network(
-                      controller.currentProfileData.value.userImage ?? "",
+                  : Image.asset(
+                      Assets.iconsMenuProfileImage,
                       fit: BoxFit.fill,
                     )),
             ),
@@ -185,7 +179,8 @@ class _EditIconWidget extends StatelessWidget {
                 onPressed: () {
                   controller.setProfileEditable();
                 },
-                icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit)),
+                icon: SvgImageUtils()
+                    .showSvgFromAsset(Assets.iconsEdit, width: 19, height: 19)),
           ),
         ));
   }
@@ -232,7 +227,8 @@ class _EmailWidget extends StatelessWidget {
           },
           validator: (value) => ValidationUtils().emailValidation(value),
           suffix: Obx(() => controller.isEmailVerified.value
-              ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick)
+              ? SvgImageUtils()
+                  .showSvgFromAsset(Assets.iconsTick, width: 24, height: 24)
               : GestureDetector(
                   onTap: () {
                     controller.validateEmailID();
@@ -256,13 +252,14 @@ class _MobileNumberWidget extends StatelessWidget {
     return Obx(() => MobileNumberWidget(
           mobileNumber: controller.currentProfileData.value.mobileNumber ?? "",
           isEnabled: false,
-          suffix: controller.isMobileVerified.value
-              ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick)
-              : GestureDetector(
-                  onTap: () {},
-                  child:
-                      SvgImageUtils().showSvgFromAsset(Assets.iconsExclamation),
-                ),
+          // suffix: controller.isMobileVerified.value
+          //     ? SvgImageUtils()
+          //         .showSvgFromAsset(Assets.iconsTick, width: 24, height: 24)
+          //     : GestureDetector(
+          //         onTap: () {},
+          //         child:
+          //             SvgImageUtils().showSvgFromAsset(Assets.iconsExclamation),
+          //       ),
           title: translate(LocaleKeys.mobileNumber),
           validator: (value) {
             controller.mobileNumberError.value =

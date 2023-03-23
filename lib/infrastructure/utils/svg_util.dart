@@ -9,7 +9,9 @@ class SvgImageUtils {
         width: width,
         height: height,
       );
-    } else if (assetPath.split(".").last == "png") {
+    } else if (assetPath.split(".").last == "png" ||
+        assetPath.split(".").last == "jpg" ||
+        assetPath.split(".").last == "jpeg") {
       return Image.asset(
         assetPath,
         width: width,

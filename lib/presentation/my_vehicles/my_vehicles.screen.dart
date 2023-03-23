@@ -41,7 +41,7 @@ class MyVehiclesScreen extends GetView<MyVehiclesController> {
                       height: 150,
                       width: 150,
                     ),
-                    const SizedBox(height: 10),
+                    // const SizedBox(height: 10),
                     _ContentView(
                       controller: controller,
                     ),
@@ -61,40 +61,38 @@ class _ContentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomCardView(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: controller.vehiclesList.length,
-          itemBuilder: (context, index) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                children: [
-                  _VehicleNumberAndEditWidget(
-                      controller: controller, index: index),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      _MakeModelWidget(
-                        title: translate(LocaleKeys.make),
-                        text: controller.vehiclesList[index].vehicleMake ?? "",
-                      ),
-                      _MakeModelWidget(
-                        title: translate(LocaleKeys.model),
-                        text: controller.vehiclesList[index].vehicleModel ?? "",
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Divider(),
-                ],
-              ),
-            );
-          },
-        ),
+    return CustomCardView(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: controller.vehiclesList.length,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(
+              children: [
+                _VehicleNumberAndEditWidget(
+                    controller: controller, index: index),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    _MakeModelWidget(
+                      title: translate(LocaleKeys.make),
+                      text: controller.vehiclesList[index].vehicleMake ?? "",
+                    ),
+                    _MakeModelWidget(
+                      title: translate(LocaleKeys.model),
+                      text: controller.vehiclesList[index].vehicleModel ?? "",
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Divider(),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -25,9 +25,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       title: Text(
         title,
-        style: const TextStyle(color: Colors.black),
+        style: const TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 22),
       ),
-      centerTitle: centerTitle ?? true,
+      centerTitle: centerTitle ?? false,
       leading: leading ??
           BackButtonAppbar(
             onBackPressed: onBackPressed,

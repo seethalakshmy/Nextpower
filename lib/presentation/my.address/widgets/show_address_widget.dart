@@ -61,7 +61,7 @@ class _TextWidget extends StatelessWidget {
     print(text);
     return Text(
       text ?? "",
-      style: TextStyle(color: AppColors.labelTextColor1),
+      style: TextStyle(color: AppColors.iconColor),
     );
   }
 }

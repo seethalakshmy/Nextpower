@@ -18,8 +18,8 @@ class TitleWidget extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-          fontSize: 18,
-          color: color ?? AppColors.titleTextColor,
+          fontSize: 16,
+          color: color ?? AppColors.labelColor,
           fontWeight: fontWeight),
     );
   }
