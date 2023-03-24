@@ -65,8 +65,8 @@ class _FilterTextView extends StatelessWidget {
       onTap: onTap,
       child: Text(
         text,
-        style:
-            TextStyle(color: isSelected ? AppColors.labelGreenTextColor : null),
+        style: TextStyle(
+            fontSize: 16, color: isSelected ? AppColors.primaryGreen : null),
       ),
     );
   }

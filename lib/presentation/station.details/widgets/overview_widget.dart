@@ -32,7 +32,8 @@ class OverviewWidget extends GetView<StationDetailsController> {
               children: [
                 _OverviewDetailsWidget(overview: overview),
                 const SizedBox(height: 20),
-                const _AmenitiesWidget()
+                const _AmenitiesWidget(),
+                const SizedBox(height: 20),
               ],
             ),
           )
@@ -59,6 +60,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
                 title: translate(LocaleKeys.amenities),
                 fontWeight: FontWeight.bold,
                 color: AppColors.titleLabelTextColor,
+                fontSize: 17,
               ),
               const SizedBox(
                 height: 10,
@@ -143,7 +145,7 @@ class _LabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: TextStyle(color: AppColors.iconColor),
+      style: TextStyle(color: AppColors.iconColor, fontSize: 16),
     );
   }
 }
@@ -201,9 +203,12 @@ class _IconsLabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgImageUtils().showSvgFromAsset(asset, width: 30, height: 30),
+        SvgImageUtils().showSvgFromAsset(asset, width: 31, height: 31),
         const SizedBox(height: 10),
-        TitleWidget(title: translate(label))
+        TitleWidget(
+          title: translate(label),
+          fontWeight: FontWeight.w600,
+        )
       ],
     );
   }

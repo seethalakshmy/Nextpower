@@ -56,8 +56,8 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    callLoginPage(isLoginPage: true);
-    // Get.offAllNamed(Routes.STATION_DETAILS);
+    // callLoginPage(isLoginPage: true);
+    Get.offAllNamed(Routes.STATION_DETAILS);
     // Get.offAllNamed(Routes.MY_ADDRESS);
   }
 

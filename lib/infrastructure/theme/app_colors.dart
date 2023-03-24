@@ -6,17 +6,19 @@ class AppColors {
   static Color primaryGreen = fromHex('#81B622');
   static Color primaryBlue = fromHex('#0093EA');
   static Color labelColor = fromHex('#596076');
+  static Color labelColor2 = fromHex('#363D52');
   static Color textTitleColor = fromHex('#2c3238');
   static Color iconColor = fromHex('#6B7186');
   static Color btmTextColor = fromHex('#565F7D');
   static Color labelMediumColor = fromHex('#707688');
   static Color fieldColor = fromHex('#A6B8C2');
   static Color labelTextColor3 = fromHex('#939AB1'); //terms and conditions
+  static Color tabNotSelectedColor = fromHex('#CCE1ED');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');
-  static Color availableGreen = fromHex('#1BC183');
-  static Color selectionColor = fromHex('#02507F');
+  static Color availableGreen = fromHex('#1BC182');
+  static Color tabUnderlineSelectedColor = fromHex('#03507E');
 
   static Color errorRed = Colors.red[700]!;
   static Color descriptionTextColor = fromHex('#949AAC');

@@ -23,7 +23,7 @@ class StationStatusWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Text(
         stationStatus,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white, fontSize: 11),
       ),
     );
   }

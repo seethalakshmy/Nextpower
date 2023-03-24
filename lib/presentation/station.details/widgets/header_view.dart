@@ -39,7 +39,7 @@ class HeaderView extends GetView<StationDetailsController> {
                       Text(
                         controller.details?.stationName ?? "",
                         style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                            fontSize: 21, fontWeight: FontWeight.w600),
                       ),
                       StationStatusWidget(
                         margin: const EdgeInsets.only(top: 10),
@@ -96,17 +96,17 @@ class _TabHeadingView extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(
                 bottom: BorderSide(
-                    width: 3,
+                    width: 4,
                     color: isSelected
-                        ? AppColors.selectionColor
+                        ? AppColors.tabUnderlineSelectedColor
                         : Colors.transparent))),
         padding: const EdgeInsets.only(bottom: 10),
         child: Text(
           title,
           style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+              color: isSelected ? Colors.white : AppColors.tabNotSelectedColor,
+              fontSize: 17,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

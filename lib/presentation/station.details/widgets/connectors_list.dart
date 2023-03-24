@@ -44,6 +44,7 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                           child: Column(
                             children: [
                               _ImageHeadingKWStatusWidget(index),
+                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   Expanded(
@@ -59,23 +60,7 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                                       subtitle: connector.tariff ?? " ",
                                     ),
                                   ),
-                                  IconButton(
-                                      onPressed: () {
-                                        controller.setIndexesData(index);
-                                      },
-                                      icon: Container(
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                  color:
-                                                      AppColors.primaryBlue)),
-                                          child: Obx(() => Icon(
-                                                controller.openedIndexes
-                                                        .contains(index)
-                                                    ? Icons.keyboard_arrow_up
-                                                    : Icons.keyboard_arrow_down,
-                                                color: AppColors.primaryBlue,
-                                              )))),
+                                  _ExpandingArrowWidget(index),
                                 ],
                               ),
                               Obx(
@@ -87,13 +72,20 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                                             children: [
                                               Expanded(
                                                 child: RoundedRectangleButton(
-                                                    onPressed: () {},
-                                                    text: translate(
-                                                        LocaleKeys.charge)),
+                                                  asset: Assets
+                                                      .iconsChargeWhiteIcon,
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: () {},
+                                                  text: translate(
+                                                      LocaleKeys.charge),
+                                                  height: 50,
+                                                ),
                                               ),
                                               const SizedBox(width: 10),
                                               Expanded(
                                                 child: RoundedOutlineButton(
+                                                    asset: Assets.iconsCalender,
+                                                    height: 50,
                                                     onPressed: () {},
                                                     text: translate(
                                                         LocaleKeys.reserve)),
@@ -116,6 +108,35 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
   }
 }
 
+class _ExpandingArrowWidget extends GetView<StationDetailsController> {
+  const _ExpandingArrowWidget(
+    this.index, {
+    super.key,
+  });
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          controller.setIndexesData(index);
+        },
+        icon: Container(
+            height: 35,
+            width: 35,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.primaryBlue)),
+            child: Obx(() => Icon(
+                  controller.openedIndexes.contains(index)
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: AppColors.primaryBlue,
+                ))));
+  }
+}
+
 class _TitleSubtitleColumn extends StatelessWidget {
   const _TitleSubtitleColumn({
     super.key,
@@ -131,11 +152,15 @@ class _TitleSubtitleColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SubtitleWidget(subtitle: title),
+        SubtitleWidget(
+          subtitle: title,
+          fontSize: 16,
+        ),
         SubtitleWidget(
           subtitle: subtitle,
           textColor: AppColors.subTitleTextColor2,
           fontWeight: FontWeight.w500,
+          fontSize: 16,
         ),
       ],
     );
@@ -172,6 +197,8 @@ class _ImageHeadingKWStatusWidget extends GetView<StationDetailsController> {
                               .chargingPointName ??
                           "",
                       fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: AppColors.labelColor2,
                     ),
                     // StationStatusWidget(
                     //     stationStatus: controller
@@ -190,8 +217,10 @@ class _ImageHeadingKWStatusWidget extends GetView<StationDetailsController> {
                         width: 20, height: 20),
                     const SizedBox(width: 5),
                     SubtitleWidget(
-                        subtitle:
-                            "${controller.details!.connectorsList![index].kw ?? ""} ${translate(LocaleKeys.kw)}"),
+                      subtitle:
+                          "${controller.details!.connectorsList![index].kw ?? ""} ${translate(LocaleKeys.kw)}",
+                      fontSize: 16,
+                    ),
                     const SizedBox(width: 15),
                     StationStatusWidget(
                         stationStatus:

@@ -27,25 +27,28 @@ class ShowAddressWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SvgImageUtils()
-            .showSvgFromAsset(Assets.iconsLocation, width: 25, height: 25),
+            .showSvgFromAsset(Assets.iconsLocation, width: 21, height: 25.2),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Wrap(
-              children: [
-                _TextWidget(addressLine1),
-                _TextWidget(
-                    (addressLine2.isNotEmpty ? ", " : "") + addressLine2),
-                _TextWidget((city.isNotEmpty ? ", " : "") + city),
-                _TextWidget((state.isNotEmpty ? ", " : "") + state),
-                _TextWidget((country.isNotEmpty ? ", " : "") + country)
-              ],
-            ),
-            const SizedBox(height: 5),
-            _TextWidget(postalCode)
-          ],
-        )
+        Expanded(
+          child: Wrap(
+            children: [
+              _TextWidget(addressLine1 +
+                  (addressLine1.isNotEmpty && addressLine2.isNotEmpty
+                      ? ", "
+                      : "")),
+              _TextWidget(addressLine2 +
+                  (addressLine2.isNotEmpty && city.isNotEmpty ? ", " : "")),
+              _TextWidget(
+                  city + (city.isNotEmpty && state.isNotEmpty ? ", " : "")),
+              _TextWidget(
+                  state + (state.isNotEmpty && country.isNotEmpty ? ", " : "")),
+              _TextWidget(country +
+                  (country.isNotEmpty && postalCode.isNotEmpty
+                      ? " - $postalCode"
+                      : ""))
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -61,7 +64,7 @@ class _TextWidget extends StatelessWidget {
     print(text);
     return Text(
       text ?? "",
-      style: TextStyle(color: AppColors.iconColor),
+      style: TextStyle(color: AppColors.iconColor, fontSize: 16),
     );
   }
 }
