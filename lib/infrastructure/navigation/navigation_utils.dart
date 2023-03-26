@@ -100,7 +100,13 @@ class NavigationUtils {
     Get.toNamed(Routes.STATION_DETAILS);
   }
 
-  void callChargingSessionDetails() {
-    Get.toNamed(Routes.CHARGING_SESSION);
+  void callChargingSessionDetails(
+      {required int? stationId, required int connectorId}) {
+    print(stationId);
+    print(connectorId);
+    Get.toNamed(Routes.CHARGING_SESSION, parameters: {
+      ParamName.stationId: stationId.toString(),
+      ParamName.connectorId: connectorId.toString()
+    });
   }
 }

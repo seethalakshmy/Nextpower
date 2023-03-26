@@ -14,6 +14,9 @@ class AppColors {
   static Color fieldColor = fromHex('#A6B8C2');
   static Color labelTextColor3 = fromHex('#939AB1'); //terms and conditions
   static Color tabNotSelectedColor = fromHex('#CCE1ED');
+  static Color optionsNotSelectedColor = fromHex('#F1F7FF');
+  static Color minusRed = fromHex('#F7514E');
+  static Color addGreen = fromHex('#1EBF4B');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');

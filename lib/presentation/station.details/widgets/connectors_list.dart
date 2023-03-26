@@ -16,6 +16,7 @@ import 'package:project/presentation/station.details/widgets/station_status_widg
 import '../../../infrastructure/widgets/text/title_widget.dart';
 import '../models/station_details_model.dart';
 import 'filter_view.dart';
+import 'title_subtitle_column_row.dart';
 
 class ConnectorsListWidget extends GetView<StationDetailsController> {
   const ConnectorsListWidget({Key? key}) : super(key: key);
@@ -49,57 +50,25 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: _TitleSubtitleColumn(
+                                    child: TitleSubtitleColumnRowWidget(
                                       title: connector.connectorName ?? "",
                                       subtitle: connector.connectorType ?? "",
+                                      showAsColumn: true,
                                     ),
                                   ),
                                   const SizedBox(width: 10),
                                   Expanded(
-                                    child: _TitleSubtitleColumn(
+                                    child: TitleSubtitleColumnRowWidget(
                                       title: translate(LocaleKeys.tariff),
                                       subtitle: connector.tariff ?? " ",
+                                      showAsColumn: true,
                                     ),
                                   ),
                                   _ExpandingArrowWidget(index),
                                 ],
                               ),
-                              Obx(
-                                () => controller.openedIndexes.contains(index)
-                                    ? Column(
-                                        children: [
-                                          const Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: RoundedRectangleButton(
-                                                  textSize: 15,
-                                                  asset: Assets
-                                                      .iconsChargeWhiteIcon,
-                                                  padding: EdgeInsets.zero,
-                                                  onPressed: () {
-                                                    NavigationUtils()
-                                                        .callChargingSessionDetails();
-                                                  },
-                                                  text: translate(
-                                                      LocaleKeys.charge),
-                                                  height: 50,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10),
-                                              Expanded(
-                                                child: RoundedOutlineButton(
-                                                    asset: Assets.iconsCalender,
-                                                    height: 50,
-                                                    onPressed: () {},
-                                                    text: translate(
-                                                        LocaleKeys.reserve)),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    : Container(),
+                              _ExpandedButtonWidgets(
+                                index: index,
                               )
                             ],
                           ),
@@ -108,7 +77,61 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                     }),
               ],
             )
-          : EmptyListView(subTitle: 'No connectors Found', title: "Sorry"),
+          : EmptyListView(
+              subTitle: translate(LocaleKeys.noConnectorsFound),
+              title: translate(LocaleKeys.sorry)),
+    );
+  }
+}
+
+class _ExpandedButtonWidgets extends GetView<StationDetailsController> {
+  const _ExpandedButtonWidgets({
+    super.key,
+    required this.index,
+  });
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => controller.openedIndexes.contains(index)
+          ? Column(
+              children: [
+                const Divider(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: RoundedRectangleButton(
+                        textSize: 15,
+                        asset: Assets.iconsChargeWhiteIcon,
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          NavigationUtils().callChargingSessionDetails(
+                              stationId: controller.stationId,
+                              connectorId: controller.details
+                                      ?.connectorsList?[index].connectorId ??
+                                  0);
+                        },
+                        text: translate(LocaleKeys.charge),
+                        height: 50,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: RoundedOutlineButton(
+                          asset: Assets.iconsCalender,
+                          height: 50,
+                          onPressed: () {
+                            NavigationUtils().callScreenYetToBeDone();
+                          },
+                          text: translate(LocaleKeys.reserve)),
+                    ),
+                  ],
+                )
+              ],
+            )
+          : Container(),
     );
   }
 }
@@ -139,36 +162,6 @@ class _ExpandingArrowWidget extends GetView<StationDetailsController> {
                       : Icons.keyboard_arrow_down,
                   color: AppColors.primaryBlue,
                 ))));
-  }
-}
-
-class _TitleSubtitleColumn extends StatelessWidget {
-  const _TitleSubtitleColumn({
-    super.key,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SubtitleWidget(
-          subtitle: title,
-          fontSize: 16,
-        ),
-        SubtitleWidget(
-          subtitle: subtitle,
-          textColor: AppColors.subTitleTextColor2,
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-        ),
-      ],
-    );
   }
 }
 

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 class CustomBorders {
-  OutlineInputBorder textFieldBorder({Color? color}) {
+  OutlineInputBorder textFieldBorder({Color? color, double? radius}) {
     return OutlineInputBorder(
-        borderRadius: borderCircularRadius5(),
+        borderRadius: borderCircularRadius(radius: radius),
         borderSide: BorderSide(color: color ?? AppColors.fieldColor));
   }
 
@@ -14,12 +14,12 @@ class CustomBorders {
         border: Border.all(
           color: color ?? AppColors.fieldColor,
         ),
-        borderRadius: borderCircularRadius5());
+        borderRadius: borderCircularRadius());
   }
 
-  BorderRadius borderCircularRadius5() {
-    return const BorderRadius.all(
-      Radius.circular(5.0),
+  BorderRadius borderCircularRadius({double? radius}) {
+    return BorderRadius.all(
+      Radius.circular(radius ?? 5.0),
     );
   }
 }

@@ -86,6 +86,21 @@ class LocaleKeys {
   static const amenities = 'amenities';
   static const noSuchStationsFound = 'noSuchStationsFound';
   static const oops = 'oops';
+  static const noConnectorsFound = 'noConnectorsFound';
+  static const sorry = 'sorry';
+  static const pricing = 'pricing';
+  static const power = 'power';
+  static const type = 'type';
+  static const chargingOptions = 'chargingOptions';
+  static const startCharging = 'startCharging';
+  static const money = 'money';
+  static const time = 'time';
+  static const energy = 'energy';
+  static const set = 'set';
+  static const budget = 'budget';
+  static const duration = 'duration';
+  static const minutes = 'minutes';
+  static const kwh = 'kwh';
   static const a = 'a';
 }
 
@@ -167,6 +182,21 @@ class Locales {
     'amenities': 'Amenities',
     'noSuchStationsFound': 'No such stations found',
     'oops': 'Oops',
+    'noConnectorsFound': 'No connectors Found',
+    'sorry': 'Sorry',
+    'pricing': 'Pricing',
+    'power': 'Power',
+    'type': 'Type',
+    'chargingOptions': 'Charging options',
+    'startCharging': 'Start charging',
+    'money': 'Money',
+    'time': 'Time',
+    'energy': 'Energy',
+    'set': 'Set',
+    'budget': 'Budget',
+    'duration': 'Duration',
+    'minutes': 'minutes',
+    'kwh': 'KWH',
     'a': '',
   };
 }
