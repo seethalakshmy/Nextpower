@@ -1,3 +1,4 @@
+export 'package:project/infrastructure/navigation/bindings/controllers/charging_session.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/login.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/my_address.controller.binding.dart'; 

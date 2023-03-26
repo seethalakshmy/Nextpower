@@ -99,4 +99,8 @@ class NavigationUtils {
   void callStationDetails() {
     Get.toNamed(Routes.STATION_DETAILS);
   }
+
+  void callChargingSessionDetails() {
+    Get.toNamed(Routes.CHARGING_SESSION);
+  }
 }

@@ -14,6 +14,7 @@ class Routes {
   static const REGISTRATION = '/registration';
   static const SAVED_ADDRESS = '/saved-address';
   static const SPLASH_SCREEN = '/splash-screen';
-  static const STATION_LIST = '/station-list';
   static const STATION_DETAILS = '/station-details';
+  static const STATION_LIST = '/station-list';
+  static const CHARGING_SESSION = '/charging-session';
 }

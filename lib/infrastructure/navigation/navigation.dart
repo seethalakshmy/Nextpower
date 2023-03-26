@@ -88,5 +88,10 @@ class Nav {
       page: () => const StationDetailsScreen(),
       binding: StationDetailsControllerBinding(),
     ),
+    GetPage(
+      name: Routes.CHARGING_SESSION,
+      page: () => const ChargingSessionScreen(),
+      binding: ChargingSessionControllerBinding(),
+    ),
   ];
 }
