@@ -47,7 +47,7 @@
   "company": "Company",
   "gstNo": "GST no.",
   "postalCode": "Postal code",
-  "shouldntBeEmpty": "should n't be empty",
+  "shouldntBeEmpty": "shouldn't be empty",
   "choose": "Choose",
   "station": "Station",
   "wallet": "Wallet",
@@ -86,5 +86,9 @@
   "duration": "Duration",
   "minutes": "minutes",
   "kwh": "KWH",
+  "submit": "Submit",
+  "noDataFound": "No data found",
+  "a": "",
+  "a": "",
   "a": ""
 }

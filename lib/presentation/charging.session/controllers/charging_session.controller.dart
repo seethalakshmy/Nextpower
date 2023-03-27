@@ -57,13 +57,13 @@ class ChargingSessionController extends GetxController {
     String text = translate(LocaleKeys.set);
     if (selectedChargingOption.value == moneyOptionValue) {
       text =
-          "$text ${translate(LocaleKeys.budget)} (${translate(LocaleKeys.money)}: \$)";
+          "$text ${translate(LocaleKeys.budget)} ( ${translate(LocaleKeys.money)}: \$ )";
     } else if (selectedChargingOption.value == timeOptionValue) {
       text =
-          "$text ${translate(LocaleKeys.time).toLowerCase()} (${translate(LocaleKeys.duration)}: ${translate(LocaleKeys.minutes)})";
+          "$text ${translate(LocaleKeys.time).toLowerCase()} ( ${translate(LocaleKeys.duration)}: ${translate(LocaleKeys.minutes)} )";
     } else if (selectedChargingOption.value == energyOptionValue) {
       text =
-          "$text ${translate(LocaleKeys.energy).toLowerCase()}  (${translate(LocaleKeys.energy)}: ${translate(LocaleKeys.kwh)})";
+          "$text ${translate(LocaleKeys.energy).toLowerCase()}  ( ${translate(LocaleKeys.energy)}: ${translate(LocaleKeys.kwh)} )";
     }
     return text;
   }

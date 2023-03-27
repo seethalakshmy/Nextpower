@@ -26,7 +26,7 @@ class OverviewWidget extends GetView<StationDetailsController> {
           _IconsRow(),
           Divider(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,7 +40,9 @@ class OverviewWidget extends GetView<StationDetailsController> {
         ],
       );
     } else {
-      return EmptyListView(subTitle: 'No data found', title: 'Oops');
+      return EmptyListView(
+          subTitle: translate(LocaleKeys.noDataFound),
+          title: translate(LocaleKeys.oops));
     }
   }
 }

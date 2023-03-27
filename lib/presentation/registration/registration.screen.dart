@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/utils/validation_utils.dart';
@@ -72,16 +73,18 @@ class RegistrationScreen extends GetView<RegistrationController> {
                   )),
               const SizedBox(height: 10),
               CommonTextFieldWidget(
-                title: 'Email address',
+                title: translate(LocaleKeys.emailAddress),
                 onNameChanged: (value) {},
                 validator: (value) => ValidationUtils().emailValidation(value),
               ),
               const SizedBox(height: 30),
               RoundedRectangleButton(
                   onPressed: () {
-                    controller.formKey.currentState?.validate();
+                    if (controller.formKey.currentState?.validate() ?? false) {
+                      NavigationUtils().callHomePage(clearStack: true);
+                    }
                   },
-                  text: 'Submit')
+                  text: translate(LocaleKeys.submit))
             ],
           ),
         ),

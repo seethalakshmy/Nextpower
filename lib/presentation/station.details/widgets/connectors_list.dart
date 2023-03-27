@@ -75,6 +75,7 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
                         ),
                       );
                     }),
+                const SizedBox(height: 20)
               ],
             )
           : EmptyListView(

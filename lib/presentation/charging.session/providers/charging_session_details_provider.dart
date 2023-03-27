@@ -10,12 +10,14 @@ class ChargingSessionDetailsProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.defaultDecoder = (map) {
-      if (map is Map<String, dynamic>)
+      if (map is Map<String, dynamic>) {
         return ChargingSessionDetails.fromJson(map);
-      if (map is List)
+      }
+      if (map is List) {
         return map
             .map((item) => ChargingSessionDetails.fromJson(item))
             .toList();
+      }
     };
     httpClient.baseUrl = 'YOUR-API-URL';
   }

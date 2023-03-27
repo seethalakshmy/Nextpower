@@ -18,7 +18,7 @@ class OtpController extends GetxController {
 
   //dummy variables
   String otp = "";
-  bool isAccountCreated = true;
+  bool isAccountCreated = false;
 
   @override
   void onInit() {

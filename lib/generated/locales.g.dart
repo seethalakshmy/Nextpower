@@ -101,6 +101,8 @@ class LocaleKeys {
   static const duration = 'duration';
   static const minutes = 'minutes';
   static const kwh = 'kwh';
+  static const submit = 'submit';
+  static const noDataFound = 'noDataFound';
   static const a = 'a';
 }
 
@@ -158,7 +160,7 @@ class Locales {
     'company': 'Company',
     'gstNo': 'GST no.',
     'postalCode': 'Postal code',
-    'shouldntBeEmpty': 'should n\'t be empty',
+    'shouldntBeEmpty': 'shouldn\'t be empty',
     'choose': 'Choose',
     'station': 'Station',
     'wallet': 'Wallet',
@@ -197,6 +199,8 @@ class Locales {
     'duration': 'Duration',
     'minutes': 'minutes',
     'kwh': 'KWH',
+    'submit': 'Submit',
+    'noDataFound': 'No data found',
     'a': '',
   };
 }
