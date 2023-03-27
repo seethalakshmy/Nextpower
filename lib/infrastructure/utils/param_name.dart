@@ -16,4 +16,6 @@ class ParamName {
   static var from = "from";
 
   static var connectorId = "connector_id";
+
+  static var index = "index";
 }

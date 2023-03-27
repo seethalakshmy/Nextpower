@@ -24,24 +24,23 @@ class StationsList {
 class Stations {
   int? stationId;
   String? stationName;
-  String? lat;
-  String? long;
+  double? lat;
+  double? long;
   String? kwh;
   String? distance;
   int? free;
   int? active;
   String? status;
 
-  Stations(
-      {this.stationId,
-      this.stationName,
-      this.lat,
-      this.long,
-      this.kwh,
-      this.distance,
-      this.free,
-      this.active,
-      this.status});
+  Stations({this.stationId,
+    this.stationName,
+    this.lat,
+    this.long,
+    this.kwh,
+    this.distance,
+    this.free,
+    this.active,
+    this.status});
 
   Stations.fromJson(Map<String, dynamic> json) {
     stationId = json['station_id'];

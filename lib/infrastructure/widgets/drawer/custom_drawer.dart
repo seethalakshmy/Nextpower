@@ -4,6 +4,7 @@ import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/presentation/home/controllers/home.controller.dart';
 
 import '../text/subtitle_widget.dart';
 
@@ -60,12 +61,14 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.wallet,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().walletIndex),
             asset: Assets.iconsMenuWallet,
           ),
           _DrawerItem(
             title: LocaleKeys.chargingHistory,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().historyIndex),
             asset: Assets.iconsMenuChargingHistory,
           ),
           _DrawerItem(

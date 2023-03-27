@@ -17,41 +17,47 @@ class StationBriefDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return GestureDetector(
+      onTap: () {
+        NavigationUtils().callStationDetails();
+      },
+      child: Dialog(
         child: IntrinsicHeight(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _HeaderWidget(stationDetail),
-            const SizedBox(height: 20),
-            Row(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _ContentItem(
-                    title: 'Distance',
-                    value: stationDetail.distance ?? "",
-                    bgColor: AppColors.dialogLightPink,
-                    textColor: AppColors.dialogPink),
-                const SizedBox(width: 5),
-                _ContentItem(
-                    title: 'Free',
-                    value: (stationDetail.free ?? 0).toString(),
-                    bgColor: AppColors.dialogLightGreen,
-                    textColor: AppColors.dialogGreen),
-                const SizedBox(width: 5),
-                _ContentItem(
-                    title: 'Active',
-                    value: (stationDetail.active ?? 0).toString(),
-                    bgColor: AppColors.dialogLightOrange,
-                    textColor: AppColors.dialogOrange)
+                _HeaderWidget(stationDetail),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    _ContentItem(
+                        title: 'Distance',
+                        value: stationDetail.distance ?? "",
+                        bgColor: AppColors.dialogLightPink,
+                        textColor: AppColors.dialogPink),
+                    const SizedBox(width: 5),
+                    _ContentItem(
+                        title: 'Free',
+                        value: (stationDetail.free ?? 0).toString(),
+                        bgColor: AppColors.dialogLightGreen,
+                        textColor: AppColors.dialogGreen),
+                    const SizedBox(width: 5),
+                    _ContentItem(
+                        title: 'Active',
+                        value: (stationDetail.active ?? 0).toString(),
+                        bgColor: AppColors.dialogLightOrange,
+                        textColor: AppColors.dialogOrange)
+                  ],
+                ),
+                const SizedBox(height: 10),
               ],
             ),
-            const SizedBox(height: 10),
-          ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }
 
@@ -129,7 +135,8 @@ class _HeaderWidget extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {
-              NavigationUtils().callScreenYetToBeDone();
+              NavigationUtils().callGoogleMap(
+                  stationDetail.lat ?? 0.0, stationDetail.long ?? 0.0);
             },
             icon: SvgImageUtils().showSvgFromAsset(Assets.iconsDirection))
       ],

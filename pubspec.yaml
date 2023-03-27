@@ -16,6 +16,8 @@ dependencies:
   pinput: ^2.2.31
   flutter_svg: ^2.0.4
   google_fonts: ^4.0.3
+  google_maps_flutter: ^2.2.5
+  url_launcher: ^6.1.10
 
   flutter:
     sdk: flutter

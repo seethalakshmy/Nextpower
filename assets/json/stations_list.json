@@ -3,8 +3,8 @@
     {
       "station_id": 1,
       "station_name": "Station name 1",
-      "lat": "85.479344",
-      "long": "4.5323434",
+      "lat": 56.172249,
+      "long": 10.187372,
       "kwh": "3.3 KW",
       "distance": "13 km",
       "free": 1,
@@ -14,8 +14,8 @@
     {
       "station_id": 2,
       "station_name": "Station name 2",
-      "lat": "85.479344",
-      "long": "4.5323434",
+      "lat": 52.337801,
+      "long": 4.872066,
       "kwh": "15 KW",
       "distance": "5 km",
       "free": 3,
@@ -25,8 +25,8 @@
     {
       "station_id": 3,
       "station_name": "Station name 3",
-      "lat": "85.479344",
-      "long": "4.5323434",
+      "lat": 42.3063848,
+      "long": -83.7140833,
       "kwh": "15 KW",
       "distance": "5 km",
       "free": 0,
