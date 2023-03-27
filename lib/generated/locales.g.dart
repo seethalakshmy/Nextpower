@@ -10,6 +10,7 @@ class AppTranslation {
 
 class LocaleKeys {
   LocaleKeys._();
+
   static const appName = 'appName';
   static const login = 'login';
   static const signup = 'signup';
@@ -65,6 +66,7 @@ class LocaleKeys {
   static const shouldntBeEmpty = 'shouldntBeEmpty';
   static const choose = 'choose';
   static const station = 'station';
+  static const stations = 'stations';
   static const wallet = 'wallet';
   static const chargingHistory = 'chargingHistory';
   static const rfidTag = 'rfidTag';
@@ -112,7 +114,7 @@ class Locales {
     'login': 'Login',
     'signup': 'Signup',
     'pleaseEnterTheDetailsBelowToContinue':
-        'Please enter the details below to continue',
+    'Please enter the details below to continue',
     'byContinuingYouAgreeToOur': 'By continuing, you agree to our',
     'mobileNumber': 'Mobile number',
     'continueLabel': 'Continue',
@@ -126,7 +128,7 @@ class Locales {
     'changePhoneNumber': 'Change phone number',
     'createAnAccount': 'Create an account',
     'pleaseEnterTheFollowingDetailsToCreateAnAccount':
-        'Please enter the following details to create an account',
+    'Please enter the following details to create an account',
     'name': 'Name',
     'emailAddress': 'Email address',
     'register': 'Register',
@@ -139,18 +141,18 @@ class Locales {
     'done': 'Done',
     'error': 'Error',
     'somethingWentWrongPleaseTryAgainLater':
-        'Something went wrong. Please try again later',
+    'Something went wrong. Please try again later',
     'kindlyValidateAllFieldsAndTryAgain':
-        'Kindly validate all fields and try again',
+    'Kindly validate all fields and try again',
     'verify': 'Verify',
     'profile': 'Profile',
     'pleaseEnterTheNumberToChange': 'Please enter the number to change',
-    'myVehicles': 'My Vehicles',
+    'myVehicles': 'My vehicles',
     'make': 'Make',
     'model': 'Model',
     'number': 'Number',
     'vehicle': 'Vehicle',
-    'myAddress': 'My Address',
+    'myAddress': 'My address',
     'address': 'Address',
     'addressLine1': 'Address line 1',
     'addressLine2': 'Address line 2',
@@ -163,6 +165,7 @@ class Locales {
     'shouldntBeEmpty': 'shouldn\'t be empty',
     'choose': 'Choose',
     'station': 'Station',
+    'stations': 'Stations',
     'wallet': 'Wallet',
     'chargingHistory': 'Charging history',
     'rfidTag': 'RFID tag',

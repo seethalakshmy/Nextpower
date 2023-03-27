@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
@@ -14,7 +16,7 @@ class StationListScreen extends GetView<StationListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar(
-        title: 'Stations',
+        title: translate(LocaleKeys.stations),
       ),
       body: Obx(() => controller.isLoading.value
           ? const LoadingWidget()
