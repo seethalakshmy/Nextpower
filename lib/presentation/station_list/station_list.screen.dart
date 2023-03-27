@@ -24,6 +24,9 @@ class StationListScreen extends GetView<StationListController> {
                   onTap: () {
                     NavigationUtils().callStationDetails();
                   },
+                  onLongPress: () {
+                    Get.dialog(Text("test"));
+                  },
                   child: Card(
                     margin: const EdgeInsets.all(10),
                     child: Padding(
