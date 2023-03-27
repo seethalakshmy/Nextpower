@@ -1,16 +1,37 @@
 {
-  "station_list": [
+  "stations": [
     {
       "station_id": 1,
       "station_name": "Station name 1",
       "lat": "85.479344",
-      "long": "4.5323434"
+      "long": "4.5323434",
+      "kwh": "3.3 KW",
+      "distance": "13 km",
+      "free": 1,
+      "active": 2,
+      "status": "Available"
     },
     {
       "station_id": 2,
       "station_name": "Station name 2",
       "lat": "85.479344",
-      "long": "4.5323434"
+      "long": "4.5323434",
+      "kwh": "15 KW",
+      "distance": "5 km",
+      "free": 3,
+      "active": 6,
+      "status": "Available"
+    },
+    {
+      "station_id": 3,
+      "station_name": "Station name 3",
+      "lat": "85.479344",
+      "long": "4.5323434",
+      "kwh": "15 KW",
+      "distance": "5 km",
+      "free": 0,
+      "active": 0,
+      "status": "Unavailable"
     }
   ]
 }

@@ -4,13 +4,13 @@ import 'package:project/presentation/station_list/providers/stations_list_provid
 
 class StationListController extends GetxController {
   final isLoading = false.obs;
-  List<Station> stationList = [];
+  List<Stations> stationList = [];
 
   @override
   void onInit() {
     isLoading(true);
     StationsListProvider().getStationsList().then((value) {
-      stationList = value?.stationList ?? [];
+      stationList = value?.stations ?? [];
       isLoading(false);
     });
     super.onInit();

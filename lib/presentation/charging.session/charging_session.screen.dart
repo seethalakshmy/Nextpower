@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
-import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/charging.session/widgets/charging_option_section.dart';
-import 'package:project/presentation/station.details/widgets/station_status_widget.dart';
+import 'package:project/presentation/station.details/widgets/charging_power_status_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
 
 import 'controllers/charging_session.controller.dart';
@@ -48,26 +45,11 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                                         .sessionDetails!.chargingPointName ??
                                     ""),
                             const SizedBox(height: 10),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              alignment: WrapAlignment.start,
-                              children: [
-                                SvgImageUtils().showSvgFromAsset(
-                                    Assets.iconsMenuStation,
-                                    width: 20,
-                                    height: 20),
-                                const SizedBox(width: 5),
-                                SubtitleWidget(
-                                  subtitle:
-                                      "${controller.sessionDetails!.kw ?? ""} ${translate(LocaleKeys.kw)}",
-                                  fontSize: 16,
-                                ),
-                                const SizedBox(width: 15),
-                                StationStatusWidget(
-                                    stationStatus:
-                                        controller.sessionDetails!.status ?? "")
-                              ],
-                            ),
+                            ChargingPowerStatusWidget(
+                                connectorPower:
+                                    "${controller.sessionDetails!.kw ?? ""} ${translate(LocaleKeys.kw)}",
+                                connectorStatus:
+                                    controller.sessionDetails!.status ?? ""),
                             const SizedBox(height: 10),
                             TitleSubtitleColumnRowWidget(
                               title:

@@ -1,39 +1,58 @@
 class StationsList {
-  List<Station>? stationList;
+  List<Stations>? stations;
 
-  StationsList({this.stationList});
+  StationsList({this.stations});
 
   StationsList.fromJson(Map<String, dynamic> json) {
-    if (json['station_list'] != null) {
-      stationList = <Station>[];
-      json['station_list'].forEach((v) {
-        stationList?.add(Station.fromJson(v));
+    if (json['stations'] != null) {
+      stations = <Stations>[];
+      json['stations'].forEach((v) {
+        stations?.add(Stations.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (stationList != null) {
-      data['station_list'] = stationList?.map((v) => v.toJson()).toList();
+    if (stations != null) {
+      data['stations'] = stations?.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Station {
+class Stations {
   int? stationId;
   String? stationName;
   String? lat;
   String? long;
+  String? kwh;
+  String? distance;
+  int? free;
+  int? active;
+  String? status;
 
-  Station({this.stationId, this.stationName, this.lat, this.long});
+  Stations(
+      {this.stationId,
+      this.stationName,
+      this.lat,
+      this.long,
+      this.kwh,
+      this.distance,
+      this.free,
+      this.active,
+      this.status});
 
-  Station.fromJson(Map<String, dynamic> json) {
+  Stations.fromJson(Map<String, dynamic> json) {
     stationId = json['station_id'];
     stationName = json['station_name'];
     lat = json['lat'];
     long = json['long'];
+    kwh = json['kwh'];
+    distance = json['distance'];
+    free = json['free'];
+    active = json['active'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +61,11 @@ class Station {
     data['station_name'] = stationName;
     data['lat'] = lat;
     data['long'] = long;
+    data['kwh'] = kwh;
+    data['distance'] = distance;
+    data['free'] = free;
+    data['active'] = active;
+    data['status'] = status;
     return data;
   }
 }

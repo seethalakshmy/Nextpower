@@ -13,10 +13,17 @@ class AppColors {
   static Color labelMediumColor = fromHex('#707688');
   static Color fieldColor = fromHex('#A6B8C2');
   static Color labelTextColor3 = fromHex('#939AB1'); //terms and conditions
+  static Color labelTextColor4 = fromHex('#2D444B');
   static Color tabNotSelectedColor = fromHex('#CCE1ED');
   static Color optionsNotSelectedColor = fromHex('#F1F7FF');
   static Color minusRed = fromHex('#F7514E');
   static Color addGreen = fromHex('#1EBF4B');
+  static Color dialogPink = fromHex('#DA1987');
+  static Color dialogLightPink = fromHex('#FFE7F7');
+  static Color dialogGreen = fromHex('#0AB868');
+  static Color dialogLightGreen = fromHex('#E5FFEE');
+  static Color dialogOrange = fromHex('#F89014');
+  static Color dialogLightOrange = fromHex('#FFEED9');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');
