@@ -7,7 +7,6 @@ import 'package:project/infrastructure/utils/validation_utils.dart';
 import 'package:project/infrastructure/widgets/buttons/back_button.dart';
 import 'package:project/infrastructure/widgets/text/heading_text_widget.dart';
 
-import '../../infrastructure/widgets/text/subtitle_widget.dart';
 import '../../infrastructure/widgets/text_fields/mobile_number_widget.dart';
 import 'controllers/login.controller.dart';
 import 'widgets/continue_button_widget.dart';
@@ -34,16 +33,16 @@ class LoginScreen extends GetView<LoginController> {
               children: [
                 HeadingTextWidget(
                   title: controller.isLoginPage
-                      ? translate(LocaleKeys.login)
+                      ? "${translate(LocaleKeys.login)} / ${translate(LocaleKeys.signup)}"
                       : translate(LocaleKeys.changePhoneNumber),
                 ),
-                const SizedBox(height: 10),
-                SubtitleWidget(
-                    subtitle: controller.isLoginPage
-                        ? translate(
-                            LocaleKeys.pleaseEnterTheDetailsBelowToContinue)
-                        : translate(LocaleKeys.pleaseEnterTheNumberToChange)),
                 const SizedBox(height: 30),
+                // SubtitleWidget(
+                //     subtitle: controller.isLoginPage
+                //         ? translate(
+                //             LocaleKeys.pleaseEnterTheDetailsBelowToContinue)
+                //         : translate(LocaleKeys.pleaseEnterTheNumberToChange)),
+                // const SizedBox(height: 30),
                 Obx(() => MobileNumberWidget(
                       validator: (value) {
                         controller.mobileNumberError(ValidationUtils()
@@ -64,7 +63,7 @@ class LoginScreen extends GetView<LoginController> {
                     )),
                 const SizedBox(height: 20),
                 const ContinueButtonWidget(),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
                 controller.isLoginPage
                     ? const TermsAndConditionsTextWidget()
                     : const SizedBox.shrink()

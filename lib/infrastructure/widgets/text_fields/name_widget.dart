@@ -29,21 +29,24 @@ class CommonTextFieldWidget extends StatelessWidget {
       children: [
         if (title.isNotEmpty) TitleWidget(title: title),
         if (title.isNotEmpty) const SizedBox(height: 10),
-        TextFormField(
-          initialValue: initialValue,
-          onTapOutside: (event) {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          keyboardType: TextInputType.name,
-          validator: validator,
-          decoration: CustomDecorationUtils().textFieldDecoration(
-            hintText: translate(title),
-            // color: errorText.isNotEmpty ? AppColors.errorRed : null,
-            suffix: suffix,
+        SizedBox(
+          height: 50,
+          child: TextFormField(
+            initialValue: initialValue,
+            onTapOutside: (event) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            keyboardType: TextInputType.name,
+            validator: validator,
+            decoration: CustomDecorationUtils().textFieldDecoration(
+              hintText: translate(title),
+              // color: errorText.isNotEmpty ? AppColors.errorRed : null,
+              suffix: suffix,
+            ),
+            onChanged: (value) {
+              onNameChanged(value);
+            },
           ),
-          onChanged: (value) {
-            onNameChanged(value);
-          },
         ),
         // errorText.isEmpty
         //     ? Container()

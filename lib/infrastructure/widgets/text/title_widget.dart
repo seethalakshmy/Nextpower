@@ -5,15 +5,24 @@ class TitleWidget extends StatelessWidget {
   const TitleWidget({
     super.key,
     required this.title,
+    this.fontWeight,
+    this.color,
+    this.fontSize,
   });
 
   final String title;
+  final FontWeight? fontWeight;
+  final double? fontSize;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: 18, color: AppColors.titleLabelTextColor),
+      style: TextStyle(
+          fontSize: fontSize ?? 16,
+          color: color ?? AppColors.labelColor,
+          fontWeight: fontWeight),
     );
   }
 }

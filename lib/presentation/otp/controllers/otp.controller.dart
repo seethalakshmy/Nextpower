@@ -14,11 +14,11 @@ class OtpController extends GetxController {
   RxBool isVerify = false.obs;
   RxBool isLoading = false.obs;
   final formKey = GlobalKey<FormState>();
-
+  final className = "OTP-Screen";
 
   //dummy variables
   String otp = "";
-  bool isAccountCreated = true;
+  bool isAccountCreated = false;
 
   @override
   void onInit() {
@@ -26,9 +26,9 @@ class OtpController extends GetxController {
     mobileNumber = Get.parameters[ParamName.mobileNumber] ?? "";
     countryCode = Get.parameters[ParamName.countryCode] ?? "";
     isVerify.value =
-    (Get.parameters[ParamName.isVerify] ?? "false").compareTo("true") == 0
-        ? true
-        : false;
+        (Get.parameters[ParamName.isVerify] ?? "false").compareTo("true") == 0
+            ? true
+            : false;
     numberToDisplay.value = "$countryCode $mobileNumber";
     otp = Get.parameters['otp'] ?? "";
     if (numberToDisplay.isEmpty) {

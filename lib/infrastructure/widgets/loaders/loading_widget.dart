@@ -4,17 +4,24 @@ import 'package:project/infrastructure/theme/app_colors.dart';
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({
     super.key,
+    this.size,
+    this.strokeWidth,
+    this.strokeColor,
   });
+
+  final double? size;
+  final double? strokeWidth;
+  final Color? strokeColor;
 
   @override
   Widget build(BuildContext context) {
     return Center(
         child: SizedBox(
-      height: 20,
-      width: 20,
+      height: size ?? 20,
+      width: size ?? 20,
       child: CircularProgressIndicator(
-        color: AppColors.primaryColor,
-        strokeWidth: 1,
+        color: strokeColor ?? AppColors.primaryBlue,
+        strokeWidth: strokeWidth ?? 1,
       ),
     ));
   }

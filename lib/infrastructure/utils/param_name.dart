@@ -10,4 +10,12 @@ class ParamName {
   static var vehicleId = "vehicle_id";
 
   static var addressId = "address_id";
+
+  static var stationId = "station_id";
+
+  static var from = "from";
+
+  static var connectorId = "connector_id";
+
+  static var index = "index";
 }

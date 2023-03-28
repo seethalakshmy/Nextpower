@@ -32,8 +32,10 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
               child: ListView(
                 children: [
                   const SizedBox(height: 10),
-                  SvgImageUtils()
-                      .showSvgFromAsset(Assets.iconsMyAddressLocation),
+                  SvgImageUtils().showSvgFromAsset(
+                      Assets.iconsMyAddressLocation,
+                      width: 150,
+                      height: 150),
                   const SizedBox(height: 10),
                   CustomCardView(
                       padding: const EdgeInsets.all(20),
@@ -48,7 +50,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "${LocaleKeys.addressLine1} ${LocaleKeys.shouldntBeEmpty}";
+                                  return "${translate(LocaleKeys.addressLine1)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                 }
                                 return null;
                               }),
@@ -61,7 +63,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "${LocaleKeys.addressLine2} ${LocaleKeys.shouldntBeEmpty}";
+                                  return "${translate(LocaleKeys.addressLine2)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                 }
                                 return null;
                               }),
@@ -74,7 +76,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "${LocaleKeys.city} ${LocaleKeys.shouldntBeEmpty}";
+                                  return "${translate(LocaleKeys.city)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                 }
                                 return null;
                               }),
@@ -99,7 +101,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                             },
                             customValidator: (dynamic country) {
                               if (country == null) {
-                                return "Country ${LocaleKeys.shouldntBeEmpty}";
+                                return "${translate(LocaleKeys.country)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                               } else {
                                 return null;
                               }
@@ -124,7 +126,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                 onChanged: (States states) {},
                                 customValidator: (dynamic states) {
                                   if (states == null) {
-                                    return "States ${LocaleKeys.shouldntBeEmpty}";
+                                    return "${translate(LocaleKeys.state)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                   } else {
                                     return null;
                                   }
@@ -139,7 +141,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "${LocaleKeys.postalCode} ${LocaleKeys.shouldntBeEmpty}";
+                                  return "${translate(LocaleKeys.postalCode)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                 }
                                 return null;
                               }),
@@ -152,7 +154,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "${LocaleKeys.company} ${LocaleKeys.shouldntBeEmpty}";
+                                  return "${translate(LocaleKeys.company)} ${translate(LocaleKeys.shouldntBeEmpty)}";
                                 }
                                 return null;
                               }),
@@ -191,6 +193,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               text: translate(LocaleKeys.done))
                         ],
                       )),
+                  const SizedBox(height: 20),
                 ],
               ),
             )),

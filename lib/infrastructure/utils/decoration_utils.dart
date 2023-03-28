@@ -9,9 +9,15 @@ class CustomDecorationUtils {
     Widget? suffix,
   }) {
     return InputDecoration(
-      suffix: suffix,
+      suffixIcon: Padding(
+        padding: const EdgeInsets.only(right: 4.0),
+        child: suffix,
+      ),
+      suffixIconConstraints: const BoxConstraints(
+          maxHeight: 28, minHeight: 28, minWidth: 28, maxWidth: 28),
       hintText: hintText,
-      isDense: true,
+      isDense: false,
+      // errorBorder: CustomBorders().textFieldBorder(color: color),
       disabledBorder: CustomBorders().textFieldBorder(color: color),
       enabledBorder: CustomBorders().textFieldBorder(color: color),
       border: CustomBorders().textFieldBorder(color: color),

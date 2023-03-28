@@ -84,7 +84,7 @@ class CustomDropdownWidget extends StatelessWidget {
                 onChanged(value);
                 // validator(value);
               },
-              isExpanded: false,
+              isExpanded: true,
               validator: (value) {
                 print("CustomDropdownWidget validator: $value");
                 return customValidator!(value);

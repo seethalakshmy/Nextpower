@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:project/infrastructure/navigation/routes.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
+import 'package:project/presentation/home/controllers/home.controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/param_name.dart';
 
@@ -29,12 +31,20 @@ class NavigationUtils {
     return verified;
   }
 
-  void callHomePage({bool clearStack = false}) {
-    if (clearStack) {
-      Get.offAllNamed(Routes.HOME);
-    } else {
-      Get.toNamed(Routes.HOME);
-    }
+  void callHomePage({bool clearStack = false, int? index}) {
+    // if (clearStack) {
+    //   Get.offAllNamed(Routes.HOME, parameters: {
+    //     ParamName.index: index != null
+    //         ? index.toString()
+    //         : HomeController().stationIndex.toString()
+    //   });
+    // } else {
+    Get.offAllNamed(Routes.HOME, parameters: {
+      ParamName.index: index != null
+          ? index.toString()
+          : HomeController().stationIndex.toString()
+    });
+    // }
   }
 
   void callRegistration(String countryCode, String mobileNumber) {
@@ -56,14 +66,15 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    // callLoginPage(isLoginPage: false);
-    // Get.offAllNamed(Routes.MY_ADDRESS);
-    Get.offAllNamed(Routes.HOME);
+    callLoginPage(isLoginPage: true);
+    // Get.offAllNamed(Routes.STATION_DETAILS);
+    // Get.offAllNamed(Routes.HOME);
   }
 
-  void callProfile({bool clearStack = false}) {
+  void callProfile({bool clearStack = false, required String isCalledFrom}) {
     if (clearStack) {
-      Get.offAllNamed(Routes.PROFILE);
+      Get.offAllNamed(Routes.PROFILE,
+          parameters: {ParamName.from: isCalledFrom});
     } else {
       Get.toNamed(Routes.PROFILE);
     }
@@ -89,5 +100,34 @@ class NavigationUtils {
 
   callScreenYetToBeDone() {
     CustomSnackBar.showErrorSnackBar('Error', "Screen yet to be done");
+  }
+
+  Future<void> callGoogleMap(double lat, double long) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=$lat,$long';
+    if (await canLaunchUrl(Uri.parse(googleUrl))) {
+      await launchUrl(Uri.parse(googleUrl),
+          mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not open the map.';
+    }
+  }
+
+  callStationList() {
+    Get.toNamed(Routes.STATION_LIST);
+  }
+
+  void callStationDetails() {
+    Get.toNamed(Routes.STATION_DETAILS);
+  }
+
+  void callChargingSessionDetails(
+      {required int? stationId, required int connectorId}) {
+    print(stationId);
+    print(connectorId);
+    Get.toNamed(Routes.CHARGING_SESSION, parameters: {
+      ParamName.stationId: stationId.toString(),
+      ParamName.connectorId: connectorId.toString()
+    });
   }
 }

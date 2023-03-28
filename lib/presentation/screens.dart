@@ -1,3 +1,4 @@
+export 'package:project/presentation/charging.session/charging_session.screen.dart';
 export 'package:project/presentation/home/home.screen.dart';
 export 'package:project/presentation/login/login.screen.dart';
 export 'package:project/presentation/my.address.add.edit/my_address_add_edit.screen.dart';
@@ -7,4 +8,6 @@ export 'package:project/presentation/my_vehicles/my_vehicles.screen.dart';
 export 'package:project/presentation/otp/otp.screen.dart';
 export 'package:project/presentation/profile/profile.screen.dart';
 export 'package:project/presentation/registration/registration.screen.dart';
-export 'package:project/presentation/splash_screen/splash_screen.screen.dart';
+export 'package:project/presentation/splash_screen/splash.screen.dart';
+export 'package:project/presentation/station.details/station_details.screen.dart';
+export 'package:project/presentation/station_list/station_list.screen.dart';

@@ -12,6 +12,7 @@ class LocaleKeys {
   LocaleKeys._();
   static const appName = 'appName';
   static const login = 'login';
+  static const signup = 'signup';
   static const pleaseEnterTheDetailsBelowToContinue =
       'pleaseEnterTheDetailsBelowToContinue';
   static const byContinuingYouAgreeToOur = 'byContinuingYouAgreeToOur';
@@ -64,12 +65,47 @@ class LocaleKeys {
   static const shouldntBeEmpty = 'shouldntBeEmpty';
   static const choose = 'choose';
   static const station = 'station';
+  static const stations = 'stations';
   static const wallet = 'wallet';
   static const chargingHistory = 'chargingHistory';
+  static const usageHistory = 'usageHistory';
+  static const history = 'history';
   static const rfidTag = 'rfidTag';
   static const support = 'support';
   static const aboutUs = 'aboutUs';
   static const logout = 'logout';
+  static const connectors = 'connectors';
+  static const overview = 'overview';
+  static const all = 'all';
+  static const free = 'free';
+  static const kw = 'kw';
+  static const tariff = 'tariff';
+  static const charge = 'charge';
+  static const reserve = 'reserve';
+  static const direction = 'direction';
+  static const share = 'share';
+  static const call = 'call';
+  static const favourites = 'favourites';
+  static const amenities = 'amenities';
+  static const noSuchStationsFound = 'noSuchStationsFound';
+  static const oops = 'oops';
+  static const noConnectorsFound = 'noConnectorsFound';
+  static const sorry = 'sorry';
+  static const pricing = 'pricing';
+  static const power = 'power';
+  static const type = 'type';
+  static const chargingOptions = 'chargingOptions';
+  static const startCharging = 'startCharging';
+  static const money = 'money';
+  static const time = 'time';
+  static const energy = 'energy';
+  static const set = 'set';
+  static const budget = 'budget';
+  static const duration = 'duration';
+  static const minutes = 'minutes';
+  static const kwh = 'kwh';
+  static const submit = 'submit';
+  static const noDataFound = 'noDataFound';
   static const a = 'a';
 }
 
@@ -77,6 +113,7 @@ class Locales {
   static const en_US = {
     'appName': 'Next Power',
     'login': 'Login',
+    'signup': 'Signup',
     'pleaseEnterTheDetailsBelowToContinue':
         'Please enter the details below to continue',
     'byContinuingYouAgreeToOur': 'By continuing, you agree to our',
@@ -126,15 +163,50 @@ class Locales {
     'company': 'Company',
     'gstNo': 'GST no.',
     'postalCode': 'Postal code',
-    'shouldntBeEmpty': 'should n\'t be empty',
+    'shouldntBeEmpty': 'shouldn\'t be empty',
     'choose': 'Choose',
     'station': 'Station',
+    'stations': 'Stations',
     'wallet': 'Wallet',
     'chargingHistory': 'Charging history',
+    'usageHistory': 'Usage history',
+    'history': 'History',
     'rfidTag': 'RFID tag',
     'support': 'Support',
     'aboutUs': 'About us',
     'logout': 'Logout',
+    'connectors': 'Connectors',
+    'overview': 'Overview',
+    'all': 'All',
+    'free': 'Free',
+    'kw': 'KW',
+    'tariff': 'Tariff',
+    'charge': 'Charge',
+    'reserve': 'Reserve',
+    'direction': 'Direction',
+    'share': 'Share',
+    'call': 'Call',
+    'favourites': 'Favorites',
+    'amenities': 'Amenities',
+    'noSuchStationsFound': 'No such stations found',
+    'oops': 'Oops',
+    'noConnectorsFound': 'No connectors Found',
+    'sorry': 'Sorry',
+    'pricing': 'Pricing',
+    'power': 'Power',
+    'type': 'Type',
+    'chargingOptions': 'Charging options',
+    'startCharging': 'Start charging',
+    'money': 'Money',
+    'time': 'Time',
+    'energy': 'Energy',
+    'set': 'Set',
+    'budget': 'Budget',
+    'duration': 'Duration',
+    'minutes': 'minutes',
+    'kwh': 'KWH',
+    'submit': 'Submit',
+    'noDataFound': 'No data found',
     'a': '',
   };
 }

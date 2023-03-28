@@ -6,10 +6,23 @@
     "lat": "1234567",
     "long": "123456786543",
     "share_text": "",
-    "mobile_number": "",
+    "open_time": "24 hrs",
+    "mobile_number": "+9786756453423",
     "is_favorite": true,
-    "address": "",
-    "mail_id": "",
+    "address": {
+      "address_id": 1,
+      "address_line1": "XIII/399",
+      "address_line2": "Edappilly junction",
+      "city": "Kochi",
+      "state_id": 1,
+      "State_name": "Kerala",
+      "postal_code": "682024",
+      "country_id": 1,
+      "country_name": "India",
+      "company_name": "Seeroo",
+      "gst_no": "GSTIN1234589"
+    },
+    "mail_id": "test@mail.com",
     "amenities": [
       "Wifi",
       "Parking",
@@ -25,6 +38,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #1",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": false
     },
@@ -34,6 +48,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #2",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": true
     },
@@ -43,6 +58,7 @@
       "kw": "15",
       "status": "available",
       "connector_name": "connector #3",
+      "connector_type": "CCS",
       "tariff": "$15 /kwh + tax",
       "has_reserve": true
     }

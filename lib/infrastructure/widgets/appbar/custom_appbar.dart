@@ -8,23 +8,23 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       required this.title,
       this.leading,
       this.onBackPressed,
-      this.centerTitle})
+      this.centerTitle,
+      this.elevation})
       : super(key: key);
 
   final String title;
   final Widget? leading;
   final VoidCallback? onBackPressed;
   final bool? centerTitle;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: elevation,
       backgroundColor: Colors.white,
-      title: Text(
-        title,
-        style: const TextStyle(color: Colors.black),
-      ),
-      centerTitle: centerTitle ?? true,
+      title: AppBarTitleWidget(title: title),
+      centerTitle: centerTitle ?? false,
       leading: leading ??
           BackButtonAppbar(
             onBackPressed: onBackPressed,
@@ -43,4 +43,22 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class AppBarTitleWidget extends StatelessWidget {
+  const AppBarTitleWidget({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+          color: Colors.black, fontWeight: FontWeight.w600, fontSize: 22),
+    );
+  }
 }

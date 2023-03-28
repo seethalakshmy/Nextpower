@@ -4,6 +4,7 @@ import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/presentation/home/controllers/home.controller.dart';
 
 import '../text/subtitle_widget.dart';
 
@@ -31,36 +32,44 @@ class CustomDrawerWidget extends StatelessWidget {
                 SizedBox(
                     width: 50,
                     height: 50,
-                    child: SvgImageUtils()
-                        .showSvgFromAsset(Assets.iconsMenuProfile)),
+                    child: Image.asset(
+                      Assets.iconsMenuProfileImage,
+                      fit: BoxFit.fill,
+                    )),
                 const SizedBox(height: 10),
                 const Text('John Doe'),
                 const SizedBox(height: 5),
                 const SubtitleWidget(
                   subtitle: '+91 1234567890',
                   fontWeight: FontWeight.w400,
+                  fontSize: 12,
                 ),
               ],
             ),
           ),
           _DrawerItem(
-            title: LocaleKeys.station,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            title: LocaleKeys.stations,
+            // onPressed: () => NavigationUtils().callStationList(),
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().stationIndex),
             asset: Assets.iconsMenuStation,
           ),
           _DrawerItem(
             title: LocaleKeys.profile,
-            onPressed: () => NavigationUtils().callProfile(),
+            onPressed: () =>
+                NavigationUtils().callProfile(isCalledFrom: 'drawer'),
             asset: Assets.iconsMenuProfile,
           ),
           _DrawerItem(
             title: LocaleKeys.wallet,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().walletIndex),
             asset: Assets.iconsMenuWallet,
           ),
           _DrawerItem(
-            title: LocaleKeys.chargingHistory,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            title: LocaleKeys.usageHistory,
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().historyIndex),
             asset: Assets.iconsMenuChargingHistory,
           ),
           _DrawerItem(
@@ -95,7 +104,10 @@ class CustomDrawerWidget extends StatelessWidget {
             asset: Assets.iconsMenuLogout,
           ),
           const SizedBox(height: 30),
-          SvgImageUtils().showSvgFromAsset(Assets.iconsMenuNextPowerLogo)
+          const Image(
+            image: AssetImage(Assets.logoLogo),
+            height: 76,
+          ),
         ],
       ),
     );

@@ -61,6 +61,7 @@ class SplashContent extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,8 +71,7 @@ class SplashContent extends StatelessWidget {
           ),
           const Image(
             image: AssetImage(Assets.logoLogo),
-            width: 150,
-            height: 150,
+            height: 200,
           ),
           Container(
             padding: const EdgeInsets.only(bottom: 30),
@@ -80,7 +80,7 @@ class SplashContent extends StatelessWidget {
                 Text(
                   "V $versionNumber",
                   style: TextStyle(
-                      color: AppColors.primaryColor,
+                      color: AppColors.labelTextColor3,
                       fontSize: 12,
                       fontWeight: FontWeight.w600),
                 ),

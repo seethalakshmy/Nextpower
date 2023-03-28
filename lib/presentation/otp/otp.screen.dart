@@ -55,16 +55,19 @@ class OtpScreen extends GetView<OtpController> {
                             controller.isLoading(true);
                             if (controller.formKey.currentState!.validate()) {
                               await Future.delayed(const Duration(seconds: 2));
+                              controller.isLoading(false);
                               if (controller.isVerify.value) {
                                 controller.isLoading(false);
                                 Get.back(result: true);
                               } else if (controller.isAccountCreated) {
-                                NavigationUtils().callProfile(clearStack: true);
+                                NavigationUtils().callHomePage();
                               } else {
                                 NavigationUtils().callRegistration(
                                     controller.countryCode,
                                     controller.mobileNumber);
                               }
+                            } else {
+                              controller.isLoading(false);
                             }
                           },
                           isLoading: controller.isLoading.value,
@@ -75,24 +78,16 @@ class OtpScreen extends GetView<OtpController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          TextButton(
-                            onPressed: () {
-                              controller.resendOTP();
-                            },
-                            child: Text(
-                              translate(LocaleKeys.resendOtp),
-                              style: const TextStyle(
-                                  decoration: TextDecoration.underline),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              controller.changePhoneNumber();
-                            },
-                            child: Text(translate(LocaleKeys.changePhoneNumber),
-                                style: const TextStyle(
-                                    decoration: TextDecoration.underline)),
-                          ),
+                          _TextButtons(
+                              onPressed: () {
+                                controller.resendOTP();
+                              },
+                              text: LocaleKeys.resendOtp),
+                          _TextButtons(
+                              onPressed: () {
+                                controller.changePhoneNumber();
+                              },
+                              text: LocaleKeys.changePhoneNumber),
                         ],
                       )
                     ],
@@ -100,5 +95,28 @@ class OtpScreen extends GetView<OtpController> {
                 ),
               )),
         ));
+  }
+}
+
+class _TextButtons extends StatelessWidget {
+  const _TextButtons({
+    super.key,
+    required this.onPressed,
+    required this.text,
+  });
+
+  final VoidCallback onPressed;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        translate(text),
+        style:
+            const TextStyle(decoration: TextDecoration.underline, fontSize: 14),
+      ),
+    );
   }
 }
