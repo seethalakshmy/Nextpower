@@ -18,6 +18,7 @@ dependencies:
   google_fonts: ^4.0.3
   google_maps_flutter: ^2.2.5
   url_launcher: ^6.1.10
+  geolocator: ^9.0.2
 
   flutter:
     sdk: flutter

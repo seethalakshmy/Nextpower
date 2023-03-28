@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
@@ -33,7 +34,9 @@ class HomeScreen extends GetView<HomeController> {
         drawer: const CustomDrawerWidget(),
         bottomNavigationBar: const BottomNavigationBarWidget(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            NavigationUtils().callScreenYetToBeDone();
+          },
           child: SvgImageUtils()
               .showSvgFromAsset(Assets.iconsQrcode, width: 24, height: 24),
         ),
