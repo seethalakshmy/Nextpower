@@ -3,6 +3,7 @@ class Routes {
     return SPLASH_SCREEN;
   }
 
+  static const CHARGING_SESSION = '/charging-session';
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const MY_ADDRESS = '/my-address';
@@ -16,5 +17,5 @@ class Routes {
   static const SPLASH_SCREEN = '/splash-screen';
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
-  static const CHARGING_SESSION = '/charging-session';
+  static const QR_CODE = '/qr-code';
 }

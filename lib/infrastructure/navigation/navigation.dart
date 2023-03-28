@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../config.dart';
@@ -17,11 +16,11 @@ class EnvironmentsBadge extends StatelessWidget {
     var env = ConfigEnvironments.getEnvironments()['env'];
     return env != Environments.PRODUCTION
         ? Banner(
-            location: BannerLocation.topStart,
-            message: env!,
-            color: env == Environments.QAS ? Colors.blue : Colors.purple,
-            child: child,
-          )
+      location: BannerLocation.topStart,
+      message: env!,
+      color: env == Environments.QAS ? Colors.blue : Colors.purple,
+      child: child,
+    )
         : SizedBox(child: child);
   }
 }
@@ -92,6 +91,11 @@ class Nav {
       name: Routes.CHARGING_SESSION,
       page: () => const ChargingSessionScreen(),
       binding: ChargingSessionControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.QR_CODE,
+      page: () => QrCodeScreen(),
+      binding: QrCodeControllerBinding(),
     ),
   ];
 }

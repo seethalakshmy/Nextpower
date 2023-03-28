@@ -66,9 +66,9 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    callLoginPage(isLoginPage: true);
+    // callLoginPage(isLoginPage: true);
     // Get.offAllNamed(Routes.STATION_DETAILS);
-    // Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.HOME);
   }
 
   void callProfile({bool clearStack = false, required String isCalledFrom}) {
@@ -125,9 +125,15 @@ class NavigationUtils {
       {required int? stationId, required int connectorId}) {
     print(stationId);
     print(connectorId);
-    Get.toNamed(Routes.CHARGING_SESSION, parameters: {
-      ParamName.stationId: stationId.toString(),
-      ParamName.connectorId: connectorId.toString()
-    });
+    Get.offNamed(Routes.CHARGING_SESSION,
+        parameters: {
+          ParamName.stationId: stationId.toString(),
+          ParamName.connectorId: connectorId.toString()
+        },
+        preventDuplicates: true);
+  }
+
+  void callQrCodeScannerPage() {
+    Get.toNamed(Routes.QR_CODE);
   }
 }

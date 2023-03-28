@@ -25,6 +25,7 @@ class AppColors {
   static Color tabUnderlineSelectedColor = fromHex('#03507E');
   static Color availableGreen = fromHex('#1BC182');
   static Color homeIconColor = fromHex('#003784');
+  static Color greenColor = fromHex('#ABF428');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');

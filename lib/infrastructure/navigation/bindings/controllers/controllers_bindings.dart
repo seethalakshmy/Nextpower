@@ -7,6 +7,7 @@ export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicl
 export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicles_add_edit.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/otp.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/profile.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/qr_code.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/registration.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/splash_screen.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/station_details.controller.binding.dart'; 

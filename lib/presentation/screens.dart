@@ -7,6 +7,7 @@ export 'package:project/presentation/my.vehicles.add.edit/my_vehicles_add_edit.s
 export 'package:project/presentation/my_vehicles/my_vehicles.screen.dart';
 export 'package:project/presentation/otp/otp.screen.dart';
 export 'package:project/presentation/profile/profile.screen.dart';
+export 'package:project/presentation/qr.code/qr_code.screen.dart';
 export 'package:project/presentation/registration/registration.screen.dart';
 export 'package:project/presentation/splash_screen/splash.screen.dart';
 export 'package:project/presentation/station.details/station_details.screen.dart';

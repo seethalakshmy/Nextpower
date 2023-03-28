@@ -34,8 +34,9 @@ class HomeScreen extends GetView<HomeController> {
         drawer: const CustomDrawerWidget(),
         bottomNavigationBar: const BottomNavigationBarWidget(),
         floatingActionButton: FloatingActionButton(
+          heroTag: "QrCodeScanner",
           onPressed: () {
-            NavigationUtils().callScreenYetToBeDone();
+            NavigationUtils().callQrCodeScannerPage();
           },
           child: SvgImageUtils()
               .showSvgFromAsset(Assets.iconsQrcode, width: 24, height: 24),

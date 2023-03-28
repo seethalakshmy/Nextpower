@@ -67,6 +67,7 @@ class _StationViewState extends State<StationView> {
               child: Column(
                 children: [
                   FloatingActionButton(
+                    heroTag: "CurrentLocation",
                     onPressed: () {
                       print("my_location pressed");
                       _homeController.determinePosition();
@@ -79,6 +80,7 @@ class _StationViewState extends State<StationView> {
                     ),
                   ),
                   FloatingActionButton(
+                    heroTag: "FilterView",
                     onPressed: () {
                       print("filter pressed");
                       NavigationUtils().callScreenYetToBeDone();
