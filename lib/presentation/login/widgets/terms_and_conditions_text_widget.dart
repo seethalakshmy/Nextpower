@@ -25,7 +25,7 @@ class TermsAndConditionsTextWidget extends StatelessWidget {
                   CustomSnackBar.showErrorSnackBar('Not yet done', "");
                 },
               text: translate(LocaleKeys.termsAndConditions),
-              style: TextStyle(color: AppColors.labelGreenTextColor)),
+              style: TextStyle(color: AppColors.primaryGreen)),
           const TextSpan(text: ". "),
           TextSpan(
               recognizer: TapGestureRecognizer()
@@ -34,7 +34,7 @@ class TermsAndConditionsTextWidget extends StatelessWidget {
                   CustomSnackBar.showErrorSnackBar('Not yet done', "");
                 },
               text: translate(LocaleKeys.privacyPolicy),
-              style: TextStyle(color: AppColors.labelGreenTextColor))
+              style: TextStyle(color: AppColors.primaryGreen))
         ],
       ),
     );

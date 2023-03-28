@@ -6,10 +6,12 @@ class LoadingWidget extends StatelessWidget {
     super.key,
     this.size,
     this.strokeWidth,
+    this.strokeColor,
   });
 
   final double? size;
   final double? strokeWidth;
+  final Color? strokeColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class LoadingWidget extends StatelessWidget {
       height: size ?? 20,
       width: size ?? 20,
       child: CircularProgressIndicator(
-        color: AppColors.primaryColor,
+        color: strokeColor ?? AppColors.primaryBlue,
         strokeWidth: strokeWidth ?? 1,
       ),
     ));

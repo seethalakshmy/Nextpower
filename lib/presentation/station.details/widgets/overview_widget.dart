@@ -61,7 +61,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
               TitleWidget(
                 title: translate(LocaleKeys.amenities),
                 fontWeight: FontWeight.bold,
-                color: AppColors.titleLabelTextColor,
+                color: AppColors.btmTextColor,
                 fontSize: 17,
               ),
               const SizedBox(

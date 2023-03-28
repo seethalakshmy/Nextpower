@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  //Given
-
   static Color primaryGreen = fromHex('#81B622');
   static Color primaryBlue = fromHex('#0093EA');
   static Color labelColor = fromHex('#596076');
@@ -24,19 +22,14 @@ class AppColors {
   static Color dialogLightGreen = fromHex('#E5FFEE');
   static Color dialogOrange = fromHex('#F89014');
   static Color dialogLightOrange = fromHex('#FFEED9');
+  static Color tabUnderlineSelectedColor = fromHex('#03507E');
+  static Color availableGreen = fromHex('#1BC182');
+  static Color homeIconColor = fromHex('#003784');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');
-  static Color availableGreen = fromHex('#1BC182');
-  static Color tabUnderlineSelectedColor = fromHex('#03507E');
 
   static Color errorRed = Colors.red[700]!;
-  static Color descriptionTextColor = fromHex('#949AAC');
-  static Color titleLabelTextColor = fromHex('#5A6077');
-  static Color labelGreenTextColor = fromHex('#80B720');
-
-  //color picked
-  static Color subTitleTextColor2 = fromHex('#585F83');
 
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();

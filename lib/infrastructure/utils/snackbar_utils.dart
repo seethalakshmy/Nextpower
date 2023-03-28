@@ -23,7 +23,7 @@ class CustomSnackBar {
   static void showSuccessSnackBar(String title, String message) {
     Get.snackbar(title, message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.primaryBlue,
         maxWidth: kIsWeb ? AppConstants().kWebWidth : double.infinity,
         colorText: Colors.white,
         margin: const EdgeInsets.all(16));
@@ -36,7 +36,7 @@ class CustomSnackBar {
       required Function onPressedButton}) {
     Get.snackbar(title, message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.primaryBlue,
         maxWidth: kIsWeb ? AppConstants().kWebWidth : double.infinity,
         colorText: Colors.white,
         margin: const EdgeInsets.all(14),
@@ -50,7 +50,7 @@ class CustomSnackBar {
           },
           child: Text(
             buttonTitle,
-            style: TextStyle(color: AppColors.primaryColor),
+            style: TextStyle(color: AppColors.primaryBlue),
           ),
         ));
   }

@@ -49,8 +49,9 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.stations,
-            onPressed: () => NavigationUtils().callStationList(),
-            // onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            // onPressed: () => NavigationUtils().callStationList(),
+            onPressed: () => NavigationUtils()
+                .callHomePage(index: HomeController().stationIndex),
             asset: Assets.iconsMenuStation,
           ),
           _DrawerItem(
@@ -66,7 +67,7 @@ class CustomDrawerWidget extends StatelessWidget {
             asset: Assets.iconsMenuWallet,
           ),
           _DrawerItem(
-            title: LocaleKeys.chargingHistory,
+            title: LocaleKeys.usageHistory,
             onPressed: () => NavigationUtils()
                 .callHomePage(index: HomeController().historyIndex),
             asset: Assets.iconsMenuChargingHistory,

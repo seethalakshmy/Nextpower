@@ -68,6 +68,7 @@ class LocaleKeys {
   static const stations = 'stations';
   static const wallet = 'wallet';
   static const chargingHistory = 'chargingHistory';
+  static const usageHistory = 'usageHistory';
   static const history = 'history';
   static const rfidTag = 'rfidTag';
   static const support = 'support';
@@ -168,6 +169,7 @@ class Locales {
     'stations': 'Stations',
     'wallet': 'Wallet',
     'chargingHistory': 'Charging history',
+    'usageHistory': 'Usage history',
     'history': 'History',
     'rfidTag': 'RFID tag',
     'support': 'Support',

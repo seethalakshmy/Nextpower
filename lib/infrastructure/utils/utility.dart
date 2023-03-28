@@ -79,7 +79,7 @@ class Utility {
         snackStyle: SnackStyle.GROUNDED,
         snackPosition: SnackPosition.TOP,
         padding: const EdgeInsets.only(bottom: 16),
-        backgroundColor: AppColors.successGreen,
+        backgroundColor: AppColors.primaryGreen,
         margin: EdgeInsets.zero,
         colorText: Colors.white,
         icon: SvgPicture.asset(Assets.iconsSuccessTick),

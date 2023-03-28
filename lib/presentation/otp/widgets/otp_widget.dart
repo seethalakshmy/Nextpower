@@ -16,12 +16,10 @@ class OtpWidget extends GetView<OtpController> {
   final defaultPinTheme = PinTheme(
     width: double.infinity,
     height: 50,
-    textStyle: const TextStyle(
-        fontSize: 20,
-        color: Color.fromRGBO(30, 60, 87, 1),
-        fontWeight: FontWeight.w600),
+    textStyle: TextStyle(
+        fontSize: 20, color: AppColors.iconColor, fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
-      border: Border.all(color: AppColors.descriptionTextColor.withOpacity(.5)),
+      border: Border.all(color: AppColors.fieldColor),
       borderRadius: BorderRadius.circular(5),
     ),
   );
@@ -48,7 +46,7 @@ class OtpWidget extends GetView<OtpController> {
       },
       focusedPinTheme: defaultPinTheme.copyWith(
           decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primaryColor),
+        border: Border.all(color: AppColors.primaryBlue),
         borderRadius: BorderRadius.circular(5),
       )),
     );

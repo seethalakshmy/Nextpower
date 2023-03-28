@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
 import 'package:project/presentation/station_list/models/stations_list_model.dart';
@@ -41,16 +42,52 @@ class _StationViewState extends State<StationView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: double.infinity,
-        child: GoogleMap(
-          mapType: MapType.normal,
-          markers: markers.values.toSet(),
-          initialCameraPosition: HomeController.kGooglePlex,
-          onMapCreated: (GoogleMapController mapController) {
-            // controller.mapController.complete(mapController);
-            onMapCreated(mapController);
-          },
-        ));
+    return Stack(
+      children: [
+        SizedBox(
+            width: double.infinity,
+            child: GoogleMap(
+              mapType: MapType.normal,
+              markers: markers.values.toSet(),
+              myLocationButtonEnabled: false,
+              initialCameraPosition: HomeController.kGooglePlex,
+              onMapCreated: (GoogleMapController mapController) {
+                // controller.mapController.complete(mapController);
+                onMapCreated(mapController);
+              },
+            )),
+        Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0, right: 20),
+              child: Column(
+                children: [
+                  FloatingActionButton(
+                    onPressed: () {
+                      print("my_locattion pressed");
+                    },
+                    mini: true,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.my_location,
+                      color: AppColors.homeIconColor,
+                    ),
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      print("filter pressed");
+                    },
+                    mini: true,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.filter_alt_outlined,
+                      color: AppColors.homeIconColor,
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      ],
+    );
   }
 }

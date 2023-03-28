@@ -120,7 +120,7 @@ class _VehicleNumberAndEditWidget extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               controller.vehiclesList[index].vehicleNumber ?? "",
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 18, color: AppColors.labelColor2),
             ),
           ],
         ),
@@ -155,11 +155,12 @@ class _MakeModelWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: AppColors.descriptionTextColor),
+            style: TextStyle(color: AppColors.iconColor, fontSize: 16),
           ),
           const SizedBox(height: 5),
           Text(
             text,
+            style: TextStyle(color: AppColors.btmTextColor, fontSize: 16),
           )
         ],
       ),
