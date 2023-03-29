@@ -12,10 +12,10 @@ class Routes {
   static const MY_VEHICLES_ADD_EDIT = '/my-vehicles-add-edit';
   static const OTP = '/otp';
   static const PROFILE = '/profile';
+  static const QR_CODE = '/qr-code';
   static const REGISTRATION = '/registration';
   static const SAVED_ADDRESS = '/saved-address';
   static const SPLASH_SCREEN = '/splash-screen';
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
-  static const QR_CODE = '/qr-code';
 }

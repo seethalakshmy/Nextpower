@@ -106,6 +106,7 @@ class LocaleKeys {
   static const kwh = 'kwh';
   static const submit = 'submit';
   static const noDataFound = 'noDataFound';
+  static const noFavoritesYet = 'noFavoritesYet';
   static const a = 'a';
 }
 
@@ -207,6 +208,7 @@ class Locales {
     'kwh': 'KWH',
     'submit': 'Submit',
     'noDataFound': 'No data found',
+    'noFavoritesYet': 'No favorites yet',
     'a': '',
   };
 }

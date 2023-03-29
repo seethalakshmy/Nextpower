@@ -6,8 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
+import 'package:project/presentation/home/providers/favorites_list_provider.dart';
 import 'package:project/presentation/station_list/models/stations_list_model.dart';
 import 'package:project/presentation/station_list/providers/stations_list_provider.dart';
+
+import '../models/favorites_list_model.dart';
 
 class HomeController extends GetxController {
   final int stationIndex = 1;
@@ -30,6 +33,8 @@ class HomeController extends GetxController {
   Position? position;
 
   GoogleMapController? mapController;
+
+  List<Favorites> favoritesList = [];
 
   @override
   void onInit() async {
@@ -57,6 +62,9 @@ class HomeController extends GetxController {
     await Future.delayed(const Duration(seconds: 2));
     isLoading(false);
     selectedIndex.value = index;
+    if (selectedIndex.value == favoritesIndex) {
+      getFavoritesList();
+    }
   }
 
   Future<void> onMapCreated() async {
@@ -125,5 +133,13 @@ class HomeController extends GetxController {
       target: LatLng(position?.latitude ?? 0, position?.longitude ?? 0),
       zoom: 14.4746,
     )));
+  }
+
+  void getFavoritesList() {
+    isLoading(true);
+    FavoritesListProvider().getFavoritesList().then((value) {
+      favoritesList = value?.favorites ?? [];
+      isLoading(false);
+    });
   }
 }

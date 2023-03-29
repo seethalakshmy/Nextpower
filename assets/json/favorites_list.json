@@ -1,12 +1,12 @@
 {
-  "favorites_list": [
+  "favorites": [
     {
       "station_id": 1,
       "station_name": "test",
       "kwh": "3.3 KW",
       "distance": "13 km",
-      "lat": "123456",
-      "long": "2134567",
+      "lat": 56.172249,
+      "long": 10.187372,
       "free": 1,
       "active": 2,
       "status": "available"
