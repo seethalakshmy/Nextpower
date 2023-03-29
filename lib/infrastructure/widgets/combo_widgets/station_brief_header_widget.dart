@@ -36,7 +36,8 @@ class StationBriefHeaderWidget extends StatelessWidget {
             onPressed: () {
               NavigationUtils().callGoogleMap(lat, long);
             },
-            icon: SvgImageUtils().showSvgFromAsset(Assets.iconsDirection))
+            icon: SvgImageUtils()
+                .showSvgFromAsset(Assets.iconsDirection, width: 24, height: 24))
       ],
     );
   }

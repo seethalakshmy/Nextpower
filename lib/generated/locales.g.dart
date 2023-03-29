@@ -107,6 +107,8 @@ class LocaleKeys {
   static const submit = 'submit';
   static const noDataFound = 'noDataFound';
   static const noFavoritesYet = 'noFavoritesYet';
+  static const active = 'active';
+  static const distance = 'distance';
   static const a = 'a';
 }
 
@@ -209,6 +211,8 @@ class Locales {
     'submit': 'Submit',
     'noDataFound': 'No data found',
     'noFavoritesYet': 'No favorites yet',
+    'active': 'Active',
+    'distance': 'Distance',
     'a': '',
   };
 }

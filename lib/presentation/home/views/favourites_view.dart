@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/combo_widgets/station_brief_header_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:project/presentation/home/models/favorites_list_model.dart';
+import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
 
 class FavouritesView extends GetView<HomeController> {
   const FavouritesView({Key? key}) : super(key: key);
@@ -26,15 +31,66 @@ class FavouritesView extends GetView<HomeController> {
                         horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                              padding:
+                                  EdgeInsets.only(top: 8, left: 8, bottom: 8),
+                              onPressed: () {},
+                              icon: Icon(Icons.close)),
+                        ),
                         StationBriefHeaderWidget(
                           connectorPower:
                               "${favorites.kwh ?? ""} ${translate(LocaleKeys.kw)}",
                           connectorStatus: favorites.status ?? "",
-                          stationName:
-                              controller.favoritesList[index].stationName ?? "",
-                          lat: controller.favoritesList[index].lat ?? 0,
-                          long: controller.favoritesList[index].lat ?? 0,
+                          stationName: favorites.stationName ?? "",
+                          lat: favorites.lat ?? 0,
+                          long: favorites.lat ?? 0,
                         ),
+                        const SizedBox(height: 10),
+                        const Divider(),
+                        Row(
+                          children: [
+                            ContentItem(
+                              title: translate(LocaleKeys.distance),
+                              value: favorites.distance ?? "",
+                              bgColor: Colors.transparent,
+                              textColor: AppColors.btmTextColor,
+                              alignment: Alignment.centerLeft,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                            const SizedBox(width: 5),
+                            ContentItem(
+                              title: translate(LocaleKeys.free),
+                              value: (favorites.free ?? 0).toString(),
+                              bgColor: Colors.transparent,
+                              textColor: AppColors.btmTextColor,
+                              alignment: Alignment.centerLeft,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                            const SizedBox(width: 5),
+                            ContentItem(
+                              title: translate(LocaleKeys.active),
+                              value: (favorites.active ?? 0).toString(),
+                              bgColor: Colors.transparent,
+                              textColor: AppColors.btmTextColor,
+                              alignment: Alignment.centerLeft,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        RoundedRectangleButton(
+                          textSize: 15,
+                          asset: Assets.iconsChargeWhiteIcon,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            NavigationUtils().callScreenYetToBeDone();
+                          },
+                          text: translate(LocaleKeys.charge),
+                          height: 50,
+                        ),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ));
