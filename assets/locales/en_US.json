@@ -94,6 +94,15 @@
   "noFavoritesYet": "No favorites yet",
   "active": "Active",
   "distance": "Distance",
+  "id": "id",
+  "totalCost": "Total cost",
+  "startTime": "Start time",
+  "endTime": "End time",
+  "success": "Success",
+  "pendingInvoice": "Pending invoice",
+  "a": "",
+  "a": "",
+  "a": "",
   "a": "",
   "a": ""
 }

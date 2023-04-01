@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
+import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/home/providers/favorites_list_provider.dart';
+import 'package:project/presentation/home/providers/usage_history_list_provider.dart';
 import 'package:project/presentation/station_list/models/stations_list_model.dart';
 import 'package:project/presentation/station_list/providers/stations_list_provider.dart';
 
@@ -17,6 +19,8 @@ class HomeController extends GetxController {
   final int historyIndex = 2;
   final int favoritesIndex = 3;
   final int walletIndex = 4;
+  final int successHistory = 1;
+  final int pendingHistory = 2;
 
   final selectedIndex = 0.obs;
   final RxBool isLoading = true.obs;
@@ -35,6 +39,9 @@ class HomeController extends GetxController {
   GoogleMapController? mapController;
 
   List<Favorites> favoritesList = [];
+  final historySelectedIndex = 1.obs;
+  final historyLoading = true.obs;
+  List<UsageHistory> usageHistoryList = [];
 
   @override
   void onInit() async {
@@ -58,12 +65,19 @@ class HomeController extends GetxController {
   }
 
   void setSelectedIndex(int index) async {
-    isLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
-    isLoading(false);
-    selectedIndex.value = index;
-    if (selectedIndex.value == favoritesIndex) {
+    if (index == favoritesIndex) {
+      isLoading(true);
+      await Future.delayed(const Duration(seconds: 2));
+      selectedIndex.value = index;
       getFavoritesList();
+    } else if (index == historyIndex) {
+      selectedIndex.value = index;
+      getUsageHistoryList(successHistory);
+    } else {
+      isLoading(true);
+      await Future.delayed(const Duration(seconds: 2));
+      selectedIndex.value = index;
+      isLoading(false);
     }
   }
 
@@ -136,10 +150,23 @@ class HomeController extends GetxController {
   }
 
   void getFavoritesList() {
-    isLoading(true);
     FavoritesListProvider().getFavoritesList().then((value) {
       favoritesList = value?.favorites ?? [];
       isLoading(false);
     });
+  }
+
+  void getUsageHistoryList(int historyOption) async {
+    historyLoading(true);
+    await Future.delayed(const Duration(seconds: 2));
+    UsageHistoryListProvider().getUsageHistoryList(historyOption).then((value) {
+      usageHistoryList = value?.usageHistory ?? [];
+      historyLoading(false);
+    });
+  }
+
+  void setHistorySelectedIndex(int currentIndex) {
+    historySelectedIndex(currentIndex);
+    getUsageHistoryList(currentIndex);
   }
 }

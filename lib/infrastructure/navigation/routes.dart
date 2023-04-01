@@ -18,4 +18,5 @@ class Routes {
   static const SPLASH_SCREEN = '/splash-screen';
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
+  static const USAGE_HISTORY = '/usage-history';
 }

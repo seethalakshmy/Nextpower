@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
-import 'package:project/infrastructure/widgets/text/title_widget.dart';
+import 'package:project/infrastructure/widgets/text/list_title_widget.dart';
 import 'package:project/presentation/charging.session/widgets/charging_option_section.dart';
 import 'package:project/presentation/station.details/widgets/charging_power_status_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
@@ -40,7 +39,7 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _TitleWidget(
+                            ListTitleWidget(
                                 title: controller
                                         .sessionDetails!.chargingPointName ??
                                     ""),
@@ -92,7 +91,7 @@ class _PricingSection extends GetView<ChargingSessionController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _TitleWidget(title: translate(LocaleKeys.pricing)),
+        ListTitleWidget(title: translate(LocaleKeys.pricing)),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -122,25 +121,6 @@ class _PricingSection extends GetView<ChargingSessionController> {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({
-    super.key,
-    required this.title,
-  });
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return TitleWidget(
-      title: title,
-      fontWeight: FontWeight.w600,
-      fontSize: 18,
-      color: AppColors.labelColor2,
     );
   }
 }

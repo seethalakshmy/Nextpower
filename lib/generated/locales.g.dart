@@ -109,6 +109,12 @@ class LocaleKeys {
   static const noFavoritesYet = 'noFavoritesYet';
   static const active = 'active';
   static const distance = 'distance';
+  static const id = 'id';
+  static const totalCost = 'totalCost';
+  static const startTime = 'startTime';
+  static const endTime = 'endTime';
+  static const success = 'success';
+  static const pendingInvoice = 'pendingInvoice';
   static const a = 'a';
 }
 
@@ -213,6 +219,12 @@ class Locales {
     'noFavoritesYet': 'No favorites yet',
     'active': 'Active',
     'distance': 'Distance',
+    'id': 'id',
+    'totalCost': 'Total cost',
+    'startTime': 'Start time',
+    'endTime': 'End time',
+    'success': 'Success',
+    'pendingInvoice': 'Pending invoice',
     'a': '',
   };
 }

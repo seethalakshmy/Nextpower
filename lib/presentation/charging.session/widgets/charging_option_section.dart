@@ -5,8 +5,8 @@ import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/border_utils.dart';
 import 'package:project/infrastructure/utils/input_formatter_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/text/list_title_widget.dart';
 import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
-import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/charging.session/controllers/charging_session.controller.dart';
 
 class ChargingOptionsSection extends GetView<ChargingSessionController> {
@@ -19,12 +19,7 @@ class ChargingOptionsSection extends GetView<ChargingSessionController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleWidget(
-          title: translate(LocaleKeys.chargingOptions),
-          fontWeight: FontWeight.w600,
-          fontSize: 18,
-          color: AppColors.labelColor2,
-        ),
+        ListTitleWidget(title: translate(LocaleKeys.chargingOptions)),
         const SizedBox(height: 20),
         const _ChargingOptionTitleSection(),
         const SizedBox(height: 10),
