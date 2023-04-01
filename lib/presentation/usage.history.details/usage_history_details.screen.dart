@@ -40,7 +40,7 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 19,
                                   ),
-                                  SizedBox(width: 20),
+                                  const SizedBox(width: 20),
                                   StationStatusWidget(
                                       stationStatus:
                                           controller.details?.status ?? ""),
