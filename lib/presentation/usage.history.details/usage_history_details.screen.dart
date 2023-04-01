@@ -18,7 +18,7 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppbar(title: 'History'),
+        appBar: CustomAppbar(title: translate(LocaleKeys.history)),
         body: Obx(
           () => controller.isLoading.value
               ? const LoadingWidget()
