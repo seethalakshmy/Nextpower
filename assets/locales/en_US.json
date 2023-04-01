@@ -101,8 +101,8 @@
   "success": "Success",
   "pendingInvoice": "Pending invoice",
   "details": "Details",
-  "a": "",
-  "a": "",
+  "totalUnit": "Total unit",
+  "connector": "",
   "a": "",
   "a": ""
 }

@@ -18,4 +18,6 @@ class ParamName {
   static var connectorId = "connector_id";
 
   static var index = "index";
+
+  static var historyId = "history_id";
 }

@@ -19,4 +19,5 @@ class Routes {
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
   static const USAGE_HISTORY = '/usage-history';
+  static const USAGE_HISTORY_DETAILS = '/usage-history-details';
 }

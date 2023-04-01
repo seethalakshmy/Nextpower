@@ -137,4 +137,9 @@ class NavigationUtils {
   void callQrCodeScannerPage() {
     Get.toNamed(Routes.QR_CODE);
   }
+
+  void callHistoryDetails(int id) {
+    Get.toNamed(Routes.USAGE_HISTORY_DETAILS,
+        parameters: {ParamName.historyId: id.toString()});
+  }
 }

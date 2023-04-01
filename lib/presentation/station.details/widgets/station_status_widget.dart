@@ -16,7 +16,8 @@ class StationStatusWidget extends StatelessWidget {
     return Container(
       margin: margin,
       decoration: BoxDecoration(
-          color: (stationStatus).toLowerCase().compareTo('available') == 0
+          color: (stationStatus.toLowerCase().compareTo('available') == 0 ||
+                  stationStatus.toLowerCase().compareTo('success') == 0)
               ? AppColors.availableGreen
               : Colors.red,
           borderRadius: const BorderRadius.all(Radius.circular(15.0))),

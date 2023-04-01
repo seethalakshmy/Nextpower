@@ -12,3 +12,4 @@ export 'package:project/presentation/registration/registration.screen.dart';
 export 'package:project/presentation/splash_screen/splash.screen.dart';
 export 'package:project/presentation/station.details/station_details.screen.dart';
 export 'package:project/presentation/station_list/station_list.screen.dart';
+export 'package:project/presentation/usage.history.details/usage_history_details.screen.dart';

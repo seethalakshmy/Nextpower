@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import '../../config.dart';
@@ -96,6 +97,11 @@ class Nav {
       name: Routes.QR_CODE,
       page: () => QrCodeScreen(),
       binding: QrCodeControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.USAGE_HISTORY_DETAILS,
+      page: () => const UsageHistoryDetailsScreen(),
+      binding: UsageHistoryDetailsControllerBinding(),
     ),
   ];
 }
