@@ -4,8 +4,8 @@ import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/buttons/rounded_outline_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/combo_widgets/title_power_status_combo_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
@@ -18,7 +18,7 @@ class FavouritesView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.favoritesList.isNotEmpty
+    return Obx(() => controller.favoritesList.isNotEmpty
         ? ListView.builder(
             itemCount: controller.favoritesList.length,
             itemBuilder: (context, index) {
@@ -32,16 +32,6 @@ class FavouritesView extends GetView<HomeController> {
                         horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
-                        // Align(
-                        //   alignment: Alignment.centerRight,
-                        //   child: IconButton(
-                        //       padding:
-                        //           EdgeInsets.only(top: 8, left: 8, bottom: 8),
-                        //       onPressed: () {
-                        //         NavigationUtils().callScreenYetToBeDone();
-                        //       },
-                        //       icon: Icon(Icons.close)),
-                        // ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -53,24 +43,16 @@ class FavouritesView extends GetView<HomeController> {
                                       "${favorites.kwh ?? ""} ${translate(LocaleKeys.kw)}",
                                   status: favorites.status ?? ""),
                             ),
-
-                            // Expanded(
-                            //   child: StationBriefHeaderWidget(
-                            //     connectorPower:
-                            //         "${favorites.kwh ?? ""} ${translate(LocaleKeys.kw)}",
-                            //     connectorStatus: favorites.status ?? "",
-                            //     stationName: favorites.stationName ?? "",
-                            //     lat: favorites.lat ?? 0,
-                            //     long: favorites.lat ?? 0,
-                            //   ),
-                            // ),
                             IconButton(
-                                padding:
-                                    EdgeInsets.only(top: 8, left: 8, bottom: 8),
+                                padding: const EdgeInsets.only(
+                                    top: 8, left: 8, bottom: 8),
                                 onPressed: () {
-                                  NavigationUtils().callScreenYetToBeDone();
+                                  controller.removeFavorite(index);
                                 },
-                                icon: Icon(Icons.close)),
+                                icon: Icon(
+                                  Icons.delete_outline,
+                                  color: AppColors.iconColor,
+                                )),
                           ],
                         ),
                         const SizedBox(height: 10),
@@ -114,21 +96,26 @@ class FavouritesView extends GetView<HomeController> {
                                 asset: Assets.iconsChargeWhiteIcon,
                                 padding: EdgeInsets.zero,
                                 onPressed: () {
-                                  NavigationUtils().callScreenYetToBeDone();
+                                  NavigationUtils().callStationDetails(
+                                      favorites.stationId ?? 0);
                                 },
-                                text: translate(LocaleKeys.charge),
+                                text: translate(LocaleKeys.details),
                                 height: 50,
                               ),
                             ),
-                            IconButton(
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: RoundedOutlineButton(
+                                asset: Assets.iconsDirection,
+                                assetHeight: 24,
                                 onPressed: () {
                                   NavigationUtils().callGoogleMap(
                                       favorites.lat ?? 0, favorites.long ?? 0);
                                 },
-                                icon: SvgImageUtils().showSvgFromAsset(
-                                    Assets.iconsDirection,
-                                    width: 24,
-                                    height: 24))
+                                text: translate(LocaleKeys.direction),
+                                height: 50,
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -138,6 +125,6 @@ class FavouritesView extends GetView<HomeController> {
             })
         : EmptyListView(
             subTitle: translate(LocaleKeys.noFavoritesYet),
-            title: translate(LocaleKeys.sorry));
+            title: translate(LocaleKeys.sorry)));
   }
 }

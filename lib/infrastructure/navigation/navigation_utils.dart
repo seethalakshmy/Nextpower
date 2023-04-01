@@ -117,8 +117,9 @@ class NavigationUtils {
     Get.toNamed(Routes.STATION_LIST);
   }
 
-  void callStationDetails() {
-    Get.toNamed(Routes.STATION_DETAILS);
+  void callStationDetails(int stationId) {
+    Get.toNamed(Routes.STATION_DETAILS,
+        parameters: {ParamName.stationId: stationId.toString()});
   }
 
   void callChargingSessionDetails(

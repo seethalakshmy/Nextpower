@@ -38,7 +38,7 @@ class HomeController extends GetxController {
 
   GoogleMapController? mapController;
 
-  List<Favorites> favoritesList = [];
+  RxList<Favorites> favoritesList = <Favorites>[].obs;
   final historySelectedIndex = 1.obs;
   final historyLoading = true.obs;
   List<UsageHistory> usageHistoryList = [];
@@ -151,7 +151,7 @@ class HomeController extends GetxController {
 
   void getFavoritesList() {
     FavoritesListProvider().getFavoritesList().then((value) {
-      favoritesList = value?.favorites ?? [];
+      favoritesList.value = value?.favorites ?? [];
       isLoading(false);
     });
   }
@@ -167,6 +167,14 @@ class HomeController extends GetxController {
 
   void setHistorySelectedIndex(int currentIndex) {
     historySelectedIndex(currentIndex);
+    getUsageHistoryList(currentIndex);
+  }
+
+  void removeFavorite(int currentIndex) async {
+    isLoading(true);
+    await Future.delayed(const Duration(seconds: 2));
+    favoritesList.removeAt(currentIndex);
+    isLoading(false);
     getUsageHistoryList(currentIndex);
   }
 }

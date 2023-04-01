@@ -115,6 +115,7 @@ class LocaleKeys {
   static const endTime = 'endTime';
   static const success = 'success';
   static const pendingInvoice = 'pendingInvoice';
+  static const details = 'details';
   static const a = 'a';
 }
 
@@ -225,6 +226,7 @@ class Locales {
     'endTime': 'End time',
     'success': 'Success',
     'pendingInvoice': 'Pending invoice',
+    'details': 'Details',
     'a': '',
   };
 }

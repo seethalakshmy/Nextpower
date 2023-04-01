@@ -18,7 +18,7 @@ class StationBriefDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigationUtils().callStationDetails();
+        NavigationUtils().callStationDetails(stationDetail.stationId ?? 0);
       },
       child: Dialog(
         child: IntrinsicHeight(

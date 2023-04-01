@@ -23,20 +23,21 @@ class StationListScreen extends GetView<StationListController> {
           : ListView.builder(
               itemCount: controller.stationList.length,
               itemBuilder: (context, index) {
+                var station = controller.stationList[index];
                 return GestureDetector(
                   onTap: () {
-                    NavigationUtils().callStationDetails();
+                    NavigationUtils()
+                        .callStationDetails(station.stationId ?? 0);
                   },
                   onLongPress: () {
-                    Get.dialog(StationBriefDetailsWidget(
-                        controller.stationList[index]));
+                    Get.dialog(StationBriefDetailsWidget(station));
                   },
                   child: Card(
                     margin: const EdgeInsets.all(10),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        controller.stationList[index].stationName ?? "",
+                        station.stationName ?? "",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
