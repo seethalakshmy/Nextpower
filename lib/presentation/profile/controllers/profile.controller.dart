@@ -70,7 +70,7 @@ class ProfileController extends GetxController {
       isEmailVerified(true);
     }
     currentProfileData.update((val) {
-      val?.emailId = value ?? "";
+      val?.emailId = value;
     });
   }
 

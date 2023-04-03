@@ -103,5 +103,10 @@ class Nav {
       page: () => const UsageHistoryDetailsScreen(),
       binding: UsageHistoryDetailsControllerBinding(),
     ),
+    GetPage(
+      name: Routes.RFID_TAG_LIST,
+      page: () => const RfidTagListScreen(),
+      binding: RfidTagListControllerBinding(),
+    ),
   ];
 }

@@ -102,7 +102,14 @@
   "pendingInvoice": "Pending invoice",
   "details": "Details",
   "totalUnit": "Total unit",
-  "connector": "",
+  "connector": "Connector",
+  "issuedDate": "Issued date",
+  "status": "Status",
+  "areYouSureYouWantToLogout": "Are you sure you want to logout?",
+  "doYouReallyWantMakeYourRFIDInactive": "Do you really want make your RFID inactive ?",
+  "requestRfidTag": "Request RFID tag",
+  "a": "",
+  "a": "",
   "a": "",
   "a": ""
 }

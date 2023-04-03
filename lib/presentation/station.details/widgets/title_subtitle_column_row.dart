@@ -24,6 +24,7 @@ class TitleSubtitleColumnRowWidget extends StatelessWidget {
         textColor: AppColors.iconColor,
       ),
       const SizedBox(width: 10),
+      const SizedBox(height: 5),
       SubtitleWidget(
         subtitle: subtitle,
         textColor: AppColors.btmTextColor,

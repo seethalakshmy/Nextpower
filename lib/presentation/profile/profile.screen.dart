@@ -116,7 +116,7 @@ class _ImageWidget extends StatelessWidget {
       onTap: () async {
         File? file = await FilePickerUtils.pickImage();
         if (file != null) {
-          controller.userImagePath.value = file.path ?? "";
+          controller.userImagePath.value = file.path;
         }
       },
       child: Stack(children: [

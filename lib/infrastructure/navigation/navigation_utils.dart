@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/routes.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/param_name.dart';
+import '../utils/translation_util.dart';
+import '../views/custom_alert_view.dart';
 
 class NavigationUtils {
   void callLoginPage({bool clearStack = false, bool isLoginPage = true}) {
@@ -54,14 +57,24 @@ class NavigationUtils {
     });
   }
 
-  Future<bool> goBack() async {
-    Get.back(closeOverlays: true);
+  Future<bool> goBack({bool? closeOverlays}) async {
+    Get.back(closeOverlays: closeOverlays ?? true);
     return true;
   }
 
   void callLogout() async {
-    callLoginPage(
-      clearStack: true,
+    Get.dialog(
+      CustomAlertView(
+        title: translate(LocaleKeys.areYouSureYouWantToLogout),
+        onPositiveTap: () {
+          callLoginPage(
+            clearStack: true,
+          );
+        },
+        onNegativeTap: () {
+          NavigationUtils().goBack(closeOverlays: false);
+        },
+      ),
     );
   }
 
@@ -141,5 +154,9 @@ class NavigationUtils {
   void callHistoryDetails(int id) {
     Get.toNamed(Routes.USAGE_HISTORY_DETAILS,
         parameters: {ParamName.historyId: id.toString()});
+  }
+
+  void callRfidScreen() {
+    Get.toNamed(Routes.RFID_TAG_LIST);
   }
 }

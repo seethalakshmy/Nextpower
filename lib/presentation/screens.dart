@@ -9,6 +9,7 @@ export 'package:project/presentation/otp/otp.screen.dart';
 export 'package:project/presentation/profile/profile.screen.dart';
 export 'package:project/presentation/qr.code/qr_code.screen.dart';
 export 'package:project/presentation/registration/registration.screen.dart';
+export 'package:project/presentation/rfid.tag.list/rfid_tag_list.screen.dart';
 export 'package:project/presentation/splash_screen/splash.screen.dart';
 export 'package:project/presentation/station.details/station_details.screen.dart';
 export 'package:project/presentation/station_list/station_list.screen.dart';

@@ -8,21 +8,25 @@ class TitleWidget extends StatelessWidget {
     this.fontWeight,
     this.color,
     this.fontSize,
+    this.textAlign,
   });
 
   final String title;
   final FontWeight? fontWeight;
   final double? fontSize;
   final Color? color;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
       style: TextStyle(
-          fontSize: fontSize ?? 16,
-          color: color ?? AppColors.labelColor,
-          fontWeight: fontWeight),
+        fontSize: fontSize ?? 16,
+        color: color ?? AppColors.labelColor,
+        fontWeight: fontWeight,
+      ),
+      textAlign: textAlign,
     );
   }
 }

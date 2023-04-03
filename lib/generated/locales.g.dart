@@ -118,6 +118,12 @@ class LocaleKeys {
   static const details = 'details';
   static const totalUnit = 'totalUnit';
   static const connector = 'connector';
+  static const issuedDate = 'issuedDate';
+  static const status = 'status';
+  static const areYouSureYouWantToLogout = 'areYouSureYouWantToLogout';
+  static const doYouReallyWantMakeYourRFIDInactive =
+      'doYouReallyWantMakeYourRFIDInactive';
+  static const requestRfidTag = 'requestRfidTag';
   static const a = 'a';
 }
 
@@ -230,7 +236,13 @@ class Locales {
     'pendingInvoice': 'Pending invoice',
     'details': 'Details',
     'totalUnit': 'Total unit',
-    'connector': '',
+    'connector': 'Connector',
+    'issuedDate': 'Issued date',
+    'status': 'Status',
+    'areYouSureYouWantToLogout': 'Are you sure you want to logout?',
+    'doYouReallyWantMakeYourRFIDInactive':
+        'Do you really want make your RFID inactive ?',
+    'requestRfidTag': 'Request RFID tag',
     'a': '',
   };
 }

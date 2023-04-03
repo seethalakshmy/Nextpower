@@ -84,7 +84,7 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.rfidTag,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils().callRfidScreen(),
             asset: Assets.iconsMenuRfidTag,
           ),
           _DrawerItem(
