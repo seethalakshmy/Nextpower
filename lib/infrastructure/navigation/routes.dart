@@ -22,4 +22,5 @@ class Routes {
   static const USAGE_HISTORY = '/usage-history';
   static const USAGE_HISTORY_DETAILS = '/usage-history-details';
   static const WALLET_LIST = '/wallet-list';
+  static const SUPPORT = '/support';
 }

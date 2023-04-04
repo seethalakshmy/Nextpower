@@ -162,4 +162,8 @@ class NavigationUtils {
   void callWalletListPage() {
     Get.toNamed(Routes.WALLET_LIST);
   }
+
+  void callSupportPage() {
+    Get.toNamed(Routes.SUPPORT);
+  }
 }

@@ -13,5 +13,6 @@ export 'package:project/infrastructure/navigation/bindings/controllers/rfid_tag_
 export 'package:project/infrastructure/navigation/bindings/controllers/splash_screen.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/station_details.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/station_list.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/support.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/usage_history_details.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/wallet_list.controller.binding.dart'; 

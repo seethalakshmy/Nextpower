@@ -113,5 +113,10 @@ class Nav {
       page: () => const WalletListScreen(),
       binding: WalletListControllerBinding(),
     ),
+    GetPage(
+      name: Routes.SUPPORT,
+      page: () => const SupportScreen(),
+      binding: SupportControllerBinding(),
+    ),
   ];
 }

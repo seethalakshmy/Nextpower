@@ -89,7 +89,7 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.support,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils().callSupportPage(),
             asset: Assets.iconsMenuSupport,
           ),
           const Divider(),

@@ -13,5 +13,6 @@ export 'package:project/presentation/rfid.tag.list/rfid_tag_list.screen.dart';
 export 'package:project/presentation/splash_screen/splash.screen.dart';
 export 'package:project/presentation/station.details/station_details.screen.dart';
 export 'package:project/presentation/station_list/station_list.screen.dart';
+export 'package:project/presentation/support/support.screen.dart';
 export 'package:project/presentation/usage.history.details/usage_history_details.screen.dart';
 export 'package:project/presentation/wallet.list/wallet_list.screen.dart';
