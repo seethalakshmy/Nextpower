@@ -1,6 +1,6 @@
 {
   "wallet": {
-    "available_balance": 1000,
+    "available_balance": 1000.0,
     "amount_list": [
       100,
       200,

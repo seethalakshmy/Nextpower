@@ -17,6 +17,7 @@ class CustomDecorationUtils {
           maxHeight: 28, minHeight: 28, minWidth: 28, maxWidth: 28),
       hintText: hintText,
       isDense: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       // errorBorder: CustomBorders().textFieldBorder(color: color),
       disabledBorder: CustomBorders().textFieldBorder(color: color),
       enabledBorder: CustomBorders().textFieldBorder(color: color),

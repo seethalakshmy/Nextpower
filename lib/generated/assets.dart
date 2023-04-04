@@ -6,6 +6,7 @@ class Assets {
   static const String assetsIconsChargerIcon = 'assets/icons/charger_icon.svg';
   static const String assetsIconsMyAddressLocation = 'assets/icons/my_address_location.svg';
   static const String assetsIconsProfileImage = 'assets/icons/profile_image.svg';
+  static const String assetsIconsWalletBalanceBg = 'assets/icons/wallet_balance_bg.svg';
   static const String iconsAboutusImage = 'assets/icons/aboutus_image.jpg';
   static const String iconsArrowDown = 'assets/icons/arrow_down.svg';
   static const String iconsArrowUp = 'assets/icons/arrow_up.svg';
@@ -71,7 +72,7 @@ class Assets {
   static const String iconsTick = 'assets/icons/tick.svg';
   static const String iconsTime = 'assets/icons/time.svg';
   static const String iconsWalletActive = 'assets/icons/wallet_active.svg';
-  static const String iconsWalletBalanceBg = 'assets/icons/wallet_balance_bg.svg';
+  static const String iconsWalletBalanceBg = 'assets/icons/wallet_balance_bg.png';
   static const String iconsWalletHistoryIcon = 'assets/icons/wallet_history_icon.svg';
   static const String iconsWalletIcon = 'assets/icons/wallet_icon.svg';
   static const String iconsWalletVector = 'assets/icons/wallet_vector.svg';

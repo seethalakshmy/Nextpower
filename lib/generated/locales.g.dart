@@ -124,6 +124,10 @@ class LocaleKeys {
   static const doYouReallyWantMakeYourRFIDInactive =
       'doYouReallyWantMakeYourRFIDInactive';
   static const requestRfidTag = 'requestRfidTag';
+  static const availableBalance = 'availableBalance';
+  static const addMoneyToYourWallet = 'addMoneyToYourWallet';
+  static const chargeYourEvAtAnyStations = 'chargeYourEvAtAnyStations';
+  static const proceedToPay = 'proceedToPay';
   static const a = 'a';
 }
 
@@ -243,6 +247,10 @@ class Locales {
     'doYouReallyWantMakeYourRFIDInactive':
         'Do you really want make your RFID inactive ?',
     'requestRfidTag': 'Request RFID tag',
+    'availableBalance': 'Available balance',
+    'addMoneyToYourWallet': 'Add money to your wallet',
+    'chargeYourEvAtAnyStations': 'Charge your EV at any stations',
+    'proceedToPay': 'Proceed to pay',
     'a': '',
   };
 }

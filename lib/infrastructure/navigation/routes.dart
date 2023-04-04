@@ -14,11 +14,12 @@ class Routes {
   static const PROFILE = '/profile';
   static const QR_CODE = '/qr-code';
   static const REGISTRATION = '/registration';
+  static const RFID_TAG_LIST = '/rfid-tag-list';
   static const SAVED_ADDRESS = '/saved-address';
   static const SPLASH_SCREEN = '/splash-screen';
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
   static const USAGE_HISTORY = '/usage-history';
   static const USAGE_HISTORY_DETAILS = '/usage-history-details';
-  static const RFID_TAG_LIST = '/rfid-tag-list';
+  static const WALLET_LIST = '/wallet-list';
 }

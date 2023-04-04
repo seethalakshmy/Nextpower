@@ -42,7 +42,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 initialValue: controller.vehicle.vehicleNumber,
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.number).toLowerCase()}",
-                                onNameChanged: (value) {
+                                onChanged: (value) {
                                   controller.vehicle.vehicleNumber =
                                       value ?? "";
                                 },
@@ -57,7 +57,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 initialValue: controller.vehicle.vehicleMake,
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.make).toLowerCase()}",
-                                onNameChanged: (value) {
+                                onChanged: (value) {
                                   controller.vehicle.vehicleMake = value ?? "";
                                 },
                                 validator: (value) {
@@ -71,7 +71,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 initialValue: controller.vehicle.vehicleModel,
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.model).toLowerCase()}",
-                                onNameChanged: (value) {
+                                onChanged: (value) {
                                   controller.vehicle.vehicleModel = value ?? "";
                                 },
                                 validator: (value) {

@@ -79,8 +79,8 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    callLoginPage(isLoginPage: true);
-    // Get.offAllNamed(Routes.HOME);
+    // callLoginPage(isLoginPage: true);
+    Get.offAllNamed(Routes.HOME);
   }
 
   void callProfile({bool clearStack = false, required String isCalledFrom}) {
@@ -157,5 +157,9 @@ class NavigationUtils {
 
   void callRfidScreen() {
     Get.toNamed(Routes.RFID_TAG_LIST);
+  }
+
+  void callWalletListPage() {
+    Get.toNamed(Routes.WALLET_LIST);
   }
 }

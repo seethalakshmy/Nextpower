@@ -59,7 +59,7 @@ class RoundedRectangleButton extends StatelessWidget {
                       text.toUpperCase(),
                       style: TextStyle(
                           fontSize: textSize ?? 18,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.w700),
                     ),
                   ],
                 )),

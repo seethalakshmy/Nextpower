@@ -108,5 +108,10 @@ class Nav {
       page: () => const RfidTagListScreen(),
       binding: RfidTagListControllerBinding(),
     ),
+    GetPage(
+      name: Routes.WALLET_LIST,
+      page: () => const WalletListScreen(),
+      binding: WalletListControllerBinding(),
+    ),
   ];
 }

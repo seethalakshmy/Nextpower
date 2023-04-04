@@ -21,6 +21,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
+      softWrap: true,
       style: TextStyle(
         fontSize: fontSize ?? 16,
         color: color ?? AppColors.labelColor,

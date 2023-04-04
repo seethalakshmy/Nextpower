@@ -108,8 +108,10 @@
   "areYouSureYouWantToLogout": "Are you sure you want to logout?",
   "doYouReallyWantMakeYourRFIDInactive": "Do you really want make your RFID inactive ?",
   "requestRfidTag": "Request RFID tag",
-  "a": "",
-  "a": "",
+  "availableBalance": "Available balance",
+  "addMoneyToYourWallet": "Add money to your wallet",
+  "chargeYourEvAtAnyStations": "Charge your EV at any stations",
+  "proceedToPay": "Proceed to pay",
   "a": "",
   "a": ""
 }
