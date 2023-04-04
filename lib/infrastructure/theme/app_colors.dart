@@ -33,6 +33,7 @@ class AppColors {
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');
+  static Color walletListBackground = fromHex('#5D93F4');
 
   static Color errorRed = Colors.red[700]!;
 
