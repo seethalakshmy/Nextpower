@@ -20,4 +20,6 @@ class ParamName {
   static var index = "index";
 
   static var historyId = "history_id";
+
+  static var pageIndex = "page_index";
 }

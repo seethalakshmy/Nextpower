@@ -128,6 +128,8 @@ class LocaleKeys {
   static const addMoneyToYourWallet = 'addMoneyToYourWallet';
   static const chargeYourEvAtAnyStations = 'chargeYourEvAtAnyStations';
   static const proceedToPay = 'proceedToPay';
+  static const charging = 'charging';
+  static const billing = 'billing';
   static const a = 'a';
 }
 
@@ -251,6 +253,8 @@ class Locales {
     'addMoneyToYourWallet': 'Add money to your wallet',
     'chargeYourEvAtAnyStations': 'Charge your EV at any stations',
     'proceedToPay': 'Proceed to pay',
+    'charging': 'Charging',
+    'billing': 'Billing',
     'a': '',
   };
 }

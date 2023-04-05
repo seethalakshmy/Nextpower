@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
@@ -16,7 +18,7 @@ class SupportScreen extends GetView<SupportController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(title: 'Support'),
+      appBar: CustomAppbar(title: translate(LocaleKeys.support)),
       body: CustomCardView(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
@@ -29,17 +31,17 @@ class SupportScreen extends GetView<SupportController> {
                 _ButtonItem(
                   asset: Assets.iconsMenuStation,
                   onPressed: () {
-                    NavigationUtils().callScreenYetToBeDone();
+                    NavigationUtils().callChargingBillingPage(1);
                   },
-                  title: 'Charging',
+                  title: translate(LocaleKeys.charging),
                 ),
                 const SizedBox(height: 10),
                 _ButtonItem(
                   asset: Assets.iconsMenuStation,
                   onPressed: () {
-                    NavigationUtils().callScreenYetToBeDone();
+                    NavigationUtils().callChargingBillingPage(2);
                   },
-                  title: 'Billing',
+                  title: translate(LocaleKeys.billing),
                 )
               ],
             ),
@@ -65,7 +67,7 @@ class _ButtonItem extends StatelessWidget {
     return TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: AppColors.primaryColor),
                 borderRadius: BorderRadius.circular(5))),
@@ -73,7 +75,7 @@ class _ButtonItem extends StatelessWidget {
           children: [
             SvgImageUtils()
                 .showSvgFromAsset(asset, color: AppColors.primaryColor),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(

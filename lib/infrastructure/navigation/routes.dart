@@ -19,8 +19,9 @@ class Routes {
   static const SPLASH_SCREEN = '/splash-screen';
   static const STATION_DETAILS = '/station-details';
   static const STATION_LIST = '/station-list';
+  static const SUPPORT = '/support';
   static const USAGE_HISTORY = '/usage-history';
   static const USAGE_HISTORY_DETAILS = '/usage-history-details';
   static const WALLET_LIST = '/wallet-list';
-  static const SUPPORT = '/support';
+  static const CHARGING_BILLING = '/charging-billing';
 }

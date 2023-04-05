@@ -166,4 +166,9 @@ class NavigationUtils {
   void callSupportPage() {
     Get.toNamed(Routes.SUPPORT);
   }
+
+  void callChargingBillingPage(int pageIndex) {
+    Get.toNamed(Routes.CHARGING_BILLING,
+        parameters: {ParamName.pageIndex: pageIndex.toString()});
+  }
 }
