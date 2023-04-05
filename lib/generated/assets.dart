@@ -6,6 +6,8 @@ class Assets {
   static const String assetsIconsChargerIcon = 'assets/icons/charger_icon.svg';
   static const String assetsIconsMyAddressLocation = 'assets/icons/my_address_location.svg';
   static const String assetsIconsProfileImage = 'assets/icons/profile_image.svg';
+  static const String assetsIconsStationCarIllustration = 'assets/icons/station_car_illustration.svg';
+  static const String assetsIconsStationLocation = 'assets/icons/station_location.svg';
   static const String assetsIconsSupport = 'assets/icons/support.svg';
   static const String assetsIconsWalletBalanceBg = 'assets/icons/wallet_balance_bg.svg';
   static const String iconsAboutusImage = 'assets/icons/aboutus_image.jpg';
@@ -63,8 +65,8 @@ class Assets {
   static const String iconsSearch = 'assets/icons/search.svg';
   static const String iconsShareBig = 'assets/icons/share_big.svg';
   static const String iconsStationActive = 'assets/icons/station_active.svg';
-  static const String iconsStationCarIllustration = 'assets/icons/station_car_illustration.svg';
-  static const String iconsStationLocation = 'assets/icons/station_location.svg';
+  static const String iconsStationCarIllustration = 'assets/icons/station_car_illustration.png';
+  static const String iconsStationLocation = 'assets/icons/station_location.png';
   static const String iconsStationPopup = 'assets/icons/station_popup.svg';
   static const String iconsSubtract = 'assets/icons/subtract.svg';
   static const String iconsSuccessTick = 'assets/icons/success_tick.svg';

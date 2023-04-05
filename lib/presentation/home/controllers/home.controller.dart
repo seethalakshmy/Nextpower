@@ -93,7 +93,7 @@ class HomeController extends GetxController {
     print("onMapCreated()");
     allMarkers.clear();
     var fromAssetImage = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(), Assets.assetsIconsChargerIcon);
+        const ImageConfiguration(), Assets.iconsStationLocation);
     for (final Stations station in stationList) {
       final marker = Marker(
         icon: fromAssetImage,
