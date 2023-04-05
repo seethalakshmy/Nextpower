@@ -99,12 +99,12 @@ class ContentItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 16, color: AppColors.labelTextColor4),
+              style: TextStyle(fontSize: 14, color: AppColors.labelTextColor4),
             ),
             Text(
               value,
               style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w700, color: textColor),
+                  fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
             )
           ],
         ),

@@ -94,17 +94,17 @@ class _OverviewDetailsWidget extends StatelessWidget {
             state: overview.address?.stateName ?? "",
             postalCode: overview.address?.postalCode ?? ""),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsTime,
           label: overview.openTime ?? "",
         ),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsCallBig,
           label: overview.mobileNumber ?? "",
         ),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsEmail,
           label: overview.mailId ?? "",
         ),
@@ -113,8 +113,8 @@ class _OverviewDetailsWidget extends StatelessWidget {
   }
 }
 
-class _SmallIconLabelWidget extends StatelessWidget {
-  const _SmallIconLabelWidget({
+class SmallIconLabelWidget extends StatelessWidget {
+  const SmallIconLabelWidget({
     super.key,
     required this.assetPath,
     required this.label,

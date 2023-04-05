@@ -1,3 +1,4 @@
+export 'package:project/infrastructure/navigation/bindings/controllers/about_us.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/charging_billing.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/charging_session.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 

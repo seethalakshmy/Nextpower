@@ -78,6 +78,7 @@ class Assets {
   static const String iconsWalletIcon = 'assets/icons/wallet_icon.svg';
   static const String iconsWalletVector = 'assets/icons/wallet_vector.svg';
   static const String iconsWebsite = 'assets/icons/website.svg';
+  static const String jsonAboutUs = 'assets/json/about_us.json';
   static const String jsonAddEditAddress = 'assets/json/add_edit_address.json';
   static const String jsonAddressList = 'assets/json/address_list.json';
   static const String jsonChargingSessionDetails = 'assets/json/charging_session_details.json';

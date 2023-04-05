@@ -1,0 +1,16 @@
+{
+  "address": {
+    "address_id": 1,
+    "address_line1": "XIII/399",
+    "address_line2": "Edappilly junction",
+    "city": "Kochi",
+    "state_id": 1,
+    "state_name": "Kerala",
+    "postal_code": "682024",
+    "country_id": 1,
+    "country_name": "India"
+  },
+  "open_time": "24 hrs",
+  "mobile_number": "+9786756453423",
+  "mail_id": "test@mail.com"
+}

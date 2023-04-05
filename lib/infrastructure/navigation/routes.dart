@@ -3,6 +3,7 @@ class Routes {
     return SPLASH_SCREEN;
   }
 
+  static const CHARGING_BILLING = '/charging-billing';
   static const CHARGING_SESSION = '/charging-session';
   static const HOME = '/home';
   static const LOGIN = '/login';
@@ -23,5 +24,5 @@ class Routes {
   static const USAGE_HISTORY = '/usage-history';
   static const USAGE_HISTORY_DETAILS = '/usage-history-details';
   static const WALLET_LIST = '/wallet-list';
-  static const CHARGING_BILLING = '/charging-billing';
+  static const ABOUT_US = '/about-us';
 }

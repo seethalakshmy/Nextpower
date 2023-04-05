@@ -95,7 +95,7 @@ class CustomDrawerWidget extends StatelessWidget {
           const Divider(),
           _DrawerItem(
             title: LocaleKeys.aboutUs,
-            onPressed: () => NavigationUtils().callScreenYetToBeDone(),
+            onPressed: () => NavigationUtils().callAboutUsPage(),
             asset: Assets.iconsMenuAboutus,
           ),
           _DrawerItem(

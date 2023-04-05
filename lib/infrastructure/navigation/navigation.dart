@@ -123,5 +123,10 @@ class Nav {
       page: () => const ChargingBillingScreen(),
       binding: ChargingBillingControllerBinding(),
     ),
+    GetPage(
+      name: Routes.ABOUT_US,
+      page: () => const AboutUsScreen(),
+      binding: AboutUsControllerBinding(),
+    ),
   ];
 }

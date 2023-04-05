@@ -29,6 +29,7 @@ class StationBriefHeaderWidget extends StatelessWidget {
         Expanded(
           child: TitlePowerStatusComboWidget(
               title: stationName,
+              titleFontSize: 18,
               power: connectorPower,
               status: connectorStatus),
         ),

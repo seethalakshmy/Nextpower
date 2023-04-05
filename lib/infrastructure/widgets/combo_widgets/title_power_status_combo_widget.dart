@@ -10,9 +10,11 @@ class TitlePowerStatusComboWidget extends StatelessWidget {
     required this.title,
     required this.power,
     required this.status,
+    this.titleFontSize,
   });
 
   final String title;
+  final double? titleFontSize;
   final String power;
   final String status;
 
@@ -24,7 +26,7 @@ class TitlePowerStatusComboWidget extends StatelessWidget {
         TitleWidget(
           title: title,
           fontWeight: FontWeight.bold,
-          fontSize: 20,
+          fontSize: titleFontSize ?? 20,
           color: AppColors.textTitleColor,
         ),
         const SizedBox(height: 10),
