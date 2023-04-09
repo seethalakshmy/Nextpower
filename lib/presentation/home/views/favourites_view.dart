@@ -39,8 +39,8 @@ class FavouritesView extends GetView<HomeController> {
                             Expanded(
                               child: TitlePowerStatusComboWidget(
                                   title: favorites.stationName ?? "",
-                                  power:
-                                      "${favorites.kwh ?? ""} ${translate(LocaleKeys.kw)}",
+                                  titleFontSize: 18,
+                                  power: favorites.kwh ?? "",
                                   status: favorites.status ?? ""),
                             ),
                             IconButton(

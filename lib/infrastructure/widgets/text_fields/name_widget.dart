@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/infrastructure/utils/decoration_utils.dart';
-import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class CommonTextFieldWidget extends StatelessWidget {
@@ -48,7 +47,7 @@ class CommonTextFieldWidget extends StatelessWidget {
             keyboardType: TextInputType.name,
             validator: validator,
             decoration: CustomDecorationUtils().textFieldDecoration(
-              hintText: translate(title),
+              // hintText: translate(title),
               // color: errorText.isNotEmpty ? AppColors.errorRed : null,
               suffix: suffix,
             ),

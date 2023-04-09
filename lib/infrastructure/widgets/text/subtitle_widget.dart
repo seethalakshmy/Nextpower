@@ -22,7 +22,8 @@ class SubtitleWidget extends StatelessWidget {
       style: TextStyle(
           fontSize: fontSize ?? 14,
           color: textColor ?? AppColors.labelTextColor3,
-          fontWeight: fontWeight),
+          fontWeight: fontWeight,
+          height: 1.5),
     );
   }
 }

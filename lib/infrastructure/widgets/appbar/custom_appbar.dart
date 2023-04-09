@@ -58,7 +58,7 @@ class AppBarTitleWidget extends StatelessWidget {
     return Text(
       title,
       style: const TextStyle(
-          color: Colors.black, fontWeight: FontWeight.w600, fontSize: 22),
+          color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
     );
   }
 }

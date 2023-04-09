@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 import '../../../generated/locales.g.dart';
+import '../../utils/border_utils.dart';
 import '../../utils/translation_util.dart';
 
 class CustomDropdownWidget extends StatelessWidget {
@@ -57,16 +58,21 @@ class CustomDropdownWidget extends StatelessWidget {
               : const Padding(padding: EdgeInsets.zero),
           const SizedBox(height: 10),
           Container(
-            height: height,
+            height: height ?? 50,
             alignment: dropDownAlign ?? Alignment.centerLeft,
             color: backgroundColor ?? Colors.transparent,
             padding:
                 EdgeInsets.only(left: padding ?? 0.0, right: padding ?? 0.0),
             child: DropdownButtonFormField<dynamic>(
+              isDense: false,
+              itemHeight: 50,
               menuMaxHeight: height,
               decoration: ignorePointerValue
                   ? InputDecoration.collapsed(hintText: '')
-                  : decoration,
+                  : InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      border: CustomBorders().textFieldBorder()),
               focusNode: focusNode,
               hint: dropDownHint != null
                   ? Text(dropDownHint ?? "")

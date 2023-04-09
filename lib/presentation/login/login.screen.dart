@@ -36,7 +36,7 @@ class LoginScreen extends GetView<LoginController> {
                       ? "${translate(LocaleKeys.login)} / ${translate(LocaleKeys.signup)}"
                       : translate(LocaleKeys.changePhoneNumber),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 15),
                 // SubtitleWidget(
                 //     subtitle: controller.isLoginPage
                 //         ? translate(

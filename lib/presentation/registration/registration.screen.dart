@@ -31,6 +31,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
           key: controller.formKey,
           child: ListView(
             children: [
+              const SizedBox(height: 50),
               HeadingTextWidget(title: translate(LocaleKeys.createAnAccount)),
               const SizedBox(height: 10),
               SubtitleWidget(

@@ -29,12 +29,11 @@ class RoundedRectangleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
+      height: height ?? 50,
       child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-              padding: padding ??
-                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 15),
+              padding: padding ?? EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
               ),

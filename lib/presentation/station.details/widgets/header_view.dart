@@ -39,7 +39,7 @@ class HeaderView extends GetView<StationDetailsController> {
                       Text(
                         controller.details?.stationName ?? "",
                         style: const TextStyle(
-                            fontSize: 21, fontWeight: FontWeight.w600),
+                            fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       StationStatusWidget(
                         margin: const EdgeInsets.only(top: 10),
@@ -105,7 +105,7 @@ class _TabHeadingView extends StatelessWidget {
           title,
           style: TextStyle(
               color: isSelected ? Colors.white : AppColors.tabNotSelectedColor,
-              fontSize: 17,
+              fontSize: 16,
               fontWeight: FontWeight.bold),
         ),
       ),

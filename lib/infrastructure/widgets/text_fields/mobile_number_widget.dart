@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/border_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/decoration_utils.dart';
 import 'package:project/infrastructure/utils/input_formatter_utils.dart';
-import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class MobileNumberWidget extends StatelessWidget {
@@ -82,9 +80,9 @@ class MobileNumberWidget extends StatelessWidget {
                   inputFormatters: InputFormatterUtils().onlyNumber(),
                   validator: validator,
                   decoration: CustomDecorationUtils().textFieldDecoration(
-                      hintText: translate(
-                        LocaleKeys.mobileNumber,
-                      ),
+                      // hintText: translate(
+                      //   LocaleKeys.mobileNumber,
+                      // ),
                       color: errorText.isNotEmpty ? AppColors.errorRed : null,
                       suffix: suffix),
                   onChanged: (value) {

@@ -100,7 +100,7 @@ class _OptionsWidgetSection extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
       decoration: BoxDecoration(
         color: AppColors.optionsNotSelectedColor,
         border: Border.all(color: AppColors.optionsNotSelectedColor),
@@ -124,7 +124,6 @@ class _OptionsWidgetSection extends GetView<HomeController> {
 
 class _HeaderWidget extends StatelessWidget {
   const _HeaderWidget({
-    super.key,
     required this.history,
   });
 
@@ -142,11 +141,15 @@ class _HeaderWidget extends StatelessWidget {
           Wrap(
             children: [
               SubtitleWidget(
-                  subtitle: "${translate(LocaleKeys.totalCost)}:",
-                  fontWeight: FontWeight.w400),
+                subtitle: "${translate(LocaleKeys.totalCost)}:",
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
               const SizedBox(width: 5),
               SubtitleWidget(
                 subtitle: "${history.totalCost}",
+                fontSize: 16,
+                textColor: AppColors.btmTextColor,
               ),
             ],
           ),
@@ -234,7 +237,7 @@ class _OptionsView extends GetView<HomeController> {
                 textColor: currentIndex == controller.historySelectedIndex.value
                     ? Colors.white
                     : AppColors.btmTextColor,
-                fontSize: 17,
+                fontSize: 16,
               ),
             )),
       ),

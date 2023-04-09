@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/widgets/buttons/back_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
@@ -114,8 +115,10 @@ class _TextButtons extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         translate(text),
-        style:
-            const TextStyle(decoration: TextDecoration.underline, fontSize: 14),
+        style: TextStyle(
+            color: AppColors.labelColor,
+            decoration: TextDecoration.underline,
+            fontSize: 14),
       ),
     );
   }

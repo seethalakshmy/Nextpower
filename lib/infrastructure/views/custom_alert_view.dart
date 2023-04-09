@@ -31,7 +31,7 @@ class CustomAlertView extends GetView {
             children: [
               TitleWidget(
                 title: title,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textTitleColor,
                 textAlign: TextAlign.center,
@@ -41,7 +41,7 @@ class CustomAlertView extends GetView {
                 children: [
                   Expanded(
                       child: RoundedRectangleButton(
-                          height: 50,
+                          height: 45,
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             if (onPositiveTap == null) {
@@ -54,7 +54,7 @@ class CustomAlertView extends GetView {
                   const SizedBox(width: 10),
                   Expanded(
                       child: RoundedOutlineButton(
-                          height: 50,
+                          height: 45,
                           onPressed: () {
                             if (onNegativeTap == null) {
                               NavigationUtils().goBack();

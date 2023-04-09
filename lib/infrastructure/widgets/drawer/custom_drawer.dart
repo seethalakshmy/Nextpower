@@ -19,8 +19,8 @@ class CustomDrawerWidget extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -30,20 +30,24 @@ class CustomDrawerWidget extends StatelessWidget {
                         onPressed: NavigationUtils().goBack,
                         icon: const Icon(Icons.close))),
                 SizedBox(
-                    width: 50,
-                    height: 50,
+                    width: 100,
+                    height: 100,
                     child: Image.asset(
                       Assets.iconsMenuProfileImage,
                       fit: BoxFit.fill,
                     )),
                 const SizedBox(height: 10),
-                const Text('John Doe'),
+                const Text(
+                  'John Doe',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
                 const SizedBox(height: 5),
                 const SubtitleWidget(
                   subtitle: '+91 1234567890',
                   fontWeight: FontWeight.w400,
-                  fontSize: 12,
+                  fontSize: 16,
                 ),
+                Divider()
               ],
             ),
           ),
@@ -75,7 +79,7 @@ class CustomDrawerWidget extends StatelessWidget {
           _DrawerItem(
             title: LocaleKeys.myVehicles,
             onPressed: () => NavigationUtils().callMyVehicles(),
-            asset: Assets.iconsCarIcon,
+            asset: Assets.iconsMenuVehicle,
           ),
           _DrawerItem(
             title: LocaleKeys.myAddress,
@@ -130,6 +134,7 @@ class _DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: SvgImageUtils().showSvgFromAsset(asset),
+      horizontalTitleGap: 0,
       title: Text(translate(title)),
       onTap: onPressed,
     );

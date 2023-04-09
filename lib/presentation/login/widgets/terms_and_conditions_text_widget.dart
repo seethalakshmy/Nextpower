@@ -16,7 +16,7 @@ class TermsAndConditionsTextWidget extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         text: "${translate(LocaleKeys.byContinuingYouAgreeToOur)} ",
-        style: TextStyle(color: AppColors.labelTextColor3),
+        style: TextStyle(color: AppColors.labelTextColor3, height: 1.5),
         children: [
           TextSpan(
               recognizer: TapGestureRecognizer()

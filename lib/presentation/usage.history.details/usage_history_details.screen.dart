@@ -38,7 +38,7 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                                     title:
                                         "${translate(LocaleKeys.id).toUpperCase()}: ${controller.details?.id}",
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 19,
+                                    fontSize: 18,
                                   ),
                                   const SizedBox(width: 20),
                                   StationStatusWidget(
@@ -48,6 +48,7 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                               )),
                               Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
+                                alignment: WrapAlignment.center,
                                 children: [
                                   const Icon(
                                     Icons.do_disturb,
@@ -57,7 +58,8 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                                   const SizedBox(width: 5),
                                   Text(
                                     controller.details?.transactionStatus ?? "",
-                                    style: const TextStyle(color: Colors.red),
+                                    style: const TextStyle(
+                                        color: Colors.red, fontSize: 13),
                                   )
                                 ],
                               ),
@@ -115,7 +117,7 @@ class _HistoryItem extends GetView<UsageHistoryDetailsController> {
             Expanded(
               child: SubtitleWidget(
                 subtitle: title,
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: FontWeight.w400,
                 textColor: AppColors.iconColor,
               ),
@@ -128,8 +130,8 @@ class _HistoryItem extends GetView<UsageHistoryDetailsController> {
               child: SubtitleWidget(
                 subtitle: value,
                 textColor: AppColors.btmTextColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
               ),
             ),
           ],
