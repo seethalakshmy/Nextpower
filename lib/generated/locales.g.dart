@@ -106,6 +106,31 @@ class LocaleKeys {
   static const kwh = 'kwh';
   static const submit = 'submit';
   static const noDataFound = 'noDataFound';
+  static const noFavoritesYet = 'noFavoritesYet';
+  static const active = 'active';
+  static const distance = 'distance';
+  static const id = 'id';
+  static const totalCost = 'totalCost';
+  static const startTime = 'startTime';
+  static const endTime = 'endTime';
+  static const success = 'success';
+  static const pendingInvoice = 'pendingInvoice';
+  static const details = 'details';
+  static const totalUnit = 'totalUnit';
+  static const connector = 'connector';
+  static const issuedDate = 'issuedDate';
+  static const status = 'status';
+  static const areYouSureYouWantToLogout = 'areYouSureYouWantToLogout';
+  static const doYouReallyWantMakeYourRFIDInactive =
+      'doYouReallyWantMakeYourRFIDInactive';
+  static const requestRfidTag = 'requestRfidTag';
+  static const availableBalance = 'availableBalance';
+  static const addMoneyToYourWallet = 'addMoneyToYourWallet';
+  static const chargeYourEvAtAnyStations = 'chargeYourEvAtAnyStations';
+  static const proceedToPay = 'proceedToPay';
+  static const charging = 'charging';
+  static const billing = 'billing';
+  static const contactUs = 'contactUs';
   static const a = 'a';
 }
 
@@ -207,6 +232,31 @@ class Locales {
     'kwh': 'KWH',
     'submit': 'Submit',
     'noDataFound': 'No data found',
+    'noFavoritesYet': 'No favorites yet',
+    'active': 'Active',
+    'distance': 'Distance',
+    'id': 'id',
+    'totalCost': 'Total cost',
+    'startTime': 'Start time',
+    'endTime': 'End time',
+    'success': 'Success',
+    'pendingInvoice': 'Pending invoice',
+    'details': 'Details',
+    'totalUnit': 'Total unit',
+    'connector': 'Connector',
+    'issuedDate': 'Issued date',
+    'status': 'Status',
+    'areYouSureYouWantToLogout': 'Are you sure you want to logout?',
+    'doYouReallyWantMakeYourRFIDInactive':
+        'Do you really want make your RFID inactive ?',
+    'requestRfidTag': 'Request RFID tag',
+    'availableBalance': 'Available balance',
+    'addMoneyToYourWallet': 'Add money to your wallet',
+    'chargeYourEvAtAnyStations': 'Charge your EV at any stations',
+    'proceedToPay': 'Proceed to pay',
+    'charging': 'Charging',
+    'billing': 'Billing',
+    'contactUs': 'Contact us',
     'a': '',
   };
 }

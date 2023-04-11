@@ -23,8 +23,8 @@ class OverviewWidget extends GetView<StationDetailsController> {
 
       return Column(
         children: [
-          _IconsRow(),
-          Divider(),
+          const _IconsRow(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
             child: Column(
@@ -94,17 +94,17 @@ class _OverviewDetailsWidget extends StatelessWidget {
             state: overview.address?.stateName ?? "",
             postalCode: overview.address?.postalCode ?? ""),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsTime,
           label: overview.openTime ?? "",
         ),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsCallBig,
           label: overview.mobileNumber ?? "",
         ),
         const SizedBox(height: 10),
-        _SmallIconLabelWidget(
+        SmallIconLabelWidget(
           assetPath: Assets.iconsEmail,
           label: overview.mailId ?? "",
         ),
@@ -113,8 +113,8 @@ class _OverviewDetailsWidget extends StatelessWidget {
   }
 }
 
-class _SmallIconLabelWidget extends StatelessWidget {
-  const _SmallIconLabelWidget({
+class SmallIconLabelWidget extends StatelessWidget {
+  const SmallIconLabelWidget({
     super.key,
     required this.assetPath,
     required this.label,
@@ -153,9 +153,7 @@ class _LabelWidget extends StatelessWidget {
 }
 
 class _IconsRow extends StatelessWidget {
-  const _IconsRow({
-    super.key,
-  });
+  const _IconsRow();
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +203,7 @@ class _IconsLabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgImageUtils().showSvgFromAsset(asset, width: 31, height: 31),
+        SvgImageUtils().showSvgFromAsset(asset, width: 28, height: 28),
         const SizedBox(height: 10),
         TitleWidget(
           title: translate(label),

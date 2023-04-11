@@ -31,6 +31,7 @@ class ShowAddressWidget extends StatelessWidget {
         const SizedBox(width: 10),
         Expanded(
           child: Wrap(
+            runSpacing: 3,
             children: [
               _TextWidget(addressLine1 +
                   (addressLine1.isNotEmpty && addressLine2.isNotEmpty

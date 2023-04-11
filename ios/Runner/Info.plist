@@ -6,6 +6,10 @@
     <string>This app needs access to location to show list of stations in map.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>This app needs access to location when in the background, to know where we are right now inorder to fetch nearby stations</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app needs camera access to scan QR codes</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs photos access to get QR code from photo library</string>
     <key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

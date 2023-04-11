@@ -4,7 +4,6 @@ import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/daos/country_list_model.dart';
 import 'package:project/infrastructure/dal/daos/state_list_model.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/utils/border_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
@@ -34,8 +33,8 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                   const SizedBox(height: 10),
                   SvgImageUtils().showSvgFromAsset(
                       Assets.iconsMyAddressLocation,
-                      width: 150,
-                      height: 150),
+                      width: 120,
+                      height: 120),
                   const SizedBox(height: 10),
                   CustomCardView(
                       padding: const EdgeInsets.all(20),
@@ -45,7 +44,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.addressLine1,
                               title: translate(LocaleKeys.addressLine1),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.addressLine1 = value ?? "";
                               },
                               validator: (value) {
@@ -58,7 +57,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.addressLine2,
                               title: translate(LocaleKeys.addressLine2),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.addressLine2 = value ?? "";
                               },
                               validator: (value) {
@@ -71,7 +70,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.city,
                               title: translate(LocaleKeys.city),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.city = value ?? "";
                               },
                               validator: (value) {
@@ -93,8 +92,6 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                 ),
                               );
                             }).toList(),
-                            decoration: InputDecoration(
-                                border: CustomBorders().textFieldBorder()),
                             onSaved: (dynamic countries) {},
                             onChanged: (Countries countries) {
                               controller.setStateList(countries.id ?? 0);
@@ -120,8 +117,6 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                     ),
                                   );
                                 }).toList(),
-                                decoration: InputDecoration(
-                                    border: CustomBorders().textFieldBorder()),
                                 onSaved: (dynamic countries) {},
                                 onChanged: (States states) {},
                                 customValidator: (dynamic states) {
@@ -136,7 +131,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.postalCode,
                               title: translate(LocaleKeys.postalCode),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.postalCode = value ?? "";
                               },
                               validator: (value) {
@@ -149,7 +144,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.companyName,
                               title: translate(LocaleKeys.company),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.companyName = value ?? "";
                               },
                               validator: (value) {
@@ -162,7 +157,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CommonTextFieldWidget(
                               initialValue: controller.address.gstNo,
                               title: translate(LocaleKeys.gstNo),
-                              onNameChanged: (value) {
+                              onChanged: (value) {
                                 controller.address.gstNo = value ?? "";
                               },
                               validator: (value) {

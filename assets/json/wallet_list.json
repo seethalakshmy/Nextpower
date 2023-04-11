@@ -1,0 +1,11 @@
+{
+  "wallet_history": [
+    {
+      "wallet_id": 1,
+      "type": "test",
+      "mode": "test",
+      "amount": 1000,
+      "date": "12 JAN 2023"
+    }
+  ]
+}

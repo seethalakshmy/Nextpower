@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/routes.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/param_name.dart';
+import '../utils/translation_util.dart';
+import '../views/custom_alert_view.dart';
 
 class NavigationUtils {
   void callLoginPage({bool clearStack = false, bool isLoginPage = true}) {
@@ -54,20 +57,29 @@ class NavigationUtils {
     });
   }
 
-  Future<bool> goBack() async {
-    Get.back(closeOverlays: true);
+  Future<bool> goBack({bool? closeOverlays}) async {
+    Get.back(closeOverlays: closeOverlays ?? true);
     return true;
   }
 
   void callLogout() async {
-    callLoginPage(
-      clearStack: true,
+    Get.dialog(
+      CustomAlertView(
+        title: translate(LocaleKeys.areYouSureYouWantToLogout),
+        onPositiveTap: () {
+          callLoginPage(
+            clearStack: true,
+          );
+        },
+        onNegativeTap: () {
+          NavigationUtils().goBack(closeOverlays: false);
+        },
+      ),
     );
   }
 
   void goFromSplash() {
     callLoginPage(isLoginPage: true);
-    // Get.offAllNamed(Routes.STATION_DETAILS);
     // Get.offAllNamed(Routes.HOME);
   }
 
@@ -117,17 +129,50 @@ class NavigationUtils {
     Get.toNamed(Routes.STATION_LIST);
   }
 
-  void callStationDetails() {
-    Get.toNamed(Routes.STATION_DETAILS);
+  void callStationDetails(int stationId) {
+    Get.toNamed(Routes.STATION_DETAILS,
+        parameters: {ParamName.stationId: stationId.toString()});
   }
 
   void callChargingSessionDetails(
       {required int? stationId, required int connectorId}) {
     print(stationId);
     print(connectorId);
-    Get.toNamed(Routes.CHARGING_SESSION, parameters: {
-      ParamName.stationId: stationId.toString(),
-      ParamName.connectorId: connectorId.toString()
-    });
+    Get.offNamed(Routes.CHARGING_SESSION,
+        parameters: {
+          ParamName.stationId: stationId.toString(),
+          ParamName.connectorId: connectorId.toString()
+        },
+        preventDuplicates: true);
+  }
+
+  void callQrCodeScannerPage() {
+    Get.toNamed(Routes.QR_CODE);
+  }
+
+  void callHistoryDetails(int id) {
+    Get.toNamed(Routes.USAGE_HISTORY_DETAILS,
+        parameters: {ParamName.historyId: id.toString()});
+  }
+
+  void callRfidScreen() {
+    Get.toNamed(Routes.RFID_TAG_LIST);
+  }
+
+  void callWalletListPage() {
+    Get.toNamed(Routes.WALLET_LIST);
+  }
+
+  void callSupportPage() {
+    Get.toNamed(Routes.SUPPORT);
+  }
+
+  void callAboutUsPage() {
+    Get.toNamed(Routes.ABOUT_US);
+  }
+
+  void callChargingBillingPage(int pageIndex) {
+    Get.toNamed(Routes.CHARGING_BILLING,
+        parameters: {ParamName.pageIndex: pageIndex.toString()});
   }
 }

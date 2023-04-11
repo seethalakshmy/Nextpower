@@ -25,9 +25,15 @@ class AppColors {
   static Color tabUnderlineSelectedColor = fromHex('#03507E');
   static Color availableGreen = fromHex('#1BC182');
   static Color homeIconColor = fromHex('#003784');
+  static Color greenColor = fromHex('#ABF428');
+  static Color dropShadow = fromHex('#A5B7D7');
+  static Color switchInactiveColor = fromHex('#D5E5EF');
+  static Color walletTextBorderColor = fromHex('#D3DADE');
+  static Color walletListTextColor = fromHex('#7D8190');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');
+  static Color walletListBackground = fromHex('#5D93F4');
 
   static Color errorRed = Colors.red[700]!;
 

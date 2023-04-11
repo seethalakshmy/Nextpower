@@ -31,6 +31,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
           key: controller.formKey,
           child: ListView(
             children: [
+              const SizedBox(height: 50),
               HeadingTextWidget(title: translate(LocaleKeys.createAnAccount)),
               const SizedBox(height: 10),
               SubtitleWidget(
@@ -39,7 +40,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
               const SizedBox(height: 10),
               CommonTextFieldWidget(
                   title: translate(LocaleKeys.name),
-                  onNameChanged: (value) {},
+                  onChanged: (value) {},
                   validator: (value) {
                     return ValidationUtils().nameValidation(value);
                   }),
@@ -74,7 +75,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
               const SizedBox(height: 10),
               CommonTextFieldWidget(
                 title: translate(LocaleKeys.emailAddress),
-                onNameChanged: (value) {},
+                onChanged: (value) {},
                 validator: (value) => ValidationUtils().emailValidation(value),
               ),
               const SizedBox(height: 30),

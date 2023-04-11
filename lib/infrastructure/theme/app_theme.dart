@@ -7,11 +7,17 @@ class AppThemes {
     scaffoldBackgroundColor: Colors.white,
     primaryColor: AppColors.primaryBlue,
     textTheme: GoogleFonts.poppinsTextTheme(),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+    ),
   );
 
   static ThemeData dark = ThemeData(
     scaffoldBackgroundColor: Colors.black,
     primaryColor: AppColors.primaryBlue,
     textTheme: GoogleFonts.poppinsTextTheme(),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+    ),
   );
 }

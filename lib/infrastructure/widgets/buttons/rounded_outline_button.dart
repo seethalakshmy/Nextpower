@@ -12,10 +12,12 @@ class RoundedOutlineButton extends StatelessWidget {
     this.loaderSize = 18,
     this.height,
     this.asset = "",
+    this.assetHeight,
   });
 
   final VoidCallback onPressed;
   final double borderRadius;
+  final double? assetHeight;
   final String text;
   final bool isLoading;
   final double loaderSize;
@@ -47,13 +49,13 @@ class RoundedOutlineButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (asset.isNotEmpty)
-                      SvgImageUtils()
-                          .showSvgFromAsset(asset, width: 16, height: 16),
+                      SvgImageUtils().showSvgFromAsset(asset,
+                          width: assetHeight ?? 16, height: assetHeight ?? 16),
                     if (asset.isNotEmpty) const SizedBox(width: 5),
                     Text(
-                      text,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      text.toUpperCase(),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                   ],
                 )),

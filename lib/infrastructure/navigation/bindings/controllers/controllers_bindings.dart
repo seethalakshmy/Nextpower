@@ -1,3 +1,5 @@
+export 'package:project/infrastructure/navigation/bindings/controllers/about_us.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/charging_billing.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/charging_session.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/login.controller.binding.dart'; 
@@ -7,7 +9,12 @@ export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicl
 export 'package:project/infrastructure/navigation/bindings/controllers/my_vehicles_add_edit.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/otp.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/profile.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/qr_code.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/registration.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/rfid_tag_list.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/splash_screen.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/station_details.controller.binding.dart'; 
 export 'package:project/infrastructure/navigation/bindings/controllers/station_list.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/support.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/usage_history_details.controller.binding.dart'; 
+export 'package:project/infrastructure/navigation/bindings/controllers/wallet_list.controller.binding.dart'; 

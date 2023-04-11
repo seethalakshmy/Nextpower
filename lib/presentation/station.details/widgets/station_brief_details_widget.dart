@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project/generated/assets.dart';
+import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/infrastructure/utils/svg_util.dart';
-import 'package:project/infrastructure/widgets/text/title_widget.dart';
-import 'package:project/presentation/station.details/widgets/charging_power_status_widget.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/widgets/combo_widgets/station_brief_header_widget.dart';
 import 'package:project/presentation/station_list/models/stations_list_model.dart';
 
 class StationBriefDetailsWidget extends StatelessWidget {
@@ -19,7 +18,7 @@ class StationBriefDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigationUtils().callStationDetails();
+        NavigationUtils().callStationDetails(stationDetail.stationId ?? 0);
       },
       child: Dialog(
         child: IntrinsicHeight(
@@ -28,24 +27,30 @@ class StationBriefDetailsWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _HeaderWidget(stationDetail),
+                StationBriefHeaderWidget(
+                  stationName: stationDetail.stationName ?? "",
+                  connectorPower: stationDetail.kwh ?? "",
+                  connectorStatus: stationDetail.status ?? "",
+                  lat: stationDetail.lat ?? 0.0,
+                  long: stationDetail.long ?? 0.0,
+                ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    _ContentItem(
-                        title: 'Distance',
+                    ContentItem(
+                        title: translate(LocaleKeys.distance),
                         value: stationDetail.distance ?? "",
                         bgColor: AppColors.dialogLightPink,
                         textColor: AppColors.dialogPink),
                     const SizedBox(width: 5),
-                    _ContentItem(
-                        title: 'Free',
+                    ContentItem(
+                        title: translate(LocaleKeys.free),
                         value: (stationDetail.free ?? 0).toString(),
                         bgColor: AppColors.dialogLightGreen,
                         textColor: AppColors.dialogGreen),
                     const SizedBox(width: 5),
-                    _ContentItem(
-                        title: 'Active',
+                    ContentItem(
+                        title: translate(LocaleKeys.active),
                         value: (stationDetail.active ?? 0).toString(),
                         bgColor: AppColors.dialogLightOrange,
                         textColor: AppColors.dialogOrange)
@@ -61,85 +66,49 @@ class StationBriefDetailsWidget extends StatelessWidget {
   }
 }
 
-class _ContentItem extends StatelessWidget {
-  const _ContentItem({
+class ContentItem extends StatelessWidget {
+  const ContentItem({
     super.key,
     required this.title,
     required this.value,
     required this.bgColor,
     required this.textColor,
+    this.alignment,
+    this.crossAxisAlignment,
   });
 
   final String title;
   final String value;
   final Color bgColor;
   final Color textColor;
+  final AlignmentGeometry? alignment;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(5.0),
-        alignment: Alignment.center,
+        alignment: alignment ?? Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: bgColor,
         ),
         child: Column(
+          crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 16, color: AppColors.labelTextColor4),
+              style: TextStyle(fontSize: 14, color: AppColors.labelTextColor4),
             ),
             Text(
               value,
               style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w700, color: textColor),
+                  fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
             )
           ],
         ),
       ),
-    );
-  }
-}
-
-class _HeaderWidget extends StatelessWidget {
-  const _HeaderWidget(
-    this.stationDetail, {
-    super.key,
-  });
-
-  final Stations stationDetail;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TitleWidget(
-                title: stationDetail.stationName ?? "",
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: AppColors.textTitleColor,
-              ),
-              const SizedBox(height: 10),
-              ChargingPowerStatusWidget(
-                  connectorPower: stationDetail.kwh ?? "",
-                  connectorStatus: stationDetail.status ?? ""),
-            ],
-          ),
-        ),
-        IconButton(
-            onPressed: () {
-              NavigationUtils().callGoogleMap(
-                  stationDetail.lat ?? 0.0, stationDetail.long ?? 0.0);
-            },
-            icon: SvgImageUtils().showSvgFromAsset(Assets.iconsDirection))
-      ],
     );
   }
 }

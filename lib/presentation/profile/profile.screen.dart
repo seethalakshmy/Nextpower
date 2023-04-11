@@ -116,7 +116,7 @@ class _ImageWidget extends StatelessWidget {
       onTap: () async {
         File? file = await FilePickerUtils.pickImage();
         if (file != null) {
-          controller.userImagePath.value = file.path ?? "";
+          controller.userImagePath.value = file.path;
         }
       },
       child: Stack(children: [
@@ -222,7 +222,7 @@ class _EmailWidget extends StatelessWidget {
     return Obx(() => CommonTextFieldWidget(
           initialValue: controller.currentProfileData.value.emailId,
           title: translate(LocaleKeys.emailAddress),
-          onNameChanged: (value) {
+          onChanged: (value) {
             controller.changeEmailID(value);
           },
           validator: (value) => ValidationUtils().emailValidation(value),
@@ -293,7 +293,7 @@ class _NameWidget extends StatelessWidget {
     return CommonTextFieldWidget(
         initialValue: controller.currentProfileData.value.userName,
         title: translate(LocaleKeys.name),
-        onNameChanged: (value) {
+        onChanged: (value) {
           controller.currentProfileData.update((val) {
             val?.userName = value ?? "";
           });

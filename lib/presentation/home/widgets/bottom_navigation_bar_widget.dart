@@ -87,10 +87,12 @@ class _BottomBarItemWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             SvgImageUtils().showSvgFromAsset(assetPath,
-                color: isSelected ? AppColors.primaryGreen : null),
+                color: isSelected ? AppColors.primaryGreen : null, height: 20),
+            const SizedBox(height: 5),
             TitleWidget(
               title: translate(title),
               color: isSelected ? AppColors.primaryGreen : null,
+              fontSize: 15,
             ),
             const SizedBox(height: 5)
           ],

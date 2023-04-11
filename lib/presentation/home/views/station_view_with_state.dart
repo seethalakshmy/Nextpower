@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
@@ -21,11 +22,13 @@ class _StationViewState extends State<StationView> {
   Future<void> onMapCreated(GoogleMapController controller) async {
     _homeController.mapController = controller;
     markers.clear();
-    // var fromAssetImage = await BitmapDescriptor.fromAssetImage(
-    //     const ImageConfiguration(), Assets.assetsIconsChargerIcon);
+    var fromAssetImage = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      Assets.iconsStationLocation,
+    );
     for (final Stations station in _homeController.stationList) {
       final marker = Marker(
-          // icon: fromAssetImage,
+          icon: fromAssetImage,
           markerId: MarkerId(station.stationId.toString()),
           position: LatLng(station.lat ?? 0.0, station.long ?? 0.0),
           // infoWindow: InfoWindow(
@@ -67,6 +70,7 @@ class _StationViewState extends State<StationView> {
               child: Column(
                 children: [
                   FloatingActionButton(
+                    heroTag: "CurrentLocation",
                     onPressed: () {
                       print("my_location pressed");
                       _homeController.determinePosition();
@@ -79,6 +83,7 @@ class _StationViewState extends State<StationView> {
                     ),
                   ),
                   FloatingActionButton(
+                    heroTag: "FilterView",
                     onPressed: () {
                       print("filter pressed");
                       NavigationUtils().callScreenYetToBeDone();

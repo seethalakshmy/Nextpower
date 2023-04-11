@@ -93,5 +93,40 @@ class Nav {
       page: () => const ChargingSessionScreen(),
       binding: ChargingSessionControllerBinding(),
     ),
+    GetPage(
+      name: Routes.QR_CODE,
+      page: () => QrCodeScreen(),
+      binding: QrCodeControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.USAGE_HISTORY_DETAILS,
+      page: () => const UsageHistoryDetailsScreen(),
+      binding: UsageHistoryDetailsControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.RFID_TAG_LIST,
+      page: () => const RfidTagListScreen(),
+      binding: RfidTagListControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.WALLET_LIST,
+      page: () => const WalletListScreen(),
+      binding: WalletListControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.SUPPORT,
+      page: () => const SupportScreen(),
+      binding: SupportControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.CHARGING_BILLING,
+      page: () => const ChargingBillingScreen(),
+      binding: ChargingBillingControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.ABOUT_US,
+      page: () => const AboutUsScreen(),
+      binding: AboutUsControllerBinding(),
+    ),
   ];
 }

@@ -1,3 +1,5 @@
+export 'package:project/presentation/about.us/about_us.screen.dart';
+export 'package:project/presentation/charging.billing/charging_billing.screen.dart';
 export 'package:project/presentation/charging.session/charging_session.screen.dart';
 export 'package:project/presentation/home/home.screen.dart';
 export 'package:project/presentation/login/login.screen.dart';
@@ -7,7 +9,12 @@ export 'package:project/presentation/my.vehicles.add.edit/my_vehicles_add_edit.s
 export 'package:project/presentation/my_vehicles/my_vehicles.screen.dart';
 export 'package:project/presentation/otp/otp.screen.dart';
 export 'package:project/presentation/profile/profile.screen.dart';
+export 'package:project/presentation/qr.code/qr_code.screen.dart';
 export 'package:project/presentation/registration/registration.screen.dart';
+export 'package:project/presentation/rfid.tag.list/rfid_tag_list.screen.dart';
 export 'package:project/presentation/splash_screen/splash.screen.dart';
 export 'package:project/presentation/station.details/station_details.screen.dart';
 export 'package:project/presentation/station_list/station_list.screen.dart';
+export 'package:project/presentation/support/support.screen.dart';
+export 'package:project/presentation/usage.history.details/usage_history_details.screen.dart';
+export 'package:project/presentation/wallet.list/wallet_list.screen.dart';
