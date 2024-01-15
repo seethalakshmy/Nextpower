@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/infrastructure/dal/models/countries/state_list_model.dart';
 
-import '../state_list_model.dart';
+
 
 class StateListProvider extends GetConnect {
   @override

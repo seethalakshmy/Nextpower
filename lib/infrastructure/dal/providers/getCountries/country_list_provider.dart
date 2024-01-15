@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/infrastructure/dal/models/countries/country_list_model.dart';
 
-import '../country_list_model.dart';
+
 
 class CountryListProvider extends GetConnect {
   @override

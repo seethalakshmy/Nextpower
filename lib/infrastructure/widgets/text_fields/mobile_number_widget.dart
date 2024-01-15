@@ -77,12 +77,10 @@ class MobileNumberWidget extends StatelessWidget {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
                   keyboardType: TextInputType.number,
+                  // maxLength: 15,
                   inputFormatters: InputFormatterUtils().onlyNumber(),
                   validator: validator,
                   decoration: CustomDecorationUtils().textFieldDecoration(
-                      // hintText: translate(
-                      //   LocaleKeys.mobileNumber,
-                      // ),
                       color: errorText.isNotEmpty ? AppColors.errorRed : null,
                       suffix: suffix),
                   onChanged: (value) {

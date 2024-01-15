@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/login/login_model.dart';
+import 'package:project/infrastructure/dal/providers/login/login_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
@@ -55,21 +58,37 @@ class LoginController extends GetxController {
   }
 
   gotoNextPage() async {
-    printData(message: "Mobile number:", value: mobileNumber);
-    formKey.currentState!.validate();
-    if (mobileNumberError.value.isEmpty) {
-      isLoading(true);
-      await Future.delayed(const Duration(seconds: 2));
-      String otp = Utility.generate4DigitOTP();
-      CustomSnackBar.showSuccessSnackBar("OTP", otp);
-      NavigationUtils().callOTPPage(
-          countryCode: selectedCountryCode.value,
-          mobileNumber: mobileNumber,
-          otp: otp,
-          isVerify: false);
-      isLoading(false);
-    } else {
-      isLoading(false);
+    if (mobileNumber.isEmpty) {
+      mobileNumberError.value = LocaleKeys.mobileNumberShouldntBeEmpty.tr;
+      return;
     }
+    callMobileNumberValidateApi();
+  }
+
+  void callMobileNumberValidateApi(){
+    isLoading(true);
+    LoginProvider().login(phoneNumber: mobileNumber).then((value) {
+      isLoading(false);
+      LoginModel response = value;
+      if(response.name != null){
+        moveToOtpValidatePage();
+        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success.tr,"Otp send");
+      }
+    });
+  }
+
+  void hideErrors(){
+    mobileNumberError.value = "";
+  }
+
+  void moveToOtpValidatePage(){
+    // String otp = Utility.generate4DigitOTP();
+    // CustomSnackBar.showSuccessSnackBar("OTP", otp);
+
+    NavigationUtils().callOTPPage(
+        countryCode: selectedCountryCode.value,
+        mobileNumber: mobileNumber,
+        otp: "0000",
+        isVerify: false);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 enum Method { POST, GET, PUT, DELETE, PATCH }
@@ -21,7 +22,7 @@ class ApiService extends GetConnect implements GetxService {
     Response response;
     try {
       if (method == Method.POST) {
-        response = await post(url, params, headers: _headers);
+        response = await post(baseUrl + url, params, headers: _headers);
       } else if (method == Method.DELETE) {
         response = await delete(url, headers: _headers);
       } else if (method == Method.PATCH) {
@@ -30,8 +31,10 @@ class ApiService extends GetConnect implements GetxService {
         response = await get(url, headers: _headers);
       }
 
-      if (response.statusCode == 200) {
-        return response;
+      debugPrint(
+          "\n ----Response---- \n status code : ${response.statusCode}\n body : ${response.body}");
+      if (response.statusCode == 201) {
+        return response.body;
       } else if (response.statusCode == 401) {
         throw Exception("Unauthorized");
       } else if (response.statusCode == 500) {

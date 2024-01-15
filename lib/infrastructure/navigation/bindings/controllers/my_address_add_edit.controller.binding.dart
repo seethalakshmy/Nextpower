@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:project/presentation/my_address_add_edit/controllers/my_address_add_edit_controller.dart';
 
-import '../../../../presentation/my.address.add.edit/controllers/my_address_add_edit.controller.dart';
 
 class MyAddressAddEditControllerBinding extends Bindings {
   @override

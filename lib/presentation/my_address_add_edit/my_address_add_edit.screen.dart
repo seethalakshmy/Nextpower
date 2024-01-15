@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/dal/daos/country_list_model.dart';
-import 'package:project/infrastructure/dal/daos/state_list_model.dart';
+import 'package:project/infrastructure/dal/models/countries/country_list_model.dart';
+import 'package:project/infrastructure/dal/models/countries/state_list_model.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
@@ -15,7 +15,7 @@ import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/infrastructure/widgets/text_fields/name_widget.dart';
 
 import '../../generated/assets.dart';
-import 'controllers/my_address_add_edit.controller.dart';
+import 'controllers/my_address_add_edit_controller.dart';
 
 class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
   const MyAddressAddEditScreen({Key? key}) : super(key: key);

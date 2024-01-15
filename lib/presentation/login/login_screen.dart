@@ -8,7 +8,7 @@ import 'package:project/infrastructure/widgets/buttons/back_button.dart';
 import 'package:project/infrastructure/widgets/text/heading_text_widget.dart';
 
 import '../../infrastructure/widgets/text_fields/mobile_number_widget.dart';
-import 'controllers/login.controller.dart';
+import 'controllers/login_controller.dart';
 import 'widgets/continue_button_widget.dart';
 import 'widgets/terms_and_conditions_text_widget.dart';
 
@@ -37,12 +37,6 @@ class LoginScreen extends GetView<LoginController> {
                       : translate(LocaleKeys.changePhoneNumber),
                 ),
                 const SizedBox(height: 15),
-                // SubtitleWidget(
-                //     subtitle: controller.isLoginPage
-                //         ? translate(
-                //             LocaleKeys.pleaseEnterTheDetailsBelowToContinue)
-                //         : translate(LocaleKeys.pleaseEnterTheNumberToChange)),
-                // const SizedBox(height: 30),
                 Obx(() => MobileNumberWidget(
                       validator: (value) {
                         controller.mobileNumberError(ValidationUtils()
@@ -52,6 +46,7 @@ class LoginScreen extends GetView<LoginController> {
                       },
                       onMobileNumberChanged: (value) {
                         controller.mobileNumber = value;
+                        controller.hideErrors();
                       },
                       onCountryCodeChanged: (value) {
                         PrintUtils().prints(message: "Selected ", value: value);
@@ -59,7 +54,7 @@ class LoginScreen extends GetView<LoginController> {
                       },
                       errorText: controller.mobileNumberError.value,
                       countryCode: controller.selectedCountryCode.value,
-                      title: translate(LocaleKeys.mobileNumber),
+                      title: translate(LocaleKeys.mobileNumber.tr),
                     )),
                 const SizedBox(height: 20),
                 const ContinueButtonWidget(),

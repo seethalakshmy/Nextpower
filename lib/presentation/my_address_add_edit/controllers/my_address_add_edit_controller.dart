@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/infrastructure/dal/daos/country_list_model.dart';
-import 'package:project/infrastructure/dal/daos/providers/country_list_provider.dart';
-import 'package:project/infrastructure/dal/daos/providers/state_list_provider.dart';
-import 'package:project/infrastructure/dal/daos/state_list_model.dart';
+import 'package:project/infrastructure/dal/models/countries/country_list_model.dart';
+import 'package:project/infrastructure/dal/models/countries/state_list_model.dart';
+import 'package:project/infrastructure/dal/providers/getCountries/country_list_provider.dart';
+import 'package:project/infrastructure/dal/providers/getCountries/state_list_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/presentation/my.address/address_list_model.dart';
 import 'package:project/presentation/my.address/providers/address_list_provider.dart';
