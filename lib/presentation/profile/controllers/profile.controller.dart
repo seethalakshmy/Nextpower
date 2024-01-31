@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
@@ -28,6 +29,7 @@ class ProfileController extends GetxController {
   String previousCountryCode = "";
   RxString userImagePath = "".obs;
   String from = ""; //not used now
+  RxList<Country> countries = RxList.empty(growable: true);
 
   @override
   void onInit() {

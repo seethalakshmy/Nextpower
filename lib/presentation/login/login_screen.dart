@@ -38,19 +38,21 @@ class LoginScreen extends GetView<LoginController> {
                 ),
                 const SizedBox(height: 15),
                 Obx(() => MobileNumberWidget(
+                      countryLoading: controller.countriesLoading.value,
                       validator: (value) {
                         controller.mobileNumberError(ValidationUtils()
                                 .mobileNumberEmptyValidation(value) ??
                             "");
                         return null;
                       },
+                      countries: controller.countries.value,
                       onMobileNumberChanged: (value) {
                         controller.mobileNumber = value;
                         controller.hideErrors();
                       },
                       onCountryCodeChanged: (value) {
                         PrintUtils().prints(message: "Selected ", value: value);
-                        controller.setCountryCode(value);
+                        controller.selectedCountryCode.value = value;
                       },
                       errorText: controller.mobileNumberError.value,
                       countryCode: controller.selectedCountryCode.value,

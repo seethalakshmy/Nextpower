@@ -132,6 +132,7 @@ class LocaleKeys {
   static const billing = 'billing';
   static const contactUs = 'contactUs';
   static const failed = 'failed';
+  static const internal_server_error = 'internal_server_error';
 }
 
 class Locales {
@@ -258,5 +259,6 @@ class Locales {
     'billing': 'Billing',
     'contactUs': 'Contact us',
     'failed': 'Failed',
+    'internal_server_error': 'INTERNAL SERVER ERROR',
   };
 }

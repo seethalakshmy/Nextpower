@@ -14,6 +14,7 @@ class RoundedRectangleButton extends StatelessWidget {
     this.padding,
     this.asset = "",
     this.textSize,
+    this.textColor,
   });
 
   final VoidCallback onPressed;
@@ -24,6 +25,7 @@ class RoundedRectangleButton extends StatelessWidget {
   final double loaderSize;
   final double? height;
   final double? textSize;
+  final Color? textColor;
   final EdgeInsetsGeometry? padding;
 
   @override
@@ -57,6 +59,7 @@ class RoundedRectangleButton extends StatelessWidget {
                     Text(
                       text.toUpperCase(),
                       style: TextStyle(
+                        color: textColor ?? Colors.white,
                           fontSize: textSize ?? 18,
                           fontWeight: FontWeight.w700),
                     ),

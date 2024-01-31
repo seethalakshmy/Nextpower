@@ -46,6 +46,7 @@ class RegistrationScreen extends GetView<RegistrationController> {
                   }),
               const SizedBox(height: 10),
               Obx(() => MobileNumberWidget(
+                countries: controller.countries.value,
                     mobileNumber: controller.mobileNumber,
                     isEnabled: false,
                     title: translate(LocaleKeys.mobileNumber),

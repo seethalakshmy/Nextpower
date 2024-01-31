@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/presentation/registration/models/registration_model.dart';
@@ -12,6 +13,7 @@ class RegistrationController extends GetxController {
   final count = 0.obs;
   final registrationModel = RegistrationModel().obs;
   final formKey = GlobalKey<FormState>();
+  RxList<Country> countries = RxList.empty(growable: true);
   late String mobileNumber;
   late String countryCode;
 

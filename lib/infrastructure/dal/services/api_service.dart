@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:project/generated/locales.g.dart';
 
 enum Method { POST, GET, PUT, DELETE, PATCH }
 
@@ -26,11 +27,11 @@ class ApiService extends GetConnect implements GetxService {
     };
   }
 
-  Future<dynamic> apicall(
+  Future<dynamic> apiRequest(
   {required String url,bool postRequest = true,Map<String, dynamic>? params}
       ) async{
-    debugPrint("URL:${baseUrl + url}");
-    debugPrint("\n-----REQUEST PARAMS-------\n$params");
+    debugPrint("\nURL:${baseUrl + url}");
+    debugPrint("-----REQUEST PARAMS-------\n$params");
     updateToken();
     late http.Response res;
     try{
@@ -41,8 +42,19 @@ class ApiService extends GetConnect implements GetxService {
       }else{
         res = await http.get(Uri.parse(baseUrl + url), headers: _headers);
       }
-
-
+      debugPrint('-----RESPONSE:${baseUrl + url} : ${res.statusCode}---\n ${res.body}\n\n');
+      if(res.statusCode == 200){
+        return res;
+      }else{
+        return http.Response(
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
+          },
+          json.encode(
+              {'status': false, 'message': LocaleKeys.internal_server_error.tr}),
+          500,
+        );
+      }
 
 
     } on SocketException catch (e) {
@@ -58,41 +70,9 @@ class ApiService extends GetConnect implements GetxService {
 
   void updateToken(){
     //if login
+
   }
 
-  Future<dynamic> apiRequest(
-      {required String url,
-      Method? method = Method.POST,
-      Map<String, dynamic>? params}) async {
-    debugPrint(baseUrl + url);
-    debugPrint("\n-----params-------\n$params");
-    Response response;
-    try {
-      if (method == Method.POST) {
-        response = await post(baseUrl + url, params);
-      }else {
-        response = await get(baseUrl + url, headers: _headers);
-      }
-
-      debugPrint(
-          "\n ----Response---- \n status code : ${response.statusCode}\n body : ${response.body}");
-      if (response.statusCode == 200) {
-        return response.body;
-      } else if (response.statusCode == 401) {
-        throw Exception("Unauthorized");
-      } else if (response.statusCode == 500) {
-        throw Exception("Server Error");
-      } else {
-        throw Exception("Something Went Wrong");
-      }
-    } on SocketException catch (e) {
-      throw Exception("No Internet Connection");
-    } on FormatException {
-      throw Exception("Bad Response Format!");
-    } catch (e) {
-      throw Exception("Something Went Wrong");
-    }
-  }
 
   updateHeaders() {
     _headers['Authorization'] = '';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/border_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
@@ -17,6 +18,8 @@ class MobileNumberWidget extends StatelessWidget {
     required this.title,
     this.isEnabled = true,
     this.mobileNumber = "",
+    required this.countries,
+    this.countryLoading = false,
     this.suffix,
   });
 
@@ -27,7 +30,9 @@ class MobileNumberWidget extends StatelessWidget {
   final String countryCode;
   final String title;
   final bool isEnabled;
+  final bool countryLoading;
   final String mobileNumber;
+  final List<Country> countries;
 
   final Widget? suffix;
 
@@ -43,28 +48,30 @@ class MobileNumberWidget extends StatelessWidget {
             Container(
                 decoration: CustomBorders().containerBorder(
                     color: errorText.isNotEmpty ? AppColors.errorRed : null),
-                child: DropdownButton<String>(
-                  value: countryCode,
-                  underline: Container(),
-                  items: AppConstants().countryCodeList.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(items),
-                      ),
-                    );
-                  }).toList(),
-                  icon: const Padding(
-                    padding: EdgeInsets.only(right: 8.0),
-                    child: Icon(Icons.keyboard_arrow_down),
-                  ),
-                  onChanged: !isEnabled
-                      ? null
-                      : (value) {
-                          onCountryCodeChanged(value);
-                        },
-                )),
+                child: countryLoading
+                    ? buildLoading()
+                    : DropdownButton<String>(
+                        value: countryCode,
+                        underline: Container(),
+                        items: countries.map((Country items) {
+                          return DropdownMenuItem(
+                            value: "${items.countryCode ?? 91}",
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text("+${items.countryCode ?? 91}"),
+                            ),
+                          );
+                        }).toList(),
+                        icon: const Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Icon(Icons.keyboard_arrow_down),
+                        ),
+                        onChanged: !isEnabled
+                            ? null
+                            : (value) {
+                                onCountryCodeChanged(value);
+                              },
+                      )),
             const SizedBox(width: 10),
             Expanded(
               child: SizedBox(
@@ -103,5 +110,14 @@ class MobileNumberWidget extends StatelessWidget {
               )
       ],
     );
+  }
+
+  Widget buildLoading() {
+    return Container(
+      width: 50,
+        height: 50,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(12),
+        child: const CircularProgressIndicator());
   }
 }

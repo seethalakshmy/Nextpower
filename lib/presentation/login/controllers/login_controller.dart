@@ -1,8 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
 import 'package:project/infrastructure/dal/providers/login/login_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
@@ -19,6 +18,8 @@ class LoginController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
+  RxBool countriesLoading = false.obs;
+  RxList<Country> countries = RxList.empty(growable: true);
   bool isLoginPage = true; //Page reused for change phone number
 
   @override
@@ -29,24 +30,24 @@ class LoginController extends GetxController {
             0
         ? true
         : false;
-    setCountryCode();
-    mobileNumber = "1305906721";
+    getCountries();
+
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  setCountryCode([String? value]) {
-    selectedCountryCode(value ?? AppConstants().countryCodeList.first);
-    update();
+  void getCountries() {
+    countriesLoading(true);
+    LoginProvider().getCountries().then((response) {
+      countriesLoading(false);
+      if (response.status ?? false) {
+        countries.value = response.countries ?? [];
+        selectedCountryCode.value =
+            "${countries.value.first.countryCode ?? 91}";
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
   }
 
   printData({required String message, required String value, int? lineNumber}) {
@@ -65,32 +66,34 @@ class LoginController extends GetxController {
     callMobileNumberValidateApi();
   }
 
-  void callMobileNumberValidateApi(){
+  void callMobileNumberValidateApi() {
     isLoading(true);
-    LoginProvider().login(phoneNumber: mobileNumber).then((value) {
+    LoginProvider()
+        .login(
+            phoneNumber: mobileNumber, countryCode: selectedCountryCode.value)
+        .then((value) {
       isLoading(false);
       LoginResponse response = value;
-      if(response.status ?? false){
-        // moveToOtpValidatePage();
-        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success.tr,response.message ?? "");
-      }else{
-        CustomSnackBar.showErrorSnackBar(LocaleKeys.failed.tr,response.message ?? "");
+      if (response.status ?? false) {
+        moveToOtpValidatePage(response.otp ?? "");
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.otp ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
       }
     });
   }
 
-  void hideErrors(){
+  void hideErrors() {
     mobileNumberError.value = "";
   }
 
-  void moveToOtpValidatePage(){
-    // String otp = Utility.generate4DigitOTP();
-    // CustomSnackBar.showSuccessSnackBar("OTP", otp);
-
+  void moveToOtpValidatePage(String otp) {
     NavigationUtils().callOTPPage(
         countryCode: selectedCountryCode.value,
         mobileNumber: mobileNumber,
-        otp: "0000",
+        otp: otp,
         isVerify: false);
   }
 }

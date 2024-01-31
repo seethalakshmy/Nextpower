@@ -250,6 +250,7 @@ class _MobileNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => MobileNumberWidget(
+      countries: controller.countries.value,
           mobileNumber: controller.currentProfileData.value.mobileNumber ?? "",
           isEnabled: false,
           // suffix: controller.isMobileVerified.value
