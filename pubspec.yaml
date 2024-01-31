@@ -6,6 +6,8 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+
+
   cupertino_icons: ^1.0.2
   get: 4.6.6
   intl: ^0.19.0
@@ -20,6 +22,7 @@ dependencies:
   url_launcher: ^6.1.10
   geolocator: ^10.1.0
   mobile_scanner: ^3.1.1
+  http: ^1.2.0
 
   flutter:
     sdk: flutter

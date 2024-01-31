@@ -131,7 +131,7 @@ class LocaleKeys {
   static const charging = 'charging';
   static const billing = 'billing';
   static const contactUs = 'contactUs';
-  static const a = 'a';
+  static const failed = 'failed';
 }
 
 class Locales {
@@ -257,6 +257,6 @@ class Locales {
     'charging': 'Charging',
     'billing': 'Billing',
     'contactUs': 'Contact us',
-    'a': '',
+    'failed': 'Failed',
   };
 }

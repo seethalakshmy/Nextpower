@@ -10,7 +10,7 @@ class ConfigEnvironments {
   static final List<Map<String, String>> _availableEnvironments = [
     {
       'env': Environments.LOCAL,
-      'url': 'https://reqres.in/api/',
+      'url': 'http://43.204.191.238/api/v1/',
     },
     {
       'env': Environments.DEV,

@@ -1,16 +1,15 @@
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/dal/models/login/login_model.dart';
+import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
 import 'package:project/infrastructure/dal/providers/login/login_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
-import 'package:project/infrastructure/utils/utility.dart';
 
 class LoginController extends GetxController {
   final selectedCountryCode = "".obs;
@@ -31,6 +30,7 @@ class LoginController extends GetxController {
         ? true
         : false;
     setCountryCode();
+    mobileNumber = "1305906721";
     super.onInit();
   }
 
@@ -69,10 +69,12 @@ class LoginController extends GetxController {
     isLoading(true);
     LoginProvider().login(phoneNumber: mobileNumber).then((value) {
       isLoading(false);
-      LoginModel response = value;
-      if(response.name != null){
-        moveToOtpValidatePage();
-        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success.tr,"Otp send");
+      LoginResponse response = value;
+      if(response.status ?? false){
+        // moveToOtpValidatePage();
+        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success.tr,response.message ?? "");
+      }else{
+        CustomSnackBar.showErrorSnackBar(LocaleKeys.failed.tr,response.message ?? "");
       }
     });
   }
