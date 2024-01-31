@@ -4,6 +4,7 @@ class AppStorage {
   static const accessToken = "access_token";
   static const isLoggedin = "is_logged_in";
   static const tokenType = "token_type";
+  static const userId = "user_id";
 
   AppStorage() {
     GetStorage.init();
@@ -27,12 +28,12 @@ class AppStorage {
     return storage.read(AppStorage.isLoggedin) ?? false;
   }
 
-  void writeTokenType(String value) async {
-    await storage.write(AppStorage.tokenType, value);
+  void writeUserId(String value) async {
+    await storage.write(AppStorage.userId, value);
   }
 
-  String getTokenType() {
-    return storage.read(AppStorage.tokenType) ?? "";
+  String getUserId() {
+    return storage.read(AppStorage.userId) ?? "";
   }
 
   void clearValues() async {

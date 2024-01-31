@@ -33,12 +33,13 @@ class OtpWidget extends GetView<OtpController> {
       closeKeyboardWhenCompleted: true,
       validator: (value) {
         print(value!.length);
+        controller.otp = value;
         if (value.isEmpty) {
           return translate(LocaleKeys.enterOtp);
         } else if (value.length < 4) {
           print('entered lessthan 4');
           return translate(LocaleKeys.enterValidOtp);
-        } else if (value != controller.otp) {
+        } else if (value != controller.validOtp) {
           return translate(LocaleKeys.invalidOtp);
         } else {
           return null;

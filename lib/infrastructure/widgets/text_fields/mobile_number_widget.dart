@@ -50,28 +50,7 @@ class MobileNumberWidget extends StatelessWidget {
                     color: errorText.isNotEmpty ? AppColors.errorRed : null),
                 child: countryLoading
                     ? buildLoading()
-                    : DropdownButton<String>(
-                        value: countryCode,
-                        underline: Container(),
-                        items: countries.map((Country items) {
-                          return DropdownMenuItem(
-                            value: "${items.countryCode ?? 91}",
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text("+${items.countryCode ?? 91}"),
-                            ),
-                          );
-                        }).toList(),
-                        icon: const Padding(
-                          padding: EdgeInsets.only(right: 8.0),
-                          child: Icon(Icons.keyboard_arrow_down),
-                        ),
-                        onChanged: !isEnabled
-                            ? null
-                            : (value) {
-                                onCountryCodeChanged(value);
-                              },
-                      )),
+                    : buildDropdown()),
             const SizedBox(width: 10),
             Expanded(
               child: SizedBox(
@@ -110,6 +89,41 @@ class MobileNumberWidget extends StatelessWidget {
               )
       ],
     );
+  }
+
+  Widget buildDropdown(){
+    if(isEnabled){
+      return DropdownButton<String>(
+        value: countryCode,
+        underline: Container(),
+        items: countries.map((Country items) {
+          return DropdownMenuItem(
+            value: "${items.countryCode ?? 91}",
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text("+${items.countryCode ?? 91}"),
+            ),
+          );
+        }).toList(),
+        icon: const Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Icon(Icons.keyboard_arrow_down),
+        ),
+        onChanged: !isEnabled
+            ? null
+            : (value) {
+          onCountryCodeChanged(value);
+        },
+      );
+    }else{
+      return Container(
+        width: 50,
+        height: 46,
+        alignment: Alignment.center,
+        child: Text("+$countryCode",textAlign: TextAlign.center,style: TextStyle(fontSize: 16,color: Colors.grey),),
+      );
+    }
+
   }
 
   Widget buildLoading() {

@@ -40,13 +40,14 @@ class RegistrationScreen extends GetView<RegistrationController> {
               const SizedBox(height: 10),
               CommonTextFieldWidget(
                   title: translate(LocaleKeys.name),
+                  editingController: controller.nameController,
                   onChanged: (value) {},
                   validator: (value) {
                     return ValidationUtils().nameValidation(value);
                   }),
               const SizedBox(height: 10),
               Obx(() => MobileNumberWidget(
-                countries: controller.countries.value,
+                    countries: controller.countries.value,
                     mobileNumber: controller.mobileNumber,
                     isEnabled: false,
                     title: translate(LocaleKeys.mobileNumber),
@@ -74,19 +75,26 @@ class RegistrationScreen extends GetView<RegistrationController> {
                         controller.registrationModel.value.countryCode ?? "",
                   )),
               const SizedBox(height: 10),
-              CommonTextFieldWidget(
+              Obx(() => CommonTextFieldWidget(
                 title: translate(LocaleKeys.emailAddress),
-                onChanged: (value) {},
+                editingController: controller.emailController,
+                errorText: controller.emailError.value,
+                onChanged: (value) {
+                  controller.validate();
+                },
                 validator: (value) => ValidationUtils().emailValidation(value),
-              ),
+
+              )),
               const SizedBox(height: 30),
-              RoundedRectangleButton(
+              Obx(() => RoundedRectangleButton(
                   onPressed: () {
-                    if (controller.formKey.currentState?.validate() ?? false) {
-                      NavigationUtils().callHomePage(clearStack: true);
+                    if (controller.validate()) {
+                      controller.registration();
                     }
                   },
-                  text: translate(LocaleKeys.submit))
+                  enable: controller.buttonEnabled.value,
+                  isLoading: controller.isLoading.value,
+                  text: translate(LocaleKeys.submit)))
             ],
           ),
         ),

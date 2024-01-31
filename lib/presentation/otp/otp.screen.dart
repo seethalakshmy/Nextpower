@@ -53,22 +53,8 @@ class OtpScreen extends GetView<OtpController> {
                       const SizedBox(height: 20),
                       Obx(() => RoundedRectangleButton(
                           onPressed: () async {
-                            controller.isLoading(true);
-                            if (controller.formKey.currentState!.validate()) {
-                              await Future.delayed(const Duration(seconds: 2));
-                              controller.isLoading(false);
-                              if (controller.isVerify.value) {
-                                controller.isLoading(false);
-                                Get.back(result: true);
-                              } else if (controller.isAccountCreated) {
-                                NavigationUtils().callHomePage();
-                              } else {
-                                NavigationUtils().callRegistration(
-                                    controller.countryCode,
-                                    controller.mobileNumber);
-                              }
-                            } else {
-                              controller.isLoading(false);
+                            if(controller.validate()){
+                              controller.validateOtp();
                             }
                           },
                           isLoading: controller.isLoading.value,
@@ -77,13 +63,19 @@ class OtpScreen extends GetView<OtpController> {
                               : translate(LocaleKeys.login))),
                       const SizedBox(height: 20),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _TextButtons(
-                              onPressed: () {
-                                controller.resendOTP();
-                              },
-                              text: LocaleKeys.resendOtp),
+                          Obx(() {
+                            if (controller.resendOtpTime.value) {
+                              return _TextButtons(
+                                  onPressed: () {
+                                    controller.resendOTP();
+                                  },
+                                  text: LocaleKeys.resendOtp);
+                            } else {
+                              return Spacer();
+                            }
+                          }),
                           _TextButtons(
                               onPressed: () {
                                 controller.changePhoneNumber();

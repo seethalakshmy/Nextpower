@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/decoration_utils.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
@@ -7,7 +8,7 @@ class CommonTextFieldWidget extends StatelessWidget {
     required this.title,
     required this.onChanged,
     required this.validator,
-    // this.errorText = "",
+    this.errorText = "",
     super.key,
     this.initialValue,
     this.suffix,
@@ -20,6 +21,7 @@ class CommonTextFieldWidget extends StatelessWidget {
   final Function onChanged;
   final Widget? suffix;
   final double? fontSize;
+  final String errorText;
   final FormFieldValidator validator;
 
   // final String errorText;
@@ -56,15 +58,15 @@ class CommonTextFieldWidget extends StatelessWidget {
             },
           ),
         ),
-        // errorText.isEmpty
-        //     ? Container()
-        //     : Padding(
-        //         padding: const EdgeInsets.only(left: 5.0, top: 5),
-        //         child: Text(
-        //           errorText,
-        //           style: TextStyle(color: AppColors.errorRed),
-        //         ),
-        //       )
+        errorText.isEmpty
+            ? Container()
+            : Padding(
+                padding: const EdgeInsets.only(left: 5.0, top: 5),
+                child: Text(
+                  errorText,
+                  style: TextStyle(color: AppColors.errorRed),
+                ),
+              )
       ],
     );
   }
