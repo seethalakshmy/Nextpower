@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
-import 'package:project/presentation/station_list/models/stations_list_model.dart';
 
 class StationView extends StatefulWidget {
   const StationView({Key? key}) : super(key: key);
@@ -30,13 +30,13 @@ class _StationViewState extends State<StationView> {
       final marker = Marker(
           icon: fromAssetImage,
           markerId: MarkerId(station.stationId.toString()),
-          position: LatLng(station.lat ?? 0.0, station.long ?? 0.0),
+          position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
           // infoWindow: InfoWindow(
           //   title: station.stationName,
           //   snippet: station.distance,
           // ),
           onTap: () {
-            Get.dialog(StationBriefDetailsWidget(station));
+            // Get.dialog(StationBriefDetailsWidget());
           });
       setState(() {
         markers[station.stationId.toString()] = marker;
@@ -55,7 +55,7 @@ class _StationViewState extends State<StationView> {
               mapType: MapType.normal,
               markers: markers.values.toSet(),
               myLocationButtonEnabled: false,
-              initialCameraPosition: HomeController.kGooglePlex,
+              initialCameraPosition: HomeController.cameraPosition,
               myLocationEnabled: true,
               zoomControlsEnabled: false,
               onMapCreated: (GoogleMapController mapController) {

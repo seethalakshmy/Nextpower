@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
+import 'package:project/infrastructure/storage/app_storage.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 
 class SplashScreenScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SplashScreenScreenState extends State<SplashScreenScreen> {
     getVersionNumber();
     super.initState();
     Timer(const Duration(seconds: 3), () {
+      AppStorage().writeIsLoggedIn(true);
       NavigationUtils().goFromSplash();
     });
   }

@@ -22,11 +22,7 @@ class OtpScreen extends GetView<OtpController> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: BackButtonAppbar(onBackPressed: () {
-            if (controller.isVerify.value) {
-              Get.back(result: false);
-            } else {
-              controller.changePhoneNumber();
-            }
+            Get.back(result: false);
           }),
         ),
         body: Padding(
@@ -76,11 +72,17 @@ class OtpScreen extends GetView<OtpController> {
                               return Spacer();
                             }
                           }),
-                          _TextButtons(
-                              onPressed: () {
-                                controller.changePhoneNumber();
-                              },
-                              text: LocaleKeys.changePhoneNumber),
+                          Obx(() {
+                            if (!controller.isVerify.value) {
+                              return _TextButtons(
+                                  onPressed: () {
+                                    Get.back(result: false);
+                                  },
+                                  text: LocaleKeys.changePhoneNumber);
+                            } else {
+                              return Spacer();
+                            }
+                          }),
                         ],
                       )
                     ],

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/routes.dart';
+import 'package:project/infrastructure/storage/app_storage.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,31 +24,34 @@ class NavigationUtils {
   Future<bool> callOTPPage(
       {required String countryCode,
       required String mobileNumber,
-      required String otp,
+      required String otp, bool clearBackStack = false,
       required bool isVerify}) async {
-    bool verified = await Get.toNamed(Routes.OTP, parameters: {
-      ParamName.countryCode: countryCode,
-      ParamName.mobileNumber: mobileNumber,
-      ParamName.otp: otp,
-      ParamName.isVerify: isVerify.toString()
-    });
+    bool verified = false;
+    if(clearBackStack){
+      verified = await Get.offNamed(Routes.OTP, parameters: {
+        ParamName.countryCode: countryCode,
+        ParamName.mobileNumber: mobileNumber,
+        ParamName.otp: otp,
+        ParamName.isVerify: isVerify.toString()
+      });
+    }else{
+      verified = await Get.toNamed(Routes.OTP, parameters: {
+        ParamName.countryCode: countryCode,
+        ParamName.mobileNumber: mobileNumber,
+        ParamName.otp: otp,
+        ParamName.isVerify: isVerify.toString()
+      });
+    }
+
     return verified;
   }
 
   void callHomePage({bool clearStack = false, int? index}) {
-    // if (clearStack) {
-    //   Get.offAllNamed(Routes.HOME, parameters: {
-    //     ParamName.index: index != null
-    //         ? index.toString()
-    //         : HomeController().stationIndex.toString()
-    //   });
-    // } else {
     Get.offAllNamed(Routes.HOME, parameters: {
       ParamName.index: index != null
           ? index.toString()
           : HomeController().stationIndex.toString()
     });
-    // }
   }
 
   void callRegistration(String countryCode, String mobileNumber) {
@@ -79,7 +83,11 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    callLoginPage(isLoginPage: true,clearStack: true);
+    if(AppStorage().getLoggedIn()){
+      callHomePage(clearStack: true);
+    }else{
+      callLoginPage(isLoginPage: true,clearStack: true);
+    }
   }
 
   void callProfile({bool clearStack = false, required String isCalledFrom}) {

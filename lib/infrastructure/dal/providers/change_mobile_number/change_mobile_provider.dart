@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:project/infrastructure/dal/models/base/CommonResponse.dart';
-import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'dart:convert';
 import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
 import 'package:project/infrastructure/dal/models/validate_otp/VerifyOtpResponse.dart';
 import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
 
-class LoginProvider extends GetConnect {
+class ChangeMobileNumberProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
-  Future<LoginResponse> login(
+  Future<LoginResponse> changePhoneNumber(
       {required String phoneNumber, required String countryCode}) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'sign_in',
+          url: 'change_phone_number',
           params: {'country_code': countryCode, 'phone_number': phoneNumber});
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
@@ -23,35 +21,6 @@ class LoginProvider extends GetConnect {
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
       return LoginResponse(status: false, message: e.toString());
-    }
-  }
-
-  Future<LoginResponse> resendOtp(
-      {required String phoneNumber, required String countryCode}) async {
-    try {
-      http.Response response = await _apiService.apiRequest(
-          url: 'resend_otp',
-          params: {'country_code': countryCode, 'phone_number': phoneNumber});
-
-      LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
-      return data;
-    } catch (e) {
-      debugPrint("Api issue in provider : ${e.toString()}");
-      return LoginResponse(status: false, message: e.toString());
-    }
-  }
-
-  Future<CountryResponse> getCountries() async {
-    try {
-      http.Response response =
-          await _apiService.apiRequest(url: 'countries', postRequest: false);
-
-      CountryResponse data =
-          CountryResponse.fromJson(json.decode(response.body));
-      return data;
-    } catch (e) {
-      debugPrint("Api issue in provider : ${e.toString()}");
-      return CountryResponse(status: false, message: e.toString());
     }
   }
 

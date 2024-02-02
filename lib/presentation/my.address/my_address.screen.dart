@@ -31,7 +31,8 @@ class MyAddressScreen extends GetView<MyAddressController> {
                       NavigationUtils().callMyAddressAddEditPage(0);
                     },
                     backgroundColor: AppColors.primaryGreen,
-                    child: const Icon(Icons.add),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+                    child: const Icon(Icons.add,color: Colors.white,),
                   )
                 : null,
         body: Obx(() => controller.isLoading.value
@@ -91,7 +92,7 @@ class _ContentView extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         NavigationUtils().callMyAddressAddEditPage(
-                            controller.address[index].addressId ?? 0);
+                            controller.address[0].id!.toInt());
                         // NavigationUtils().callScreenYetToBeDone();
                       },
                       child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
@@ -103,8 +104,8 @@ class _ContentView extends StatelessWidget {
                   addressLine1: controller.address[index].addressLine1 ?? "",
                   addressLine2: controller.address[index].addressLine2 ?? "",
                   city: controller.address[index].city ?? "",
-                  country: controller.address[index].countryName ?? "",
-                  state: controller.address[index].stateName ?? "",
+                  country: "sample country",
+                  state: "Sample state",
                   postalCode: controller.address[index].postalCode ?? "",
                 ),
                 const SizedBox(height: 10),

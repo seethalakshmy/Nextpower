@@ -67,6 +67,8 @@ class RegistrationController extends GetxController {
       CommonResponse response = value;
       if (response.status ?? false) {
         AppStorage().writeIsLoggedIn(true);
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.message ?? "");
         NavigationUtils().callHomePage(clearStack: true);
       } else {
         CustomSnackBar.showErrorSnackBar(

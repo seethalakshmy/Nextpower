@@ -3,8 +3,8 @@ import 'package:get_storage/get_storage.dart';
 class AppStorage {
   static const accessToken = "access_token";
   static const isLoggedin = "is_logged_in";
-  static const tokenType = "token_type";
   static const userId = "user_id";
+  static const mobileNumber = "mobile_number";
 
   AppStorage() {
     GetStorage.init();
@@ -24,7 +24,7 @@ class AppStorage {
     await storage.write(AppStorage.isLoggedin, value);
   }
 
-  bool isLoggedIn() {
+  bool getLoggedIn() {
     return storage.read(AppStorage.isLoggedin) ?? false;
   }
 
@@ -34,6 +34,14 @@ class AppStorage {
 
   String getUserId() {
     return storage.read(AppStorage.userId) ?? "";
+  }
+
+  void writeMobileNumber(String value) async {
+    await storage.write(AppStorage.mobileNumber, value);
+  }
+
+  String getMobileNumber() {
+    return storage.read(AppStorage.mobileNumber) ?? "";
   }
 
   void clearValues() async {

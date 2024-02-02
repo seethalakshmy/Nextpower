@@ -29,6 +29,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return WillPopScope(
       onWillPop: NavigationUtils().goBack,
       child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.98),
         appBar: CustomAppbar(title: translate(LocaleKeys.profile)),
         body: Obx(() => controller.isLoading.value
             ? const LoadingWidget()
@@ -37,12 +38,10 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: ListView(
                   children: [
                     _EditIconWidget(controller: controller),
-                    // controller.isEditable.value
-                    //     ? const SizedBox(height: 30)
-                    //     : const SizedBox.shrink(),
                     _ImageWidget(controller: controller),
                     const SizedBox(height: 30),
                     CustomCardView(
+                      color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
@@ -195,18 +194,14 @@ class _DoneButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundedRectangleButton(
+    return Obx(() => RoundedRectangleButton(
+      isLoading : controller.buttonLoading.value,
         onPressed: () {
-          var validate = controller.formKey.currentState!.validate();
-          print("button pressed: $validate");
-          if (controller.isValid(validate)) {
-            CustomSnackBar.showErrorSnackBar(translate(LocaleKeys.error),
-                translate(LocaleKeys.kindlyValidateAllFieldsAndTryAgain));
-          } else {
+          if (controller.isValid()) {
             controller.submit();
           }
         },
-        text: translate(LocaleKeys.done));
+        text: translate(LocaleKeys.done)));
   }
 }
 
@@ -220,7 +215,7 @@ class _EmailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => CommonTextFieldWidget(
-          initialValue: controller.currentProfileData.value.emailId,
+          initialValue: controller.email.value,
           title: translate(LocaleKeys.emailAddress),
           onChanged: (value) {
             controller.changeEmailID(value);
@@ -251,7 +246,7 @@ class _MobileNumberWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => MobileNumberWidget(
       countries: controller.countries.value,
-          mobileNumber: controller.currentProfileData.value.mobileNumber ?? "",
+          mobileNumber: controller.phoneNumber.value,
           isEnabled: false,
           // suffix: controller.isMobileVerified.value
           //     ? SvgImageUtils()
@@ -268,16 +263,13 @@ class _MobileNumberWidget extends StatelessWidget {
             return null;
           },
           onMobileNumberChanged: (value) {
-            controller.currentProfileData.update((val) {
-              val?.mobileNumber = value;
-            });
+            controller.phoneNumber.value = value;
           },
           onCountryCodeChanged: (value) {
             PrintUtils().prints(message: "Selected ", value: value);
-            controller.setCountryCode(value);
           },
           errorText: controller.mobileNumberError.value,
-          countryCode: controller.currentProfileData.value.countryCode ?? "",
+          countryCode: controller.countryCode.value,
         ));
   }
 }
@@ -292,12 +284,10 @@ class _NameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonTextFieldWidget(
-        initialValue: controller.currentProfileData.value.userName,
+        initialValue: controller.name.value,
         title: translate(LocaleKeys.name),
         onChanged: (value) {
-          controller.currentProfileData.update((val) {
-            val?.userName = value ?? "";
-          });
+          controller.name.value = value;
         },
         validator: (value) {
           return ValidationUtils().nameValidation(value);

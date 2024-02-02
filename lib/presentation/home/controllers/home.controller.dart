@@ -5,15 +5,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project/generated/assets.dart';
+import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/stations/StationsDetailsResponse.dart';
+import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
+import 'package:project/infrastructure/dal/providers/home_stations/home_stations_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
+import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/home/models/wallet_detail_model.dart';
 import 'package:project/presentation/home/providers/favorites_list_provider.dart';
 import 'package:project/presentation/home/providers/usage_history_list_provider.dart';
 import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
-import 'package:project/presentation/station_list/models/stations_list_model.dart';
 import 'package:project/presentation/station_list/providers/stations_list_provider.dart';
-
 import '../models/favorites_list_model.dart';
 
 class HomeController extends GetxController {
@@ -31,7 +34,7 @@ class HomeController extends GetxController {
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
 
-  static const CameraPosition kGooglePlex = CameraPosition(
+  static const CameraPosition cameraPosition = CameraPosition(
     target: LatLng(56.172249, 10.187372),
     zoom: 14.4746,
   );
@@ -52,21 +55,43 @@ class HomeController extends GetxController {
   void onInit() async {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
-    stationList =
-        (await StationsListProvider().getStationsList())?.stations ?? [];
     // await determinePosition();
     onMapCreated();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void getStations() {
+    isLoading(true);
+    HomeStationsProvider()
+        .getStations(
+        latitude: cameraPosition.target.latitude, longitude: cameraPosition.target.longitude)
+        .then((value) {
+      isLoading(false);
+      StationsResponse response = value;
+      if (response.status ?? false) {
+        stationList = response.stations ?? [];
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void getStationDetails() {
+    isLoading(true);
+    HomeStationsProvider()
+        .getStationDetails(
+        stationId: '')
+        .then((value) {
+      isLoading(false);
+      StationsDetailsResponse response = value;
+      if (response.status ?? false) {
+
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
   }
 
   void setSelectedIndex(int index) async {
@@ -98,10 +123,10 @@ class HomeController extends GetxController {
       final marker = Marker(
         icon: fromAssetImage,
         markerId: MarkerId(station.stationId.toString()),
-        position: LatLng(station.lat ?? 0.0, station.long ?? 0.0),
+        position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
         infoWindow: InfoWindow(
-          title: station.stationName,
-          snippet: station.distance,
+          title: 'sample name',
+          snippet: '0 km',
         ),
       );
       allMarkers.add(marker);
@@ -193,6 +218,7 @@ class HomeController extends GetxController {
       isLoading(false);
     });
   }
+
 
   void setWalletAmountChosenIndex({required int index, required int amount}) {
     walletChosenAmountIndex(index);

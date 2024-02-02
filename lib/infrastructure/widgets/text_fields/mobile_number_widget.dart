@@ -118,7 +118,7 @@ class MobileNumberWidget extends StatelessWidget {
     }else{
       return Container(
         width: 50,
-        height: 46,
+        height: 45,
         alignment: Alignment.center,
         child: Text("+$countryCode",textAlign: TextAlign.center,style: TextStyle(fontSize: 16,color: Colors.grey),),
       );

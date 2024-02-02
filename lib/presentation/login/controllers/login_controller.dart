@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
+import 'package:project/infrastructure/dal/providers/change_mobile_number/change_mobile_provider.dart';
 import 'package:project/infrastructure/dal/providers/login/login_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/constants.dart';
@@ -63,7 +64,12 @@ class LoginController extends GetxController {
       mobileNumberError.value = LocaleKeys.mobileNumberShouldntBeEmpty.tr;
       return;
     }
-    callMobileNumberValidateApi();
+    if(isLoginPage){
+      callMobileNumberValidateApi();
+    }else{
+      callChangeMobileNumberApi();
+    }
+
   }
 
   void callMobileNumberValidateApi() {
@@ -71,6 +77,25 @@ class LoginController extends GetxController {
     LoginProvider()
         .login(
             phoneNumber: mobileNumber, countryCode: selectedCountryCode.value)
+        .then((value) {
+      isLoading(false);
+      LoginResponse response = value;
+      if (response.status ?? false) {
+        moveToOtpValidatePage(response.otp ?? "");
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.otp ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void callChangeMobileNumberApi() {
+    isLoading(true);
+    ChangeMobileNumberProvider()
+        .changePhoneNumber(
+        phoneNumber: mobileNumber, countryCode: selectedCountryCode.value)
         .then((value) {
       isLoading(false);
       LoginResponse response = value;
@@ -94,6 +119,7 @@ class LoginController extends GetxController {
         countryCode: selectedCountryCode.value,
         mobileNumber: mobileNumber,
         otp: otp,
-        isVerify: false);
+        clearBackStack: !isLoginPage,
+        isVerify: !isLoginPage);
   }
 }
