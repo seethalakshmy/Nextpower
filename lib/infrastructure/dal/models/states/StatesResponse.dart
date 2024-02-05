@@ -2,7 +2,7 @@ class StatesResponse {
   StatesResponse({
       bool? status, 
       String? message, 
-      List<States>? states,}){
+      List<CountryState>? states,}){
     _status = status;
     _message = message;
     _states = states;
@@ -14,17 +14,17 @@ class StatesResponse {
     if (json['states'] != null) {
       _states = [];
       json['states'].forEach((v) {
-        _states?.add(States.fromJson(v));
+        _states?.add(CountryState.fromJson(v));
       });
     }
   }
   bool? _status;
   String? _message;
-  List<States>? _states;
+  List<CountryState>? _states;
 
   bool? get status => _status;
   String? get message => _message;
-  List<States>? get states => _states;
+  List<CountryState>? get states => _states;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -38,22 +38,22 @@ class StatesResponse {
 
 }
 
-class States {
-  States({
-      num? id, 
+class CountryState {
+  CountryState({
+      int? id,
       String? name,}){
     _id = id;
     _name = name;
 }
 
-  States.fromJson(dynamic json) {
+  CountryState.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
   }
-  num? _id;
+  int? _id;
   String? _name;
 
-  num? get id => _id;
+  int? get id => _id;
   String? get name => _name;
 
   Map<String, dynamic> toJson() {

@@ -103,18 +103,20 @@ class NavigationUtils {
     Get.toNamed(Routes.MY_VEHICLES);
   }
 
-  void callMyVehiclesAddEditPage(int id) {
-    Get.toNamed(Routes.MY_VEHICLES_ADD_EDIT,
-        parameters: {ParamName.vehicleId: id.toString()});
+  Future<bool> callMyVehiclesAddEditPage(int id) async{
+    bool? result = await Get.toNamed(Routes.MY_VEHICLES_ADD_EDIT,
+        parameters: {ParamName.vehicleId: id.toString()}) as bool?;
+    return result ?? false;
   }
 
   void callMyAddress() {
     Get.toNamed(Routes.MY_ADDRESS);
   }
 
-  void callMyAddressAddEditPage(int id) {
-    Get.toNamed(Routes.MY_ADDRESS_ADD_EDIT,
-        parameters: {ParamName.addressId: id.toString()});
+  Future<bool> callMyAddressAddEditPage(int id) async{
+    bool? result = await Get.toNamed(Routes.MY_ADDRESS_ADD_EDIT,
+        parameters: {ParamName.addressId: id.toString()}) as bool?;
+    return result ?? false;
   }
 
   callScreenYetToBeDone() {

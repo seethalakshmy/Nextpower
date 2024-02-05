@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/dal/models/countries/country_list_model.dart';
+import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'package:project/infrastructure/dal/models/countries/state_list_model.dart';
+import 'package:project/infrastructure/dal/models/states/StatesResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
@@ -83,7 +84,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           CustomDropdownWidget(
                             initialValue: controller.selectedCountry,
                             fieldTitle: translate(LocaleKeys.country),
-                            list: controller.countries.map((Countries items) {
+                            list: controller.countries.map((Country items) {
                               return DropdownMenuItem(
                                 value: items,
                                 child: Padding(
@@ -93,7 +94,8 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               );
                             }).toList(),
                             onSaved: (dynamic countries) {},
-                            onChanged: (Countries countries) {
+                            onChanged: (Country countries) {
+                              controller.address.countryId = countries.id ?? 0;
                               controller.setStateList(countries.id ?? 0);
                             },
                             customValidator: (dynamic country) {
@@ -108,17 +110,20 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           Obx(() => CustomDropdownWidget(
                                 initialValue: controller.selectedState,
                                 fieldTitle: translate(LocaleKeys.state),
-                                list: controller.states.map((States items) {
+                                list: controller.states.map((CountryState items) {
                                   return DropdownMenuItem(
                                     value: items,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
+                                      padding: EdgeInsets.only(left: 8.0),
                                       child: Text(items.name ?? ""),
                                     ),
                                   );
                                 }).toList(),
                                 onSaved: (dynamic countries) {},
-                                onChanged: (States states) {},
+                                onChanged: (CountryState states) {
+                                  debugPrint("state:${states.id}");
+                                  controller.address.stateId = states.id ?? 0;
+                                },
                                 customValidator: (dynamic states) {
                                   if (states == null) {
                                     return "${translate(LocaleKeys.state)} ${translate(LocaleKeys.shouldntBeEmpty)}";
@@ -169,21 +174,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                           const SizedBox(height: 30),
                           RoundedRectangleButton(
                               onPressed: () async {
-                                if (controller.formKey.currentState
-                                        ?.validate() ??
-                                    false) {
-                                  controller.isLoading(true);
-                                  await Future.delayed(
-                                      const Duration(seconds: 2));
-                                  NavigationUtils().goBack();
-                                  if (controller.addressId != 0) {
-                                    CustomSnackBar.showSuccessSnackBar(
-                                        'Success', 'Successfully updated');
-                                  } else {
-                                    CustomSnackBar.showSuccessSnackBar(
-                                        'Success', 'Successfully added');
-                                  }
-                                }
+                                controller.addAddress();
                               },
                               text: translate(LocaleKeys.done))
                         ],

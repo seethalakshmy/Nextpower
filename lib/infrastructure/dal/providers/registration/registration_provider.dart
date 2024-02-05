@@ -21,7 +21,7 @@ class RegistrationProvider extends GetConnect {
       String userId = AppStorage().getUserId();
       http.Response response =
       await _apiService.apiRequest(
-        url: 'sign_up',
+        endPoint: 'sign_up',
         params: {
           'email': email,
           'user_id': userId,

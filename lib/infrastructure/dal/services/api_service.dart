@@ -29,22 +29,29 @@ class ApiService extends GetConnect implements GetxService {
   }
 
   Future<dynamic> apiRequest(
-      {required String url,
+      {required String endPoint,
       bool postRequest = true,
       Map<String, dynamic>? params}) async {
-    debugPrint("\nURL:${baseUrl + url}");
+    debugPrint("\nURL:${baseUrl + endPoint}");
     debugPrint("-----REQUEST PARAMS-------\n$params");
     updateToken();
     late http.Response res;
     try {
       if (postRequest) {
-        res = await http.post(Uri.parse(baseUrl + url),
+        res = await http.post(Uri.parse(baseUrl + endPoint),
             body: jsonEncode(params), headers: _headers);
       } else {
-        res = await http.get(Uri.parse(baseUrl + url), headers: _headers);
+        String totalUrl = "";
+        if (params != null && params.isNotEmpty) {
+          String queryString = Uri(queryParameters: params).query;
+          totalUrl = "${baseUrl + endPoint}?$queryString";
+        } else {
+          totalUrl = baseUrl + endPoint;
+        }
+        res = await http.get(Uri.parse(totalUrl), headers: _headers);
       }
       debugPrint(
-          '-----RESPONSE:${baseUrl + url} : ${res.statusCode}---\n ${res.body}\n\n');
+          '-----RESPONSE:${baseUrl + endPoint} : ${res.statusCode}---\n ${res.body}\n\n');
       if (res.statusCode == 200) {
         return res;
       } else {

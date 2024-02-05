@@ -1,4 +1,4 @@
-import '../../my.address/address_list_model.dart';
+import '../../../infrastructure/dal/models/address/address_request_model.dart';
 
 class StationDetails {
   int? stationId;

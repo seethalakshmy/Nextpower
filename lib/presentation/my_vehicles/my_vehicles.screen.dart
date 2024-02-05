@@ -26,10 +26,12 @@ class MyVehiclesScreen extends GetView<MyVehiclesController> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              NavigationUtils().callMyVehiclesAddEditPage(0);
+              controller.moveAddEditScreen(0);
+
             },
             backgroundColor: AppColors.primaryGreen,
-            child: const Icon(Icons.add),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            child: const Icon(Icons.add,color: Colors.white,),
           ),
           body: Obx(() => controller.isLoading.value
               ? const LoadingWidget()
@@ -42,8 +44,10 @@ class MyVehiclesScreen extends GetView<MyVehiclesController> {
                       width: 150,
                     ),
                     // const SizedBox(height: 10),
-                    _ContentView(
-                      controller: controller,
+                    Expanded(
+                      child: _ContentView(
+                        controller: controller,
+                      ),
                     ),
                   ],
                 ))),
@@ -63,9 +67,8 @@ class _ContentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCardView(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      child: ListView.builder(
+      child: Obx(() => ListView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
         itemCount: controller.vehiclesList.length,
         itemBuilder: (context, index) {
           return Container(
@@ -93,7 +96,7 @@ class _ContentView extends StatelessWidget {
             ),
           );
         },
-      ),
+      )),
     );
   }
 }
@@ -126,8 +129,7 @@ class _VehicleNumberAndEditWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            NavigationUtils().callMyVehiclesAddEditPage(
-                controller.vehiclesList[index].vehicleId ?? 0);
+            controller.moveAddEditScreen(controller.vehiclesList[index].id ?? 0);
           },
           child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
         ),

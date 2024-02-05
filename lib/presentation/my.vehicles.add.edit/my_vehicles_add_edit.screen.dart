@@ -43,6 +43,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.number).toLowerCase()}",
                                 onChanged: (value) {
+                                  controller.validation();
                                   controller.vehicle.vehicleNumber =
                                       value ?? "";
                                 },
@@ -58,6 +59,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.make).toLowerCase()}",
                                 onChanged: (value) {
+                                  controller.validation();
                                   controller.vehicle.vehicleMake = value ?? "";
                                 },
                                 validator: (value) {
@@ -72,6 +74,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                 title:
                                     "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.model).toLowerCase()}",
                                 onChanged: (value) {
+                                  controller.validation();
                                   controller.vehicle.vehicleModel = value ?? "";
                                 },
                                 validator: (value) {
@@ -81,25 +84,15 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   return null;
                                 }),
                             const SizedBox(height: 30),
-                            RoundedRectangleButton(
+                            Obx(() => RoundedRectangleButton(
+                                enable: !controller.buttonDisable.value,
+                                isLoading: controller.buttonLoading.value,
                                 onPressed: () async {
-                                  if (controller.formKey.currentState
-                                          ?.validate() ??
-                                      false) {
-                                    controller.isLoading(true);
-                                    await Future.delayed(
-                                        const Duration(seconds: 2));
-                                    NavigationUtils().goBack();
-                                    if (controller.vehicleId != 0) {
-                                      CustomSnackBar.showSuccessSnackBar(
-                                          'Success', 'Successfully updated');
-                                    } else {
-                                      CustomSnackBar.showSuccessSnackBar(
-                                          'Success', 'Successfully added');
-                                    }
+                                  if(controller.validation()){
+                                    controller.addVehicle();
                                   }
                                 },
-                                text: translate(LocaleKeys.done))
+                                text: translate(LocaleKeys.done)))
                           ],
                         )),
                   ],

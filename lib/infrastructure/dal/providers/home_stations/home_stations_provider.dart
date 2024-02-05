@@ -15,7 +15,7 @@ class HomeStationsProvider extends GetConnect {
       {required double latitude, required double longitude}) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'stations',
+          endPoint: 'stations',
           params: {'latitude': latitude, 'longitude': longitude});
 
       StationsResponse data = StationsResponse.fromJson(json.decode(response.body));
@@ -29,7 +29,7 @@ class HomeStationsProvider extends GetConnect {
   Future<StationsDetailsResponse> getStationDetails({required String stationId}) async {
     try {
       http.Response response =
-          await _apiService.apiRequest(url: 'get_station_by_id',
+          await _apiService.apiRequest(endPoint: 'get_station_by_id',
               params: {'id': stationId},
               postRequest: false);
 

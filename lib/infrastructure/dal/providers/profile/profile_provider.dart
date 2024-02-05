@@ -13,7 +13,7 @@ class ProfileProvider extends GetConnect {
   Future<ProfileResponse> getProfile() async {
     try {
       http.Response response =
-      await _apiService.apiRequest(url: 'get_profile', postRequest: false);
+      await _apiService.apiRequest(endPoint: 'get_profile', postRequest: false);
 
       ProfileResponse data =
       ProfileResponse.fromJson(json.decode(response.body));
@@ -28,7 +28,7 @@ class ProfileProvider extends GetConnect {
     String userId = AppStorage().getUserId();
     try {
       http.Response response =
-      await _apiService.apiRequest(url: 'update_profile',
+      await _apiService.apiRequest(endPoint: 'update_profile',
           params: {
             'user_id': userId,
             'name': name,

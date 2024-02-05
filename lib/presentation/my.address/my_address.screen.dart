@@ -28,11 +28,15 @@ class MyAddressScreen extends GetView<MyAddressController> {
             !controller.isLoading.value && controller.address.isEmpty
                 ? FloatingActionButton(
                     onPressed: () {
-                      NavigationUtils().callMyAddressAddEditPage(0);
+                      controller.moveAddEditScreen(0);
                     },
                     backgroundColor: AppColors.primaryGreen,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                    child: const Icon(Icons.add,color: Colors.white,),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(28)),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   )
                 : null,
         body: Obx(() => controller.isLoading.value
@@ -91,9 +95,8 @@ class _ContentView extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        NavigationUtils().callMyAddressAddEditPage(
+                        controller.moveAddEditScreen(
                             controller.address[0].id!.toInt());
-                        // NavigationUtils().callScreenYetToBeDone();
                       },
                       child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
                     ),

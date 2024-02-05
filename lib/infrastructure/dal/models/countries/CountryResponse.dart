@@ -40,7 +40,7 @@ class CountryResponse {
 
 class Country {
   Country({
-      num? id, 
+    int? id,
       String? name, 
       num? countryCode,}){
     _id = id;
@@ -53,11 +53,11 @@ class Country {
     _name = json['name'];
     _countryCode = json['country_code'];
   }
-  num? _id;
+  int? _id;
   String? _name;
   num? _countryCode;
 
-  num? get id => _id;
+  int? get id => _id;
   String? get name => _name;
   num? get countryCode => _countryCode;
 

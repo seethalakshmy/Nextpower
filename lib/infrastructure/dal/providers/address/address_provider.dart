@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:project/infrastructure/dal/models/address/AddressResponse.dart';
+import 'package:project/infrastructure/dal/models/base/CommonResponse.dart';
 import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'dart:convert';
 import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
@@ -11,7 +12,7 @@ import 'package:http/http.dart' as http;
 class AddressProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
-  Future<LoginResponse> addAddress(
+  Future<CommonResponse> addAddress(
       {
         required String addressline2,
         required String addressline1,
@@ -19,10 +20,12 @@ class AddressProvider extends GetConnect {
         required String stateId,
         required String postalCode,
         required String countryId,
+        required String companyName,
+        required String gstNo,
       }) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'add_saved_address',
+          endPoint: 'add_saved_address',
           params: {
             'address_line1': addressline1,
             'address_line2': addressline2,
@@ -30,21 +33,23 @@ class AddressProvider extends GetConnect {
             'state_id': stateId,
             'postal_code': postalCode,
             'country_id': countryId,
+            'company_name': companyName,
+            'gst_no': gstNo,
           }
       );
 
-      LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
+      CommonResponse data = CommonResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
-      return LoginResponse(status: false, message: e.toString());
+      return CommonResponse(status: false, message: e.toString());
     }
   }
 
   Future<AddressResponse> getAddress() async {
     try {
       http.Response response =
-          await _apiService.apiRequest(url: 'get_saved_address', postRequest: false);
+          await _apiService.apiRequest(endPoint: 'get_saved_address', postRequest: false);
 
       AddressResponse data =
       AddressResponse.fromJson(json.decode(response.body));
@@ -58,7 +63,7 @@ class AddressProvider extends GetConnect {
   Future<StatesResponse> getStates({required String countryId}) async {
     try {
       http.Response response =
-      await _apiService.apiRequest(url: 'states',
+      await _apiService.apiRequest(endPoint: 'states',
         params: {
         'country_id':countryId
         }
@@ -76,7 +81,7 @@ class AddressProvider extends GetConnect {
   Future<CountryResponse> getCountries() async {
     try {
       http.Response response =
-      await _apiService.apiRequest(url: 'countries', postRequest: false);
+      await _apiService.apiRequest(endPoint: 'countries', postRequest: false);
 
       CountryResponse data =
       CountryResponse.fromJson(json.decode(response.body));

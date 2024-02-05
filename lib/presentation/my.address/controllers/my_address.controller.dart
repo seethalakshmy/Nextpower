@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/models/address/AddressResponse.dart';
 import 'package:project/infrastructure/dal/providers/address/address_provider.dart';
+import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 
 class MyAddressController extends GetxController {
@@ -31,6 +32,14 @@ class MyAddressController extends GetxController {
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void moveAddEditScreen(int id) {
+    NavigationUtils().callMyAddressAddEditPage(id).then((value) {
+      if(value){
+        getAddress();
       }
     });
   }

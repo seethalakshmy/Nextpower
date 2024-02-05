@@ -15,7 +15,7 @@ class LoginProvider extends GetConnect {
       {required String phoneNumber, required String countryCode}) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'sign_in',
+          endPoint: 'sign_in',
           params: {'country_code': countryCode, 'phone_number': phoneNumber});
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
@@ -30,7 +30,7 @@ class LoginProvider extends GetConnect {
       {required String phoneNumber, required String countryCode}) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'resend_otp',
+          endPoint: 'resend_otp',
           params: {'country_code': countryCode, 'phone_number': phoneNumber});
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
@@ -44,7 +44,7 @@ class LoginProvider extends GetConnect {
   Future<CountryResponse> getCountries() async {
     try {
       http.Response response =
-          await _apiService.apiRequest(url: 'countries', postRequest: false);
+          await _apiService.apiRequest(endPoint: 'countries', postRequest: false);
 
       CountryResponse data =
           CountryResponse.fromJson(json.decode(response.body));
@@ -65,7 +65,7 @@ class LoginProvider extends GetConnect {
     try {
       http.Response response =
       await _apiService.apiRequest(
-        url: 'verify_otp',
+        endPoint: 'verify_otp',
         params: {
           'country_code': countryCode,
           'phone_number': phoneNumber,

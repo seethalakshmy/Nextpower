@@ -1,9 +1,9 @@
-class AddressList {
+class AddressRequest {
   List<Address>? address;
 
-  AddressList({this.address});
+  AddressRequest({this.address});
 
-  AddressList.fromJson(Map<String, dynamic> json) {
+  AddressRequest.fromJson(Map<String, dynamic> json) {
     if (json['address'] != null) {
       address = <Address>[];
       json['address'].forEach((v) {
@@ -22,28 +22,30 @@ class AddressList {
 }
 
 class Address {
-  int? addressId;
-  String? addressLine1;
-  String? addressLine2;
-  String? countryName;
-  String? stateName;
-  String? city;
-  int? stateId;
-  String? postalCode;
-  int? countryId;
-  String? companyName;
-  String? gstNo;
+  int? addressId = 0;
+  String addressLine1 = "";
+  String addressLine2 = "";
+  String countryName = "";
+  String stateName = "";
+  String city = "";
+  int stateId = 0;
+  String postalCode = "";
+  int countryId = 0;
+  String companyName = "";
+  String gstNo = "";
 
   Address(
       {this.addressId,
-      this.addressLine1,
-      this.addressLine2,
-      this.city,
-      this.stateId,
-      this.postalCode,
-      this.countryId,
-      this.companyName,
-      this.gstNo});
+      this.addressLine1 = "",
+      this.addressLine2 = "",
+      this.city = "",
+      this.stateId = 0,
+      this.postalCode = "",
+      this.countryId = 0,
+      this.companyName = "",
+        this.countryName = "",
+        this.stateName = "",
+      this.gstNo = ""});
 
   Address.fromJson(Map<String, dynamic> json) {
     addressId = json['address_id'];

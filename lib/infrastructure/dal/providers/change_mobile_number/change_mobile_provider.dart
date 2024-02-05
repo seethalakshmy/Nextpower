@@ -13,7 +13,7 @@ class ChangeMobileNumberProvider extends GetConnect {
       {required String phoneNumber, required String countryCode}) async {
     try {
       http.Response response = await _apiService.apiRequest(
-          url: 'change_phone_number',
+          endPoint: 'change_phone_number',
           params: {'country_code': countryCode, 'phone_number': phoneNumber});
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
@@ -34,7 +34,7 @@ class ChangeMobileNumberProvider extends GetConnect {
     try {
       http.Response response =
       await _apiService.apiRequest(
-        url: 'verify_otp',
+        endPoint: 'verify_otp',
         params: {
           'country_code': countryCode,
           'phone_number': phoneNumber,
