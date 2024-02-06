@@ -36,9 +36,10 @@ class CustomSnackBar {
       required Function onPressedButton}) {
     Get.snackbar(title, message,
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.primaryBlue,
+        backgroundColor: Colors.red,
         maxWidth: kIsWeb ? AppConstants().kWebWidth : double.infinity,
         colorText: Colors.white,
+        duration: const Duration(seconds: 5),
         margin: const EdgeInsets.all(14),
         isDismissible: false,
         mainButton: TextButton(
@@ -50,7 +51,7 @@ class CustomSnackBar {
           },
           child: Text(
             buttonTitle,
-            style: TextStyle(color: AppColors.primaryBlue),
+            style: const TextStyle(color: Colors.red),
           ),
         ));
   }

@@ -51,6 +51,7 @@ class ProfileController extends GetxController {
         name(response.profile?.name ?? "");
         phoneNumber(response.profile?.phoneNumber ?? "");
         countryCode(response.profile?.countryCode ?? "");
+        isEmailVerified(response.profile?.isEmailVerified ?? false);
 
       } else {
         CustomSnackBar.showErrorSnackBar(
@@ -84,8 +85,13 @@ class ProfileController extends GetxController {
   }
 
   void validateEmailID() async {
-    ///need to do one api call
-    ///In backend they are send a link to user if user clicks that link then email consider as verified
+    CustomSnackBar.showSuccessSnackBarWithButton(
+        title: LocaleKeys.not_verified.tr,
+        message: LocaleKeys.please_click_link_to_verify_email.tr,
+        buttonTitle: LocaleKeys.resend_verification_link.tr, onPressedButton: (){
+      ///need to do one api call
+      ///In backend they are send a link to user if user clicks that link then email consider as verified
+    });
   }
 
   void submit() {
@@ -94,6 +100,7 @@ class ProfileController extends GetxController {
       buttonLoading(false);
       if (response.status ?? false) {
         isEditable(false);
+        getProfile();
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
       } else {

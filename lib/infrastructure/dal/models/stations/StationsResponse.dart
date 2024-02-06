@@ -42,30 +42,36 @@ class Stations {
   Stations({
       num? stationId,
     double? latitude,
-    double? longitude,}){
+    double? longitude,
+    double? distance,}){
     _stationId = stationId;
     _latitude = latitude;
     _longitude = longitude;
+    _distance = distance;
 }
 
   Stations.fromJson(dynamic json) {
     _stationId = json['station_id '];
     _latitude = json['latitude'];
     _longitude = json['longitude'];
+    _distance = json['distance'];
   }
   num? _stationId;
   double? _latitude;
   double? _longitude;
+  double? _distance;
 
   num? get stationId => _stationId;
   double? get latitude => _latitude;
   double? get longitude => _longitude;
+  double? get distance => _distance;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['station_id '] = _stationId;
     map['latitude'] = _latitude;
     map['longitude'] = _longitude;
+    map['distance'] = _distance;
     return map;
   }
 

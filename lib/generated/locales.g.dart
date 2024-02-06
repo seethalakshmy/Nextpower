@@ -133,6 +133,10 @@ class LocaleKeys {
   static const contactUs = 'contactUs';
   static const failed = 'failed';
   static const internal_server_error = 'internal_server_error';
+  static const not_verified = 'not_verified';
+  static const please_click_link_to_verify_email =
+      'please_click_link_to_verify_email';
+  static const resend_verification_link = 'resend_verification_link';
 }
 
 class Locales {
@@ -260,5 +264,9 @@ class Locales {
     'contactUs': 'Contact us',
     'failed': 'Failed',
     'internal_server_error': 'INTERNAL SERVER ERROR',
+    'not_verified': 'Not Verified',
+    'please_click_link_to_verify_email':
+        'Please tap the link in the email we sent you to verify your email address',
+    'resend_verification_link': 'Resend',
   };
 }

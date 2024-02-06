@@ -71,6 +71,7 @@ class NavigationUtils {
       CustomAlertView(
         title: translate(LocaleKeys.areYouSureYouWantToLogout),
         onPositiveTap: () {
+          AppStorage().clearValues();
           callLoginPage(
             clearStack: true,
           );

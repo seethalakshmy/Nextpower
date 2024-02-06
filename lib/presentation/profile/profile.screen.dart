@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+import 'package:project/infrastructure/utils/border_utils.dart';
 import 'package:project/infrastructure/utils/file_picker_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
+import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 import '../../generated/locales.g.dart';
 import '../../infrastructure/utils/print_utils.dart';
@@ -47,17 +49,19 @@ class ProfileScreen extends GetView<ProfileController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            IgnorePointer(
-                              ignoring: !controller.isEditable.value,
-                              child: Column(
-                                children: [
-                                  _NameWidget(controller: controller),
-                                  const SizedBox(height: 10),
-                                  _MobileNumberWidget(controller: controller),
-                                  const SizedBox(height: 10),
-                                  _EmailWidget(controller: controller),
-                                ],
-                              ),
+                            Column(
+                              children: [
+                                IgnorePointer(
+                                    ignoring: !controller.isEditable.value,
+                                    child: _NameWidget(controller: controller)),
+                                const SizedBox(height: 10),
+                                IgnorePointer(
+                                    ignoring: !controller.isEditable.value,
+                                    child: _MobileNumberWidget(
+                                        controller: controller)),
+                                const SizedBox(height: 10),
+                                _EmailWidget(controller: controller),
+                              ],
                             ),
                             const SizedBox(height: 30),
                             Obx(() => controller.isEditable.value
@@ -195,7 +199,7 @@ class _DoneButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => RoundedRectangleButton(
-      isLoading : controller.buttonLoading.value,
+        isLoading: controller.buttonLoading.value,
         onPressed: () {
           if (controller.isValid()) {
             controller.submit();
@@ -214,7 +218,9 @@ class _EmailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => CommonTextFieldWidget(
+    return Obx(() {
+      if (controller.isEditable.value) {
+        return CommonTextFieldWidget(
           initialValue: controller.email.value,
           title: translate(LocaleKeys.emailAddress),
           onChanged: (value) {
@@ -224,14 +230,66 @@ class _EmailWidget extends StatelessWidget {
           suffix: Obx(() => controller.isEmailVerified.value
               ? SvgImageUtils()
                   .showSvgFromAsset(Assets.iconsTick, width: 24, height: 24)
-              : GestureDetector(
-                  onTap: () {
-                    controller.validateEmailID();
-                  },
-                  child:
-                      SvgImageUtils().showSvgFromAsset(Assets.iconsExclamation),
-                )),
-        ));
+              : Container()),
+        );
+      } else {
+        return EmailDisabled(controller: controller);
+      }
+    });
+  }
+}
+
+class EmailDisabled extends StatelessWidget {
+  const EmailDisabled({super.key, required this.controller});
+
+  final ProfileController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TitleWidget(title: translate(LocaleKeys.emailAddress)),
+        const SizedBox(height: 10),
+        GestureDetector(
+          onTap: () {
+            if (controller.isEmailVerified.isFalse) {
+              controller.validateEmailID();
+            }
+          },
+          child: Container(
+            height: 48,
+            width: double.infinity,
+            padding: const EdgeInsets.only(left: 18, right: 3),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              // Set your desired color here
+              borderRadius: BorderRadius.circular(6),
+              // Adjust the radius as needed
+              border: Border.all(
+                color: Colors.grey.withOpacity(0.6), // Set border color
+                width: 1, // Set border width
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    controller.email.value,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+                controller.isEmailVerified.value
+                    ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick,
+                        width: 24, height: 24)
+                    : SvgImageUtils().showSvgFromAsset(Assets.iconsExclamation),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -245,7 +303,7 @@ class _MobileNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => MobileNumberWidget(
-      countries: controller.countries.value,
+          countries: controller.countries.value,
           mobileNumber: controller.phoneNumber.value,
           isEnabled: false,
           // suffix: controller.isMobileVerified.value

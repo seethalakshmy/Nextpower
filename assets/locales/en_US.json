@@ -116,5 +116,8 @@
   "billing": "Billing",
   "contactUs": "Contact us",
   "failed": "Failed",
-  "internal_server_error": "INTERNAL SERVER ERROR"
+  "internal_server_error": "INTERNAL SERVER ERROR",
+  "not_verified": "Not Verified",
+  "please_click_link_to_verify_email": "Please tap the link in the email we sent you to verify your email address",
+  "resend_verification_link": "Resend"
 }
