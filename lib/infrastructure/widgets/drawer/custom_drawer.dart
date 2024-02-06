@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
@@ -60,8 +61,10 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.profile,
-            onPressed: () =>
-                NavigationUtils().callProfile(isCalledFrom: 'drawer'),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callProfile(isCalledFrom: 'drawer');
+            },
             asset: Assets.iconsMenuProfile,
           ),
           _DrawerItem(
@@ -78,28 +81,43 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
           _DrawerItem(
             title: LocaleKeys.myVehicles,
-            onPressed: () => NavigationUtils().callMyVehicles(),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callMyVehicles();
+            },
             asset: Assets.iconsMenuVehicle,
           ),
           _DrawerItem(
             title: LocaleKeys.myAddress,
-            onPressed: () => NavigationUtils().callMyAddress(),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callMyAddress();
+            },
             asset: Assets.iconsMenuMyAddress,
           ),
           _DrawerItem(
             title: LocaleKeys.rfidTag,
-            onPressed: () => NavigationUtils().callRfidScreen(),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callRfidScreen();
+            },
             asset: Assets.iconsMenuRfidTag,
           ),
           _DrawerItem(
             title: LocaleKeys.support,
-            onPressed: () => NavigationUtils().callSupportPage(),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callSupportPage();
+            },
             asset: Assets.iconsMenuSupport,
           ),
           const Divider(),
           _DrawerItem(
             title: LocaleKeys.aboutUs,
-            onPressed: () => NavigationUtils().callAboutUsPage(),
+            onPressed: () {
+              Get.back();
+              NavigationUtils().callAboutUsPage();
+            },
             asset: Assets.iconsMenuAboutus,
           ),
           _DrawerItem(

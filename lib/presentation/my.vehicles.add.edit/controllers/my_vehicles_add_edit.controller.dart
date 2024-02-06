@@ -13,9 +13,6 @@ class MyVehiclesAddEditController extends GetxController {
   final buttonDisable = true.obs;
   final buttonLoading = false.obs;
   VehicleRequest vehicle = VehicleRequest();
-  // TextEditingController vehicleNumberController = TextEditingController();
-  // TextEditingController vehicleMakeController = TextEditingController();
-  // TextEditingController vehicleModelController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   int vehicleId = 0;
 
@@ -44,9 +41,6 @@ class MyVehiclesAddEditController extends GetxController {
           vehicleNumber: response.vehicle?.vehicleNumber ?? ""
         );
         vehicle = res;
-        // vehicleMakeController.text = res.vehicleMake;
-        // vehicleModelController.text = res.vehicleModel;
-        // vehicleNumberController.text = res.vehicleNumber;
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");

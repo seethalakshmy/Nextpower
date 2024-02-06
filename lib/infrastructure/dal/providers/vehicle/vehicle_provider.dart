@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:project/infrastructure/dal/models/base/CommonResponse.dart';
-import 'package:project/infrastructure/dal/models/profile/ProfileResponse.dart';
 import 'package:project/infrastructure/dal/models/vehicles/VehicleDetailsResponse.dart';
 import 'package:project/infrastructure/dal/models/vehicles/VehicleListResponse.dart';
+import 'package:project/infrastructure/dal/models/vehicles/VehicleMakersResponse.dart';
+import 'package:project/infrastructure/dal/models/vehicles/VehicleModelsResponse.dart';
 import 'dart:convert';
 import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
@@ -64,6 +65,38 @@ class VehicleProvider extends GetConnect {
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
       return CommonResponse(status: false, message: e.toString());
+    }
+  }
+
+  Future<VehicleMakersResponse> getVehicleMakersList() async {
+    try {
+      http.Response response =
+      await _apiService.apiRequest(endPoint: 'vehicles', postRequest: false,);
+
+      VehicleMakersResponse data =
+      VehicleMakersResponse.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return VehicleMakersResponse(status: false, message: e.toString());
+    }
+  }
+
+  Future<VehicleModelsResponse> getVehicleModelsList({required String makerId}) async {
+
+    try {
+      http.Response response =
+      await _apiService.apiRequest(endPoint: 'get_vehicle_models', postRequest: false,
+          params: {
+            'id': makerId
+          });
+
+      VehicleModelsResponse data =
+      VehicleModelsResponse.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return VehicleModelsResponse(status: false, message: e.toString());
     }
   }
 }
