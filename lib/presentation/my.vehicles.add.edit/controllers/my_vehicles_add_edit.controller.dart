@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/vehicles/VehicleMakersResponse.dart';
+import 'package:project/infrastructure/dal/models/vehicles/VehicleModelsResponse.dart';
 import 'package:project/infrastructure/dal/providers/vehicle/vehicle_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/my_vehicles/models/vehicle_request_model.dart';
 
 class MyVehiclesAddEditController extends GetxController {
-  //TODO: Implement MyVehiclesAddEditController
 
   final isLoading = false.obs;
-  final buttonDisable = true.obs;
+  final buttonEnable = false.obs;
   final buttonLoading = false.obs;
   VehicleRequest vehicle = VehicleRequest();
   final formKey = GlobalKey<FormState>();
   int vehicleId = 0;
+  RxList<MakersItem> makers = RxList.empty(growable: true);
+  RxList<ModelsItem> models = RxList.empty(growable: true);
+  String makeId = "";
+  String modelId = "";
 
   @override
   void onInit() {
@@ -24,8 +29,35 @@ class MyVehiclesAddEditController extends GetxController {
       getVehicleDetails();
     }
 
+    getVehicleMakeList();
 
     super.onInit();
+  }
+
+  void getVehicleMakeList() {
+    VehicleProvider()
+        .getVehicleMakersList()
+        .then((response) {
+      if (response.status ?? false) {
+        makers.addAll(response.stations ?? []);
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void getVehicleModelList() {
+    VehicleProvider()
+        .getVehicleModelsList(makerId: makeId)
+        .then((response) {
+      if (response.status ?? false) {
+        models.value = response.stations ?? [];
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
   }
 
   void getVehicleDetails() {
@@ -49,20 +81,19 @@ class MyVehiclesAddEditController extends GetxController {
   }
 
   bool validation() {
-    buttonDisable(true);
     if (vehicle.vehicleNumber.trim().isEmpty) {
-      buttonDisable(true);
+      buttonEnable(false);
       return false;
     }
     if (vehicle.vehicleMake.trim().isEmpty) {
-      buttonDisable(true);
+      buttonEnable(false);
       return false;
     }
     if (vehicle.vehicleModel.trim().isEmpty) {
-      buttonDisable(true);
+      buttonEnable(false);
       return false;
     }
-    buttonDisable(false);
+    buttonEnable(true);
     return true;
   }
 
@@ -71,8 +102,8 @@ class MyVehiclesAddEditController extends GetxController {
     VehicleProvider()
         .addVehicle(
             vehicleNumber: vehicle.vehicleNumber,
-            vehicleModel: vehicle.vehicleModel,
-            vehicleMake: vehicle.vehicleMake)
+            vehicleModel: modelId,
+            vehicleMake: makeId)
         .then((response) {
       buttonLoading(false);
       if (response.status ?? false) {

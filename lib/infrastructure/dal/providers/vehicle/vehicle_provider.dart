@@ -71,7 +71,7 @@ class VehicleProvider extends GetConnect {
   Future<VehicleMakersResponse> getVehicleMakersList() async {
     try {
       http.Response response =
-      await _apiService.apiRequest(endPoint: 'vehicles', postRequest: false,);
+      await _apiService.apiRequest(endPoint: 'get_vehicle_makers', postRequest: false,);
 
       VehicleMakersResponse data =
       VehicleMakersResponse.fromJson(json.decode(response.body));

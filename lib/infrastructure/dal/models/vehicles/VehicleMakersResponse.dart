@@ -2,7 +2,7 @@ class VehicleMakersResponse {
   VehicleMakersResponse({
       bool? status, 
       String? message, 
-      List<Stations>? stations,}){
+      List<MakersItem>? stations,}){
     _status = status;
     _message = message;
     _stations = stations;
@@ -14,17 +14,17 @@ class VehicleMakersResponse {
     if (json['stations'] != null) {
       _stations = [];
       json['stations'].forEach((v) {
-        _stations?.add(Stations.fromJson(v));
+        _stations?.add(MakersItem.fromJson(v));
       });
     }
   }
   bool? _status;
   String? _message;
-  List<Stations>? _stations;
+  List<MakersItem>? _stations;
 
   bool? get status => _status;
   String? get message => _message;
-  List<Stations>? get stations => _stations;
+  List<MakersItem>? get stations => _stations;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -38,15 +38,15 @@ class VehicleMakersResponse {
 
 }
 
-class Stations {
-  Stations({
+class MakersItem {
+  MakersItem({
       num? id, 
       String? title,}){
     _id = id;
     _title = title;
 }
 
-  Stations.fromJson(dynamic json) {
+  MakersItem.fromJson(dynamic json) {
     _id = json['id '];
     _title = json['title '];
   }
