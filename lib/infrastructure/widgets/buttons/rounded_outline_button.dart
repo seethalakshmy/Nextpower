@@ -55,7 +55,7 @@ class RoundedOutlineButton extends StatelessWidget {
                     Text(
                       text.toUpperCase(),
                       style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w600),
+                          fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                   ],
                 )),

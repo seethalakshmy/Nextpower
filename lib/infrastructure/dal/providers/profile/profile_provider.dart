@@ -7,6 +7,7 @@ import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:project/infrastructure/storage/app_storage.dart';
 
+
 class ProfileProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
@@ -23,6 +24,20 @@ class ProfileProvider extends GetConnect {
       return ProfileResponse(status: false, message: e.toString());
     }
   }
+
+  Future<CommonResponse> emailVerificationResend() async {
+    try {
+      http.Response response =
+      await _apiService.apiRequest(endPoint: 'resend_email_verification', postRequest: false);
+      CommonResponse data =
+      CommonResponse.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return CommonResponse(status: false, message: e.toString());
+    }
+  }
+
 
   Future<CommonResponse> updateProfile({required String name,required String email}) async {
     String userId = AppStorage().getUserId();
