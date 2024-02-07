@@ -1,24 +1,29 @@
 class VehicleDetailsResponse {
   VehicleDetailsResponse({
-      bool? status, 
-      String? message, 
-      Vehicle? vehicle,}){
+    bool? status,
+    String? message,
+    Vehicle? vehicle,
+  }) {
     _status = status;
     _message = message;
     _vehicle = vehicle;
-}
+  }
 
   VehicleDetailsResponse.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _vehicle = json['vehicle'] != null ? Vehicle.fromJson(json['vehicle']) : null;
+    _vehicle =
+        json['vehicle'] != null ? Vehicle.fromJson(json['vehicle']) : null;
   }
+
   bool? _status;
   String? _message;
   Vehicle? _vehicle;
 
   bool? get status => _status;
+
   String? get message => _message;
+
   Vehicle? get vehicle => _vehicle;
 
   Map<String, dynamic> toJson() {
@@ -30,22 +35,26 @@ class VehicleDetailsResponse {
     }
     return map;
   }
-
 }
 
 class Vehicle {
   Vehicle({
-      num? id, 
-      num? userId, 
-      String? vehicleNumber, 
-      String? vehicleModel, 
-      String? vehicleMake,}){
+    num? id,
+    num? userId,
+    String? vehicleNumber,
+    String? vehicleModel,
+    String? vehicleMake,
+    int? vehicleMakeId,
+    int? vehicleModelId,
+  }) {
     _id = id;
     _userId = userId;
     _vehicleNumber = vehicleNumber;
     _vehicleModel = vehicleModel;
     _vehicleMake = vehicleMake;
-}
+    _vehicleModelId = vehicleModelId;
+    _vehicleMakeId = vehicleMakeId;
+  }
 
   Vehicle.fromJson(dynamic json) {
     _id = json['id'];
@@ -53,18 +62,31 @@ class Vehicle {
     _vehicleNumber = json['vehicle_number'];
     _vehicleModel = json['vehicle_model'];
     _vehicleMake = json['vehicle_make'];
+    _vehicleModelId = json['vehicle_model_id'];
+    _vehicleMakeId = json['vehicle_make_id'];
   }
+
   num? _id;
   num? _userId;
   String? _vehicleNumber;
   String? _vehicleModel;
   String? _vehicleMake;
+  int? _vehicleMakeId;
+  int? _vehicleModelId;
 
   num? get id => _id;
+
   num? get userId => _userId;
+
   String? get vehicleNumber => _vehicleNumber;
+
   String? get vehicleModel => _vehicleModel;
+
   String? get vehicleMake => _vehicleMake;
+
+  int? get vehicleModelId => _vehicleModelId;
+
+  int? get vehicleMakeId => _vehicleMakeId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -73,7 +95,8 @@ class Vehicle {
     map['vehicle_number'] = _vehicleNumber;
     map['vehicle_model'] = _vehicleModel;
     map['vehicle_make'] = _vehicleMake;
+    map['vehicle_model_id'] = _vehicleModelId;
+    map['vehicle_make_id'] = _vehicleMakeId;
     return map;
   }
-
 }

@@ -66,6 +66,8 @@ class MyVehiclesAddEditController extends GetxController {
             vehicleMake: response.vehicle?.vehicleMake ?? "",
             vehicleModel: response.vehicle?.vehicleModel ?? "",
             vehicleNumber: response.vehicle?.vehicleNumber ?? "");
+        modelId = "${response.vehicle?.vehicleModelId ?? 0}";
+        makeId = "${response.vehicle?.vehicleMakeId ?? 0}";
         vehicle = res;
       } else {
         CustomSnackBar.showErrorSnackBar(
@@ -114,6 +116,27 @@ class MyVehiclesAddEditController extends GetxController {
     buttonLoading(true);
     VehicleProvider()
         .addVehicle(
+            vehicleNumber: vehicle.vehicleNumber,
+            vehicleModel: modelId,
+            vehicleMake: makeId)
+        .then((response) {
+      buttonLoading(false);
+      if (response.status ?? false) {
+        Get.back(result: true);
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.message ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void updateVehicle() {
+    buttonLoading(true);
+    VehicleProvider()
+        .updateVehicle(
+            id: vehicleId.toString(),
             vehicleNumber: vehicle.vehicleNumber,
             vehicleModel: modelId,
             vehicleMake: makeId)

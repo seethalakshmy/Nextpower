@@ -16,14 +16,11 @@ class VehicleProvider extends GetConnect {
   Future<VehicleListResponse> getVehicleList() async {
     String userId = AppStorage().getUserId();
     try {
-      http.Response response =
-      await _apiService.apiRequest(endPoint: 'vehicles', postRequest: false,
-      params: {
-          'id': userId
-          });
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'vehicles', postRequest: false, params: {'id': userId});
 
       VehicleListResponse data =
-      VehicleListResponse.fromJson(json.decode(response.body));
+          VehicleListResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
@@ -31,16 +28,16 @@ class VehicleProvider extends GetConnect {
     }
   }
 
-  Future<VehicleDetailsResponse> getVehicleDetails({required String vehicleId}) async {
+  Future<VehicleDetailsResponse> getVehicleDetails(
+      {required String vehicleId}) async {
     try {
-      http.Response response =
-      await _apiService.apiRequest(endPoint: 'get_vehicle', postRequest: false,
-          params: {
-            'id': vehicleId
-          });
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'get_vehicle',
+          postRequest: false,
+          params: {'id': vehicleId});
 
       VehicleDetailsResponse data =
-      VehicleDetailsResponse.fromJson(json.decode(response.body));
+          VehicleDetailsResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
@@ -48,19 +45,41 @@ class VehicleProvider extends GetConnect {
     }
   }
 
-  Future<CommonResponse> addVehicle({required String vehicleNumber,required String vehicleModel,required String vehicleMake}) async {
+  Future<CommonResponse> addVehicle(
+      {required String vehicleNumber,
+      required String vehicleModel,
+      required String vehicleMake}) async {
     try {
       http.Response response =
-      await _apiService.apiRequest(endPoint: 'add_vehicle',
-          params: {
-            'vehicle_number': vehicleNumber,
-            'vehicle_model_id': vehicleModel,
-            'vehicle_make_id': vehicleMake,
-          }
-      );
+          await _apiService.apiRequest(endPoint: 'add_vehicle', params: {
+        'vehicle_number': vehicleNumber,
+        'vehicle_model_id': vehicleModel,
+        'vehicle_make_id': vehicleMake,
+      });
 
-      CommonResponse data =
-      CommonResponse.fromJson(json.decode(response.body));
+      CommonResponse data = CommonResponse.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return CommonResponse(status: false, message: e.toString());
+    }
+  }
+
+  Future<CommonResponse> updateVehicle(
+      {required String id,
+      required String vehicleNumber,
+      required String vehicleModel,
+      required String vehicleMake}) async {
+    try {
+      http.Response response =
+          await _apiService.apiRequest(endPoint: 'update_vehicle', params: {
+        'id': id,
+        'vehicle_number': vehicleNumber,
+        'vehicle_model_id': vehicleModel,
+        'vehicle_make_id': vehicleMake,
+      });
+
+      CommonResponse data = CommonResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
@@ -70,11 +89,13 @@ class VehicleProvider extends GetConnect {
 
   Future<VehicleMakersResponse> getVehicleMakersList() async {
     try {
-      http.Response response =
-      await _apiService.apiRequest(endPoint: 'get_vehicle_makers', postRequest: false,);
+      http.Response response = await _apiService.apiRequest(
+        endPoint: 'get_vehicle_makers',
+        postRequest: false,
+      );
 
       VehicleMakersResponse data =
-      VehicleMakersResponse.fromJson(json.decode(response.body));
+          VehicleMakersResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
@@ -82,17 +103,16 @@ class VehicleProvider extends GetConnect {
     }
   }
 
-  Future<VehicleModelsResponse> getVehicleModelsList({required String makerId}) async {
-
+  Future<VehicleModelsResponse> getVehicleModelsList(
+      {required String makerId}) async {
     try {
-      http.Response response =
-      await _apiService.apiRequest(endPoint: 'get_vehicle_models', postRequest: false,
-          params: {
-            'id': makerId
-          });
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'get_vehicle_models',
+          postRequest: false,
+          params: {'id': makerId});
 
       VehicleModelsResponse data =
-      VehicleModelsResponse.fromJson(json.decode(response.body));
+          VehicleModelsResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");

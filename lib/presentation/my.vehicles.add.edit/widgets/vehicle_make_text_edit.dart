@@ -5,10 +5,15 @@ import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class VehicleMakeTextEdit extends StatelessWidget {
   const VehicleMakeTextEdit(
-      {required this.list, this.title, this.onSelected, this.onTextChange});
+      {required this.list,
+      this.title,
+      this.onSelected,
+      this.onTextChange,
+      this.initialText});
 
   final List<MakersItem> list;
   final String? title;
+  final String? initialText;
   final Function? onSelected;
   final Function? onTextChange;
 
@@ -39,11 +44,14 @@ class VehicleMakeTextEdit extends StatelessWidget {
                 TextEditingController controller,
                 FocusNode focusNode,
                 VoidCallback onFieldSubmitted) {
+              if (initialText != null && initialText!.trim().isNotEmpty) {
+                controller.text = initialText!;
+              }
               return TextField(
                 controller: controller,
                 focusNode: focusNode,
-                onChanged: (value){
-                  if(onTextChange!=null){
+                onChanged: (value) {
+                  if (onTextChange != null) {
                     onTextChange!(value);
                   }
                 },

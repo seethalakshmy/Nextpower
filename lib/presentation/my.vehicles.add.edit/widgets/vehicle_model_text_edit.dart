@@ -4,10 +4,16 @@ import 'package:project/infrastructure/dal/models/vehicles/VehicleModelsResponse
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class VehicleModelTextEdit extends StatelessWidget {
-  const VehicleModelTextEdit({required this.list, this.title, this.onSelected,this.onTextChange});
+  const VehicleModelTextEdit(
+      {required this.list,
+      this.title,
+      this.onSelected,
+      this.onTextChange,
+      this.initialText});
 
   final List<ModelsItem> list;
   final String? title;
+  final String? initialText;
   final Function? onSelected;
   final Function? onTextChange;
 
@@ -38,11 +44,14 @@ class VehicleModelTextEdit extends StatelessWidget {
                 TextEditingController controller,
                 FocusNode focusNode,
                 VoidCallback onFieldSubmitted) {
+              if (initialText != null && initialText!.trim().isNotEmpty) {
+                controller.text = initialText!;
+              }
               return TextField(
                 controller: controller,
                 focusNode: focusNode,
-                onChanged: (value){
-                  if(onTextChange!=null){
+                onChanged: (value) {
+                  if (onTextChange != null) {
                     onTextChange!(value);
                   }
                 },

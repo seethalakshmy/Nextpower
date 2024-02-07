@@ -4,8 +4,6 @@ import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/models/vehicles/VehicleMakersResponse.dart';
 import 'package:project/infrastructure/dal/models/vehicles/VehicleModelsResponse.dart';
-import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
@@ -53,13 +51,11 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                         value ?? "";
                                   },
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Enter vehicle number";
-                                    }
                                     return null;
                                   }),
                               const SizedBox(height: 10),
                               VehicleMakeTextEdit(
+                                  initialText: controller.vehicle.vehicleMake,
                                   onTextChange: (value) {
                                     controller.makeId = "";
                                     controller.selectMakeId(value as String);
@@ -73,6 +69,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   list: controller.makers.value),
                               const SizedBox(height: 10),
                               VehicleModelTextEdit(
+                                  initialText: controller.vehicle.vehicleModel,
                                   onTextChange: (value) {
                                     controller.modelId = "";
                                     controller.selectModelId(value as String);
@@ -89,7 +86,11 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   isLoading: controller.buttonLoading.value,
                                   onPressed: () async {
                                     if (controller.validation()) {
-                                      // controller.addVehicle();
+                                      if (controller.vehicleId != 0) {
+                                        controller.updateVehicle();
+                                      } else {
+                                        controller.addVehicle();
+                                      }
                                     }
                                   },
                                   text: translate(LocaleKeys.done))
