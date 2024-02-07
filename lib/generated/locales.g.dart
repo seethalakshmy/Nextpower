@@ -137,6 +137,10 @@ class LocaleKeys {
   static const please_click_link_to_verify_email =
       'please_click_link_to_verify_email';
   static const resend_verification_link = 'resend_verification_link';
+  static const select_vehicle_make_from_drop_down =
+      'select_vehicle_make_from_drop_down';
+  static const select_vehicle_model_from_drop_down =
+      'select_vehicle_model_from_drop_down';
 }
 
 class Locales {
@@ -268,5 +272,9 @@ class Locales {
     'please_click_link_to_verify_email':
         'Please tap the link in the email we sent you to verify your email address',
     'resend_verification_link': 'Resend',
+    'select_vehicle_make_from_drop_down':
+        'Please choose a vehicle make from the suggestions provided',
+    'select_vehicle_model_from_drop_down':
+        'Please select a vehicle model from the suggestions provided',
   };
 }

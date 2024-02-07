@@ -49,7 +49,6 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   title:
                                       "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.number).toLowerCase()}",
                                   onChanged: (value) {
-                                    controller.validation();
                                     controller.vehicle.vehicleNumber =
                                         value ?? "";
                                   },
@@ -61,8 +60,11 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   }),
                               const SizedBox(height: 10),
                               VehicleMakeTextEdit(
+                                  onTextChange: (value) {
+                                    controller.makeId = "";
+                                    controller.selectMakeId(value as String);
+                                  },
                                   onSelected: (MakersItem value) {
-                                    controller.validation();
                                     controller.makeId = "${value.id ?? 0}";
                                     controller.getVehicleModelList();
                                   },
@@ -71,8 +73,11 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   list: controller.makers.value),
                               const SizedBox(height: 10),
                               VehicleModelTextEdit(
+                                  onTextChange: (value) {
+                                    controller.modelId = "";
+                                    controller.selectModelId(value as String);
+                                  },
                                   onSelected: (ModelsItem value) {
-                                    controller.validation();
                                     controller.modelId = "${value.id ?? 0}";
                                   },
                                   title:
@@ -84,7 +89,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                                   isLoading: controller.buttonLoading.value,
                                   onPressed: () async {
                                     if (controller.validation()) {
-                                      controller.addVehicle();
+                                      // controller.addVehicle();
                                     }
                                   },
                                   text: translate(LocaleKeys.done))

@@ -4,11 +4,13 @@ import 'package:project/infrastructure/dal/models/vehicles/VehicleMakersResponse
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class VehicleMakeTextEdit extends StatelessWidget {
-  const VehicleMakeTextEdit({required this.list, this.title, this.onSelected});
+  const VehicleMakeTextEdit(
+      {required this.list, this.title, this.onSelected, this.onTextChange});
 
   final List<MakersItem> list;
   final String? title;
   final Function? onSelected;
+  final Function? onTextChange;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,11 @@ class VehicleMakeTextEdit extends StatelessWidget {
               return TextField(
                 controller: controller,
                 focusNode: focusNode,
+                onChanged: (value){
+                  if(onTextChange!=null){
+                    onTextChange!(value);
+                  }
+                },
                 decoration: const InputDecoration(
                     border: InputBorder.none,
                     contentPadding:

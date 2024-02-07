@@ -9,9 +9,8 @@ import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/my_vehicles/models/vehicle_request_model.dart';
 
 class MyVehiclesAddEditController extends GetxController {
-
   final isLoading = false.obs;
-  final buttonEnable = false.obs;
+  final buttonEnable = true.obs;
   final buttonLoading = false.obs;
   VehicleRequest vehicle = VehicleRequest();
   final formKey = GlobalKey<FormState>();
@@ -35,9 +34,7 @@ class MyVehiclesAddEditController extends GetxController {
   }
 
   void getVehicleMakeList() {
-    VehicleProvider()
-        .getVehicleMakersList()
-        .then((response) {
+    VehicleProvider().getVehicleMakersList().then((response) {
       if (response.status ?? false) {
         makers.addAll(response.stations ?? []);
       } else {
@@ -48,9 +45,7 @@ class MyVehiclesAddEditController extends GetxController {
   }
 
   void getVehicleModelList() {
-    VehicleProvider()
-        .getVehicleModelsList(makerId: makeId)
-        .then((response) {
+    VehicleProvider().getVehicleModelsList(makerId: makeId).then((response) {
       if (response.status ?? false) {
         models.value = response.stations ?? [];
       } else {
@@ -68,10 +63,9 @@ class MyVehiclesAddEditController extends GetxController {
       isLoading(false);
       if (response.status ?? false) {
         VehicleRequest res = VehicleRequest(
-          vehicleMake: response.vehicle?.vehicleMake ?? "",
-          vehicleModel: response.vehicle?.vehicleModel ?? "",
-          vehicleNumber: response.vehicle?.vehicleNumber ?? ""
-        );
+            vehicleMake: response.vehicle?.vehicleMake ?? "",
+            vehicleModel: response.vehicle?.vehicleModel ?? "",
+            vehicleNumber: response.vehicle?.vehicleNumber ?? "");
         vehicle = res;
       } else {
         CustomSnackBar.showErrorSnackBar(
@@ -82,19 +76,38 @@ class MyVehiclesAddEditController extends GetxController {
 
   bool validation() {
     if (vehicle.vehicleNumber.trim().isEmpty) {
-      buttonEnable(false);
       return false;
     }
-    if (vehicle.vehicleMake.trim().isEmpty) {
-      buttonEnable(false);
+    if (makeId.isEmpty) {
+      CustomSnackBar.showErrorSnackBar(LocaleKeys.failed.tr,
+          LocaleKeys.select_vehicle_make_from_drop_down.tr);
       return false;
     }
-    if (vehicle.vehicleModel.trim().isEmpty) {
-      buttonEnable(false);
+    if (modelId.isEmpty) {
+      CustomSnackBar.showErrorSnackBar(LocaleKeys.failed.tr,
+          LocaleKeys.select_vehicle_model_from_drop_down.tr);
       return false;
     }
     buttonEnable(true);
     return true;
+  }
+
+  void selectMakeId(String text) {
+    for (MakersItem itm in makers.value) {
+      if (text.trim().toLowerCase() == itm.title!.toLowerCase()) {
+        makeId = itm.id.toString();
+        break;
+      }
+    }
+  }
+
+  void selectModelId(String text) {
+    for (ModelsItem itm in models.value) {
+      if (text.trim().toLowerCase() == itm.name!.toLowerCase()) {
+        modelId = itm.id.toString();
+        break;
+      }
+    }
   }
 
   void addVehicle() {
