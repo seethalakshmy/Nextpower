@@ -122,5 +122,6 @@
   "resend_verification_link": "Resend",
   "select_vehicle_make_from_drop_down": "Please choose a vehicle make from the suggestions provided",
   "select_vehicle_model_from_drop_down": "Please select a vehicle model from the suggestions provided",
+  "deleted": "Deleted",
   "do_you_really_want_to_delete": "Do you really want to delete?"
 }

@@ -119,4 +119,18 @@ class VehicleProvider extends GetConnect {
       return VehicleModelsResponse(status: false, message: e.toString());
     }
   }
+
+  Future<CommonResponse> deleteVehicleItem({required String vehicleId}) async {
+    try {
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'delete_vehicle', params: {'id': vehicleId});
+
+      CommonResponse data =
+      CommonResponse.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return CommonResponse(status: false, message: e.toString());
+    }
+  }
 }

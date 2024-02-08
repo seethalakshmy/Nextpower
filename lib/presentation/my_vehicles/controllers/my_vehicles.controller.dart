@@ -12,11 +12,6 @@ class MyVehiclesController extends GetxController {
 
   @override
   void onInit() {
-    // isLoading(true);
-    // VehiclesListProvider().getVehiclesList().then((value) {
-    //   vehiclesList = value?.vehicles ?? [];
-    //   isLoading(false);
-    // });
     getVehicleList();
     super.onInit();
   }
@@ -27,6 +22,19 @@ class MyVehiclesController extends GetxController {
       isLoading(false);
       if (response.status ?? false) {
         vehiclesList.value = response.vehicles ?? [];
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void deleteItem(int id) {
+    VehicleProvider().deleteVehicleItem(vehicleId: id.toString()).then((response) {
+      if (response.status ?? false) {
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.deleted.tr, response.message ?? "");
+        getVehicleList();
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");

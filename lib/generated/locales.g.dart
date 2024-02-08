@@ -141,6 +141,7 @@ class LocaleKeys {
       'select_vehicle_make_from_drop_down';
   static const select_vehicle_model_from_drop_down =
       'select_vehicle_model_from_drop_down';
+  static const deleted = 'deleted';
   static const do_you_really_want_to_delete = 'do_you_really_want_to_delete';
 }
 
@@ -277,6 +278,7 @@ class Locales {
         'Please choose a vehicle make from the suggestions provided',
     'select_vehicle_model_from_drop_down':
         'Please select a vehicle model from the suggestions provided',
+    'deleted': 'Deleted',
     'do_you_really_want_to_delete': 'Do you really want to delete?',
   };
 }

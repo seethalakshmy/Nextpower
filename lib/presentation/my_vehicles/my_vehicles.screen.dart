@@ -72,26 +72,47 @@ class _ContentView extends StatelessWidget {
         itemCount: controller.vehiclesList.length,
         itemBuilder: (context, index) {
           return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
+            height: 120,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+                border: Border(
+                    bottom: BorderSide(
+                        color: Colors.grey,
+                        width: 0.2
+                    )
+                )
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _VehicleNumberAndEditWidget(
-                    controller: controller, index: index),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    _MakeModelWidget(
-                      title: translate(LocaleKeys.make),
-                      text: controller.vehiclesList[index].vehicleMake ?? "",
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Column(
+                      children: [
+                        _VehicleNumberAndEditWidget(
+                            controller: controller, index: index),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            _MakeModelWidget(
+                              title: translate(LocaleKeys.make),
+                              text: controller.vehiclesList[index].vehicleMake ?? "",
+                            ),
+                            _MakeModelWidget(
+                              title: translate(LocaleKeys.model),
+                              text: controller.vehiclesList[index].vehicleModel ?? "",
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    _MakeModelWidget(
-                      title: translate(LocaleKeys.model),
-                      text: controller.vehiclesList[index].vehicleModel ?? "",
-                    ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: 10),
-                const Divider(),
+                SizedBox(
+                  width: 40,child: OptionsWidget(controller: controller, index: index),)
               ],
             ),
           );
@@ -100,6 +121,44 @@ class _ContentView extends StatelessWidget {
     );
   }
 }
+
+class OptionsWidget extends StatelessWidget {
+  const OptionsWidget({super.key, required this.controller, required this.index});
+
+  final MyVehiclesController controller;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      child: Column(
+        children: [
+          Expanded(child: Material(
+            color: Colors.white,
+            child: InkWell(
+              onTap: () {
+                controller.moveAddEditScreen(controller.vehiclesList[index].id ?? 0);
+              },
+              child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit,width: 15,height: 15),
+            ),
+          )),
+          const Divider(),
+          Expanded(child: Material(
+            color: Colors.white,
+            child: InkWell(
+              onTap: () {
+                controller.deleteItem(index);
+              },
+              child: const Icon(Icons.delete_outline_outlined,color: Colors.red,size: 20,),
+            ),
+          )),
+        ],
+      ),
+    );
+  }
+}
+
 
 class _VehicleNumberAndEditWidget extends StatelessWidget {
   const _VehicleNumberAndEditWidget({
@@ -126,12 +185,6 @@ class _VehicleNumberAndEditWidget extends StatelessWidget {
               style: TextStyle(fontSize: 18, color: AppColors.labelColor2),
             ),
           ],
-        ),
-        GestureDetector(
-          onTap: () {
-            controller.moveAddEditScreen(controller.vehiclesList[index].id ?? 0);
-          },
-          child: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
         ),
       ],
     );
