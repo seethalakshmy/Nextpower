@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/station_details/station_details_model.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
@@ -10,6 +13,7 @@ import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/my.address/widgets/show_address_widget.dart';
 import 'package:project/presentation/station.details/controllers/station_details.controller.dart';
 import 'package:project/presentation/station.details/models/station_details_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OverviewWidget extends GetView<StationDetailsController> {
   const OverviewWidget({
@@ -18,19 +22,19 @@ class OverviewWidget extends GetView<StationDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    if (controller.details!.overview != null) {
-      Overview overview = controller.details!.overview!;
+    if (controller.stationDetails.value.stationId != null) {
+      //Overview overview = controller.details!.overview!;
 
       return Column(
         children: [
-          const _IconsRow(),
+          _IconsRow(controller.stationDetails.value),
           const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _OverviewDetailsWidget(overview: overview),
+                _OverviewDetailsWidget( station: controller.stationDetails.value),
                 const SizedBox(height: 20),
                 const _AmenitiesWidget(),
                 const SizedBox(height: 20),
@@ -54,7 +58,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return (controller.getAmenities().isNotEmpty)
+    return (controller.stationDetails.value.amenities == null)
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,7 +71,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
               const SizedBox(
                 height: 10,
               ),
-              _LabelWidget(label: controller.getAmenities())
+              _LabelWidget(label: controller.stationDetails.value.amenities?.first ?? "hgfhgfg")
             ],
           )
         : Container();
@@ -77,36 +81,36 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
 class _OverviewDetailsWidget extends StatelessWidget {
   const _OverviewDetailsWidget({
     super.key,
-    required this.overview,
+    required this.station
   });
 
-  final Overview overview;
+  final Station station;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ShowAddressWidget(
-            addressLine1: overview.address?.addressLine1 ?? "",
-            addressLine2: overview.address?.addressLine2 ?? "",
-            city: overview.address?.city ?? "",
-            country: overview.address?.countryName ?? "",
-            state: overview.address?.stateName ?? "",
-            postalCode: overview.address?.postalCode ?? ""),
+            addressLine1: station.address?.addressLine1 ?? "",
+            addressLine2: station.address?.addressLine2 ?? "",
+            city: station.address?.city ?? "",
+            country: station.address?.countryName ?? "",
+            state: station.address?.stateName ?? "",
+            postalCode: station.address?.postalCode ?? ""),
         const SizedBox(height: 10),
         SmallIconLabelWidget(
           assetPath: Assets.iconsTime,
-          label: overview.openTime ?? "",
+          label: station.overview?.openTime ?? "",
         ),
         const SizedBox(height: 10),
         SmallIconLabelWidget(
           assetPath: Assets.iconsCallBig,
-          label: overview.mobileNumber ?? "",
+          label: station.overview?.mobileNumber ?? "",
         ),
         const SizedBox(height: 10),
         SmallIconLabelWidget(
           assetPath: Assets.iconsEmail,
-          label: overview.mailId ?? "",
+          label: station.mailId ?? "",
         ),
       ],
     );
@@ -153,7 +157,8 @@ class _LabelWidget extends StatelessWidget {
 }
 
 class _IconsRow extends StatelessWidget {
-  const _IconsRow();
+  const _IconsRow(this.stationDetails);
+  final Station stationDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +170,9 @@ class _IconsRow extends StatelessWidget {
           _IconsLabelWidget(
             asset: Assets.iconsDirection,
             label: LocaleKeys.direction,
-            onTap: () {},
+            onTap: () {
+              // map redirection
+            },
           ),
           _IconsLabelWidget(
             asset: Assets.iconsShareBig,
@@ -175,7 +182,9 @@ class _IconsRow extends StatelessWidget {
           _IconsLabelWidget(
             asset: Assets.iconsCallBig,
             label: LocaleKeys.call,
-            onTap: () {},
+            onTap: () {
+              _makePhoneCall(stationDetails.overview?.mobileNumber ?? "");
+            },
           ),
           _IconsLabelWidget(
             asset: Assets.iconsFavouriteBig,
@@ -186,7 +195,18 @@ class _IconsRow extends StatelessWidget {
       ),
     );
   }
+
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
 }
+
+
 
 class _IconsLabelWidget extends StatelessWidget {
   const _IconsLabelWidget({
@@ -201,15 +221,18 @@ class _IconsLabelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SvgImageUtils().showSvgFromAsset(asset, width: 28, height: 28),
-        const SizedBox(height: 10),
-        TitleWidget(
-          title: translate(label),
-          fontWeight: FontWeight.w600,
-        )
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          SvgImageUtils().showSvgFromAsset(asset, width: 28, height: 28),
+          const SizedBox(height: 10),
+          TitleWidget(
+            title: translate(label),
+            fontWeight: FontWeight.w600,
+          )
+        ],
+      ),
     );
   }
 }

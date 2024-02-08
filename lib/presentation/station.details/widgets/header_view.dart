@@ -37,13 +37,13 @@ class HeaderView extends GetView<StationDetailsController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.details?.stationName ?? "",
+                        controller.stationDetails.value.stationName ?? "",
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       StationStatusWidget(
                         margin: const EdgeInsets.only(top: 10),
-                        stationStatus: controller.details?.stationStatus ?? "",
+                        stationStatus: controller.stationDetails.value.stationStatus ?? "",
                       ),
                     ],
                   ),

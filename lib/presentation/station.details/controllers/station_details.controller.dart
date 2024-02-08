@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/presentation/station.details/models/station_details_model.dart';
-import 'package:project/presentation/station.details/providers/station_details_provider.dart';
+import '../../../generated/locales.g.dart';
+import '../../../infrastructure/dal/models/station_details/station_details_model.dart';
+import '../../../infrastructure/dal/providers/station_details/station_details_provider.dart';
+import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class StationDetailsController extends GetxController {
   int stationId = 0;
@@ -11,13 +14,19 @@ class StationDetailsController extends GetxController {
   RxBool isAllFilterChosen = true.obs;
 
   RxList<int> openedIndexes = <int>[].obs;
+   Rx<Station> stationDetails = Station().obs;
 
   @override
   void onInit() {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
-    StationDetailsProvider().getStationDetails(stationId).then((value) {
-      details = value;
+    StationDetailsProvider().getStationDetails(id: stationId).then((value) {
+      if (value.status ?? false){
+       stationDetails.value = value.station!;
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
       isLoading(false);
     });
     super.onInit();
@@ -44,13 +53,13 @@ class StationDetailsController extends GetxController {
   String getAmenities() {
     String amenities = "";
 
-    var list = details?.overview?.amenities ?? [];
-    for (int i = 0; i < list.length; i++) {
-      amenities = amenities + list[i];
-      if (i != list.length - 1) {
-        amenities = "$amenities | ";
-      }
-    }
-    return amenities;
+    //var list = stationDetails?.overview?.amenities ?? [];
+    // for (int i = 0; i < list.length; i++) {
+    //   amenities = amenities + list[i];
+    //   if (i != list.length - 1) {
+    //     amenities = "$amenities | ";
+    //   }
+    // }
+     return amenities;
   }
 }

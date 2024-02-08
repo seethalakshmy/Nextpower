@@ -74,7 +74,7 @@ class HomeController extends GetxController {
       if (response.status ?? false) {
         stationList = response.stations ?? [];
         stationList.add(Stations(
-          stationId: 1,
+          stationId: 3,
           stationStatus: "Available",
           latitude: 10.06501,
           longitude: 76.3561
