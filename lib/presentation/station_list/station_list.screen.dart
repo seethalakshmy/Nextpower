@@ -30,7 +30,7 @@ class StationListScreen extends GetView<StationListController> {
                         .callStationDetails(station.stationId ?? 0);
                   },
                   onLongPress: () {
-                    Get.dialog(StationBriefDetailsWidget(station));
+                    // Get.dialog(StationBriefDetailsWidget(station));
                   },
                   child: Card(
                     margin: const EdgeInsets.all(10),

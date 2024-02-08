@@ -31,12 +31,12 @@ class _StationViewState extends State<StationView> {
           icon: fromAssetImage,
           markerId: MarkerId(station.stationId.toString()),
           position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
-          // infoWindow: InfoWindow(
-          //   title: station.stationName,
-          //   snippet: station.distance,
-          // ),
+          infoWindow: InfoWindow(
+            title: station.stationName,
+            // snippet: "${station.distance ?? 0}",
+          ),
           onTap: () {
-            // Get.dialog(StationBriefDetailsWidget());
+            Get.dialog(StationBriefDetailsWidget(station));
           });
       setState(() {
         markers[station.stationId.toString()] = marker;
@@ -57,7 +57,7 @@ class _StationViewState extends State<StationView> {
               myLocationButtonEnabled: false,
               initialCameraPosition: HomeController.cameraPosition,
               myLocationEnabled: true,
-              zoomControlsEnabled: false,
+              zoomControlsEnabled: true,
               onMapCreated: (GoogleMapController mapController) {
                 // controller.mapController.complete(mapController);
                 onMapCreated(mapController);

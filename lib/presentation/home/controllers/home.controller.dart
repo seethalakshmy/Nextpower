@@ -34,8 +34,9 @@ class HomeController extends GetxController {
       Completer<GoogleMapController>();
 
   static const CameraPosition cameraPosition = CameraPosition(
-    target: LatLng(56.172249, 10.187372),
-    zoom: 14.4746,
+    target: LatLng(10.065010195176646, 76.35613924535859),
+    // zoom: 14.4746,
+    zoom: 10 //increase to zoom
   );
   RxList<Marker> allMarkers = <Marker>[].obs; // Inside Map View Controller
   List<Stations> stationList = [];
@@ -55,20 +56,22 @@ class HomeController extends GetxController {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
     // await determinePosition();
-    onMapCreated();
     super.onInit();
+    getStations();
   }
 
   void getStations() {
     isLoading(true);
     HomeStationsProvider()
         .getStations(
-        latitude: cameraPosition.target.latitude, longitude: cameraPosition.target.longitude)
+            latitude: cameraPosition.target.latitude,
+            longitude: cameraPosition.target.longitude)
         .then((value) {
       isLoading(false);
       StationsResponse response = value;
       if (response.status ?? false) {
         stationList = response.stations ?? [];
+        onMapCreated();
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -78,14 +81,10 @@ class HomeController extends GetxController {
 
   void getStationDetails() {
     isLoading(true);
-    HomeStationsProvider()
-        .getStationDetails(
-        stationId: '')
-        .then((value) {
+    HomeStationsProvider().getStationDetails(stationId: '').then((value) {
       isLoading(false);
       StationsDetailsResponse response = value;
       if (response.status ?? false) {
-
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -114,7 +113,6 @@ class HomeController extends GetxController {
   }
 
   Future<void> onMapCreated() async {
-    print("onMapCreated()");
     allMarkers.clear();
     var fromAssetImage = await BitmapDescriptor.fromAssetImage(
         const ImageConfiguration(), Assets.iconsStationLocation);
@@ -124,14 +122,14 @@ class HomeController extends GetxController {
         markerId: MarkerId(station.stationId.toString()),
         position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
         infoWindow: InfoWindow(
-          title: 'sample name',
-          snippet: '0 km',
+          title: station.stationName ?? "",
+          snippet: "${station.distance ?? 0}",
         ),
       );
       allMarkers.add(marker);
-      update();
       isMapLoaded(true);
     }
+    update();
   }
 
   /// Determine the current position of the device.
@@ -183,7 +181,7 @@ class HomeController extends GetxController {
 
   void getFavoritesList() {
     isLoading(true);
-    FavoriteProvider().getFavoritesList().then((response){
+    FavoriteProvider().getFavoritesList().then((response) {
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
@@ -194,9 +192,11 @@ class HomeController extends GetxController {
     });
   }
 
-  void removeFavorite(int currentIndex,String favoriteId) async {
+  void removeFavorite(int currentIndex, String favoriteId) async {
     isLoading(true);
-    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: "").then((response){
+    FavoriteProvider()
+        .removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: "")
+        .then((response) {
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
@@ -207,7 +207,6 @@ class HomeController extends GetxController {
     });
     isLoading(false);
   }
-
 
   void getUsageHistoryList(int historyOption) async {
     historyLoading(true);
@@ -223,8 +222,6 @@ class HomeController extends GetxController {
     getUsageHistoryList(currentIndex);
   }
 
-
-
   void getWalletData() async {
     isLoading(true);
     await Future.delayed(const Duration(seconds: 2));
@@ -233,7 +230,6 @@ class HomeController extends GetxController {
       isLoading(false);
     });
   }
-
 
   void setWalletAmountChosenIndex({required int index, required int amount}) {
     walletChosenAmountIndex(index);

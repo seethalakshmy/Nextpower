@@ -35,7 +35,7 @@ class StationsDetailsResponse {
 
 class Station {
   Station({
-      num? stationId, 
+      int? stationId,
       String? stationName, 
       String? stationStatus, 
       Overview? overview, 
@@ -65,7 +65,7 @@ class Station {
       _connectors = [];
     }
   }
-  num? _stationId;
+  int? _stationId;
   String? _stationName;
   String? _stationStatus;
   Overview? _overview;
@@ -74,7 +74,7 @@ class Station {
   List<String>? _amenities;
   List<dynamic>? _connectors;
 
-  num? get stationId => _stationId;
+  int? get stationId => _stationId;
   String? get stationName => _stationName;
   String? get stationStatus => _stationStatus;
   Overview? get overview => _overview;

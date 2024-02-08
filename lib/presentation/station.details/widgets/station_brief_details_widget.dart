@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/combo_widgets/station_brief_header_widget.dart';
-import 'package:project/presentation/station_list/models/stations_list_model.dart';
 
 class StationBriefDetailsWidget extends StatelessWidget {
   const StationBriefDetailsWidget(
@@ -29,29 +29,29 @@ class StationBriefDetailsWidget extends StatelessWidget {
               children: [
                 StationBriefHeaderWidget(
                   stationName: stationDetail.stationName ?? "",
-                  connectorPower: stationDetail.kwh ?? "",
-                  connectorStatus: stationDetail.status ?? "",
-                  lat: stationDetail.lat ?? 0.0,
-                  long: stationDetail.long ?? 0.0,
+                  connectorPower: "${stationDetail.power?.toStringAsFixed(2) ?? 0}",
+                  connectorStatus: stationDetail.stationStatus ?? "",
+                  lat: stationDetail.latitude ?? 0.0,
+                  long: stationDetail.longitude ?? 0.0,
                 ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
                     ContentItem(
                         title: translate(LocaleKeys.distance),
-                        value: stationDetail.distance ?? "",
+                        value: "${stationDetail.distance?.toStringAsFixed(2) ?? 0}",
                         bgColor: AppColors.dialogLightPink,
                         textColor: AppColors.dialogPink),
                     const SizedBox(width: 5),
                     ContentItem(
                         title: translate(LocaleKeys.free),
-                        value: (stationDetail.free ?? 0).toString(),
+                        value: (stationDetail.freeConnectors ?? 0).toString(),
                         bgColor: AppColors.dialogLightGreen,
                         textColor: AppColors.dialogGreen),
                     const SizedBox(width: 5),
                     ContentItem(
                         title: translate(LocaleKeys.active),
-                        value: (stationDetail.active ?? 0).toString(),
+                        value: (stationDetail.activeConnectors ?? 0).toString(),
                         bgColor: AppColors.dialogLightOrange,
                         textColor: AppColors.dialogOrange)
                   ],
@@ -103,6 +103,8 @@ class ContentItem extends StatelessWidget {
             ),
             Text(
               value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
             )

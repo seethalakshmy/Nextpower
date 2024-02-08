@@ -40,14 +40,25 @@ class StationsResponse {
 
 class Stations {
   Stations({
-      num? stationId,
+      int? stationId,
     double? latitude,
     double? longitude,
-    double? distance,}){
+    double? distance,
+    int? freeConnectors,
+    String? stationName,
+    String? stationStatus,
+    int? activeConnectors,
+    num? power,}){
     _stationId = stationId;
     _latitude = latitude;
     _longitude = longitude;
     _distance = distance;
+    _freeConnectors = freeConnectors;
+    _stationName = stationName;
+    _stationStatus = stationStatus;
+    _activeConnectors = activeConnectors;
+    _power = power;
+
 }
 
   Stations.fromJson(dynamic json) {
@@ -55,16 +66,33 @@ class Stations {
     _latitude = json['latitude'];
     _longitude = json['longitude'];
     _distance = json['distance'];
+    _freeConnectors = json['free_connectors'];
+    _stationName = json['station_name '];
+    _stationStatus = json['station_status'];
+    _activeConnectors = json['active_connectors'];
+    _power = json['power'];
   }
-  num? _stationId;
+  int? _stationId;
   double? _latitude;
   double? _longitude;
   double? _distance;
+  int? _freeConnectors;
+  String? _stationName;
+  String? _stationStatus;
+  int? _activeConnectors;
+  num? _power;
 
-  num? get stationId => _stationId;
+
+
+  int? get stationId => _stationId;
   double? get latitude => _latitude;
   double? get longitude => _longitude;
   double? get distance => _distance;
+  int? get freeConnectors => _freeConnectors;
+  String? get stationName => _stationName;
+  String? get stationStatus => _stationStatus;
+  int? get activeConnectors => _activeConnectors;
+  num? get power => _power;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -72,6 +100,11 @@ class Stations {
     map['latitude'] = _latitude;
     map['longitude'] = _longitude;
     map['distance'] = _distance;
+    map['free_connectors'] = _freeConnectors;
+    map['station_name '] = _stationName;
+    map['station_status'] = _stationStatus;
+    map['active_connectors'] = _activeConnectors;
+    map['power'] = _power;
     return map;
   }
 
