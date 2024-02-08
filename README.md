@@ -14,3 +14,8 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+#get generate locales assets/locales
+#Flutter Version : 3.16.7
+#Branch name : upgrade_15.01.2024
+#Architecture : GetX with Provider

@@ -26,7 +26,7 @@ class Address {
   String addressLine1 = "";
   String addressLine2 = "";
   String countryName = "";
-  String stateName = "";
+  String? stateName = "";
   String city = "";
   int stateId = 0;
   String postalCode = "";

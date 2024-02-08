@@ -23,7 +23,7 @@ class StationDetailsScreen extends GetView<StationDetailsController> {
       ),
       body: Obx(() => controller.isLoading.value
           ? const LoadingWidget()
-          : controller.details == null
+          : controller.stationDetails.value.stationId == null
               ? EmptyListView(
                   subTitle: translate(LocaleKeys.noSuchStationsFound),
                   title: translate(LocaleKeys.oops))
