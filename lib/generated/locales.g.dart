@@ -137,6 +137,9 @@ class LocaleKeys {
   static const please_click_link_to_verify_email =
       'please_click_link_to_verify_email';
   static const resend_verification_link = 'resend_verification_link';
+  static const delete_confirmation = 'Are you sure you want delete?';
+
+
 }
 
 class Locales {

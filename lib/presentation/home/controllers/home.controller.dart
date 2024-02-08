@@ -16,6 +16,7 @@ import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/home/models/wallet_detail_model.dart';
 import 'package:project/presentation/home/providers/usage_history_list_provider.dart';
 import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
+import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
 import '../models/favorites_list_model.dart';
 
 class HomeController extends GetxController {
@@ -32,7 +33,6 @@ class HomeController extends GetxController {
   final RxBool isMapLoaded = true.obs;
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
-
   static const CameraPosition cameraPosition = CameraPosition(
     target: LatLng(56.172249, 10.187372),
     zoom: 14.4746,
@@ -43,7 +43,7 @@ class HomeController extends GetxController {
 
   GoogleMapController? mapController;
 
-  RxList<Favorites> favoritesList = <Favorites>[].obs;
+  RxList<Favorite> favoritesList = <Favorite>[].obs;
   final historySelectedIndex = 1.obs;
   final historyLoading = true.obs;
   List<UsageHistory> usageHistoryList = [];
@@ -56,6 +56,8 @@ class HomeController extends GetxController {
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
     // await determinePosition();
     onMapCreated();
+    getFavoritesList();
+
     super.onInit();
   }
 
@@ -185,21 +187,23 @@ class HomeController extends GetxController {
     isLoading(true);
     FavoriteProvider().getFavoritesList().then((response){
       if (response.status == true) {
-        CustomSnackBar.showSuccessSnackBar(
-            LocaleKeys.success.tr, response.message ?? "");
+        favoritesList.value = response.favorites!;
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
+      isLoading(false);
     });
   }
 
-  void removeFavorite(int currentIndex,String favoriteId) async {
+  void removeAddFavorite(int currentIndex,int favoriteId) async {
     isLoading(true);
-    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: "").then((response){
+    final int? stationId = favoritesList[currentIndex].stationId?.toInt();
+    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: stationId ?? 0).then((response){
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
+        getFavoritesList();
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");

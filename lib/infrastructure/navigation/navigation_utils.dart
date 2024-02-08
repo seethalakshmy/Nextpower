@@ -78,7 +78,7 @@ class NavigationUtils {
         },
         onNegativeTap: () {
           NavigationUtils().goBack(closeOverlays: false);
-        },
+        }, notForNegative: false,
       ),
     );
   }

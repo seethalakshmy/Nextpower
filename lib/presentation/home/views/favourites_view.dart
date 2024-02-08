@@ -5,6 +5,7 @@ import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/views/custom_alert_view.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_outline_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
 import 'package:project/infrastructure/widgets/combo_widgets/title_power_status_combo_widget.dart';
@@ -13,16 +14,18 @@ import 'package:project/presentation/home/controllers/home.controller.dart';
 import 'package:project/presentation/home/models/favorites_list_model.dart';
 import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
 
+import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
+
 class FavouritesView extends GetView<HomeController> {
   const FavouritesView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+
     return Obx(() => controller.favoritesList.isNotEmpty
         ? ListView.builder(
             itemCount: controller.favoritesList.length,
             itemBuilder: (context, index) {
-              Favorites favorites = controller.favoritesList[index];
+              Favorite favorites = controller.favoritesList[index];
               return Card(
                   elevation: 2,
                   margin:
@@ -40,14 +43,24 @@ class FavouritesView extends GetView<HomeController> {
                               child: TitlePowerStatusComboWidget(
                                   title: favorites.stationName ?? "",
                                   titleFontSize: 18,
-                                  power: favorites.kwh ?? "",
-                                  status: favorites.status ?? ""),
+                                  power:  "",
+                                  status: favorites.stationStatus == "true" ? "Availabe":"Not Available"),
                             ),
                             IconButton(
                                 padding: const EdgeInsets.only(
                                     top: 8, left: 8, bottom: 8),
                                 onPressed: () {
-                                  controller.removeFavorite(index,"0");
+
+                                  Get.dialog(
+                                    CustomAlertView(
+                                      title: translate(LocaleKeys.delete_confirmation),
+                                      onPositiveTap: (){
+                                        NavigationUtils().goBack();
+                                        controller.removeAddFavorite(index,0);
+                                      },
+                                      notForNegative: true,
+                                    ),
+                                  );
                                 },
                                 icon: Icon(
                                   Icons.delete_outline,
@@ -61,7 +74,7 @@ class FavouritesView extends GetView<HomeController> {
                           children: [
                             ContentItem(
                               title: translate(LocaleKeys.distance),
-                              value: favorites.distance ?? "",
+                              value:  "",
                               bgColor: Colors.transparent,
                               textColor: AppColors.btmTextColor,
                               alignment: Alignment.centerLeft,
@@ -70,7 +83,7 @@ class FavouritesView extends GetView<HomeController> {
                             const SizedBox(width: 5),
                             ContentItem(
                               title: translate(LocaleKeys.free),
-                              value: (favorites.free ?? 0).toString(),
+                              value: "",//(favorites.free ?? 0).toString(),
                               bgColor: Colors.transparent,
                               textColor: AppColors.btmTextColor,
                               alignment: Alignment.centerLeft,
@@ -79,7 +92,7 @@ class FavouritesView extends GetView<HomeController> {
                             const SizedBox(width: 5),
                             ContentItem(
                               title: translate(LocaleKeys.active),
-                              value: (favorites.active ?? 0).toString(),
+                              value:"",// (favorites.active ?? 0).toString(),
                               bgColor: Colors.transparent,
                               textColor: AppColors.btmTextColor,
                               alignment: Alignment.centerLeft,
@@ -110,7 +123,7 @@ class FavouritesView extends GetView<HomeController> {
                                 assetHeight: 24,
                                 onPressed: () {
                                   NavigationUtils().callGoogleMap(
-                                      favorites.lat ?? 0, favorites.long ?? 0);
+                                      favorites.latitude ?? 0, favorites.longitude ?? 0);
                                 },
                                 text: translate(LocaleKeys.direction),
                                 height: 50,
