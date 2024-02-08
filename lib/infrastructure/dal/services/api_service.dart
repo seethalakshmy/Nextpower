@@ -78,6 +78,7 @@ class ApiService extends GetConnect implements GetxService {
   void updateToken() {
     if (AppStorage().getLoggedIn()) {
       _headers['Authorization'] = "Bearer ${AppStorage().getAccessToken()}";
+      print("token -- $_headers");
     }
   }
 }

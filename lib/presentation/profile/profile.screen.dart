@@ -246,49 +246,56 @@ class EmailDisabled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TitleWidget(title: translate(LocaleKeys.emailAddress)),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTap: () {
-            if (controller.isEmailVerified.isFalse) {
-              controller.validateEmailID();
-            }
-          },
-          child: Container(
-            height: 48,
-            width: double.infinity,
-            padding: const EdgeInsets.only(left: 18, right: 3),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              // Set your desired color here
-              borderRadius: BorderRadius.circular(6),
-              // Adjust the radius as needed
-              border: Border.all(
-                color: Colors.grey.withOpacity(0.6), // Set border color
-                width: 1, // Set border width
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Text(
-                    controller.email.value,
-                    style: const TextStyle(fontSize: 16),
+    return Obx(
+      () {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TitleWidget(title: translate(LocaleKeys.emailAddress)),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                if (controller.isEmailVerified.isFalse) {
+                  controller.validateEmailID();
+                }
+              },
+              child: Container(
+                height: 48,
+                width: double.infinity,
+                padding: const EdgeInsets.only(left: 18, right: 3),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // Set your desired color here
+                  borderRadius: BorderRadius.circular(6),
+                  // Adjust the radius as needed
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.6), // Set border color
+                    width: 1, // Set border width
                   ),
                 ),
-                controller.isEmailVerified.value
-                    ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick,
-                        width: 24, height: 24)
-                    : SvgImageUtils().showSvgFromAsset(Assets.iconsExclamation),
-              ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        controller.email.value,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    controller.isEmailVerified.value
+                        ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick,
+                            width: 24, height: 24)
+                        : controller.isEmailVerificationIconEnable.value
+                            ? SvgImageUtils()
+                                .showSvgFromAsset(Assets.iconsExclamation)
+                            : const SizedBox(),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      }
     );
   }
 }

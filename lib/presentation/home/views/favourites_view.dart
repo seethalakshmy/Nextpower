@@ -47,7 +47,7 @@ class FavouritesView extends GetView<HomeController> {
                                 padding: const EdgeInsets.only(
                                     top: 8, left: 8, bottom: 8),
                                 onPressed: () {
-                                  controller.removeFavorite(index);
+                                  controller.removeFavorite(index,"0");
                                 },
                                 icon: Icon(
                                   Icons.delete_outline,
