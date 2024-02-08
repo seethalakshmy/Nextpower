@@ -8,15 +8,14 @@ import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/models/stations/StationsDetailsResponse.dart';
 import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
+import 'package:project/infrastructure/dal/providers/favorites/favorites_provider.dart';
 import 'package:project/infrastructure/dal/providers/home_stations/home_stations_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/home/models/wallet_detail_model.dart';
-import 'package:project/presentation/home/providers/favorites_list_provider.dart';
 import 'package:project/presentation/home/providers/usage_history_list_provider.dart';
 import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
-import 'package:project/presentation/station_list/providers/stations_list_provider.dart';
 import '../models/favorites_list_model.dart';
 
 class HomeController extends GetxController {
@@ -183,11 +182,32 @@ class HomeController extends GetxController {
   }
 
   void getFavoritesList() {
-    FavoritesListProvider().getFavoritesList().then((value) {
-      favoritesList.value = value?.favorites ?? [];
-      isLoading(false);
+    isLoading(true);
+    FavoriteProvider().getFavoritesList().then((response){
+      if (response.status == true) {
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.message ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
     });
   }
+
+  void removeFavorite(int currentIndex,String favoriteId) async {
+    isLoading(true);
+    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: "").then((response){
+      if (response.status == true) {
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.message ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+    isLoading(false);
+  }
+
 
   void getUsageHistoryList(int historyOption) async {
     historyLoading(true);
@@ -203,12 +223,7 @@ class HomeController extends GetxController {
     getUsageHistoryList(currentIndex);
   }
 
-  void removeFavorite(int currentIndex) async {
-    isLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
-    favoritesList.removeAt(currentIndex);
-    isLoading(false);
-  }
+
 
   void getWalletData() async {
     isLoading(true);

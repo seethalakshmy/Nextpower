@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:project/infrastructure/dal/models/base/CommonResponse.dart';
 import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'dart:convert';
 import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';

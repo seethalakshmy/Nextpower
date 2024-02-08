@@ -38,22 +38,22 @@ class SupportScreen extends GetView<SupportController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _ClickableTextWidget(
-                                text: translate(LocaleKeys.termsAndConditions),
-                                onPressed: () {},
-                              ),
-                              _ClickableTextWidget(
-                                text: translate(LocaleKeys.privacyPolicy),
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     _ClickableTextWidget(
+                          //       text: translate(LocaleKeys.termsAndConditions),
+                          //       onPressed: () {},
+                          //     ),
+                          //     _ClickableTextWidget(
+                          //       text: translate(LocaleKeys.privacyPolicy),
+                          //       onPressed: () {},
+                          //     ),
+                          //   ],
+                          // ),
                           const SizedBox(height: 20),
                           TitleWidget(
-                            title: translate(LocaleKeys.aboutUs),
+                            title: translate(LocaleKeys.contactUs),
                             fontSize: 19,
                             fontWeight: FontWeight.w600,
                           ),

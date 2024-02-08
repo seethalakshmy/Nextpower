@@ -22,6 +22,7 @@ class ProfileController extends GetxController {
   RxBool isMobileVerificationEnabled = false.obs;
   RxBool isEmailVerified = true.obs;
   RxBool isMobileVerified = true.obs;
+  RxBool isEmailVerificationIconEnable = true.obs;
   RxString userImagePath = "".obs;
   RxString name = "".obs;
   RxString email = "".obs;
@@ -114,10 +115,9 @@ class ProfileController extends GetxController {
   }
 
   void emailVerificationResend() {
-    buttonLoading(true);
     ProfileProvider().emailVerificationResend().then((response) {
-      buttonLoading(false);
       if (response.status == true) {
+        isEmailVerificationIconEnable.value = false;
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
       } else {

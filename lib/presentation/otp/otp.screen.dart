@@ -69,7 +69,7 @@ class OtpScreen extends GetView<OtpController> {
                                   },
                                   text: LocaleKeys.resendOtp);
                             } else {
-                              return Spacer();
+                              return const Spacer();
                             }
                           }),
                           Obx(() {
@@ -80,7 +80,7 @@ class OtpScreen extends GetView<OtpController> {
                                   },
                                   text: LocaleKeys.changePhoneNumber);
                             } else {
-                              return Spacer();
+                              return const Spacer();
                             }
                           }),
                         ],
