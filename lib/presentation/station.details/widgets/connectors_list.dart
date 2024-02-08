@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/station_details/ConnectorsResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
@@ -23,63 +24,70 @@ class ConnectorsListWidget extends GetView<StationDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: (controller.details?.connectorsList != null &&
-              controller.details!.connectorsList!.isNotEmpty)
-          ? Column(
-              children: [
-                const FilterView(),
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-                        (controller.details?.connectorsList ?? []).length,
-                    itemBuilder: (context, index) {
-                      ConnectorsList connector =
-                          (controller.details?.connectorsList![index])!;
-                      return Card(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        elevation: 6,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              _ImageHeadingKWStatusWidget(index),
-                              const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: TitleSubtitleColumnRowWidget(
-                                      title: connector.connectorName ?? "",
-                                      subtitle: connector.connectorType ?? "",
-                                      showAsColumn: true,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: TitleSubtitleColumnRowWidget(
-                                      title: translate(LocaleKeys.tariff),
-                                      subtitle: connector.tariff ?? " ",
-                                      showAsColumn: true,
-                                    ),
-                                  ),
-                                  _ExpandingArrowWidget(index),
-                                ],
-                              ),
-                              _ExpandedButtonWidgets(
-                                index: index,
-                              )
-                            ],
+        child: Obx(() {
+          if (controller.connectionList.isNotEmpty) {
+            return buildList();
+          } else {
+            return EmptyListView(
+                subTitle: translate(LocaleKeys.noConnectorsFound),
+                title: translate(LocaleKeys.sorry));
+          }
+        })
+    );
+  }
+
+  Column buildList() {
+    return Column(
+      children: [
+        const FilterView(),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount:
+            controller.connectionList.value.length,
+            itemBuilder: (context, index) {
+              Connectors connector =
+              (controller.connectionList[index]);
+              return Card(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 20, vertical: 10),
+                elevation: 6,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      _ImageHeadingKWStatusWidget(index),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TitleSubtitleColumnRowWidget(
+                              title: connector.connectorName ?? "",
+                              subtitle: connector.connectorType ?? "",
+                              showAsColumn: true,
+                            ),
                           ),
-                        ),
-                      );
-                    }),
-                const SizedBox(height: 20)
-              ],
-            )
-          : EmptyListView(
-              subTitle: translate(LocaleKeys.noConnectorsFound),
-              title: translate(LocaleKeys.sorry)),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: TitleSubtitleColumnRowWidget(
+                              title: translate(LocaleKeys.tariff),
+                              subtitle: connector.tariff ?? " ",
+                              showAsColumn: true,
+                            ),
+                          ),
+                          _ExpandingArrowWidget(index),
+                        ],
+                      ),
+                      _ExpandedButtonWidgets(
+                        index: index,
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }),
+        const SizedBox(height: 20)
+      ],
     );
   }
 }
@@ -95,50 +103,50 @@ class _ExpandedButtonWidgets extends GetView<StationDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.openedIndexes.contains(index)
+          () =>
+      controller.openedIndexes.contains(index)
           ? Column(
-              children: [
-                const Divider(),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RoundedRectangleButton(
-                        textSize: 15,
-                        asset: Assets.iconsChargeWhiteIcon,
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          NavigationUtils().callChargingSessionDetails(
-                              stationId: controller.stationId,
-                              connectorId: controller.details
-                                      ?.connectorsList?[index].connectorId ??
-                                  0);
-                        },
-                        text: translate(LocaleKeys.charge),
-                        height: 50,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: RoundedOutlineButton(
-                          asset: Assets.iconsCalender,
-                          height: 50,
-                          onPressed: () {
-                            NavigationUtils().callScreenYetToBeDone();
-                          },
-                          text: translate(LocaleKeys.reserve)),
-                    ),
-                  ],
-                )
-              ],
-            )
+        children: [
+          const Divider(),
+          Row(
+            children: [
+              Expanded(
+                child: RoundedRectangleButton(
+                  textSize: 15,
+                  asset: Assets.iconsChargeWhiteIcon,
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    NavigationUtils().callChargingSessionDetails(
+                        stationId: controller.stationId,
+                        connectorId: controller.details
+                            ?.connectorsList?[index].connectorId ??
+                            0);
+                  },
+                  text: translate(LocaleKeys.charge),
+                  height: 50,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: RoundedOutlineButton(
+                    asset: Assets.iconsCalender,
+                    height: 50,
+                    onPressed: () {
+                      NavigationUtils().callScreenYetToBeDone();
+                    },
+                    text: translate(LocaleKeys.reserve)),
+              ),
+            ],
+          )
+        ],
+      )
           : Container(),
     );
   }
 }
 
 class _ExpandingArrowWidget extends GetView<StationDetailsController> {
-  const _ExpandingArrowWidget(
-    this.index, {
+  const _ExpandingArrowWidget(this.index, {
     super.key,
   });
 
@@ -156,7 +164,8 @@ class _ExpandingArrowWidget extends GetView<StationDetailsController> {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.primaryBlue)),
-            child: Obx(() => Icon(
+            child: Obx(() =>
+                Icon(
                   controller.openedIndexes.contains(index)
                       ? Icons.keyboard_arrow_up
                       : Icons.keyboard_arrow_down,
@@ -166,8 +175,7 @@ class _ExpandingArrowWidget extends GetView<StationDetailsController> {
 }
 
 class _ImageHeadingKWStatusWidget extends GetView<StationDetailsController> {
-  const _ImageHeadingKWStatusWidget(
-    this.index, {
+  const _ImageHeadingKWStatusWidget(this.index, {
     super.key,
   });
 
@@ -187,8 +195,7 @@ class _ImageHeadingKWStatusWidget extends GetView<StationDetailsController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TitleWidget(
-                  title: controller
-                          .details!.connectorsList![index].chargingPointName ??
+                  title: controller.connectionList![index].chargingPointName ??
                       "",
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -197,9 +204,10 @@ class _ImageHeadingKWStatusWidget extends GetView<StationDetailsController> {
                 const SizedBox(height: 10),
                 ChargingPowerStatusWidget(
                   connectorPower:
-                      "${controller.details!.connectorsList![index].kw ?? ""} ${translate(LocaleKeys.kw)}",
+                  "${controller.connectionList[index].kw ?? ""} ${translate(
+                      LocaleKeys.kw)}",
                   connectorStatus:
-                      controller.details!.connectorsList![index].status ?? "",
+                  controller.connectionList[index].status ?? "",
                 )
               ],
             ),

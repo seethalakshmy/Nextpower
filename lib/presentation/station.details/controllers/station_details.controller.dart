@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:project/infrastructure/dal/models/station_details/ConnectorsResponse.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/presentation/station.details/models/station_details_model.dart';
 import '../../../generated/locales.g.dart';
@@ -14,32 +15,40 @@ class StationDetailsController extends GetxController {
   RxBool isAllFilterChosen = true.obs;
 
   RxList<int> openedIndexes = <int>[].obs;
-   Rx<Station> stationDetails = Station().obs;
+  RxList<Connectors> connectionList = RxList<Connectors>.empty(growable: true);
+  Rx<Station> stationDetails = Station().obs;
 
   @override
   void onInit() {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
     StationDetailsProvider().getStationDetails(id: stationId).then((value) {
-      if (value.status ?? false){
-       stationDetails.value = value.station!;
-      }else{
+      if (value.status ?? false) {
+        stationDetails.value = value.station!;
+      } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value.message ?? "");
       }
       isLoading(false);
     });
+    getConnectors();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  void getConnectors() {
+    isLoading(true);
+    StationDetailsProvider()
+        .getConnectors(stationId: stationId.toString())
+        .then((value) {
+      isLoading(false);
+      ConnectorsResponse response = value;
+      if (response.status ?? false) {
+        connectionList.value = response.connectors ?? [];
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
   }
 
   setIndexesData(index) {
@@ -60,6 +69,6 @@ class StationDetailsController extends GetxController {
     //     amenities = "$amenities | ";
     //   }
     // }
-     return amenities;
+    return amenities;
   }
 }

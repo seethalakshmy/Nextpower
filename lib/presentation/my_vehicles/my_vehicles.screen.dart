@@ -148,7 +148,7 @@ class OptionsWidget extends StatelessWidget {
             color: Colors.white,
             child: InkWell(
               onTap: () {
-                controller.showDeleteAlert(index);
+                controller.showDeleteAlert(controller.vehiclesList[index].id ?? 0);
               },
               child: const Icon(Icons.delete_outline_outlined,color: Colors.red,size: 20,),
             ),
