@@ -53,42 +53,43 @@ class AboutUsScreen extends GetView<AboutUsController> {
                           ),
                           const SizedBox(height: 20),
                           TitleWidget(
-                            title: translate(LocaleKeys.contactUs),
+                            title: translate(LocaleKeys.aboutUs),
                             fontSize: 19,
                             fontWeight: FontWeight.w600,
                           ),
                           const SizedBox(height: 10),
-                          ShowAddressWidget(
-                              addressLine1:
-                                  controller.aboutUs?.address?.addressLine1 ??
-                                      "",
-                              addressLine2:
-                                  controller.aboutUs?.address?.addressLine2 ??
-                                      "",
-                              city: controller.aboutUs?.address?.city ?? "",
-                              country:
-                                  controller.aboutUs?.address?.countryName ??
-                                      "",
-                              state:
-                                  controller.aboutUs?.address?.stateName ?? "",
-                              postalCode:
-                                  controller.aboutUs?.address?.postalCode ??
-                                      ""),
-                          const SizedBox(height: 10),
-                          SmallIconLabelWidget(
-                            assetPath: Assets.iconsTime,
-                            label: controller.aboutUs?.openTime ?? "",
-                          ),
-                          const SizedBox(height: 10),
-                          SmallIconLabelWidget(
-                            assetPath: Assets.iconsCallBig,
-                            label: controller.aboutUs?.mobileNumber ?? "",
-                          ),
-                          const SizedBox(height: 10),
-                          SmallIconLabelWidget(
-                            assetPath: Assets.iconsEmail,
-                            label: controller.aboutUs?.mailId ?? "",
-                          ),
+                          Text(controller.aboutUs?.data ?? "")
+                          // ShowAddressWidget(
+                          //     addressLine1:
+                          //         controller.aboutUs?.address?.addressLine1 ??
+                          //             "",
+                          //     addressLine2:
+                          //         controller.aboutUs?.address?.addressLine2 ??
+                          //             "",
+                          //     city: controller.aboutUs?.address?.city ?? "",
+                          //     country:
+                          //         controller.aboutUs?.address?.countryName ??
+                          //             "",
+                          //     state:
+                          //         controller.aboutUs?.address?.stateName ?? "",
+                          //     postalCode:
+                          //         controller.aboutUs?.address?.postalCode ??
+                          //             ""),
+                          // const SizedBox(height: 10),
+                          // // SmallIconLabelWidget(
+                          // //   assetPath: Assets.iconsTime,
+                          // //   label: controller.aboutUs?.openTime ?? "",
+                          // // ),
+                          // const SizedBox(height: 10),
+                          // SmallIconLabelWidget(
+                          //   assetPath: Assets.iconsCallBig,
+                          //   label: controller.aboutUs?.mobileNumber ?? "",
+                          // ),
+                          // const SizedBox(height: 10),
+                          // SmallIconLabelWidget(
+                          //   assetPath: Assets.iconsEmail,
+                          //   label: controller.aboutUs?.mailId ?? "",
+                          // ),
                         ],
                       ),
                     ))

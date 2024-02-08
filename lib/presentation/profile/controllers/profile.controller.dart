@@ -59,6 +59,8 @@ class ProfileController extends GetxController {
       }
     });
   }
+
+
   
   
   void changeEmailID(String value) {
@@ -89,8 +91,9 @@ class ProfileController extends GetxController {
         title: LocaleKeys.not_verified.tr,
         message: LocaleKeys.please_click_link_to_verify_email.tr,
         buttonTitle: LocaleKeys.resend_verification_link.tr, onPressedButton: (){
-      ///need to do one api call
-      ///In backend they are send a link to user if user clicks that link then email consider as verified
+
+          Get.back();
+        emailVerificationResend();
     });
   }
 
@@ -109,6 +112,23 @@ class ProfileController extends GetxController {
       }
     });
   }
+
+  void emailVerificationResend() {
+    buttonLoading(true);
+    ProfileProvider().emailVerificationResend().then((response) {
+      buttonLoading(false);
+      if (response.status == true) {
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success.tr, response.message ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+
+
 
   void gotoLogin() {
     NavigationUtils().callLoginPage(isLoginPage: false);

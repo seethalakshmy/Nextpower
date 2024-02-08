@@ -4,7 +4,6 @@ import 'package:project/infrastructure/dal/models/address/AddressResponse.dart';
 import 'package:project/infrastructure/dal/models/base/CommonResponse.dart';
 import 'package:project/infrastructure/dal/models/countries/CountryResponse.dart';
 import 'dart:convert';
-import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
 import 'package:project/infrastructure/dal/models/states/StatesResponse.dart';
 import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
