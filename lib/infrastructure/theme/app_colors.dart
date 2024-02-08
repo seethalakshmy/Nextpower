@@ -30,6 +30,7 @@ class AppColors {
   static Color switchInactiveColor = fromHex('#D5E5EF');
   static Color walletTextBorderColor = fromHex('#D3DADE');
   static Color walletListTextColor = fromHex('#7D8190');
+  static Color darkOrange = fromHex('#DF865F');
 
   static Color primaryColor = fromHex('#0094EA');
   static Color successGreen = fromHex('#62DF85');

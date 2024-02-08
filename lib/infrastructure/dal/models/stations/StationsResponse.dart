@@ -62,12 +62,12 @@ class Stations {
 }
 
   Stations.fromJson(dynamic json) {
-    _stationId = json['station_id '];
+    _stationId = json['station_id'];
     _latitude = json['latitude'];
     _longitude = json['longitude'];
     _distance = json['distance'];
     _freeConnectors = json['free_connectors'];
-    _stationName = json['station_name '];
+    _stationName = json['station_name'];
     _stationStatus = json['station_status'];
     _activeConnectors = json['active_connectors'];
     _power = json['power'];

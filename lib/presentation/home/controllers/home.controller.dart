@@ -73,12 +73,6 @@ class HomeController extends GetxController {
       StationsResponse response = value;
       if (response.status ?? false) {
         stationList = response.stations ?? [];
-        stationList.add(Stations(
-          stationId: 1,
-          stationStatus: "Available",
-          latitude: 10.06501,
-          longitude: 76.3561
-        ));
         onMapCreated();
       } else {
         CustomSnackBar.showErrorSnackBar(
@@ -131,7 +125,7 @@ class HomeController extends GetxController {
         position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
         infoWindow: InfoWindow(
           title: station.stationName ?? "",
-          snippet: "${station.distance ?? 0}",
+          snippet: "${station.distance ?? 0} Km",
         ),
       );
       allMarkers.add(marker);

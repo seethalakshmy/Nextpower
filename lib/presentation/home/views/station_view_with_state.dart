@@ -33,7 +33,7 @@ class _StationViewState extends State<StationView> {
           position: LatLng(station.latitude ?? 0.0, station.longitude ?? 0.0),
           infoWindow: InfoWindow(
             title: station.stationName,
-            // snippet: "${station.distance ?? 0}",
+            snippet: "${station.distance ?? 0} Km",
           ),
           onTap: () {
             Get.dialog(StationBriefDetailsWidget(station));
@@ -57,7 +57,7 @@ class _StationViewState extends State<StationView> {
               myLocationButtonEnabled: false,
               initialCameraPosition: HomeController.cameraPosition,
               myLocationEnabled: true,
-              zoomControlsEnabled: true,
+              zoomControlsEnabled: false,
               onMapCreated: (GoogleMapController mapController) {
                 // controller.mapController.complete(mapController);
                 onMapCreated(mapController);
@@ -72,7 +72,6 @@ class _StationViewState extends State<StationView> {
                   FloatingActionButton(
                     heroTag: "CurrentLocation",
                     onPressed: () {
-                      print("my_location pressed");
                       _homeController.determinePosition();
                     },
                     mini: true,
@@ -85,7 +84,6 @@ class _StationViewState extends State<StationView> {
                   FloatingActionButton(
                     heroTag: "FilterView",
                     onPressed: () {
-                      print("filter pressed");
                       NavigationUtils().callScreenYetToBeDone();
                     },
                     mini: true,

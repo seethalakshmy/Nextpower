@@ -4,6 +4,8 @@ import 'package:project/infrastructure/dal/models/vehicles/VehicleListResponse.d
 import 'package:project/infrastructure/dal/providers/vehicle/vehicle_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/infrastructure/views/custom_alert_view.dart';
 
 class MyVehiclesController extends GetxController {
   RxBool isLoading = false.obs;
@@ -40,6 +42,19 @@ class MyVehiclesController extends GetxController {
             LocaleKeys.failed.tr, response.message ?? "");
       }
     });
+  }
+
+  void showDeleteAlert(int id){
+    Get.dialog(
+      CustomAlertView(
+        title: translate(LocaleKeys.do_you_really_want_to_delete),
+        onPositiveTap: (){
+          Get.back();
+          deleteItem(id);
+        },
+        positiveButtonRightAlign: true,
+      ),
+    );
   }
 
   void moveAddEditScreen(int id) {

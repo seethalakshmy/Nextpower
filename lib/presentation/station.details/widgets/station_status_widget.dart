@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+import 'package:project/infrastructure/utils/translation_util.dart';
 
 class StationStatusWidget extends StatelessWidget {
   const StationStatusWidget({
@@ -16,10 +17,7 @@ class StationStatusWidget extends StatelessWidget {
     return Container(
       margin: margin,
       decoration: BoxDecoration(
-          color: (stationStatus.toLowerCase().compareTo('available') == 0 ||
-                  stationStatus.toLowerCase().compareTo('success') == 0)
-              ? AppColors.availableGreen
-              : Colors.red,
+        color: getStatusColor(stationStatus),
           borderRadius: const BorderRadius.all(Radius.circular(15.0))),
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: Text(

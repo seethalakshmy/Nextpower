@@ -29,7 +29,7 @@ class StationBriefDetailsWidget extends StatelessWidget {
               children: [
                 StationBriefHeaderWidget(
                   stationName: stationDetail.stationName ?? "",
-                  connectorPower: "${stationDetail.power?.toStringAsFixed(2) ?? 0}",
+                  connectorPower: "${stationDetail.power?.toStringAsFixed(2) ?? 0} KW",
                   connectorStatus: stationDetail.stationStatus ?? "",
                   lat: stationDetail.latitude ?? 0.0,
                   long: stationDetail.longitude ?? 0.0,
@@ -39,7 +39,7 @@ class StationBriefDetailsWidget extends StatelessWidget {
                   children: [
                     ContentItem(
                         title: translate(LocaleKeys.distance),
-                        value: "${stationDetail.distance?.toStringAsFixed(2) ?? 0}",
+                        value: "${stationDetail.distance?.toStringAsFixed(2) ?? 0} Km",
                         bgColor: AppColors.dialogLightPink,
                         textColor: AppColors.dialogPink),
                     const SizedBox(width: 5),

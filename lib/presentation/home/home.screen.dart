@@ -23,7 +23,7 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
+        child: Obx(() =>Scaffold(
         appBar: AppBar(
           title: const _AppBarTitleWidget(),
           centerTitle: false,
@@ -33,19 +33,19 @@ class HomeScreen extends GetView<HomeController> {
         ),
         drawer: const CustomDrawerWidget(),
         bottomNavigationBar: const BottomNavigationBarWidget(),
-        // floatingActionButton:
-        //     controller.selectedIndex.value == controller.stationIndex
-        //         ? FloatingActionButton(
-        //             heroTag: "QrCodeScanner",
-        //             onPressed: () {
-        //               NavigationUtils().callQrCodeScannerPage();
-        //             },
-        //             child: SvgImageUtils().showSvgFromAsset(Assets.iconsQrcode,
-        //                 width: 24, height: 24),
-        //           )
-        //         : null,
+        floatingActionButton:
+            controller.selectedIndex.value == controller.stationIndex
+                ? FloatingActionButton(
+                    heroTag: "QrCodeScanner",
+                    onPressed: () {
+                      NavigationUtils().callQrCodeScannerPage();
+                    },
+                    child: SvgImageUtils().showSvgFromAsset(Assets.iconsQrcode,
+                        width: 24, height: 24),
+                  )
+                : null,
         body: const HomeContentView(),
-      ),
+      )),
     );
   }
 }
