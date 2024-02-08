@@ -53,12 +53,12 @@ class FavouritesView extends GetView<HomeController> {
 
                                   Get.dialog(
                                     CustomAlertView(
-                                      title: translate(LocaleKeys.delete_confirmation),
+                                      title: translate(LocaleKeys.do_you_really_want_to_delete),
                                       onPositiveTap: (){
                                         NavigationUtils().goBack();
                                         controller.removeAddFavorite(index,0);
                                       },
-                                      notForNegative: true,
+                                      positiveButtonRightAlign: true,
                                     ),
                                   );
                                 },

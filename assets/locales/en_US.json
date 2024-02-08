@@ -121,5 +121,6 @@
   "please_click_link_to_verify_email": "Please tap the link in the email we sent you to verify your email address",
   "resend_verification_link": "Resend",
   "select_vehicle_make_from_drop_down": "Please choose a vehicle make from the suggestions provided",
-  "select_vehicle_model_from_drop_down": "Please select a vehicle model from the suggestions provided"
+  "select_vehicle_model_from_drop_down": "Please select a vehicle model from the suggestions provided",
+  "do_you_really_want_to_delete": "Do you really want to delete?"
 }

@@ -7,9 +7,9 @@ import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
 class CustomAlertView extends GetView {
-  const CustomAlertView( {
+  const CustomAlertView({
     Key? key,
-    required this.notForNegative,
+    this.positiveButtonRightAlign = false,
     required this.title,
     this.positiveText,
     this.negativeText,
@@ -21,7 +21,7 @@ class CustomAlertView extends GetView {
   final String? negativeText;
   final VoidCallback? onPositiveTap;
   final VoidCallback? onNegativeTap;
-  final bool notForNegative;
+  final bool positiveButtonRightAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -42,48 +42,14 @@ class CustomAlertView extends GetView {
               Row(
                 children: [
                   Expanded(
-                      child: notForNegative == true ? RoundedOutlineButton(
-                          height: 45,
-                          onPressed: () {
-                            if (onNegativeTap == null) {
-                              NavigationUtils().goBack();
-                            } else {
-                              onNegativeTap!();
-                            }
-                          },
-                          text: negativeText ?? 'No'):RoundedRectangleButton(
-                          height: 45,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            if (onPositiveTap == null) {
-                              NavigationUtils().goBack();
-                            } else {
-                              onPositiveTap!();
-                            }
-                          },
-                          text: positiveText ?? 'Yes')),
+                      child: positiveButtonRightAlign
+                          ? noButton(onNegativeTap)
+                          : yesButton(onPositiveTap)),
                   const SizedBox(width: 10),
                   Expanded(
-                      child:notForNegative == true ? RoundedRectangleButton(
-                          height: 45,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            if (onPositiveTap == null) {
-                              NavigationUtils().goBack();
-                            } else {
-                              onPositiveTap!();
-                            }
-                          },
-                          text: positiveText ?? 'Yes'):RoundedOutlineButton(
-                          height: 45,
-                          onPressed: () {
-                            if (onNegativeTap == null) {
-                              NavigationUtils().goBack();
-                            } else {
-                              onNegativeTap!();
-                            }
-                          },
-                          text: negativeText ?? 'No'))
+                      child: positiveButtonRightAlign
+                          ? yesButton(onPositiveTap)
+                          : noButton(onNegativeTap))
                 ],
               )
             ],
@@ -91,5 +57,32 @@ class CustomAlertView extends GetView {
         ),
       ),
     );
+  }
+
+  Widget noButton(Function? onclick) {
+    return RoundedOutlineButton(
+        height: 45,
+        onPressed: () {
+          if (onclick != null) {
+            onclick();
+          } else {
+            NavigationUtils().goBack();
+          }
+        },
+        text: negativeText ?? 'No');
+  }
+
+  Widget yesButton(Function? onclick) {
+    return RoundedRectangleButton(
+        height: 45,
+        padding: EdgeInsets.zero,
+        onPressed: () {
+          if (onclick != null) {
+            onclick();
+          } else {
+            NavigationUtils().goBack();
+          }
+        },
+        text: positiveText ?? 'Yes');
   }
 }
