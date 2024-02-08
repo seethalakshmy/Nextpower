@@ -141,6 +141,9 @@ class LocaleKeys {
       'select_vehicle_make_from_drop_down';
   static const select_vehicle_model_from_drop_down =
       'select_vehicle_model_from_drop_down';
+  static const delete_confirmation = 'Are you sure you want delete?';
+
+
 }
 
 class Locales {

@@ -146,7 +146,7 @@ class _IssueDateAndStatusWidget extends GetView<RfidTagListController> {
                             onNegativeTap: () {
                               rfid.tagStatus(true);
                               NavigationUtils().goBack(closeOverlays: false);
-                            },
+                            }, notForNegative: false,
                           ));
                           // rfid.tagStatus(value);
                         } else {
