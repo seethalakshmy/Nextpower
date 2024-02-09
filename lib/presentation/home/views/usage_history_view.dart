@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
+import 'package:project/infrastructure/dal/models/usage_history/UsageHistoryResponse.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
@@ -9,7 +10,6 @@ import 'package:project/infrastructure/widgets/text/list_title_widget.dart';
 import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
-import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
 
 class UsageHistoryView extends GetView<HomeController> {
@@ -19,7 +19,6 @@ class UsageHistoryView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const _OptionsWidgetSection(),
         Expanded(
           child: Obx(
             () => controller.historyLoading.value
@@ -76,7 +75,7 @@ class _ListContentSection extends GetView<HomeController> {
                     Row(
                       children: [
                         _HeaderWidget(history: history),
-                        _ArrowWidget(id: history.id ?? 0)
+                        _ArrowWidget(id: history.id?.toInt() ?? 0)
                       ],
                     ),
                     const Divider(),
@@ -92,42 +91,12 @@ class _ListContentSection extends GetView<HomeController> {
   }
 }
 
-class _OptionsWidgetSection extends GetView<HomeController> {
-  const _OptionsWidgetSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-      decoration: BoxDecoration(
-        color: AppColors.optionsNotSelectedColor,
-        border: Border.all(color: AppColors.optionsNotSelectedColor),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: [
-          _OptionsView(
-            text: LocaleKeys.success,
-            currentIndex: controller.successHistory,
-          ),
-          _OptionsView(
-            text: LocaleKeys.pendingInvoice,
-            currentIndex: controller.pendingHistory,
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class _HeaderWidget extends StatelessWidget {
   const _HeaderWidget({
     required this.history,
   });
 
-  final UsageHistory history;
+  final UsageHistoryItem history;
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +152,7 @@ class _TimeViews extends StatelessWidget {
     required this.history,
   });
 
-  final UsageHistory history;
+  final UsageHistoryItem history;
 
   @override
   Widget build(BuildContext context) {
@@ -200,47 +169,6 @@ class _TimeViews extends StatelessWidget {
                 subtitle: history.endTime ?? "",
                 showAsColumn: true))
       ],
-    );
-  }
-}
-
-class _OptionsView extends GetView<HomeController> {
-  const _OptionsView({
-    required this.text,
-    required this.currentIndex,
-    super.key,
-  });
-
-  final String text;
-  final int currentIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          controller.setHistorySelectedIndex(currentIndex);
-        },
-        child: Obx(() => Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: currentIndex == controller.historySelectedIndex.value
-                    ? AppColors.primaryGreen
-                    : AppColors.optionsNotSelectedColor,
-                border: Border.all(color: AppColors.optionsNotSelectedColor),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              alignment: Alignment.center,
-              child: SubtitleWidget(
-                subtitle: translate(text),
-                fontWeight: FontWeight.w600,
-                textColor: currentIndex == controller.historySelectedIndex.value
-                    ? Colors.white
-                    : AppColors.btmTextColor,
-                fontSize: 16,
-              ),
-            )),
-      ),
     );
   }
 }

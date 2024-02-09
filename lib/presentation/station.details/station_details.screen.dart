@@ -27,13 +27,22 @@ class StationDetailsScreen extends GetView<StationDetailsController> {
               ? EmptyListView(
                   subTitle: translate(LocaleKeys.noSuchStationsFound),
                   title: translate(LocaleKeys.oops))
-              : ListView(
-                  children: [
-                    const HeaderView(),
-                    Obx(() => controller.isSelectedConnectorView.value
-                        ? const ConnectorsListWidget()
-                        : const OverviewWidget()),
-                  ],
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    if (controller.isSelectedConnectorView.value) {
+                      controller.getConnectors();
+                      return Future<void>.delayed(const Duration(seconds: 3));
+                    }
+                    return;
+                  },
+                  child: ListView(
+                    children: [
+                      const HeaderView(),
+                      Obx(() => controller.isSelectedConnectorView.value
+                          ? const ConnectorsListWidget()
+                          : const OverviewWidget()),
+                    ],
+                  ),
                 )),
     );
   }
