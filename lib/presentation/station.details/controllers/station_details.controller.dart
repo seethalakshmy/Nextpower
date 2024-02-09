@@ -12,23 +12,14 @@ class StationDetailsController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSelectedConnectorView = true.obs;
   RxBool isAllFilterChosen = true.obs;
+  RxBool isFavorite = false.obs;
 
   RxList<int> openedIndexes = <int>[].obs;
    Rx<Station> stationDetails = Station().obs;
 
   @override
   void onInit() {
-    isLoading(true);
-    stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
-    StationDetailsProvider().getStationDetails(id: stationId).then((value) {
-      if (value.status ?? false){
-       stationDetails.value = value.station!;
-      }else{
-        CustomSnackBar.showErrorSnackBar(
-            LocaleKeys.failed.tr, value.message ?? "");
-      }
-      isLoading(false);
-    });
+    getStationDetails();
     super.onInit();
   }
 
@@ -40,6 +31,21 @@ class StationDetailsController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void getStationDetails() {
+    isLoading(true);
+    stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
+    StationDetailsProvider().getStationDetails(id: stationId).then((value) {
+      if (value.status ?? false){
+        stationDetails.value = value.station!;
+        isFavorite.value = stationDetails.value.overview?.isFavorite ?? false;
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
+      isLoading(false);
+    });
   }
 
   setIndexesData(index) {

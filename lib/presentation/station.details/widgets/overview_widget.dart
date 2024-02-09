@@ -12,8 +12,10 @@ import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/my.address/widgets/show_address_widget.dart';
 import 'package:project/presentation/station.details/controllers/station_details.controller.dart';
-import 'package:project/presentation/station.details/models/station_details_model.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../infrastructure/dal/providers/favorites/favorites_provider.dart';
+import '../../../infrastructure/navigation/navigation_utils.dart';
 
 class OverviewWidget extends GetView<StationDetailsController> {
   const OverviewWidget({
@@ -27,14 +29,15 @@ class OverviewWidget extends GetView<StationDetailsController> {
 
       return Column(
         children: [
-          _IconsRow(controller.stationDetails.value),
+          _IconsRow(controller.stationDetails.value,controller.isFavorite),
           const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _OverviewDetailsWidget( station: controller.stationDetails.value),
+                _OverviewDetailsWidget(
+                    station: controller.stationDetails.value),
                 const SizedBox(height: 20),
                 const _AmenitiesWidget(),
                 const SizedBox(height: 20),
@@ -58,7 +61,8 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return (controller.stationDetails.value.amenities == null)
+    String amenities = controller.stationDetails.value.amenities!.join(" | ");
+    return (controller.stationDetails.value.amenities != null)
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,7 +75,8 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
               const SizedBox(
                 height: 10,
               ),
-              _LabelWidget(label: controller.stationDetails.value.amenities?.first ?? "hgfhgfg")
+              _LabelWidget(
+                  label: amenities)
             ],
           )
         : Container();
@@ -79,10 +84,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
 }
 
 class _OverviewDetailsWidget extends StatelessWidget {
-  const _OverviewDetailsWidget({
-    super.key,
-    required this.station
-  });
+  const _OverviewDetailsWidget({super.key, required this.station});
 
   final Station station;
 
@@ -157,11 +159,13 @@ class _LabelWidget extends StatelessWidget {
 }
 
 class _IconsRow extends StatelessWidget {
-  const _IconsRow(this.stationDetails);
+  const _IconsRow(this.stationDetails, this.isFavorites);
   final Station stationDetails;
+  final RxBool isFavorites;
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 10),
       child: Row(
@@ -171,7 +175,9 @@ class _IconsRow extends StatelessWidget {
             asset: Assets.iconsDirection,
             label: LocaleKeys.direction,
             onTap: () {
-              // map redirection
+              NavigationUtils().callGoogleMap(
+                  stationDetails.overview?.latitude ?? 0.0,
+                  stationDetails.overview?.longitude ?? 0.0);
             },
           ),
           _IconsLabelWidget(
@@ -186,16 +192,22 @@ class _IconsRow extends StatelessWidget {
               _makePhoneCall(stationDetails.overview?.mobileNumber ?? "");
             },
           ),
-          _IconsLabelWidget(
-            asset: Assets.iconsFavouriteBig,
-            label: LocaleKeys.favourites,
-            onTap: () {},
+          Obx(()=>
+             _IconsLabelWidget(
+              asset: isFavorites.value ? Assets.iconsFavouriteBig:Assets.iconsFavouriteIcon,
+              label: LocaleKeys.favourites,
+              onTap: () {
+                FavoriteProvider().removeOrAddFavoritesListItem(
+                    favoriteId: isFavorites.value ? 0 : 1,
+                    stationId: stationDetails.stationId ?? 0);
+                isFavorites(!isFavorites.value);
+              },
+            ),
           ),
         ],
       ),
     );
   }
-
 
   Future<void> _makePhoneCall(String phoneNumber) async {
     final Uri launchUri = Uri(
@@ -205,8 +217,6 @@ class _IconsRow extends StatelessWidget {
     await launchUrl(launchUri);
   }
 }
-
-
 
 class _IconsLabelWidget extends StatelessWidget {
   const _IconsLabelWidget({
