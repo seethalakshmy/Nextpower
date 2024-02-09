@@ -13,6 +13,7 @@ class StationDetailsController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSelectedConnectorView = true.obs;
   RxBool isAllFilterChosen = true.obs;
+  RxBool isFavorite = false.obs;
 
   RxList<int> openedIndexes = <int>[].obs;
   RxList<Connectors> connectionList = RxList<Connectors>.empty(growable: true);
@@ -22,17 +23,25 @@ class StationDetailsController extends GetxController {
   void onInit() {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
+
+    getStationDetails();
+    getConnectors();
+    super.onInit();
+  }
+
+  void getStationDetails() {
+    isLoading(true);
+    stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
     StationDetailsProvider().getStationDetails(id: stationId).then((value) {
-      if (value.status ?? false) {
+      if (value.status ?? false){
         stationDetails.value = value.station!;
-      } else {
+        isFavorite.value = stationDetails.value.overview?.isFavorite ?? false;
+      }else{
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value.message ?? "");
       }
       isLoading(false);
     });
-    getConnectors();
-    super.onInit();
   }
 
   void getConnectors() {
@@ -69,6 +78,6 @@ class StationDetailsController extends GetxController {
     //     amenities = "$amenities | ";
     //   }
     // }
-    return amenities;
+     return amenities;
   }
 }

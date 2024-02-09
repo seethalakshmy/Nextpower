@@ -9,13 +9,11 @@ class MyAddressController extends GetxController {
   //TODO: Implement MyAddressController
 
   final isLoading = false.obs;
-
   RxList<SavedAddress> address = RxList.empty(growable: true);
 
   @override
   void onInit() {
     isLoading(true);
-
     getAddress();
     super.onInit();
   }
