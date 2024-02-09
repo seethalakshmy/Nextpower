@@ -10,7 +10,6 @@ class RfidTagListController extends GetxController {
   final isNameEditable = false.obs;
   Rx <RfidResponse> rfidList = RfidResponse().obs;
 
-
   @override
   void onInit() {
     getRfidTagList();
@@ -41,7 +40,13 @@ class RfidTagListController extends GetxController {
 
   }
 
-
+  bool getStatus(String? status) {
+    if (status != null && status.toLowerCase() == "active") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
 }
