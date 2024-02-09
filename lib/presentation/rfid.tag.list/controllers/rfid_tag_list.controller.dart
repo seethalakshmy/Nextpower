@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
-import 'package:project/presentation/rfid.tag.list/providers/rfid_tag_list_provider.dart';
 
-import '../rfid_tag_list_model.dart';
+import '../../../generated/locales.g.dart';
+import '../../../infrastructure/dal/models/rfid/rfid_response.dart';
+import '../../../infrastructure/dal/providers/rfid/rfidProvider.dart';
+import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class RfidTagListController extends GetxController {
   final isLoading = true.obs;
-  List<RfidItem> rfidList = [];
   final isNameEditable = false.obs;
+  Rx <RfidResponse> rfidList = RfidResponse().obs;
+
 
   @override
   void onInit() {
-    RfidTagListProvider().getRfidTagList().then((value) {
-      rfidList = value?.rfidList ?? [];
-      isLoading(false);
-    });
+    getRfidTagList();
     super.onInit();
   }
 
@@ -26,4 +26,22 @@ class RfidTagListController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  void getRfidTagList() {
+    isLoading(true);
+    RfidTagListProvider().getRfidTagList().then((value){
+      if (value?.status != null){
+        rfidList.value = value!;
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value?.message ?? "");
+      }
+    });
+    isLoading(false);
+
+  }
+
+
+
+
 }

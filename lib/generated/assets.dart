@@ -30,6 +30,7 @@ class Assets {
   static const String iconsEdit = 'assets/icons/edit.svg';
   static const String iconsEmail = 'assets/icons/email.svg';
   static const String iconsExclamation = 'assets/icons/exclamation.svg';
+  static const String iconsFavFillHeart = 'assets/icons/fav_fill_heart.svg';
   static const String iconsFavouriteActive = 'assets/icons/favourite_active.svg';
   static const String iconsFavouriteBig = 'assets/icons/favourite_big.svg';
   static const String iconsFavouriteIcon = 'assets/icons/favourite_icon.svg';

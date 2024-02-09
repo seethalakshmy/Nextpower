@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class FavoritesModel {
+class FavoritesModelResponse {
   final bool? status;
   final String? message;
   final List<Favorite>? favorites;
 
-  FavoritesModel({
+  FavoritesModelResponse({
     this.status,
     this.message,
     this.favorites,
   });
 
-  factory FavoritesModel.fromRawJson(String str) => FavoritesModel.fromJson(json.decode(str));
+  factory FavoritesModelResponse.fromRawJson(String str) => FavoritesModelResponse.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory FavoritesModel.fromJson(Map<String, dynamic> json) => FavoritesModel(
+  factory FavoritesModelResponse.fromJson(Map<String, dynamic> json) => FavoritesModelResponse(
     status: json["status"],
     message: json["message"],
     favorites: json["favorites"] == null ? [] : List<Favorite>.from(json["favorites"]!.map((x) => Favorite.fromJson(x))),
@@ -32,7 +32,7 @@ class Favorite {
   final int? stationId;
   final double? latitude;
   final String? stationName;
-  final bool? stationStatus;
+  final String? stationStatus;
   final int? freeConnectors;
   final int? activeConnectors;
   final double? longitude;

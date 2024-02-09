@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,8 @@ import 'package:project/presentation/my.address/widgets/show_address_widget.dart
 import 'package:project/presentation/station.details/controllers/station_details.controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../infrastructure/dal/providers/favorites/favorites_provider.dart';
 import '../../../infrastructure/navigation/navigation_utils.dart';
+import '../../../infrastructure/widgets/loaders/loading_widget.dart';
 
 class OverviewWidget extends GetView<StationDetailsController> {
   const OverviewWidget({
@@ -29,7 +30,9 @@ class OverviewWidget extends GetView<StationDetailsController> {
 
       return Column(
         children: [
-          _IconsRow(controller.stationDetails.value,controller.isFavorite),
+          _IconsRow(
+            controller: controller,
+          ),
           const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30, top: 20),
@@ -75,8 +78,7 @@ class _AmenitiesWidget extends GetView<StationDetailsController> {
               const SizedBox(
                 height: 10,
               ),
-              _LabelWidget(
-                  label: amenities)
+              _LabelWidget(label: amenities)
             ],
           )
         : Container();
@@ -159,13 +161,15 @@ class _LabelWidget extends StatelessWidget {
 }
 
 class _IconsRow extends StatelessWidget {
-  const _IconsRow(this.stationDetails, this.isFavorites);
-  final Station stationDetails;
-  final RxBool isFavorites;
+  const _IconsRow({
+    super.key,
+    required this.controller,
+  });
+
+  final StationDetailsController controller;
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 10),
       child: Row(
@@ -176,8 +180,8 @@ class _IconsRow extends StatelessWidget {
             label: LocaleKeys.direction,
             onTap: () {
               NavigationUtils().callGoogleMap(
-                  stationDetails.overview?.latitude ?? 0.0,
-                  stationDetails.overview?.longitude ?? 0.0);
+                  controller.stationDetails.value.overview?.latitude ?? 0.0,
+                  controller.stationDetails.value.overview?.longitude ?? 0.0);
             },
           ),
           _IconsLabelWidget(
@@ -189,21 +193,21 @@ class _IconsRow extends StatelessWidget {
             asset: Assets.iconsCallBig,
             label: LocaleKeys.call,
             onTap: () {
-              _makePhoneCall(stationDetails.overview?.mobileNumber ?? "");
+              _makePhoneCall(
+                  controller.stationDetails.value.overview?.mobileNumber ?? "");
             },
           ),
-          Obx(()=>
-             _IconsLabelWidget(
-              asset: isFavorites.value ? Assets.iconsFavouriteBig:Assets.iconsFavouriteIcon,
-              label: LocaleKeys.favourites,
-              onTap: () {
-                FavoriteProvider().removeOrAddFavoritesListItem(
-                    favoriteId: isFavorites.value ? 0 : 1,
-                    stationId: stationDetails.stationId ?? 0);
-                isFavorites(!isFavorites.value);
-              },
-            ),
-          ),
+          Obx(() => FavoritesWidget(
+            loading:controller.isFavoritesLoading.value,
+                    asset: controller.isFavorite.value
+                        ? Assets.iconsFavFillHeart
+                        : Assets.iconsFavouriteBig,
+                    onTap: () {
+                      controller.removeAddFavorite(controller.stationId,
+                          controller.isFavorite.value ? 0 : 1);
+                    },
+                  )
+              )
         ],
       ),
     );
@@ -242,6 +246,49 @@ class _IconsLabelWidget extends StatelessWidget {
             fontWeight: FontWeight.w600,
           )
         ],
+      ),
+    );
+  }
+}
+
+class FavoritesWidget extends StatelessWidget {
+  const FavoritesWidget({
+    required this.asset,
+    required this.onTap,
+    this.loading = false,
+  });
+
+  final bool loading;
+  final String asset;
+  final GestureTapCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          loading
+              ? buildLoadingWidget()
+              : SvgImageUtils().showSvgFromAsset(asset, width: 28, height: 28),
+          const SizedBox(height: 10),
+          TitleWidget(
+            title: translate(LocaleKeys.favourites),
+            fontWeight: FontWeight.w600,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildLoadingWidget() {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      height: 28,
+      width: 28,
+      child: CircularProgressIndicator(
+        color: AppColors.primaryBlue,
+        strokeWidth: 1,
       ),
     );
   }

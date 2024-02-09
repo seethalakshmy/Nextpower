@@ -10,17 +10,17 @@ import '../../models/favorites/favorites_model.dart';
 class FavoriteProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
-Future<FavoritesModel> getFavoritesList() async {
+Future<FavoritesModelResponse> getFavoritesList() async {
   //model not added
   try {
     http.Response response =
     await _apiService.apiRequest(endPoint: 'get_favorites');
-    FavoritesModel data =
-    FavoritesModel.fromJson(json.decode(response.body));
+    FavoritesModelResponse data =
+    FavoritesModelResponse.fromJson(json.decode(response.body));
     return data;
   } catch (e) {
     debugPrint("Api issue in provider : ${e.toString()}");
-    return FavoritesModel(status: false, message: e.toString());
+    return FavoritesModelResponse(status: false, message: e.toString());
   }
 }
 

@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class StationDetailModel {
+class StationDetailResponse {
   final bool? status;
   final String? message;
   final Station? station;
 
-  StationDetailModel({
+  StationDetailResponse({
     this.status,
     this.message,
     this.station,
   });
 
-  factory StationDetailModel.fromRawJson(String str) => StationDetailModel.fromJson(json.decode(str));
+  factory StationDetailResponse.fromRawJson(String str) => StationDetailResponse.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory StationDetailModel.fromJson(Map<String, dynamic> json) => StationDetailModel(
+  factory StationDetailResponse.fromJson(Map<String, dynamic> json) => StationDetailResponse(
     status: json["status"],
     message: json["message"],
     station: json["station"] == null ? null : Station.fromJson(json["station"]),

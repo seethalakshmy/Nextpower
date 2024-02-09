@@ -44,7 +44,7 @@ class FavouritesView extends GetView<HomeController> {
                                   title: favorites.stationName ?? "",
                                   titleFontSize: 18,
                                   power:  "",
-                                  status: favorites.stationStatus == "true" ? "Availabe":"Not Available"),
+                                  status: favorites.stationStatus ?? ""),
                             ),
                             IconButton(
                                 padding: const EdgeInsets.only(
@@ -55,8 +55,9 @@ class FavouritesView extends GetView<HomeController> {
                                     CustomAlertView(
                                       title: translate(LocaleKeys.do_you_really_want_to_delete),
                                       onPositiveTap: (){
+                                        final int stationId = controller.favoritesList[index].stationId?.toInt() ?? 0;
                                         NavigationUtils().goBack();
-                                        controller.removeAddFavorite(index,0);
+                                        controller.removeFavorite(stationId);
                                       },
                                       positiveButtonRightAlign: true,
                                     ),

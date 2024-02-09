@@ -14,7 +14,7 @@ class StationDetailsProvider extends GetConnect {
   void onInit() {
   }
 
-  Future<StationDetailModel> getStationDetails({required int id}) async {
+  Future<StationDetailResponse> getStationDetails({required int id}) async {
     try {
       http.Response response =
       await _apiService.apiRequest(endPoint: 'get_station_by_id',postRequest: false,
@@ -22,12 +22,12 @@ class StationDetailsProvider extends GetConnect {
             'id': id.toString(),
           }
       );
-      StationDetailModel data =
-      StationDetailModel.fromJson(json.decode(response.body));
+      StationDetailResponse data =
+      StationDetailResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
-      return StationDetailModel(status: false, message: e.toString());
+      return StationDetailResponse(status: false, message: e.toString());
     }
   }
 

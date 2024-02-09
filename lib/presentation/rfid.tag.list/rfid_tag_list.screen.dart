@@ -13,9 +13,9 @@ import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/custom_switch.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
-import 'package:project/presentation/rfid.tag.list/rfid_tag_list_model.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
 
+import '../../infrastructure/dal/models/rfid/rfid_response.dart';
 import '../../infrastructure/widgets/text/subtitle_widget.dart';
 import 'controllers/rfid_tag_list.controller.dart';
 
@@ -43,7 +43,7 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
                       padding: const EdgeInsets.only(top: 5),
                       child: SvgImageUtils()
                           .showSvgFromAsset(Assets.iconsRequestRfidWhiteIcon)),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   TitleWidget(
@@ -69,9 +69,9 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
                       child: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.rfidList.length,
+                        itemCount: controller.rfidList.value.rfids?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final rfid = controller.rfidList[index];
+                          final rfid = controller.rfidList.value.rfids?[index];
                           return Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
@@ -79,17 +79,17 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
                             child: Column(
                               children: [
                                 _RfidNameView(
-                                  rfid: rfid,
+                                  rfid: rfid!,
                                 ),
                                 const SizedBox(height: 5),
-                                _IssueDateAndStatusWidget(rfid: rfid),
+                               // _IssueDateAndStatusWidget(rfid: rfid),
                                 const SizedBox(height: 10),
                               ],
                             ),
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
-                          return Divider();
+                          return const Divider();
                         },
                       ),
                     ),
@@ -105,7 +105,7 @@ class _IssueDateAndStatusWidget extends GetView<RfidTagListController> {
     required this.rfid,
   });
 
-  final RfidItem rfid;
+  final Rfid rfid;
 
   @override
   Widget build(BuildContext context) {
@@ -132,25 +132,25 @@ class _IssueDateAndStatusWidget extends GetView<RfidTagListController> {
               const SizedBox(height: 5),
               Obx(() => IntrinsicWidth(
                     child: CustomSwitch(
-                      value: rfid.tagStatus.value,
+                      value: rfid.tagStatus == "Active" ? true:false,
                       onChanged: (value) {
                         print(value);
-                        if (rfid.tagStatus.value == true) {
+                        if (rfid.tagStatus == "Active") {
                           Get.dialog(CustomAlertView(
                             title: translate(
                                 LocaleKeys.doYouReallyWantMakeYourRFIDInactive),
                             onPositiveTap: () {
-                              rfid.tagStatus(false);
+                             // rfid.tagStatus(false);
                               NavigationUtils().goBack(closeOverlays: false);
                             },
                             onNegativeTap: () {
-                              rfid.tagStatus(true);
+                             // rfid.tagStatus(true);
                               NavigationUtils().goBack(closeOverlays: false);
                             },
                           ));
                           // rfid.tagStatus(value);
                         } else {
-                          rfid.tagStatus(true);
+                         // rfid.tagStatus(true);
                         }
                       },
                       // activeColor: AppColors.primaryBlue,
@@ -171,7 +171,7 @@ class _RfidNameView extends GetView<RfidTagListController> {
     required this.rfid,
   });
 
-  final RfidItem rfid;
+  final Rfid rfid;
 
   @override
   Widget build(BuildContext context) {
@@ -180,9 +180,9 @@ class _RfidNameView extends GetView<RfidTagListController> {
         Expanded(
           child: Obx(() => TextFormField(
                 initialValue: rfid.tagName,
-                enabled: rfid.isNameEditable.value,
-                focusNode: rfid.focusNode,
-                autofocus: rfid.isNameEditable.value,
+                enabled: false, //rfid.isNameEditable.value,
+                //focusNode: "",//rfid.focusNode,
+                //autofocus: rfid.isNameEditable.value,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -191,21 +191,21 @@ class _RfidNameView extends GetView<RfidTagListController> {
               )),
         ),
         const SizedBox(width: 10),
-        Obx(() => rfid.isNameEditable.value
-            ? IconButton(
-                onPressed: () {
-                  rfid.isNameEditable(false);
-                },
-                icon: const Icon(Icons.done),
-              )
-            : IconButton(
-                onPressed: () {
-                  rfid.isNameEditable(true);
-
-                  FocusScope.of(context).requestFocus(rfid.focusNode);
-                },
-                icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
-              ))
+        // Obx(() => rfid.isNameEditable.value
+        //     ? IconButton(
+        //         onPressed: () {
+        //          // rfid.isNameEditable(false);
+        //         },
+        //         icon: const Icon(Icons.done),
+        //       )
+        //     : IconButton(
+        //         onPressed: () {
+        //          // rfid.isNameEditable(true);
+        //
+        //          // FocusScope.of(context).requestFocus(rfid.focusNode);
+        //         },
+        //         icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
+        //       ))
       ],
     );
   }

@@ -37,13 +37,13 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     from = Get.parameters[ParamName.from].toString();
-
     getProfile();
     super.onInit();
   }
 
   void getProfile() {
     isLoading(true);
+    print("hghghghgh");
     ProfileProvider().getProfile().then((response) {
       isLoading(false);
       if (response.status ?? false) {

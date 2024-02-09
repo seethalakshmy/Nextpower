@@ -182,7 +182,7 @@ class HomeController extends GetxController {
   }
 
   void getFavoritesList() {
-    isLoading(true);
+     isLoading(true);
     FavoriteProvider().getFavoritesList().then((response){
       if (response.status == true) {
         favoritesList.value = response.favorites!;
@@ -190,14 +190,12 @@ class HomeController extends GetxController {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
-      isLoading(false);
+       isLoading(false);
     });
   }
 
-  void removeAddFavorite(int currentIndex,int favoriteId) async {
-    isLoading(true);
-    final int? stationId = favoritesList[currentIndex].stationId?.toInt();
-    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: favoriteId, stationId: stationId ?? 0).then((response){
+  void removeFavorite(int stationId) async {
+    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: 0, stationId: stationId).then((response){
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
@@ -207,7 +205,7 @@ class HomeController extends GetxController {
             LocaleKeys.failed.tr, response.message ?? "");
       }
     });
-    isLoading(false);
+  //  isLoading(false);
   }
 
 

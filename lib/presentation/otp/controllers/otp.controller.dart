@@ -9,6 +9,9 @@ import 'package:project/infrastructure/storage/app_storage.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
+import 'package:project/presentation/profile/controllers/profile.controller.dart';
+
+import '../../../infrastructure/navigation/routes.dart';
 
 class OtpController extends GetxController {
   RxString numberToDisplay = "".obs;
@@ -106,6 +109,8 @@ class OtpController extends GetxController {
     bool profileCompleted = AppStorage().getLoggedIn();
     if (isVerify.value) {
       Get.back(result: true);
+      final profileController=Get.find<ProfileController>();
+      profileController.getProfile();
     } else if (profileCompleted) {
       NavigationUtils().callHomePage();
     } else {
