@@ -11,7 +11,6 @@ import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.
 import 'package:project/infrastructure/widgets/combo_widgets/title_power_status_combo_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
-import 'package:project/presentation/home/models/favorites_list_model.dart';
 import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
 
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';

@@ -8,16 +8,15 @@ import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/dal/models/stations/StationsDetailsResponse.dart';
 import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
+import 'package:project/infrastructure/dal/models/usage_history/UsageHistoryResponse.dart';
 import 'package:project/infrastructure/dal/providers/favorites/favorites_provider.dart';
 import 'package:project/infrastructure/dal/providers/home_stations/home_stations_provider.dart';
+import 'package:project/infrastructure/dal/providers/usage_history/usage_history_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
-import 'package:project/presentation/home/models/usage_history_list_model.dart';
 import 'package:project/presentation/home/models/wallet_detail_model.dart';
-import 'package:project/presentation/home/providers/usage_history_list_provider.dart';
 import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
-import '../models/favorites_list_model.dart';
 
 class HomeController extends GetxController {
   final int stationIndex = 1;
@@ -36,7 +35,6 @@ class HomeController extends GetxController {
 
   static const CameraPosition cameraPosition = CameraPosition(
     target: LatLng(10.065010195176646, 76.35613924535859),
-    // zoom: 14.4746,
     zoom: 10 //increase to zoom
   );
   RxList<Marker> allMarkers = <Marker>[].obs; // Inside Map View Controller
@@ -46,9 +44,8 @@ class HomeController extends GetxController {
   GoogleMapController? mapController;
 
   RxList<Favorite> favoritesList = <Favorite>[].obs;
-  final historySelectedIndex = 1.obs;
   final historyLoading = true.obs;
-  List<UsageHistory> usageHistoryList = [];
+  RxList<UsageHistoryItem> usageHistoryList = RxList.empty(growable: true);
   WalletDetail? walletDetail;
   final TextEditingController walletBalanceController = TextEditingController();
 
@@ -56,7 +53,7 @@ class HomeController extends GetxController {
   void onInit() async {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
-    // await determinePosition();
+    // await determinePosition(); //to go to my location
     super.onInit();
     getStations();
     getFavoritesList();
@@ -74,6 +71,22 @@ class HomeController extends GetxController {
       if (response.status ?? false) {
         stationList = response.stations ?? [];
         onMapCreated();
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+  void getUsageHistory() {
+    historyLoading(true);
+    UsageHistoryProvider()
+        .getUsageHistory()
+        .then((value) {
+      historyLoading(false);
+      UsageHistoryResponse response = value;
+      if (response.status ?? false) {
+        usageHistoryList.value = response.usageHistory ?? [];
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -102,7 +115,7 @@ class HomeController extends GetxController {
       getFavoritesList();
     } else if (index == historyIndex) {
       selectedIndex.value = index;
-      getUsageHistoryList(successHistory);
+      getUsageHistory();
     } else if (index == walletIndex) {
       selectedIndex.value = index;
       getWalletData();
@@ -207,23 +220,6 @@ class HomeController extends GetxController {
     });
   //  isLoading(false);
   }
-
-
-  void getUsageHistoryList(int historyOption) async {
-    historyLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
-    UsageHistoryListProvider().getUsageHistoryList(historyOption).then((value) {
-      usageHistoryList = value?.usageHistory ?? [];
-      historyLoading(false);
-    });
-  }
-
-  void setHistorySelectedIndex(int currentIndex) {
-    historySelectedIndex(currentIndex);
-    getUsageHistoryList(currentIndex);
-  }
-
-
 
   void getWalletData() async {
     isLoading(true);

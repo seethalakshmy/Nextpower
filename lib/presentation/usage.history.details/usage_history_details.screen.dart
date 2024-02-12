@@ -22,7 +22,7 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
         body: Obx(
           () => controller.isLoading.value
               ? const LoadingWidget()
-              : controller.details != null
+              : controller.details.value?.id != null
                   ? Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 40.0, vertical: 20),
@@ -36,20 +36,22 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                                 children: [
                                   TitleWidget(
                                     title:
-                                        "${translate(LocaleKeys.id).toUpperCase()}: ${controller.details?.id}",
+                                        "${translate(LocaleKeys.id).toUpperCase()}: ${controller.details.value?.id ?? 0}",
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                   ),
                                   const SizedBox(width: 20),
                                   StationStatusWidget(
                                       stationStatus:
-                                          controller.details?.status ?? ""),
+                                          controller.details.value?.status ??
+                                              ""),
                                 ],
                               )),
                               Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 alignment: WrapAlignment.center,
                                 children: [
+                                  ///need to change according to status
                                   const Icon(
                                     Icons.do_disturb,
                                     color: Colors.red,
@@ -57,7 +59,9 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
-                                    controller.details?.transactionStatus ?? "",
+                                    controller
+                                            .details.value?.transactionStatus ??
+                                        "",
                                     style: const TextStyle(
                                         color: Colors.red, fontSize: 13),
                                   )
@@ -68,25 +72,25 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                           const SizedBox(height: 20),
                           _HistoryItem(
                             title: translate(LocaleKeys.totalCost),
-                            value:
-                                (controller.details?.totalCost ?? 0).toString(),
+                            value: (controller.details.value?.totalCost ?? 0)
+                                .toString(),
                           ),
                           _HistoryItem(
                             title: translate(LocaleKeys.totalUnit),
-                            value:
-                                (controller.details?.totalUnit ?? 0).toString(),
+                            value: (controller.details.value?.totalUnit ?? 0)
+                                .toString(),
                           ),
                           _HistoryItem(
                             title: translate(LocaleKeys.connector),
-                            value: controller.details?.connector ?? "",
+                            value: controller.details.value?.connector ?? "",
                           ),
                           _HistoryItem(
                             title: translate(LocaleKeys.startTime),
-                            value: controller.details?.startTime ?? "",
+                            value: controller.details.value?.startTime ?? "",
                           ),
                           _HistoryItem(
                             title: translate(LocaleKeys.endTime),
-                            value: controller.details?.endTime ?? "",
+                            value: controller.details.value?.endTime ?? "",
                           ),
                         ],
                       ),
