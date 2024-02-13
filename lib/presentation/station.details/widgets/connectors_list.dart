@@ -116,11 +116,10 @@ class _ExpandedButtonWidgets extends GetView<StationDetailsController> {
                   asset: Assets.iconsChargeWhiteIcon,
                   padding: EdgeInsets.zero,
                   onPressed: () {
+                    int? connectorId = controller.connectionList[index].connectorId?.toInt();
                     NavigationUtils().callChargingSessionDetails(
                         stationId: controller.stationId,
-                        connectorId: controller.details
-                            ?.connectorsList?[index].connectorId ??
-                            0);
+                        connectorId: connectorId ?? 0);
                   },
                   text: translate(LocaleKeys.charge),
                   height: 50,

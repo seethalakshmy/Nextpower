@@ -16,7 +16,6 @@ import 'package:project/presentation/station.details/controllers/station_details
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../infrastructure/navigation/navigation_utils.dart';
-import '../../../infrastructure/widgets/loaders/loading_widget.dart';
 
 class OverviewWidget extends GetView<StationDetailsController> {
   const OverviewWidget({
@@ -42,7 +41,8 @@ class OverviewWidget extends GetView<StationDetailsController> {
                 _OverviewDetailsWidget(
                     station: controller.stationDetails.value),
                 const SizedBox(height: 20),
-                const _AmenitiesWidget(),
+                controller.stationDetails.value.amenities!.isNotEmpty ?
+                const _AmenitiesWidget():const SizedBox(),
                 const SizedBox(height: 20),
               ],
             ),

@@ -5,8 +5,9 @@ import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
-import 'package:project/presentation/charging.session/models/charging_session_details_model.dart';
-import 'package:project/presentation/charging.session/providers/charging_session_details_provider.dart';
+
+import '../../../infrastructure/dal/models/charging_session/charging_session_respose.dart';
+import '../../../infrastructure/dal/providers/charging_session/charging_session_provider.dart';
 
 class ChargingSessionController extends GetxController {
   final int moneyOptionValue = 1;
@@ -15,28 +16,25 @@ class ChargingSessionController extends GetxController {
   int? stationId;
   int? connectorId;
   RxBool isLoading = true.obs;
-
-  ChargingSessionDetails? sessionDetails;
+  ChargingSessionResponseModel? chargingSession;
   RxInt selectedChargingOption = 1.obs;
+  RxInt standardMinValue = 100.obs;
+  RxInt standardMaxValue = 5000.obs;
+  static int standardValue = 100;
   TextEditingController textController = TextEditingController();
 
   @override
   void onInit() async {
+    textController.text = '100';
     stationId =
         int.parse((Get.parameters[ParamName.stationId] ?? "0").toString());
-    stationId = 9;
+    //stationId = 9;
     connectorId =
         int.parse((Get.parameters[ParamName.connectorId] ?? "0").toString());
-    await Future.delayed(const Duration(seconds: 2));
+
+    await Future.delayed(const Duration(seconds: 1));
     if (stationId != 0 && connectorId != 0) {
-      ChargingSessionDetailsProvider()
-          .getChargingSessionDetails(
-              stationId: stationId ?? 0, connectorId: connectorId ?? 0)
-          .then((value) {
-        sessionDetails = value;
-        isLoading(false);
-      });
-      textController.text = "0";
+      postChargingSessionDetail(connectorId ?? 0, stationId ?? 0);
     } else {
       NavigationUtils().goBack();
       CustomSnackBar.showErrorSnackBar(translate(LocaleKeys.error),
@@ -51,6 +49,23 @@ class ChargingSessionController extends GetxController {
   //3= Energy
   setSelectedOption(int selectedIndex) {
     selectedChargingOption(selectedIndex);
+  }
+
+
+  void postChargingSessionDetail(int connectorId,int stationId) {
+    isLoading(true);
+    ChargingSessionDetailsProvider().postChargingSessionDetails(connectorId: connectorId, stationId: stationId).then((value) {
+
+      if(value.status == true){
+        chargingSession = value;
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
+      isLoading(false);
+
+    });
+
   }
 
   String getSubtitleText() {

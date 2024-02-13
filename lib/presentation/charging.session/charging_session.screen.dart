@@ -24,7 +24,7 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
         appBar: CustomAppbar(
             title: controller.isLoading.value
                 ? ""
-                : controller.sessionDetails!.stationName ?? ""),
+                : controller.chargingSession?.chargingSession?.stationName ?? ""),
         body: Obx(
           () => controller.isLoading.value
               ? const LoadingWidget()
@@ -40,21 +40,20 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ListTitleWidget(
-                                title: controller
-                                        .sessionDetails!.chargingPointName ??
+                                title: controller.chargingSession?.chargingSession?.chargingPointName ??
                                     ""),
                             const SizedBox(height: 10),
                             ChargingPowerStatusWidget(
                                 connectorPower:
-                                    "${controller.sessionDetails!.kw ?? ""} ${translate(LocaleKeys.kw)}",
+                                    "${controller.chargingSession?.chargingSession?.pricing?.power  ?? ""} ${translate(LocaleKeys.kw)}",
                                 connectorStatus:
-                                    controller.sessionDetails!.status ?? ""),
+                                controller.chargingSession?.chargingSession?.status  ?? ""),
                             const SizedBox(height: 10),
                             TitleSubtitleColumnRowWidget(
                               title:
-                                  "${controller.sessionDetails?.connectorName ?? ""}:",
+                                  "${controller.chargingSession?.chargingSession?.connectorName  ?? ""}:",
                               subtitle:
-                                  controller.sessionDetails?.connectorType ??
+                              controller.chargingSession?.chargingSession?.connectorType ??
                                       "",
                               showAsColumn: false,
                             ),
@@ -100,21 +99,21 @@ class _PricingSection extends GetView<ChargingSessionController> {
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.power),
-                subtitle: controller.sessionDetails?.pricing?.power ?? "",
+                subtitle: controller.chargingSession?.chargingSession?.pricing?.power ?? "",
                 showAsColumn: true,
               ),
             ),
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.type),
-                subtitle: controller.sessionDetails?.pricing?.type ?? "",
+                subtitle: controller.chargingSession?.chargingSession?.pricing?.type ?? "",
                 showAsColumn: true,
               ),
             ),
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.tariff),
-                subtitle: controller.sessionDetails?.pricing?.tariff ?? "",
+                subtitle: controller.chargingSession?.chargingSession?.pricing?.tariff ?? "",
                 showAsColumn: true,
               ),
             )

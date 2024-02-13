@@ -146,8 +146,8 @@ class NavigationUtils {
 
   void callChargingSessionDetails(
       {required int? stationId, required int connectorId}) {
-    print(stationId);
-    print(connectorId);
+    print("Station id = $stationId");
+    print("Connetor id = $connectorId");
     Get.offNamed(Routes.CHARGING_SESSION,
         parameters: {
           ParamName.stationId: stationId.toString(),
