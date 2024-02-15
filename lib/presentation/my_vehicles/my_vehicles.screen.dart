@@ -10,6 +10,7 @@ import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 
+import '../empty_list_view.dart';
 import 'controllers/my_vehicles.controller.dart';
 
 class MyVehiclesScreen extends GetView<MyVehiclesController> {
@@ -67,7 +68,7 @@ class _ContentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCardView(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Obx(() => ListView.builder(
+      child: Obx(() =>  controller.vehiclesList.isNotEmpty ? ListView.builder(
         shrinkWrap: true,
         itemCount: controller.vehiclesList.length,
         itemBuilder: (context, index) {
@@ -117,7 +118,9 @@ class _ContentView extends StatelessWidget {
             ),
           );
         },
-      )),
+      ):EmptyListView(
+          subTitle: translate(LocaleKeys.noDataFound),
+          title: translate(LocaleKeys.sorry))),
     );
   }
 }

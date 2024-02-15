@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,10 +7,7 @@ import 'package:project/infrastructure/dal/providers/profile/profile_provider.da
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
-import 'package:project/infrastructure/utils/utility.dart';
 
-import '../../../infrastructure/utils/constants.dart';
-import '../models/profile_model.dart';
 
 class ProfileController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -43,7 +39,6 @@ class ProfileController extends GetxController {
 
   void getProfile() {
     isLoading(true);
-    print("hghghghgh");
     ProfileProvider().getProfile().then((response) {
       isLoading(false);
       if (response.status ?? false) {

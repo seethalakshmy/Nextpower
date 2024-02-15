@@ -45,13 +45,13 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                             const SizedBox(height: 10),
                             ChargingPowerStatusWidget(
                                 connectorPower:
-                                    "${controller.chargingSession?.chargingSession?.pricing?.power  ?? ""} ${translate(LocaleKeys.kw)}",
+                                    "${controller.chargingSession?.chargingSession?.pricing?.power  ?? ""} ",//${translate(LocaleKeys.kw)
                                 connectorStatus:
                                 controller.chargingSession?.chargingSession?.status  ?? ""),
                             const SizedBox(height: 10),
                             TitleSubtitleColumnRowWidget(
                               title:
-                                  "${controller.chargingSession?.chargingSession?.connectorName  ?? ""}:",
+                                  controller.chargingSession?.chargingSession?.connectorName  ?? "",
                               subtitle:
                               controller.chargingSession?.chargingSession?.connectorType ??
                                       "",

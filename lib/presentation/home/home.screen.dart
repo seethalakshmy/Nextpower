@@ -31,7 +31,7 @@ class HomeScreen extends GetView<HomeController> {
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: AppColors.textTitleColor),
         ),
-        drawer: const CustomDrawerWidget(),
+        drawer: CustomDrawerWidget(controller: controller,),
         bottomNavigationBar: const BottomNavigationBarWidget(),
         floatingActionButton:
             controller.selectedIndex.value == controller.stationIndex

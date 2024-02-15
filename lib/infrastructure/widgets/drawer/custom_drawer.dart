@@ -11,8 +11,10 @@ import '../text/subtitle_widget.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({
-    super.key,
+    super.key, required this.controller,
   });
+
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +40,17 @@ class CustomDrawerWidget extends StatelessWidget {
                       fit: BoxFit.fill,
                     )),
                 const SizedBox(height: 10),
-                const Text(
-                  'John Doe',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                Text(
+                  controller.name.value ,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 5),
-                const SubtitleWidget(
-                  subtitle: '+91 1234567890',
+                SubtitleWidget(
+                  subtitle: controller.phoneNumber.value,
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                 ),
-                Divider()
+                const Divider()
               ],
             ),
           ),

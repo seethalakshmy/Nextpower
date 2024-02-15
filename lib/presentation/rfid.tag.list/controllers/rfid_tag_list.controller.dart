@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../generated/locales.g.dart';
@@ -7,7 +8,7 @@ import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class RfidTagListController extends GetxController {
   final isLoading = true.obs;
-  final isNameEditable = false.obs;
+  RxBool rfidStatus = false.obs;
   Rx <RfidResponse> rfidList = RfidResponse().obs;
 
   @override
@@ -37,6 +38,18 @@ class RfidTagListController extends GetxController {
       }
     });
     isLoading(false);
+
+  }
+
+  void changeRfidNameStatus(String id,String tagName,bool rfidStatus){
+    RfidTagListProvider().changeRfidNameStatus(id, tagName, rfidStatus ? "1":"0").then((value){
+      if (value?.status != null&& value?.status == true){
+        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success, value?.message ?? "");
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value?.message ?? "");
+      }
+    });
 
   }
 

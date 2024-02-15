@@ -17,6 +17,7 @@ import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/presentation/home/models/wallet_detail_model.dart';
 import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
+import '../../../infrastructure/dal/providers/profile/profile_provider.dart';
 
 class HomeController extends GetxController {
   final int stationIndex = 1;
@@ -30,6 +31,12 @@ class HomeController extends GetxController {
   RxInt walletChosenAmountIndex = 0.obs;
   final RxBool isLoading = true.obs;
   final RxBool isMapLoaded = true.obs;
+  RxString name = "".obs;
+  RxString phoneNumber = "".obs;
+  RxList<Marker> allMarkers = <Marker>[].obs; // Inside Map View Controller
+  RxList<Favorite> favoritesList = <Favorite>[].obs;
+  final historyLoading = true.obs;
+
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
 
@@ -37,14 +44,10 @@ class HomeController extends GetxController {
     target: LatLng(10.065010195176646, 76.35613924535859),
     zoom: 10 //increase to zoom
   );
-  RxList<Marker> allMarkers = <Marker>[].obs; // Inside Map View Controller
+
   List<Stations> stationList = [];
   Position? position;
-
   GoogleMapController? mapController;
-
-  RxList<Favorite> favoritesList = <Favorite>[].obs;
-  final historyLoading = true.obs;
   RxList<UsageHistoryItem> usageHistoryList = RxList.empty(growable: true);
   WalletDetail? walletDetail;
   final TextEditingController walletBalanceController = TextEditingController();
@@ -57,6 +60,7 @@ class HomeController extends GetxController {
     super.onInit();
     getStations();
     getFavoritesList();
+    getProfile();
   }
 
   void getStations() {
@@ -235,4 +239,19 @@ class HomeController extends GetxController {
     walletChosenAmountIndex(index);
     walletBalanceController.text = amount.toString();
   }
+
+  void getProfile() {
+    isLoading(true);
+    ProfileProvider().getProfile().then((response) {
+      isLoading(false);
+      if (response.status ?? false) {
+        name(response.profile?.name ?? "");
+        phoneNumber(response.profile?.phoneNumber ?? "");
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
 }

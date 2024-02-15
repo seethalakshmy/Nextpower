@@ -28,7 +28,7 @@ class _CustomSwitchState extends State<CustomSwitch>
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 60));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _circleAnimation = AlignmentTween(
             begin: widget.value ? Alignment.centerLeft : Alignment.centerRight,
             end: widget.value ? Alignment.centerRight : Alignment.centerLeft)
@@ -48,9 +48,9 @@ class _CustomSwitchState extends State<CustomSwitch>
             } else {
               _animationController!.forward();
             }
-            // widget.value == false
-            //     ? widget.onChanged(true)
-            //     : widget.onChanged(false);
+            widget.value == false
+                ? widget.onChanged(true)
+                : widget.onChanged(false);
             widget.onChanged(!widget.value);
           },
           child: Container(
@@ -59,8 +59,8 @@ class _CustomSwitchState extends State<CustomSwitch>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               color: _circleAnimation!.value == Alignment.centerRight
-                  ? widget.activeColor ?? Colors.grey
-                  : widget.inactiveColor ?? Colors.blue,
+                  ? widget.activeColor
+                  : widget.inactiveColor,
             ),
             child: Padding(
               padding:
