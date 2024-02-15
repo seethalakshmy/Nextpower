@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../generated/locales.g.dart';
@@ -10,6 +9,7 @@ class RfidTagListController extends GetxController {
   final isLoading = true.obs;
   RxBool rfidStatus = false.obs;
   Rx <RfidResponse> rfidList = RfidResponse().obs;
+
 
   @override
   void onInit() {
@@ -41,16 +41,20 @@ class RfidTagListController extends GetxController {
 
   }
 
-  void changeRfidNameStatus(String id,String tagName,bool rfidStatus){
+
+
+  Future <bool> changeRfidNameStatus(String id,String tagName,bool rfidStatus) async{
     RfidTagListProvider().changeRfidNameStatus(id, tagName, rfidStatus ? "1":"0").then((value){
       if (value?.status != null&& value?.status == true){
         CustomSnackBar.showSuccessSnackBar(LocaleKeys.success, value?.message ?? "");
+        return false;
       }else{
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value?.message ?? "");
+        return false;
       }
     });
-
+   return false;
   }
 
   bool getStatus(String? status) {

@@ -56,8 +56,8 @@ class HomeController extends GetxController {
   void onInit() async {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
-    // await determinePosition(); //to go to my location
     super.onInit();
+   // await determinePosition(); //to go to my location
     getStations();
     getFavoritesList();
     getProfile();

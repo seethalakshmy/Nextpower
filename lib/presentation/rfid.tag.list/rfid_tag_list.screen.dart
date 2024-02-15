@@ -112,6 +112,7 @@ class _RfidNameView extends GetView<RfidTagListController> {
   String name;
   RxBool rfidStatus;
   FocusNode focusNode = FocusNode();
+  final isLoadingForStatusChange = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -180,23 +181,40 @@ class _RfidNameView extends GetView<RfidTagListController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  SubtitleWidget(
-                    subtitle: translate(LocaleKeys.status),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    textColor: AppColors.iconColor,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: SubtitleWidget(
+                      subtitle: translate(LocaleKeys.status),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      textColor: AppColors.iconColor,
+                    ),
                   ),
                   const SizedBox(height: 5),
                   IntrinsicWidth(
                     child: Obx(
                       () {
-                        return CupertinoSwitch(
-                            value: rfidStatus.value,
-                            onChanged: (value) {
-                              if (status.value) {
-                                rfidStatus.value = !rfidStatus.value;
-                              }
-                            });
+                        return isLoadingForStatusChange.value
+                            ? buildLoadingWidget()
+                            : CupertinoSwitch(
+                                activeColor: AppColors.primaryBlue,
+                                value: rfidStatus.value,
+                                onChanged: (value) async {
+                                  //  if (status.value) {
+                                  isLoadingForStatusChange.value = true;
+                                  rfidStatus.value = !rfidStatus.value;
+                                  final id = rfid.id.toString();
+                                  Future.delayed(const Duration(milliseconds: 500), () {
+                                    controller
+                                        .changeRfidNameStatus(
+                                            id, name, rfidStatus.value)
+                                        .then((value) {
+                                      isLoadingForStatusChange.value = value;
+                                    });
+                                  });
+
+                                  //  }
+                                });
                       },
                     ),
                   )
@@ -207,6 +225,21 @@ class _RfidNameView extends GetView<RfidTagListController> {
         ),
         const SizedBox(height: 5),
       ],
+    );
+  }
+
+  Widget buildLoadingWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        height: 28,
+        width: 28,
+        child: CircularProgressIndicator(
+          color: AppColors.primaryBlue,
+          strokeWidth: 1,
+        ),
+      ),
     );
   }
 }
