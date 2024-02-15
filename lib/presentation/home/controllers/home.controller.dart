@@ -14,10 +14,10 @@ import 'package:project/infrastructure/dal/providers/home_stations/home_stations
 import 'package:project/infrastructure/dal/providers/usage_history/usage_history_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
-import 'package:project/presentation/home/models/wallet_detail_model.dart';
-import 'package:project/presentation/home/providers/wallet_detail_provider.dart';
+import '../../../infrastructure/dal/models/Wallet/wallet_detail_response_model.dart';
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
 import '../../../infrastructure/dal/providers/profile/profile_provider.dart';
+import '../../../infrastructure/dal/providers/wallet/wallet_detail_provider.dart';
 
 class HomeController extends GetxController {
   final int stationIndex = 1;
@@ -35,21 +35,21 @@ class HomeController extends GetxController {
   RxString phoneNumber = "".obs;
   RxList<Marker> allMarkers = <Marker>[].obs; // Inside Map View Controller
   RxList<Favorite> favoritesList = <Favorite>[].obs;
+  Rx<WalletDetailResponseModel> walletDetail = WalletDetailResponseModel().obs;
   final historyLoading = true.obs;
 
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
 
   static const CameraPosition cameraPosition = CameraPosition(
-    target: LatLng(10.065010195176646, 76.35613924535859),
-    zoom: 10 //increase to zoom
-  );
+      target: LatLng(10.065010195176646, 76.35613924535859),
+      zoom: 10 //increase to zoom
+      );
 
   List<Stations> stationList = [];
   Position? position;
   GoogleMapController? mapController;
   RxList<UsageHistoryItem> usageHistoryList = RxList.empty(growable: true);
-  WalletDetail? walletDetail;
   final TextEditingController walletBalanceController = TextEditingController();
 
   @override
@@ -84,9 +84,7 @@ class HomeController extends GetxController {
 
   void getUsageHistory() {
     historyLoading(true);
-    UsageHistoryProvider()
-        .getUsageHistory()
-        .then((value) {
+    UsageHistoryProvider().getUsageHistory().then((value) {
       historyLoading(false);
       UsageHistoryResponse response = value;
       if (response.status ?? false) {
@@ -199,20 +197,22 @@ class HomeController extends GetxController {
   }
 
   void getFavoritesList() {
-     isLoading(true);
-    FavoriteProvider().getFavoritesList().then((response){
+    isLoading(true);
+    FavoriteProvider().getFavoritesList().then((response) {
       if (response.status == true) {
         favoritesList.value = response.favorites!;
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
-       isLoading(false);
+      isLoading(false);
     });
   }
 
   void removeFavorite(int stationId) async {
-    FavoriteProvider().removeOrAddFavoritesListItem(favoriteId: 0, stationId: stationId).then((response){
+    FavoriteProvider()
+        .removeOrAddFavoritesListItem(favoriteId: 0, stationId: stationId)
+        .then((response) {
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
@@ -222,18 +222,23 @@ class HomeController extends GetxController {
             LocaleKeys.failed.tr, response.message ?? "");
       }
     });
-  //  isLoading(false);
+    //  isLoading(false);
   }
 
   void getWalletData() async {
     isLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
     WalletDetailProvider().getWalletDetail().then((value) {
-      walletDetail = value;
+      if (value.status!= null&&value.status == true){
+        walletDetail.value = value;
+      }else{
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
       isLoading(false);
     });
-  }
 
+
+  }
 
   void setWalletAmountChosenIndex({required int index, required int amount}) {
     walletChosenAmountIndex(index);
@@ -243,7 +248,6 @@ class HomeController extends GetxController {
   void getProfile() {
     isLoading(true);
     ProfileProvider().getProfile().then((response) {
-      isLoading(false);
       if (response.status ?? false) {
         name(response.profile?.name ?? "");
         phoneNumber(response.profile?.phoneNumber ?? "");
@@ -251,7 +255,7 @@ class HomeController extends GetxController {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
+      isLoading(false);
     });
   }
-
 }

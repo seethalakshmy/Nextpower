@@ -16,12 +16,14 @@ import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 
 class WalletView extends GetView<HomeController> {
-  const WalletView({Key? key}) : super(key: key);
+   WalletView({super.key});
+
+  final amountList = ["100","200","500","1000","2000","5000","10000"];
 
   @override
   Widget build(BuildContext context) {
-    if (controller.walletDetail != null) {
-      var wallet = controller.walletDetail?.wallet;
+    if (controller.walletDetail.value.status == true) {
+      var wallet = controller.walletDetail.value.wallet;
       return Stack(
         children: [
           Column(
@@ -45,7 +47,7 @@ class WalletView extends GetView<HomeController> {
                               FittedBox(
                                 child: TitleWidget(
                                   title:
-                                      "\$ ${wallet?.availableBalance ?? 0.0}",
+                                      "\$ ${wallet?.availableAmount ?? 0.0}",
                                   fontSize: 48,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -101,18 +103,15 @@ class WalletView extends GetView<HomeController> {
                           validator: (value) {
                             return null;
                           }),
-                      if (wallet?.amountList != null)
                         Obx(() => Wrap(
                               children:
-                                  (wallet?.amountList ?? []).map((amount) {
-                                int index = (wallet?.amountList ?? [])
+                                  (amountList).map((amount) {
+                                int index = (amountList)
                                     .indexWhere((element) => element == amount);
-                                print(index.toString());
-
                                 return GestureDetector(
                                   onTap: () {
                                     controller.setWalletAmountChosenIndex(
-                                        index: index, amount: amount);
+                                        index: index, amount:int.parse(amount));
                                   },
                                   child: Container(
                                       margin: const EdgeInsets.only(

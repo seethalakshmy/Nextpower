@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+import 'package:project/presentation/charging.session/controllers/charging_session.controller.dart';
 
 import 'controllers/qr_code.controller.dart';
 
@@ -25,7 +26,7 @@ class QrCodeScreen extends GetView<QrCodeController> {
               icon: ValueListenableBuilder(
                 valueListenable: cameraController.torchState,
                 builder: (context, state, child) {
-                  switch (state as TorchState) {
+                  switch (state) {
                     case TorchState.off:
                       return const Icon(Icons.flash_off, color: Colors.grey);
                     case TorchState.on:
@@ -67,9 +68,13 @@ class QrCodeScreen extends GetView<QrCodeController> {
                 //   // CustomSnackBar.showSuccessSnackBar(
                 //   //     "Barcode found!", "${barcode.rawValue}");
                 // }
-                print(barcodes.first);
-                NavigationUtils()
-                    .callChargingSessionDetails(stationId: 1, connectorId: 1);
+                print("barcode details ${barcodes.first.rawValue}");
+                if (!Get.isRegistered<ChargingSessionController>()) {
+                  Get.lazyPut(()=>ChargingSessionController());
+                  NavigationUtils()
+                      .callChargingSessionDetails(stationId: 1, connectorId: 1);
+                }
+
                 // if (image != null) {
                 //   showDialog(
                 //     context: context,

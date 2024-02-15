@@ -97,7 +97,7 @@ class HomeContentView extends GetView<HomeController> {
       } else if (controller.selectedIndex.value == controller.favoritesIndex) {
         return const FavouritesView();
       } else if (controller.selectedIndex.value == controller.walletIndex) {
-        return const WalletView();
+        return  WalletView();
       } else {
         return Container();
       }

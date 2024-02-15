@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +17,7 @@ import '../../infrastructure/widgets/text/subtitle_widget.dart';
 import 'controllers/rfid_tag_list.controller.dart';
 
 class RfidTagListScreen extends GetView<RfidTagListController> {
-  const RfidTagListScreen({Key? key}) : super(key: key);
+  const RfidTagListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +77,6 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
                               children: [
                                 _RfidNameView(
                                   rfid: rfid!,
-                                  status: false.obs,
                                   name: rfid.tagName ?? "",
                                   rfidStatus: controller
                                       .getStatus(rfid.tagStatus ?? "")
@@ -107,18 +104,17 @@ class _RfidNameView extends GetView<RfidTagListController> {
   _RfidNameView(
       {super.key,
       required this.rfid,
-      required this.status,
       required this.name,
       required this.rfidStatus});
 
   final Rfid rfid;
-  RxBool status;
+  RxBool status = false.obs;
   String name;
   RxBool rfidStatus;
+  FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    final FocusNode focusNode = FocusNode();
     return Column(
       children: [
         Row(
@@ -139,7 +135,7 @@ class _RfidNameView extends GetView<RfidTagListController> {
                     color: AppColors.labelColor2,
                   ),
                   decoration: status.value
-                      ? const InputDecoration(border:UnderlineInputBorder())
+                      ? const InputDecoration(border: UnderlineInputBorder())
                       : const InputDecoration(border: InputBorder.none),
                 ),
               ),
@@ -160,7 +156,9 @@ class _RfidNameView extends GetView<RfidTagListController> {
                   : IconButton(
                       onPressed: () {
                         status.value = true;
-                          FocusScope.of(context).requestFocus(focusNode);
+                        Future.delayed(const Duration(milliseconds: 1), () {
+                          focusNode.requestFocus();
+                        });
                       },
                       icon: SvgImageUtils().showSvgFromAsset(Assets.iconsEdit),
                     ),

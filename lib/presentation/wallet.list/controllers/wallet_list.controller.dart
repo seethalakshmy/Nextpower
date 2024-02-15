@@ -1,18 +1,18 @@
 import 'package:get/get.dart';
-import 'package:project/presentation/wallet.list/providers/wallet_list_provider.dart';
-import 'package:project/presentation/wallet.list/wallet_list_model.dart';
+
+import '../../../generated/locales.g.dart';
+import '../../../infrastructure/dal/models/Wallet/wallet_history_response_model.dart';
+import '../../../infrastructure/dal/providers/wallet/wallet_history_provider.dart';
+import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class WalletListController extends GetxController {
+  final isLoading = false.obs;
+  Rx<WalletHistoryResponseModel> walletHistory =
+      WalletHistoryResponseModel().obs;
 
-  final isLoading = true.obs;
-  List<WalletHistory> list = [];
-  
   @override
   void onInit() {
-    WalletListProvider().getWalletList().then((value) {
-      list = value?.walletHistory ?? [];
-      isLoading(false);
-    });
+    getWalletHistory();
     super.onInit();
   }
 
@@ -26,4 +26,16 @@ class WalletListController extends GetxController {
     super.onClose();
   }
 
+  void getWalletHistory() {
+    isLoading(true);
+    WalletHistoryProvider().getWalletHistory().then((value) {
+      if (value.status != null && value.status == true) {
+        walletHistory.value = value;
+      } else {
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
+      isLoading(false);
+    });
+  }
 }

@@ -10,6 +10,7 @@ import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 
+import '../empty_list_view.dart';
 import 'controllers/wallet_list.controller.dart';
 
 class WalletListScreen extends GetView<WalletListController> {
@@ -31,9 +32,9 @@ class WalletListScreen extends GetView<WalletListController> {
                     separatorBuilder: (context, index) {
                       return const SizedBox(height: 10);
                     },
-                    itemCount: controller.list.length,
+                    itemCount: controller.walletHistory.value.walletHistory?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return CustomCardView(
+                      return controller.walletHistory.value.walletHistory!.isNotEmpty ? CustomCardView(
                           padding: const EdgeInsets.only(
                               top: 10, right: 20, left: 20, bottom: 20),
                           child: Row(
@@ -56,7 +57,7 @@ class WalletListScreen extends GetView<WalletListController> {
                                 children: [
                                   TitleWidget(
                                     title:
-                                        (controller.list[index].amount ?? 0.0)
+                                        (controller.walletHistory.value.walletHistory?[index].amount ?? 0.0)
                                             .toString(),
                                     fontSize: 18,
                                   ),
@@ -71,7 +72,7 @@ class WalletListScreen extends GetView<WalletListController> {
                                       const SizedBox(width: 5),
                                       TitleWidget(
                                           title:
-                                              controller.list[index].date ?? "",
+                                              controller.walletHistory.value.walletHistory?[index].date ?? "",
                                           fontSize: 14,
                                           color: AppColors.walletListTextColor),
                                     ],
@@ -79,7 +80,9 @@ class WalletListScreen extends GetView<WalletListController> {
                                 ],
                               )
                             ],
-                          ));
+                          )):EmptyListView(
+                          subTitle: translate(LocaleKeys.noDataFound),
+                          title: translate(LocaleKeys.sorry));
                     },
                   ),
                 ),
