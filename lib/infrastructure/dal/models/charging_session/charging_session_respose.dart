@@ -37,7 +37,12 @@ class ChargingSession {
   final Pricing? pricing;
   final String? kw;
   final bool? hasReserve;
-  final int? chargeOption;
+  final String? minTime;
+  final String? maxTime;
+  final String? minAmount;
+  final String? maxAmount;
+  final String? minEnergy;
+  final String? maxEnergy;
   final String? chargeOptionValue;
 
   ChargingSession({
@@ -49,7 +54,12 @@ class ChargingSession {
     this.pricing,
     this.kw,
     this.hasReserve,
-    this.chargeOption,
+    this.minTime,
+    this.maxTime,
+    this.minAmount,
+    this.maxAmount,
+    this.minEnergy,
+    this.maxEnergy,
     this.chargeOptionValue,
   });
 
@@ -66,7 +76,12 @@ class ChargingSession {
     pricing: json["pricing"] == null ? null : Pricing.fromJson(json["pricing"]),
     kw: json["kw"],
     hasReserve: json["has_reserve"],
-    chargeOption: json["charge_option"],
+    minTime: json["min_time"],
+    maxTime: json["max_time"],
+    minAmount: json["min_amount"],
+    maxAmount: json["max_amount"],
+    minEnergy: json["min_energy"],
+    maxEnergy: json["max_energy"],
     chargeOptionValue: json["charge_option_value"],
   );
 
@@ -79,7 +94,12 @@ class ChargingSession {
     "pricing": pricing?.toJson(),
     "kw": kw,
     "has_reserve": hasReserve,
-    "charge_option": chargeOption,
+    "min_time": minTime,
+    "max_time": maxTime,
+    "min_amount": minAmount,
+    "max_amount": maxAmount,
+    "min_energy": minEnergy,
+    "max_energy": maxEnergy,
     "charge_option_value": chargeOptionValue,
   };
 }

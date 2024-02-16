@@ -28,13 +28,13 @@ class WalletListScreen extends GetView<WalletListController> {
               ? const LoadingWidget()
               : Container(
                   margin: const EdgeInsets.only(top: 20.0),
-                  child: ListView.separated(
+                  child:controller.walletHistory.value.walletHistory!.isNotEmpty ? ListView.separated(
                     separatorBuilder: (context, index) {
                       return const SizedBox(height: 10);
                     },
                     itemCount: controller.walletHistory.value.walletHistory?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return controller.walletHistory.value.walletHistory!.isNotEmpty ? CustomCardView(
+                      return  CustomCardView(
                           padding: const EdgeInsets.only(
                               top: 10, right: 20, left: 20, bottom: 20),
                           child: Row(
@@ -80,11 +80,11 @@ class WalletListScreen extends GetView<WalletListController> {
                                 ],
                               )
                             ],
-                          )):EmptyListView(
-                          subTitle: translate(LocaleKeys.noDataFound),
-                          title: translate(LocaleKeys.sorry));
+                          ));
                     },
-                  ),
+                  ):EmptyListView(
+    subTitle: translate(LocaleKeys.noDataFound),
+    title: translate(LocaleKeys.sorry)),
                 ),
         ));
   }

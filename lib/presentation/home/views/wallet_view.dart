@@ -16,9 +16,9 @@ import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
 
 class WalletView extends GetView<HomeController> {
-   WalletView({super.key});
+  WalletView({super.key});
 
-  final amountList = ["100","200","500","1000","2000","5000","10000"];
+  final amountList = ["100", "200", "500", "1000", "2000", "5000", "10000"];
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class WalletView extends GetView<HomeController> {
                               FittedBox(
                                 child: TitleWidget(
                                   title:
-                                      "\$ ${wallet?.availableAmount ?? 0.0}",
+                                      "\u20B9 ${wallet?.availableAmount ?? 0.0}",
                                   fontSize: 48,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
@@ -103,47 +103,46 @@ class WalletView extends GetView<HomeController> {
                           validator: (value) {
                             return null;
                           }),
-                        Obx(() => Wrap(
-                              children:
-                                  (amountList).map((amount) {
-                                int index = (amountList)
-                                    .indexWhere((element) => element == amount);
-                                return GestureDetector(
-                                  onTap: () {
-                                    controller.setWalletAmountChosenIndex(
-                                        index: index, amount:int.parse(amount));
-                                  },
-                                  child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 5, top: 10),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
-                                      decoration: BoxDecoration(
+                      Obx(() => Wrap(
+                            children: (amountList).map((amount) {
+                              int index = (amountList)
+                                  .indexWhere((element) => element == amount);
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.setWalletAmountChosenIndex(
+                                      index: index, amount: int.parse(amount));
+                                },
+                                child: Container(
+                                    margin: const EdgeInsets.only(
+                                        right: 5, top: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 5),
+                                    decoration: BoxDecoration(
+                                        color: controller
+                                                    .walletChosenAmountIndex
+                                                    .value ==
+                                                index
+                                            ? AppColors.primaryGreen
+                                            : Colors.transparent,
+                                        border: Border.all(
+                                            color: AppColors
+                                                .walletTextBorderColor),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Text(
+                                      amount.toString(),
+                                      style: TextStyle(
                                           color: controller
                                                       .walletChosenAmountIndex
                                                       .value ==
                                                   index
-                                              ? AppColors.primaryGreen
-                                              : Colors.transparent,
-                                          border: Border.all(
-                                              color: AppColors
-                                                  .walletTextBorderColor),
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: Text(
-                                        amount.toString(),
-                                        style: TextStyle(
-                                            color: controller
-                                                        .walletChosenAmountIndex
-                                                        .value ==
-                                                    index
-                                                ? Colors.white
-                                                : AppColors.walletListTextColor,
-                                            fontSize: 14),
-                                      )),
-                                );
-                              }).toList(),
-                            )),
+                                              ? Colors.white
+                                              : AppColors.walletListTextColor,
+                                          fontSize: 14),
+                                    )),
+                              );
+                            }).toList(),
+                          )),
                       const SizedBox(height: 30),
                       RoundedRectangleButton(
                           onPressed: () {

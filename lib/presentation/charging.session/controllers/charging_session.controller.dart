@@ -25,7 +25,6 @@ class ChargingSessionController extends GetxController {
 
   @override
   void onInit() async {
-    textController.text = '100';
     stationId =
         int.parse((Get.parameters[ParamName.stationId] ?? "0").toString());
     //stationId = 9;
@@ -51,21 +50,26 @@ class ChargingSessionController extends GetxController {
     selectedChargingOption(selectedIndex);
   }
 
-
-  void postChargingSessionDetail(int connectorId,int stationId) {
+  void postChargingSessionDetail(int connectorId, int stationId) {
     isLoading(true);
-    ChargingSessionDetailsProvider().postChargingSessionDetails(connectorId: connectorId, stationId: stationId).then((value) {
-
-      if(value.status == true){
+    ChargingSessionDetailsProvider()
+        .postChargingSessionDetails(
+            connectorId: connectorId, stationId: stationId)
+        .then((value) {
+      if (value.status == true) {
         chargingSession = value;
-      }else{
+        standardMinValue.value =
+            int.parse(value.chargingSession?.minAmount ?? "0");
+        textController.text = value.chargingSession?.minAmount ?? "0";
+        standardMaxValue.value =
+            int.parse(value.chargingSession?.maxAmount ?? "0");
+        isLoading(false);
+      } else {
+        isLoading(false);
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value.message ?? "");
       }
-      isLoading(false);
-
     });
-
   }
 
   String getSubtitleText() {

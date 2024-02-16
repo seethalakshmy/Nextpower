@@ -8,8 +8,7 @@ import '../../../infrastructure/utils/snackbar_utils.dart';
 class RfidTagListController extends GetxController {
   final isLoading = true.obs;
   RxBool rfidStatus = false.obs;
-  Rx <RfidResponse> rfidList = RfidResponse().obs;
-
+  Rx<RfidResponse> rfidList = RfidResponse().obs;
 
   @override
   void onInit() {
@@ -29,32 +28,34 @@ class RfidTagListController extends GetxController {
 
   void getRfidTagList() {
     isLoading(true);
-    RfidTagListProvider().getRfidTagList().then((value){
-      if (value?.status != null){
+    RfidTagListProvider().getRfidTagList().then((value) {
+      if (value?.status != null) {
         rfidList.value = value!;
-      }else{
+        isLoading(false);
+      } else {
+        isLoading(false);
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value?.message ?? "");
       }
     });
-    isLoading(false);
-
   }
 
-
-
-  Future <bool> changeRfidNameStatus(String id,String tagName,bool rfidStatus) async{
-    RfidTagListProvider().changeRfidNameStatus(id, tagName, rfidStatus ? "1":"0").then((value){
-      if (value?.status != null&& value?.status == true){
-        CustomSnackBar.showSuccessSnackBar(LocaleKeys.success, value?.message ?? "");
+  Future<bool> changeRfidNameStatus(
+      String id, String tagName, bool rfidStatus) async {
+    RfidTagListProvider()
+        .changeRfidNameStatus(id, tagName, rfidStatus ? "1" : "0")
+        .then((value) {
+      if (value?.status != null && value?.status == true) {
+        CustomSnackBar.showSuccessSnackBar(
+            LocaleKeys.success, value?.message ?? "");
         return false;
-      }else{
+      } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value?.message ?? "");
         return false;
       }
     });
-   return false;
+    return false;
   }
 
   bool getStatus(String? status) {
@@ -64,6 +65,4 @@ class RfidTagListController extends GetxController {
       return false;
     }
   }
-
-
 }

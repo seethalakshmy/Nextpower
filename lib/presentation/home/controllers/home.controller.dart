@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -57,20 +56,20 @@ class HomeController extends GetxController {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
     super.onInit();
-   // await determinePosition(); //to go to my location
+  //  await determinePosition(); //to go to my location
     getStations();
-    getFavoritesList();
+    //getFavoritesList();
     getProfile();
   }
 
   void getStations() {
-    isLoading(true);
+   // isLoading(true);
     HomeStationsProvider()
         .getStations(
             latitude: cameraPosition.target.latitude,
             longitude: cameraPosition.target.longitude)
         .then((value) {
-      isLoading(false);
+    //  isLoading(false);
       StationsResponse response = value;
       if (response.status ?? false) {
         stationList = response.stations ?? [];
@@ -149,23 +148,13 @@ class HomeController extends GetxController {
     update();
   }
 
-  /// Determine the current position of the device.
-  ///
-  /// When the location services are not enabled or permissions
-  /// are denied the `Future` will return an error.
   Future<void> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
-
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       return Future.error('Location services are disabled.');
     }
-
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -246,16 +235,17 @@ class HomeController extends GetxController {
   }
 
   void getProfile() {
-    isLoading(true);
+    //isLoading(true);
     ProfileProvider().getProfile().then((response) {
       if (response.status ?? false) {
         name(response.profile?.name ?? "");
         phoneNumber(response.profile?.phoneNumber ?? "");
+        //isLoading(false);
       } else {
+        //isLoading(false);
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
-      isLoading(false);
     });
   }
 }

@@ -11,11 +11,10 @@ import 'package:project/infrastructure/widgets/text/list_title_widget.dart';
 import 'package:project/presentation/charging.session/widgets/charging_option_section.dart';
 import 'package:project/presentation/station.details/widgets/charging_power_status_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
-
 import 'controllers/charging_session.controller.dart';
 
 class ChargingSessionScreen extends GetView<ChargingSessionController> {
-  const ChargingSessionScreen({Key? key}) : super(key: key);
+  const ChargingSessionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +130,8 @@ class _CustomDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         SizedBox(height: 10),
         Divider(),
         SizedBox(height: 10),

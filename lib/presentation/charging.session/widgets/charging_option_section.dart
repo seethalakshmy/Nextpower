@@ -10,14 +10,12 @@ import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
 import 'package:project/presentation/charging.session/controllers/charging_session.controller.dart';
 
 class ChargingOptionsSection extends GetView<ChargingSessionController> {
-  const ChargingOptionsSection( {
+  const ChargingOptionsSection({
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,7 +43,8 @@ class ChargingOptionsSection extends GetView<ChargingSessionController> {
                     text = controller.standardMinValue.toString();
                   }
                   if (int.parse(text) <= controller.standardMinValue.value) {
-                    controller.textController.text = controller.standardMinValue.value.toString();
+                    controller.textController.text =
+                        controller.standardMinValue.value.toString();
                     return;
                   }
                   controller.textController.text =
@@ -62,13 +61,15 @@ class ChargingOptionsSection extends GetView<ChargingSessionController> {
                   onTapOutside: (event) {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
-                  onSubmitted: (value){
+                  onSubmitted: (value) {
                     if (int.parse(value) >= controller.standardMaxValue.value) {
-                      controller.textController.text = controller.standardMaxValue.value.toString();
+                      controller.textController.text =
+                          controller.standardMaxValue.value.toString();
                       return;
                     }
                     if (int.parse(value) <= controller.standardMinValue.value) {
-                      controller.textController.text = controller.standardMinValue.value.toString();
+                      controller.textController.text =
+                          controller.standardMinValue.value.toString();
                       return;
                     }
                   },
@@ -88,7 +89,8 @@ class ChargingOptionsSection extends GetView<ChargingSessionController> {
                     text = controller.standardMinValue.value.toString();
                   }
                   if (int.parse(text) >= controller.standardMaxValue.value) {
-                    controller.textController.text = controller.standardMaxValue.value.toString();
+                    controller.textController.text =
+                        controller.standardMaxValue.value.toString();
                     return;
                   }
                   controller.textController.text =
@@ -137,7 +139,6 @@ class _ChargingOptionTitleSection extends GetView<ChargingSessionController> {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -155,9 +156,14 @@ class _ChargingOptionTitleSection extends GetView<ChargingSessionController> {
                   controller.moneyOptionValue,
               title: translate(LocaleKeys.money),
               onTap: () {
-                controller.standardMinValue.value = 100;
-                controller.standardMaxValue.value = 5000;
-                controller.textController.text = controller.standardMinValue.value.toString();
+                controller.standardMinValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.minAmount ??
+                        "0");
+                controller.standardMaxValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.maxAmount ??
+                        "0");
+                controller.textController.text =
+                    controller.standardMinValue.value.toString();
                 controller.setSelectedOption(controller.moneyOptionValue);
               },
             ),
@@ -166,9 +172,14 @@ class _ChargingOptionTitleSection extends GetView<ChargingSessionController> {
                   controller.timeOptionValue,
               title: translate(LocaleKeys.time),
               onTap: () {
-                controller.standardMinValue.value = 30;
-                controller.standardMaxValue.value = 300;
-                controller.textController.text = controller.standardMinValue.value.toString();
+                controller.standardMinValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.minTime ??
+                        "0");
+                controller.standardMaxValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.maxTime ??
+                        "0");
+                controller.textController.text =
+                    controller.standardMinValue.value.toString();
                 controller.setSelectedOption(controller.timeOptionValue);
               },
             ),
@@ -177,9 +188,14 @@ class _ChargingOptionTitleSection extends GetView<ChargingSessionController> {
                   controller.energyOptionValue,
               title: translate(LocaleKeys.energy),
               onTap: () {
-                controller.standardMinValue.value = 1;
-                controller.standardMaxValue.value = 100;
-                controller.textController.text = controller.standardMinValue.value.toString();
+                controller.standardMinValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.minEnergy ??
+                        "0");
+                controller.standardMaxValue.value = int.parse(
+                    controller.chargingSession?.chargingSession?.maxEnergy ??
+                        "0");
+                controller.textController.text =
+                    controller.standardMinValue.value.toString();
                 controller.setSelectedOption(controller.energyOptionValue);
               },
             )

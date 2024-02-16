@@ -14,6 +14,7 @@ import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
 import '../../infrastructure/dal/models/rfid/rfid_response.dart';
 import '../../infrastructure/widgets/text/subtitle_widget.dart';
+import '../empty_list_view.dart';
 import 'controllers/rfid_tag_list.controller.dart';
 
 class RfidTagListScreen extends GetView<RfidTagListController> {
@@ -55,7 +56,7 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
         body: Obx(
           () => controller.isLoading.value
               ? const LoadingWidget()
-              : ListView(
+              : controller.rfidList.value.rfids?.isNotEmpty ?? false ? ListView(
                   children: [
                     const SizedBox(height: 10),
                     SvgImageUtils().showSvgFromAsset(Assets.iconsRfidTagCarIcon,
@@ -95,7 +96,9 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
                       ),
                     ),
                   ],
-                ),
+                ):EmptyListView(
+              subTitle: translate(LocaleKeys.noDataFound),
+              title: translate(LocaleKeys.sorry)),
         ));
   }
 }
