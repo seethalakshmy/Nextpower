@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/presentation/charging.session/controllers/charging_session.controller.dart';
-
+import '../station.details/controllers/station_details.controller.dart';
 import 'controllers/qr_code.controller.dart';
 
 class QrCodeScreen extends GetView<QrCodeController> {
@@ -69,10 +68,10 @@ class QrCodeScreen extends GetView<QrCodeController> {
                 //   //     "Barcode found!", "${barcode.rawValue}");
                 // }
                 print("barcode details ${barcodes.first.rawValue}");
-                if (!Get.isRegistered<ChargingSessionController>()) {
-                  Get.lazyPut(()=>ChargingSessionController());
-                  NavigationUtils()
-                      .callChargingSessionDetails(stationId: 1, connectorId: 1);
+                if (!Get.isRegistered<StationDetailsController>()) {
+                  Get.lazyPut(() => StationDetailsController());
+                  NavigationUtils().callChargingSessionDetailsFromQRCOde(
+                      connectorId: 3, fromQrCode: 'fromQrCode');
                 }
 
                 // if (image != null) {

@@ -157,6 +157,17 @@ class NavigationUtils {
         preventDuplicates: true);
   }
 
+  void callChargingSessionDetailsFromQRCOde(
+      {required String? fromQrCode, required int connectorId}) {
+    print("Connetor id = $connectorId");
+    Get.offNamed(Routes.STATION_DETAILS,
+        parameters: {
+          ParamName.from: fromQrCode.toString(),
+          ParamName.connectorId: connectorId.toString()
+        },
+        preventDuplicates: true);
+  }
+
   void callQrCodeScannerPage() {
     Get.toNamed(Routes.QR_CODE);
   }

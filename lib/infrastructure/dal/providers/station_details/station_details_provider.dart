@@ -14,17 +14,30 @@ class StationDetailsProvider extends GetConnect {
   void onInit() {
   }
 
-  Future<StationDetailResponse> getStationDetails({required int id}) async {
+  Future<StationDetailResponse> getStationDetails({required int id,required String fromQR,}) async {
     try {
-      http.Response response =
-      await _apiService.apiRequest(endPoint: 'get_station_by_id',postRequest: false,
-          params: {
-            'id': id.toString(),
-          }
-      );
-      StationDetailResponse data =
-      StationDetailResponse.fromJson(json.decode(response.body));
-      return data;
+      if (fromQR == "fromQrCode"){
+        http.Response response =
+        await _apiService.apiRequest(endPoint: 'get_station_by_id',postRequest: false,
+            params: {
+              'charging_point_id': id.toString(),
+            }
+        );
+        StationDetailResponse data =
+        StationDetailResponse.fromJson(json.decode(response.body));
+        return data;
+      }else{
+        http.Response response =
+        await _apiService.apiRequest(endPoint: 'get_station_by_id',postRequest: false,
+            params: {
+              'id': id.toString(),
+            }
+        );
+        StationDetailResponse data =
+        StationDetailResponse.fromJson(json.decode(response.body));
+        return data;
+      }
+
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
       return StationDetailResponse(status: false, message: e.toString());

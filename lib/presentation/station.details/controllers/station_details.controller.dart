@@ -9,6 +9,8 @@ import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class StationDetailsController extends GetxController {
   int stationId = 0;
+  int connectorId = 0;
+  String fromQR = "";
   RxBool isLoading = false.obs;
   RxBool isSelectedConnectorView = true.obs;
   RxBool isAllFilterChosen = true.obs;
@@ -23,7 +25,8 @@ class StationDetailsController extends GetxController {
   void onInit() {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
-
+    connectorId = int.parse((Get.parameters[ParamName.connectorId] ?? "0"));
+    fromQR = Get.parameters[ParamName.from]?? "";
     getStationDetails();
     getConnectors();
     super.onInit();
@@ -31,8 +34,7 @@ class StationDetailsController extends GetxController {
 
   void getStationDetails() {
     isLoading(true);
-    stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
-    StationDetailsProvider().getStationDetails(id: stationId).then((value) {
+    StationDetailsProvider().getStationDetails(id: connectorId, fromQR:fromQR).then((value) {
       if (value.status ?? false) {
         stationDetails.value = value.station!;
         isFavorite.value = stationDetails.value.overview?.isFavorite ?? false;
@@ -41,6 +43,7 @@ class StationDetailsController extends GetxController {
             LocaleKeys.failed.tr, value.message ?? "");
       }
       isLoading(false);
+      fromQR = "";
     });
   }
 

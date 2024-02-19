@@ -34,23 +34,4 @@ class ChargingSessionDetailsProvider extends GetConnect {
     }
   }
 
-  // Future<ChargingSessionDetails?> getChargingSessionDetails(
-  //     {required int stationId, required int connectorId}) async {
-  //   // final response = await get('chargingsessiondetails/$id');
-  //   // return response.body;
-  //   print("getChargingSessionDetails Called");
-  //   String data = await DefaultAssetBundle.of(Get.context!)
-  //       .loadString(Assets.jsonChargingSessionDetails);
-  //   final ChargingSessionDetails jsonResult =
-  //   ChargingSessionDetails.fromJson(jsonDecode(data));
-  //   print("ChargingSessionDetails Repository: data:${jsonResult.toJson()}");
-  //   return jsonResult;
-  // }
-  //
-  // Future<Response<ChargingSessionDetails>> postChargingSessionDetails(
-  //     ChargingSessionDetails chargingsessiondetails) async =>
-  //     await post('chargingsessiondetails', chargingsessiondetails);
-  //
-  // Future<Response> deleteChargingSessionDetails(int id) async =>
-  //     await delete('chargingsessiondetails/$id');
 }
