@@ -4,7 +4,6 @@ import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
@@ -17,7 +16,6 @@ import 'package:project/presentation/home/controllers/home.controller.dart';
 
 class WalletView extends GetView<HomeController> {
   WalletView({super.key});
-
   final amountList = ["100", "200", "500", "1000", "2000", "5000", "10000"];
 
   @override
@@ -146,8 +144,7 @@ class WalletView extends GetView<HomeController> {
                       const SizedBox(height: 30),
                       RoundedRectangleButton(
                           onPressed: () {
-                            CustomSnackBar.showErrorSnackBar(
-                                'Error', 'Payment gateway yet to be done');
+                            controller.openCheckout();
                           },
                           height: 55,
                           padding: EdgeInsets.zero,

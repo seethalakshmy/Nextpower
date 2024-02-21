@@ -21,6 +21,8 @@ class ChargingSessionController extends GetxController {
   RxInt standardMinValue = 100.obs;
   RxInt standardMaxValue = 5000.obs;
   static int standardValue = 100;
+  RxBool isCharging = false.obs;
+  RxBool isWidgetLoading = false.obs;
   TextEditingController textController = TextEditingController();
 
   @override
@@ -48,6 +50,34 @@ class ChargingSessionController extends GetxController {
   //3= Energy
   setSelectedOption(int selectedIndex) {
     selectedChargingOption(selectedIndex);
+  }
+
+  void startCharging() {
+    isWidgetLoading.value = true;
+    ChargingSessionDetailsProvider().startCharging().then((value) {
+      if (value.status == true) {
+        isCharging.value = true;
+        isWidgetLoading.value = false;
+      } else {
+        isWidgetLoading.value = false;
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
+    });
+  }
+
+  void stopCharging() {
+    ChargingSessionDetailsProvider().stopCharging().then((value) {
+      isWidgetLoading.value = true;
+      if (value.status == true) {
+        isCharging.value = false;
+        isWidgetLoading.value = false;
+      } else {
+        isWidgetLoading.value = false;
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, value.message ?? "");
+      }
+    });
   }
 
   void postChargingSessionDetail(int connectorId, int stationId) {

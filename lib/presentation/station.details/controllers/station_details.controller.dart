@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:project/infrastructure/dal/models/station_details/ConnectorsResponse.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
+
 import '../../../generated/locales.g.dart';
 import '../../../infrastructure/dal/models/station_details/station_details_model.dart';
 import '../../../infrastructure/dal/providers/favorites/favorites_provider.dart';
@@ -26,7 +27,7 @@ class StationDetailsController extends GetxController {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
     connectorId = int.parse((Get.parameters[ParamName.connectorId] ?? "0"));
-    fromQR = Get.parameters[ParamName.from]?? "";
+    fromQR = Get.parameters[ParamName.from] ?? "";
     getStationDetails();
     getConnectors();
     super.onInit();
@@ -34,7 +35,10 @@ class StationDetailsController extends GetxController {
 
   void getStationDetails() {
     isLoading(true);
-    StationDetailsProvider().getStationDetails(id: connectorId, fromQR:fromQR).then((value) {
+    StationDetailsProvider()
+        .getStationDetails(
+            id: connectorId, fromQR: fromQR, stationID: stationId)
+        .then((value) {
       if (value.status ?? false) {
         stationDetails.value = value.station!;
         isFavorite.value = stationDetails.value.overview?.isFavorite ?? false;

@@ -42,12 +42,14 @@ class RoundedRectangleButton extends StatelessWidget {
               ),
               backgroundColor: enable ? AppColors.primaryBlue : Colors.white38),
           child: isLoading
-              ? SizedBox(
-                  height: loaderSize,
-                  width: loaderSize,
-                  child: const CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 2,
+              ? Center(
+                  child: SizedBox(
+                    height: loaderSize,
+                    width: loaderSize,
+                    child: const CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2,
+                    ),
                   ),
                 )
               : Row(

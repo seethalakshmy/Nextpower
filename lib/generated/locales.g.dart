@@ -143,6 +143,9 @@ class LocaleKeys {
       'select_vehicle_model_from_drop_down';
   static const deleted = 'deleted';
   static const do_you_really_want_to_delete = 'do_you_really_want_to_delete';
+  static const update_alert = 'update_alert';
+  static const upadate = 'upadate';
+  static const stopCharging = 'stopCharging';
 }
 
 class Locales {
@@ -280,5 +283,8 @@ class Locales {
         'Please select a vehicle model from the suggestions provided',
     'deleted': 'Deleted',
     'do_you_really_want_to_delete': 'Do you really want to delete?',
+    'update_alert': 'New Update Available',
+    'upadate': 'Update',
+    'stopCharging': 'Stop charging',
   };
 }

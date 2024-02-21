@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
@@ -11,6 +10,7 @@ import 'package:project/infrastructure/widgets/text/list_title_widget.dart';
 import 'package:project/presentation/charging.session/widgets/charging_option_section.dart';
 import 'package:project/presentation/station.details/widgets/charging_power_status_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
+
 import 'controllers/charging_session.controller.dart';
 
 class ChargingSessionScreen extends GetView<ChargingSessionController> {
@@ -23,7 +23,8 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
         appBar: CustomAppbar(
             title: controller.isLoading.value
                 ? ""
-                : controller.chargingSession?.chargingSession?.stationName ?? ""),
+                : controller.chargingSession?.chargingSession?.stationName ??
+                    ""),
         body: Obx(
           () => controller.isLoading.value
               ? const LoadingWidget()
@@ -39,21 +40,24 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ListTitleWidget(
-                                title: controller.chargingSession?.chargingSession?.chargingPointName ??
+                                title: controller.chargingSession
+                                        ?.chargingSession?.chargingPointName ??
                                     ""),
                             const SizedBox(height: 10),
                             ChargingPowerStatusWidget(
                                 connectorPower:
-                                    "${controller.chargingSession?.chargingSession?.pricing?.power  ?? ""} ",//${translate(LocaleKeys.kw)
-                                connectorStatus:
-                                controller.chargingSession?.chargingSession?.status  ?? ""),
+                                    "${controller.chargingSession?.chargingSession?.pricing?.power ?? ""} ", //${translate(LocaleKeys.kw)
+                                connectorStatus: controller.chargingSession
+                                        ?.chargingSession?.status ??
+                                    ""),
                             const SizedBox(height: 10),
                             TitleSubtitleColumnRowWidget(
-                              title:
-                                  controller.chargingSession?.chargingSession?.connectorName  ?? "",
-                              subtitle:
-                              controller.chargingSession?.chargingSession?.connectorType ??
-                                      "",
+                              title: controller.chargingSession?.chargingSession
+                                      ?.connectorName ??
+                                  "",
+                              subtitle: controller.chargingSession
+                                      ?.chargingSession?.connectorType ??
+                                  "",
                               showAsColumn: false,
                             ),
                             const _CustomDivider(),
@@ -62,12 +66,19 @@ class ChargingSessionScreen extends GetView<ChargingSessionController> {
                             const ChargingOptionsSection(),
                             const SizedBox(height: 30),
                             RoundedRectangleButton(
+                                isLoading: controller.isWidgetLoading.value,
                                 onPressed: () {
-                                  NavigationUtils().callScreenYetToBeDone();
+                                  if (controller.isCharging.value) {
+                                    controller.stopCharging();
+                                  } else {
+                                    controller.startCharging();
+                                  }
                                 },
                                 height: 50,
                                 padding: EdgeInsets.zero,
-                                text: translate(LocaleKeys.startCharging)),
+                                text: translate(controller.isCharging.value
+                                    ? LocaleKeys.stopCharging
+                                    : LocaleKeys.startCharging)),
                             const SizedBox(height: 30),
                           ],
                         ),
@@ -98,21 +109,27 @@ class _PricingSection extends GetView<ChargingSessionController> {
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.power),
-                subtitle: controller.chargingSession?.chargingSession?.pricing?.power ?? "",
+                subtitle: controller
+                        .chargingSession?.chargingSession?.pricing?.power ??
+                    "",
                 showAsColumn: true,
               ),
             ),
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.type),
-                subtitle: controller.chargingSession?.chargingSession?.pricing?.type ?? "",
+                subtitle: controller
+                        .chargingSession?.chargingSession?.pricing?.type ??
+                    "",
                 showAsColumn: true,
               ),
             ),
             Expanded(
               child: TitleSubtitleColumnRowWidget(
                 title: translate(LocaleKeys.tariff),
-                subtitle: controller.chargingSession?.chargingSession?.pricing?.tariff ?? "",
+                subtitle: controller
+                        .chargingSession?.chargingSession?.pricing?.tariff ??
+                    "",
                 showAsColumn: true,
               ),
             )

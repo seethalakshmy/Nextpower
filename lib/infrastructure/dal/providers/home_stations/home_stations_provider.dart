@@ -1,12 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'dart:convert';
-import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
+import 'package:http/http.dart' as http;
 import 'package:project/infrastructure/dal/models/stations/StationsDetailsResponse.dart';
 import 'package:project/infrastructure/dal/models/stations/StationsResponse.dart';
-import 'package:project/infrastructure/dal/models/validate_otp/VerifyOtpResponse.dart';
 import 'package:project/infrastructure/dal/services/api_service.dart';
-import 'package:http/http.dart' as http;
+
+import '../../models/version/version_detail_response_model.dart';
 
 class HomeStationsProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
@@ -18,7 +19,8 @@ class HomeStationsProvider extends GetConnect {
           endPoint: 'stations',
           params: {'latitude': latitude, 'longitude': longitude});
 
-      StationsResponse data = StationsResponse.fromJson(json.decode(response.body));
+      StationsResponse data =
+          StationsResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");
@@ -26,15 +28,30 @@ class HomeStationsProvider extends GetConnect {
     }
   }
 
-  Future<StationsDetailsResponse> getStationDetails({required String stationId}) async {
+  Future<VersionDetailResponseModel> getVersionDetail() async {
     try {
-      http.Response response =
-          await _apiService.apiRequest(endPoint: 'get_station_by_id',
-              params: {'id': stationId},
-              postRequest: false);
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'app_versions', postRequest: false);
+
+      VersionDetailResponseModel data =
+          VersionDetailResponseModel.fromJson(json.decode(response.body));
+      return data;
+    } catch (e) {
+      debugPrint("Api issue in provider : ${e.toString()}");
+      return VersionDetailResponseModel(status: false, message: e.toString());
+    }
+  }
+
+  Future<StationsDetailsResponse> getStationDetails(
+      {required String stationId}) async {
+    try {
+      http.Response response = await _apiService.apiRequest(
+          endPoint: 'get_station_by_id',
+          params: {'id': stationId},
+          postRequest: false);
 
       StationsDetailsResponse data =
-      StationsDetailsResponse.fromJson(json.decode(response.body));
+          StationsDetailsResponse.fromJson(json.decode(response.body));
       return data;
     } catch (e) {
       debugPrint("Api issue in provider : ${e.toString()}");

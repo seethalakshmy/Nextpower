@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ import 'package:project/infrastructure/dal/providers/home_stations/home_stations
 import 'package:project/infrastructure/dal/providers/usage_history/usage_history_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+
 import '../../../infrastructure/dal/models/Wallet/wallet_detail_response_model.dart';
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
 import '../../../infrastructure/dal/providers/profile/profile_provider.dart';
@@ -25,7 +28,6 @@ class HomeController extends GetxController {
   final int walletIndex = 4;
   final int successHistory = 1;
   final int pendingHistory = 2;
-
   final selectedIndex = 0.obs;
   RxInt walletChosenAmountIndex = 0.obs;
   final RxBool isLoading = true.obs;
@@ -36,6 +38,7 @@ class HomeController extends GetxController {
   RxList<Favorite> favoritesList = <Favorite>[].obs;
   Rx<WalletDetailResponseModel> walletDetail = WalletDetailResponseModel().obs;
   final historyLoading = true.obs;
+  late Razorpay _razorpay;
 
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
@@ -56,20 +59,61 @@ class HomeController extends GetxController {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
     super.onInit();
-  //  await determinePosition(); //to go to my location
+    //  await determinePosition(); //to go to my location
     getStations();
     //getFavoritesList();
     getProfile();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    _razorpay.clear();
+  }
+
+  void openCheckout() async {
+    var options = {
+      'key': 'rzp_test_OFcfkX8sEE8TOD',
+      'amount': 5000, //in the smallest currency sub-unit.
+      'name': 'Acme Corp.',
+      'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
+      'description': 'Fine T-Shirt',
+      'timeout': 60, // in seconds
+      'prefill': {'contact': '9000090000', 'email': 'gaurav.kumar@example.com'}
+    };
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      print("Error --$e");
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    CustomSnackBar.showIncompleteSnackBar(
+        LocaleKeys.success.tr, "Payment success  ${response.paymentId}");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    CustomSnackBar.showErrorSnackBar(
+        LocaleKeys.error.tr, "Payment failed  ${response.message}");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
   }
 
   void getStations() {
-   // isLoading(true);
+    // isLoading(true);
     HomeStationsProvider()
         .getStations(
             latitude: cameraPosition.target.latitude,
             longitude: cameraPosition.target.longitude)
         .then((value) {
-    //  isLoading(false);
+      //  isLoading(false);
       StationsResponse response = value;
       if (response.status ?? false) {
         stationList = response.stations ?? [];
@@ -217,16 +261,14 @@ class HomeController extends GetxController {
   void getWalletData() async {
     isLoading(true);
     WalletDetailProvider().getWalletDetail().then((value) {
-      if (value.status!= null&&value.status == true){
+      if (value.status != null && value.status == true) {
         walletDetail.value = value;
-      }else{
+      } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, value.message ?? "");
       }
       isLoading(false);
     });
-
-
   }
 
   void setWalletAmountChosenIndex({required int index, required int amount}) {

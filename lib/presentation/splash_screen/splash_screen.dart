@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
-import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/storage/app_storage.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+
+import 'controllers/splash.controller.dart';
 
 class SplashScreenScreen extends StatefulWidget {
   const SplashScreenScreen({Key? key}) : super(key: key);
@@ -19,24 +17,12 @@ class _SplashScreenScreenState extends State<SplashScreenScreen> {
 
   @override
   void initState() {
-    getVersionNumber();
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      NavigationUtils().goFromSplash();
-    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-  }
-
-  Future getVersionNumber() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String versionName = packageInfo.version;
-    setState(() {
-      versionNumber = versionName;
-    });
   }
 
   @override
@@ -59,6 +45,7 @@ class SplashContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<SplashScreenController>();
     return Container(
       width: double.infinity,
       color: Colors.white,
@@ -78,13 +65,15 @@ class SplashContent extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 30),
             child: Column(
               children: [
-                Text(
-                  "V $versionNumber",
-                  style: TextStyle(
-                      color: AppColors.labelTextColor3,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
-                ),
+                Obx(() {
+                  return Text(
+                    "V ${controller.versionName}",
+                    style: TextStyle(
+                        color: AppColors.labelTextColor3,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600),
+                  );
+                }),
               ],
             ),
           ),
@@ -93,3 +82,43 @@ class SplashContent extends StatelessWidget {
     );
   }
 }
+
+// class SplashScreenScreen extends GetView<SplashScreenController> {
+//   const SplashScreenScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: double.infinity,
+//       color: Colors.white,
+//       padding: const EdgeInsets.symmetric(horizontal: 30),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           const SizedBox(
+//             height: 10,
+//           ),
+//           const Image(
+//             image: AssetImage(Assets.logoLogo),
+//             height: 200,
+//           ),
+//           Container(
+//             padding: const EdgeInsets.only(bottom: 30),
+//             child: Column(
+//               children: [
+//                 Text(
+//                   "V ",
+//                   style: TextStyle(
+//                       color: AppColors.labelTextColor3,
+//                       fontSize: 12,
+//                       fontWeight: FontWeight.w600),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
