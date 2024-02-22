@@ -10,9 +10,10 @@ import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.
 import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/text/subtitle_widget.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
-import 'package:project/infrastructure/widgets/text_fields/name_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
+
+import '../../../infrastructure/widgets/text_fields/name_widget.dart';
 
 class WalletView extends GetView<HomeController> {
   WalletView({super.key});

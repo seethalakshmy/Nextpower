@@ -39,6 +39,7 @@ class HomeController extends GetxController {
   Rx<WalletDetailResponseModel> walletDetail = WalletDetailResponseModel().obs;
   final historyLoading = true.obs;
   late Razorpay _razorpay;
+  String mailId = "";
 
   final Completer<GoogleMapController> mapCompleter =
       Completer<GoogleMapController>();
@@ -53,12 +54,14 @@ class HomeController extends GetxController {
   GoogleMapController? mapController;
   RxList<UsageHistoryItem> usageHistoryList = RxList.empty(growable: true);
   final TextEditingController walletBalanceController = TextEditingController();
+  String razorPayKey = 'rzp_test_OFcfkX8sEE8TOD';
 
   @override
   void onInit() async {
     setSelectedIndex(int.parse(
         (Get.parameters[ParamName.index] ?? stationIndex).toString()));
     super.onInit();
+    walletBalanceController.text = '100';
     //  await determinePosition(); //to go to my location
     getStations();
     //getFavoritesList();
@@ -76,25 +79,30 @@ class HomeController extends GetxController {
   }
 
   void openCheckout() async {
+    int amount = int.parse(walletBalanceController.text) * 100;
     var options = {
-      'key': 'rzp_test_OFcfkX8sEE8TOD',
-      'amount': 5000, //in the smallest currency sub-unit.
-      'name': 'Acme Corp.',
-      'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
-      'description': 'Fine T-Shirt',
+      'key': razorPayKey,
+      'amount': amount, //in the smallest currency sub-unit.
+      'name': 'Next Power',
+      //  'order_id': 'order_EMBFqjDHEEn80l', // Generate order_id using Orders API
+      'description': 'Wallet Recharge',
       'timeout': 60, // in seconds
-      'prefill': {'contact': '9000090000', 'email': 'gaurav.kumar@example.com'}
+      'prefill': {'contact': phoneNumber.value, 'email': mailId}
     };
     try {
       _razorpay.open(options);
     } catch (e) {
-      print("Error --$e");
+      print("Error :$e");
     }
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     CustomSnackBar.showIncompleteSnackBar(
         LocaleKeys.success.tr, "Payment success  ${response.paymentId}");
+    print("payment id = ${response.paymentId}");
+    print("orderId id = ${response.orderId}");
+    print("signature id = ${response.signature}");
+    print("data id = ${response.data}");
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -103,7 +111,8 @@ class HomeController extends GetxController {
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    // Do something when an external wallet is selected
+    CustomSnackBar.showIncompleteSnackBar(
+        LocaleKeys.success.tr, "Payment success  ${response.walletName}");
   }
 
   void getStations() {
@@ -282,6 +291,7 @@ class HomeController extends GetxController {
       if (response.status ?? false) {
         name(response.profile?.name ?? "");
         phoneNumber(response.profile?.phoneNumber ?? "");
+        mailId = response.profile?.userEmail ?? "";
         //isLoading(false);
       } else {
         //isLoading(false);

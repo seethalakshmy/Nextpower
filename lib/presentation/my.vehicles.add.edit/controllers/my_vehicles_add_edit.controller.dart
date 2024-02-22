@@ -6,7 +6,8 @@ import 'package:project/infrastructure/dal/models/vehicles/VehicleModelsResponse
 import 'package:project/infrastructure/dal/providers/vehicle/vehicle_provider.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
-import 'package:project/presentation/my_vehicles/models/vehicle_request_model.dart';
+
+import '../../../infrastructure/dal/models/vehicles/vehicle_request_model.dart';
 
 class MyVehiclesAddEditController extends GetxController {
   final isLoading = false.obs;
@@ -19,25 +20,34 @@ class MyVehiclesAddEditController extends GetxController {
   RxList<ModelsItem> models = RxList.empty(growable: true);
   String makeId = "";
   String modelId = "";
+  RxString? selectedMaker = "".obs;
+  RxString? selectedModel = "".obs;
+  RxList<String> makersNameList = <String>[].obs;
+  RxList<String> modelNameList = <String>[].obs;
+
+  // RxString mak
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   void onInit() {
     vehicleId = int.parse(Get.parameters[ParamName.vehicleId].toString());
     if (vehicleId != 0) {
-      //edit
       getVehicleDetails();
     }
-
     getVehicleMakeList();
-
     super.onInit();
   }
 
   void getVehicleMakeList() {
+    isLoading.value = true;
     VehicleProvider().getVehicleMakersList().then((response) {
       if (response.status ?? false) {
+        isLoading.value = false;
         makers.addAll(response.stations ?? []);
+        makersNameList.value =
+            makers.map((maker) => maker.title ?? "").toList();
       } else {
+        isLoading.value = false;
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
@@ -48,6 +58,7 @@ class MyVehiclesAddEditController extends GetxController {
     VehicleProvider().getVehicleModelsList(makerId: makeId).then((response) {
       if (response.status ?? false) {
         models.value = response.stations ?? [];
+        modelNameList.value = models.map((model) => model.name ?? "").toList();
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");

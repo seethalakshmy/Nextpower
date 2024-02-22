@@ -1,11 +1,11 @@
-
 class VehicleRequest {
   int? vehicleId;
   String vehicleNumber = "";
   String vehicleMake = "";
   String vehicleModel = "";
 
-  VehicleRequest({this.vehicleNumber = "", this.vehicleMake = "", this.vehicleModel = ""});
+  VehicleRequest(
+      {this.vehicleNumber = "", this.vehicleMake = "", this.vehicleModel = ""});
 
   VehicleRequest.fromJson(Map<String, dynamic> json) {
     vehicleId = json['vehicle_id'];
