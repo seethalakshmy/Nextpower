@@ -11,6 +11,8 @@ import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/dal/models/address/address_request_model.dart';
 
+import '../../../infrastructure/dal/models/address/AddressResponse.dart';
+
 class MyAddressAddEditController extends GetxController {
   final isLoading = false.obs;
   RxBool countriesLoading = false.obs;
@@ -22,9 +24,12 @@ class MyAddressAddEditController extends GetxController {
   RxList<CountryState> states = <CountryState>[].obs;
   Countries? selectedCountry;
   CountryState? selectedState;
+  Rx <SavedAddress> userCurrentAddress = SavedAddress().obs;
+  RxString userCountryItem = "".obs;
+  RxString userStateItem = "".obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     addressId = int.parse(Get.parameters[ParamName.addressId].toString());
     // CountryListProvider().getCountryList().then((value) {
     //   countries = value?.countries ?? [];
@@ -43,13 +48,51 @@ class MyAddressAddEditController extends GetxController {
     //     isLoading(false);
     //   }
     // });
-
-    getCountries();
-
+    await getCountries();
+    await setStateList(1);
+    await getAddress();
     super.onInit();
   }
 
-  void getCountries() {
+  Future getAddress() async {
+    isLoading(true);
+    AddressProvider().getAddress().then((value) {
+      isLoading(false);
+      AddressResponse response = value;
+      if (response.status ?? false) {
+        if (response.savedAddress?.id != null) {
+          userCurrentAddress.value = response.savedAddress ?? SavedAddress();
+          address.addressLine1 = userCurrentAddress.value.addressLine1 ?? "";
+          address.addressLine2 = userCurrentAddress.value.addressLine2 ?? "";
+          address.city = userCurrentAddress.value.city ?? "";
+          address.postalCode = userCurrentAddress.value.postalCode ?? "";
+          address.companyName = userCurrentAddress.value.companyName ?? "";
+          address.gstNo = userCurrentAddress.value.gstNo ?? "";
+          for (var country in countries) {
+            if (country.id == userCurrentAddress.value.countryId) {
+               userCountryItem.value = country.name ?? "Choose";
+               address.countryId = country.id ?? 0;
+               break;
+            }
+          }
+          for (var state in states) {
+            if (state.id == userCurrentAddress.value.stateId) {
+              userStateItem.value = state.name ?? "Choose";
+              address.stateId = state.id ?? 0;
+              break;
+            }
+          }
+        }
+      } else {
+        isLoading(false);
+        CustomSnackBar.showErrorSnackBar(
+            LocaleKeys.failed.tr, response.message ?? "");
+      }
+    });
+  }
+
+
+  Future getCountries() async{
     countriesLoading(true);
     AddressProvider().getCountries().then((response) {
       countriesLoading(false);
@@ -87,7 +130,7 @@ class MyAddressAddEditController extends GetxController {
     });
   }
 
-  void setStateList(int id) {
+  Future setStateList(int id) async{
     AddressProvider().getStates(countryId: id.toString()).then((response) {
       countriesLoading(false);
       if (response.status ?? false) {

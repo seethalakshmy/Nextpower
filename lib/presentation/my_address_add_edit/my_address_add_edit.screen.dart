@@ -19,7 +19,7 @@ import '../../generated/assets.dart';
 import 'controllers/my_address_add_edit_controller.dart';
 
 class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
-  const MyAddressAddEditScreen({Key? key}) : super(key: key);
+  const MyAddressAddEditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           CommonTextFieldWidget(
-                              initialValue: controller.address.addressLine1,
+                              initialValue: controller.userCurrentAddress.value.addressLine1,
                               title: translate(LocaleKeys.addressLine1),
                               onChanged: (value) {
                                 controller.address.addressLine1 = value ?? "";
@@ -56,7 +56,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               }),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
-                              initialValue: controller.address.addressLine2,
+                              initialValue: controller.userCurrentAddress.value.addressLine2,
                               title: translate(LocaleKeys.addressLine2),
                               onChanged: (value) {
                                 controller.address.addressLine2 = value ?? "";
@@ -69,7 +69,8 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               }),
                           const SizedBox(height: 10),
                           CustomDropdownWidget(
-                            initialValue: controller.selectedCountry,
+                            dropDownHint: controller.userCountryItem.value,
+                            initialValue:null,
                             fieldTitle: translate(LocaleKeys.country),
                             list: controller.countries.map((Country items) {
                               return DropdownMenuItem(
@@ -94,14 +95,15 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                             },
                           ),
                           const SizedBox(height: 10),
-                          Obx(() => CustomDropdownWidget(
-                                initialValue: controller.selectedState,
+                          CustomDropdownWidget(
+                            dropDownHint: controller.userStateItem.value,
+                                initialValue: null,
                                 fieldTitle: translate(LocaleKeys.state),
                                 list: controller.states.map((CountryState items) {
                                   return DropdownMenuItem(
                                     value: items,
                                     child: Padding(
-                                      padding: EdgeInsets.only(left: 8.0),
+                                      padding: const EdgeInsets.only(left: 8.0),
                                       child: Text(items.name ?? ""),
                                     ),
                                   );
@@ -118,10 +120,10 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                     return null;
                                   }
                                 },
-                              )),
+                              ),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
-                              initialValue: controller.address.city,
+                              initialValue: controller.userCurrentAddress.value.city,
                               title: translate(LocaleKeys.city),
                               onChanged: (value) {
                                 controller.address.city = value ?? "";
@@ -134,7 +136,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               }),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
-                              initialValue: controller.address.postalCode,
+                              initialValue: controller.userCurrentAddress.value.postalCode,
                               title: translate(LocaleKeys.postalCode),
                               onChanged: (value) {
                                 controller.address.postalCode = value ?? "";
@@ -147,7 +149,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               }),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
-                              initialValue: controller.address.companyName,
+                              initialValue: controller.userCurrentAddress.value.companyName,
                               title: translate(LocaleKeys.company),
                               onChanged: (value) {
                                 controller.address.companyName = value ?? "";
@@ -160,7 +162,7 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                               }),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
-                              initialValue: controller.address.gstNo,
+                              initialValue: controller.userCurrentAddress.value.gstNo,
                               title: translate(LocaleKeys.gstNo),
                               onChanged: (value) {
                                 controller.address.gstNo = value ?? "";
