@@ -70,7 +70,7 @@ class OtpScreen extends GetView<OtpController> {
                             } else {
                               final time = controller.remainingTime.value;
                               return Text(
-                                "Resend after ${time.inSeconds % 60} Sec",
+                                "Resend in ${time.inSeconds % 60} Sec",
                                 style: const TextStyle(color: Colors.red),
                               );
                             }

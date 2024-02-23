@@ -19,3 +19,5 @@ samples, guidance on mobile development, and a full API reference.
 #Flutter Version : 3.16.7
 #Branch name : upgrade_15.01.2024
 #Architecture : GetX with Provider
+
+#walletVector image need to remove from assets

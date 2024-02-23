@@ -16,12 +16,12 @@ class ChargingSessionController extends GetxController {
   int? stationId;
   int? connectorId;
   RxBool isLoading = true.obs;
+  RxBool isCharging = false.obs;
   ChargingSessionResponseModel? chargingSession;
   RxInt selectedChargingOption = 1.obs;
   RxInt standardMinValue = 100.obs;
   RxInt standardMaxValue = 5000.obs;
   static int standardValue = 100;
-  RxBool isCharging = false.obs;
   RxBool isWidgetLoading = false.obs;
   TextEditingController textController = TextEditingController();
 
@@ -79,6 +79,7 @@ class ChargingSessionController extends GetxController {
       }
     });
   }
+
 
   void postChargingSessionDetail(int connectorId, int stationId) {
     isLoading(true);

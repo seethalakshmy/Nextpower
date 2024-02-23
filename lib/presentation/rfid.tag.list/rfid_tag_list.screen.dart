@@ -26,8 +26,8 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
         appBar: CustomAppbar(title: translate(LocaleKeys.rfidTag)),
         bottomNavigationBar: GestureDetector(
           onTap: () {
-            CustomSnackBar.showSuccessSnackBar(
-                'Success', "Successfully requested new RFID tag");
+            // CustomSnackBar.showSuccessSnackBar(
+            //     'Success', "Successfully requested new RFID tag");
           },
           child: Container(
               height: 62,

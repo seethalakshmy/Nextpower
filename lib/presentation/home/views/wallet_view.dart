@@ -61,8 +61,8 @@ class WalletView extends GetView<HomeController> {
                             ],
                           ),
                         ),
-                        SvgImageUtils()
-                            .showSvgFromAsset(Assets.iconsWalletVector)
+                        // SvgImageUtils()
+                        //     .showSvgFromAsset(Assets.iconsWalletVector)
                       ],
                     ),
                   )),

@@ -126,15 +126,15 @@ class _ExpandedButtonWidgets extends GetView<StationDetailsController> {
                 ),
               ),
               const SizedBox(width: 10),
-              Expanded(
-                child: RoundedOutlineButton(
-                    asset: Assets.iconsCalender,
-                    height: 50,
-                    onPressed: () {
-                      NavigationUtils().callScreenYetToBeDone();
-                    },
-                    text: translate(LocaleKeys.reserve)),
-              ),
+              // Expanded(
+              //   child: RoundedOutlineButton(
+              //       asset: Assets.iconsCalender,
+              //       height: 50,
+              //       onPressed: () {
+              //         NavigationUtils().callScreenYetToBeDone();
+              //       },
+              //       text: translate(LocaleKeys.reserve)),
+              // ),
             ],
           )
         ],

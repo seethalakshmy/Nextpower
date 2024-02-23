@@ -68,19 +68,6 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                 return null;
                               }),
                           const SizedBox(height: 10),
-                          CommonTextFieldWidget(
-                              initialValue: controller.address.city,
-                              title: translate(LocaleKeys.city),
-                              onChanged: (value) {
-                                controller.address.city = value ?? "";
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "${translate(LocaleKeys.city)} ${translate(LocaleKeys.shouldntBeEmpty)}";
-                                }
-                                return null;
-                              }),
-                          const SizedBox(height: 10),
                           CustomDropdownWidget(
                             initialValue: controller.selectedCountry,
                             fieldTitle: translate(LocaleKeys.country),
@@ -132,6 +119,19 @@ class MyAddressAddEditScreen extends GetView<MyAddressAddEditController> {
                                   }
                                 },
                               )),
+                          const SizedBox(height: 10),
+                          CommonTextFieldWidget(
+                              initialValue: controller.address.city,
+                              title: translate(LocaleKeys.city),
+                              onChanged: (value) {
+                                controller.address.city = value ?? "";
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "${translate(LocaleKeys.city)} ${translate(LocaleKeys.shouldntBeEmpty)}";
+                                }
+                                return null;
+                              }),
                           const SizedBox(height: 10),
                           CommonTextFieldWidget(
                               initialValue: controller.address.postalCode,
