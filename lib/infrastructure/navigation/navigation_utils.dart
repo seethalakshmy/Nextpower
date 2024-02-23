@@ -24,17 +24,18 @@ class NavigationUtils {
   Future<bool> callOTPPage(
       {required String countryCode,
       required String mobileNumber,
-      required String otp, bool clearBackStack = false,
+      required String otp,
+      bool clearBackStack = false,
       required bool isVerify}) async {
     bool verified = false;
-    if(clearBackStack){
+    if (clearBackStack) {
       verified = await Get.offNamed(Routes.OTP, parameters: {
         ParamName.countryCode: countryCode,
         ParamName.mobileNumber: mobileNumber,
         ParamName.otp: otp,
         ParamName.isVerify: isVerify.toString()
       });
-    }else{
+    } else {
       verified = await Get.toNamed(Routes.OTP, parameters: {
         ParamName.countryCode: countryCode,
         ParamName.mobileNumber: mobileNumber,
@@ -55,7 +56,7 @@ class NavigationUtils {
   }
 
   void callRegistration(String countryCode, String mobileNumber) {
-    Get.toNamed(Routes.REGISTRATION, parameters: {
+    Get.offNamed(Routes.REGISTRATION, parameters: {
       ParamName.countryCode: countryCode,
       ParamName.mobileNumber: mobileNumber,
     });
@@ -84,10 +85,10 @@ class NavigationUtils {
   }
 
   void goFromSplash() {
-    if(AppStorage().getLoggedIn()){
+    if (AppStorage().getLoggedIn()) {
       callHomePage(clearStack: true);
-    }else{
-      callLoginPage(isLoginPage: true,clearStack: true);
+    } else {
+      callLoginPage(isLoginPage: true, clearStack: true);
     }
   }
 
@@ -104,7 +105,7 @@ class NavigationUtils {
     Get.toNamed(Routes.MY_VEHICLES);
   }
 
-  Future<bool> callMyVehiclesAddEditPage(int id) async{
+  Future<bool> callMyVehiclesAddEditPage(int id) async {
     bool? result = await Get.toNamed(Routes.MY_VEHICLES_ADD_EDIT,
         parameters: {ParamName.vehicleId: id.toString()}) as bool?;
     return result ?? false;
@@ -114,7 +115,7 @@ class NavigationUtils {
     Get.toNamed(Routes.MY_ADDRESS);
   }
 
-  Future<bool> callMyAddressAddEditPage(int id) async{
+  Future<bool> callMyAddressAddEditPage(int id) async {
     bool? result = await Get.toNamed(Routes.MY_ADDRESS_ADD_EDIT,
         parameters: {ParamName.addressId: id.toString()}) as bool?;
     return result ?? false;
@@ -142,7 +143,6 @@ class NavigationUtils {
   void callStationDetails(int stationId) {
     Get.toNamed(Routes.STATION_DETAILS,
         parameters: {ParamName.stationId: stationId.toString()});
-
   }
 
   void callChargingSessionDetails(

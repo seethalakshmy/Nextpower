@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
-import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
 import 'package:project/infrastructure/widgets/buttons/back_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
@@ -49,7 +48,7 @@ class OtpScreen extends GetView<OtpController> {
                       const SizedBox(height: 20),
                       Obx(() => RoundedRectangleButton(
                           onPressed: () async {
-                            if(controller.validate()){
+                            if (controller.validate()) {
                               controller.validateOtp();
                             }
                           },
@@ -69,7 +68,11 @@ class OtpScreen extends GetView<OtpController> {
                                   },
                                   text: LocaleKeys.resendOtp);
                             } else {
-                              return const Spacer();
+                              final time = controller.remainingTime.value;
+                              return Text(
+                                "Resend after ${time.inSeconds % 60} Sec",
+                                style: const TextStyle(color: Colors.red),
+                              );
                             }
                           }),
                           Obx(() {

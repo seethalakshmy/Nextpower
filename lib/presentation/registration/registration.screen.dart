@@ -14,7 +14,7 @@ import 'package:project/infrastructure/widgets/text_fields/name_widget.dart';
 import 'controllers/registration.controller.dart';
 
 class RegistrationScreen extends GetView<RegistrationController> {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  const RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +75,15 @@ class RegistrationScreen extends GetView<RegistrationController> {
                   )),
               const SizedBox(height: 10),
               Obx(() => CommonTextFieldWidget(
-                title: translate(LocaleKeys.emailAddress),
-                editingController: controller.emailController,
-                errorText: controller.emailError.value,
-                onChanged: (value) {
-                  controller.validate();
-                },
-                validator: (value) => ValidationUtils().emailValidation(value),
-
-              )),
+                    title: translate(LocaleKeys.emailAddress),
+                    editingController: controller.emailController,
+                    errorText: controller.emailError.value,
+                    onChanged: (value) {
+                      controller.validate();
+                    },
+                    validator: (value) =>
+                        ValidationUtils().emailValidation(value),
+                  )),
               const SizedBox(height: 30),
               Obx(() => RoundedRectangleButton(
                   onPressed: () {

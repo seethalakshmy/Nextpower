@@ -16,7 +16,6 @@ class ContinueButtonWidget extends GetView<LoginController> {
           isLoading: controller.isLoading.value,
           onPressed: () {
             controller.gotoNextPage();
-
           },
           text: translate(LocaleKeys.continueLabel),
         ));
