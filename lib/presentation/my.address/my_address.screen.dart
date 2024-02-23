@@ -14,7 +14,7 @@ import 'controllers/my_address.controller.dart';
 import 'widgets/show_address_widget.dart';
 
 class MyAddressScreen extends GetView<MyAddressController> {
-  const MyAddressScreen({Key? key}) : super(key: key);
+  const MyAddressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +106,8 @@ class _ContentView extends StatelessWidget {
                   addressLine1: controller.address[index].addressLine1 ?? "",
                   addressLine2: controller.address[index].addressLine2 ?? "",
                   city: controller.address[index].city ?? "",
-                  country: "sample country",
-                  state: "Sample state",
+                  country: controller.userCountryItem.value,
+                  state: controller.userStateItem.value,
                   postalCode: controller.address[index].postalCode ?? "",
                 ),
                 const SizedBox(height: 10),

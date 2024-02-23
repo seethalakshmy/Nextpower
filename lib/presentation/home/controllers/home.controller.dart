@@ -22,6 +22,8 @@ import '../../../infrastructure/dal/providers/profile/profile_provider.dart';
 import '../../../infrastructure/dal/providers/wallet/wallet_detail_provider.dart';
 
 class HomeController extends GetxController {
+  RxBool canPop = false.obs;
+  RxInt count = 0.obs;
   final int stationIndex = 1;
   final int historyIndex = 2;
   final int favoritesIndex = 3;

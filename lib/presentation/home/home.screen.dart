@@ -18,35 +18,67 @@ import 'views/wallet_view.dart';
 import 'widgets/bottom_navigation_bar_widget.dart';
 
 class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Obx(() =>Scaffold(
-        appBar: AppBar(
-          title: const _AppBarTitleWidget(),
-          centerTitle: false,
-          elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: AppColors.textTitleColor),
+    return Obx(() {
+      return PopScope(
+        onPopInvoked: (value) {
+          controller.count++;
+          if (controller.count.value > 1) {
+            controller.canPop.value = true;
+          }
+          if (controller.count.value == 1) {
+            Get.snackbar(
+              "",
+              "",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.transparent,
+              colorText: Colors.black,
+              messageText: const Text(
+                "Press Again To Exit",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+        },
+        canPop: controller.canPop.value,
+        child: SafeArea(
+          child: Obx(() => Scaffold(
+                appBar: AppBar(
+                  title: const _AppBarTitleWidget(),
+                  centerTitle: false,
+                  elevation: 0,
+                  backgroundColor: Colors.white,
+                  iconTheme: IconThemeData(color: AppColors.textTitleColor),
+                ),
+                drawer: CustomDrawerWidget(
+                  controller: controller,
+                ),
+                bottomNavigationBar: const BottomNavigationBarWidget(),
+                floatingActionButton:
+                    controller.selectedIndex.value == controller.stationIndex
+                        ? FloatingActionButton(
+                            heroTag: "QrCodeScanner",
+                            onPressed: () {
+                              NavigationUtils().callQrCodeScannerPage();
+                            },
+                            child: SvgImageUtils().showSvgFromAsset(
+                                Assets.iconsQrcode,
+                                width: 24,
+                                height: 24),
+                          )
+                        : null,
+                body: const HomeContentView(),
+              )),
         ),
-        drawer: CustomDrawerWidget(controller: controller,),
-        bottomNavigationBar: const BottomNavigationBarWidget(),
-        floatingActionButton:
-            controller.selectedIndex.value == controller.stationIndex
-                ? FloatingActionButton(
-                    heroTag: "QrCodeScanner",
-                    onPressed: () {
-                      NavigationUtils().callQrCodeScannerPage();
-                    },
-                    child: SvgImageUtils().showSvgFromAsset(Assets.iconsQrcode,
-                        width: 24, height: 24),
-                  )
-                : null,
-        body: const HomeContentView(),
-      )),
-    );
+      );
+    });
   }
 }
 
@@ -97,7 +129,7 @@ class HomeContentView extends GetView<HomeController> {
       } else if (controller.selectedIndex.value == controller.favoritesIndex) {
         return const FavouritesView();
       } else if (controller.selectedIndex.value == controller.walletIndex) {
-        return  WalletView();
+        return WalletView();
       } else {
         return Container();
       }

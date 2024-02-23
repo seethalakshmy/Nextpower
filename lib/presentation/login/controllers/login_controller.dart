@@ -6,23 +6,21 @@ import 'package:project/infrastructure/dal/models/login/LoginResponse.dart';
 import 'package:project/infrastructure/dal/providers/change_mobile_number/change_mobile_provider.dart';
 import 'package:project/infrastructure/dal/providers/login/login_provider.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
-import 'package:project/infrastructure/utils/constants.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/print_utils.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 
 class LoginController extends GetxController {
   final selectedCountryCode = "".obs;
-
+  RxBool canPop = false.obs;
+  RxInt count = 0.obs;
   String mobileNumber = "";
   RxString mobileNumberError = "".obs;
-
   final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   RxBool countriesLoading = false.obs;
   RxList<Country> countries = RxList.empty(growable: true);
   bool isLoginPage = true; //Page reused for change phone number
-
   @override
   void onInit() {
     isLoginPage = (Get.parameters[ParamName.isLoginPage] ?? "")
@@ -64,12 +62,11 @@ class LoginController extends GetxController {
       mobileNumberError.value = LocaleKeys.mobileNumberShouldntBeEmpty.tr;
       return;
     }
-    if(isLoginPage){
+    if (isLoginPage) {
       callMobileNumberValidateApi();
-    }else{
+    } else {
       callChangeMobileNumberApi();
     }
-
   }
 
   void callMobileNumberValidateApi() {
@@ -95,7 +92,7 @@ class LoginController extends GetxController {
     isLoading(true);
     ChangeMobileNumberProvider()
         .changePhoneNumber(
-        phoneNumber: mobileNumber, countryCode: selectedCountryCode.value)
+            phoneNumber: mobileNumber, countryCode: selectedCountryCode.value)
         .then((value) {
       isLoading(false);
       LoginResponse response = value;
