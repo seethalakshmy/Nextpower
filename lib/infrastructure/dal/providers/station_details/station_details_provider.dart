@@ -15,14 +15,16 @@ class StationDetailsProvider extends GetConnect {
   void onInit() {}
 
   Future<StationDetailResponse> getStationDetails(
-      {required int id, required String fromQR, required int stationID}) async {
+      {required String id,
+      required String fromQR,
+      required int stationID}) async {
     try {
       if (fromQR == "fromQrCode") {
         http.Response response = await _apiService.apiRequest(
             endPoint: 'get_station_by_id',
             postRequest: false,
             params: {
-              'charging_point_id': id.toString(),
+              'charging_point_qrcode': id.toString(),
             });
         StationDetailResponse data =
             StationDetailResponse.fromJson(json.decode(response.body));

@@ -28,6 +28,7 @@ class MyAddressController extends GetxController {
   }
 
   Future getAddress() async {
+    address.clear();
     isLoading(true);
     AddressProvider().getAddress().then((value) {
       AddressResponse response = value;

@@ -22,7 +22,7 @@ import '../../infrastructure/widgets/text_fields/name_widget.dart';
 import 'controllers/profile.controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -244,57 +244,64 @@ class EmailDisabled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TitleWidget(title: translate(LocaleKeys.emailAddress)),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                if (controller.isEmailVerified.isFalse) {
-                  controller.validateEmailID();
-                }
-              },
-              child: Container(
-                height: 48,
-                width: double.infinity,
-                padding: const EdgeInsets.only(left: 18, right: 3),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  // Set your desired color here
-                  borderRadius: BorderRadius.circular(6),
-                  // Adjust the radius as needed
-                  border: Border.all(
-                    color: Colors.grey.withOpacity(0.6), // Set border color
-                    width: 1, // Set border width
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        controller.email.value,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    controller.isEmailVerified.value
-                        ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick,
-                            width: 24, height: 24)
-                        : controller.isEmailVerificationIconEnable.value
-                            ? SvgImageUtils()
-                                .showSvgFromAsset(Assets.iconsExclamation)
-                            : const SizedBox(),
-                  ],
+    return Obx(() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TitleWidget(title: translate(LocaleKeys.emailAddress)),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () {
+              if (controller.isEmailVerified.isFalse) {
+                controller.emailVerificationResend();
+              }
+            },
+            child: Container(
+              height: 48,
+              width: double.infinity,
+              padding: const EdgeInsets.only(left: 18, right: 3),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                // Set your desired color here
+                borderRadius: BorderRadius.circular(6),
+                // Adjust the radius as needed
+                border: Border.all(
+                  color: Colors.grey.withOpacity(0.6), // Set border color
+                  width: 1, // Set border width
                 ),
               ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      controller.email.value,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  controller.isApiCalling.value
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.blueAccent,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : controller.isEmailVerified.value
+                          ? SvgImageUtils().showSvgFromAsset(Assets.iconsTick,
+                              width: 24, height: 24)
+                          : controller.isEmailVerificationIconEnable.value
+                              ? SvgImageUtils()
+                                  .showSvgFromAsset(Assets.iconsExclamation)
+                              : const SizedBox(),
+                ],
+              ),
             ),
-          ],
-        );
-      }
-    );
+          ),
+        ],
+      );
+    });
   }
 }
 

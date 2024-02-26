@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/locales.g.dart';
@@ -8,12 +7,12 @@ import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/utils/param_name.dart';
 import 'package:project/infrastructure/utils/snackbar_utils.dart';
 
-
 class ProfileController extends GetxController {
   final formKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   RxBool buttonLoading = false.obs;
   RxBool isEditable = false.obs;
+  RxBool isApiCalling = false.obs;
   RxBool isEmailVerificationEnabled = false.obs;
   RxBool isMobileVerificationEnabled = false.obs;
   RxBool isEmailVerified = true.obs;
@@ -48,7 +47,6 @@ class ProfileController extends GetxController {
         phoneNumber(response.profile?.phoneNumber ?? "");
         countryCode(response.profile?.countryCode ?? "");
         isEmailVerified(response.profile?.isEmailVerified ?? false);
-
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -56,9 +54,6 @@ class ProfileController extends GetxController {
     });
   }
 
-
-  
-  
   void changeEmailID(String value) {
     if (value.compareTo(previousEmail) != 0) {
       isEmailVerified(false);
@@ -82,20 +77,22 @@ class ProfileController extends GetxController {
     return true;
   }
 
-  void validateEmailID() async {
-    CustomSnackBar.showSuccessSnackBarWithButton(
-        title: LocaleKeys.not_verified.tr,
-        message: LocaleKeys.please_click_link_to_verify_email.tr,
-        buttonTitle: LocaleKeys.resend_verification_link.tr, onPressedButton: (){
-
-          Get.back();
-        emailVerificationResend();
-    });
-  }
+  // void validateEmailID() async {
+  //   CustomSnackBar.showSuccessSnackBarWithButton(
+  //       title: LocaleKeys.not_verified.tr,
+  //       message: LocaleKeys.please_click_link_to_verify_email.tr,
+  //       buttonTitle: LocaleKeys.resend_verification_link.tr, onPressedButton: (){
+  //
+  //         Get.back();
+  //       emailVerificationResend();
+  //   });
+  // }
 
   void submit() {
     buttonLoading(true);
-    ProfileProvider().updateProfile(name: name.value, email: email.value).then((response) {
+    ProfileProvider()
+        .updateProfile(name: name.value, email: email.value)
+        .then((response) {
       buttonLoading(false);
       if (response.status ?? false) {
         isEditable(false);
@@ -110,20 +107,20 @@ class ProfileController extends GetxController {
   }
 
   void emailVerificationResend() {
+    isApiCalling.value = true;
     ProfileProvider().emailVerificationResend().then((response) {
       if (response.status == true) {
+        isApiCalling.value = false;
         isEmailVerificationIconEnable.value = false;
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
       } else {
+        isApiCalling.value = false;
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }
     });
   }
-
-
-
 
   void gotoLogin() {
     NavigationUtils().callLoginPage(isLoginPage: false);

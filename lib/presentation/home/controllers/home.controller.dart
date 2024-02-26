@@ -165,9 +165,9 @@ class HomeController extends GetxController {
 
   void setSelectedIndex(int index) async {
     if (index == favoritesIndex) {
+      selectedIndex.value = index;
       isLoading(true);
       await Future.delayed(const Duration(seconds: 2));
-      selectedIndex.value = index;
       getFavoritesList();
     } else if (index == historyIndex) {
       selectedIndex.value = index;
@@ -176,9 +176,9 @@ class HomeController extends GetxController {
       selectedIndex.value = index;
       getWalletData();
     } else {
+      selectedIndex.value = index;
       isLoading(true);
       await Future.delayed(const Duration(seconds: 2));
-      selectedIndex.value = index;
       isLoading(false);
     }
   }
@@ -245,6 +245,7 @@ class HomeController extends GetxController {
     FavoriteProvider().getFavoritesList().then((response) {
       if (response.status == true) {
         favoritesList.value = response.favorites!;
+        print("ggggg ${favoritesList.value[0].stationId}");
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -253,7 +254,7 @@ class HomeController extends GetxController {
     });
   }
 
-  void removeFavorite(int stationId) async {
+  void removeFavorite(int stationId) {
     FavoriteProvider()
         .removeOrAddFavoritesListItem(favoriteId: 0, stationId: stationId)
         .then((response) {
@@ -266,7 +267,6 @@ class HomeController extends GetxController {
             LocaleKeys.failed.tr, response.message ?? "");
       }
     });
-    //  isLoading(false);
   }
 
   void getWalletData() async {

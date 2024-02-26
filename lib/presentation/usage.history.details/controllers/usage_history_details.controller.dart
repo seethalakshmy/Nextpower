@@ -29,6 +29,7 @@ class UsageHistoryDetailsController extends GetxController {
       if (response.status ?? false) {
         details.value = response.usageHistory;
       } else {
+        isLoading(false);
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
       }

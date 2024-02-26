@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
@@ -13,6 +10,7 @@ import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/my.address/widgets/show_address_widget.dart';
 import 'package:project/presentation/station.details/controllers/station_details.controller.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../infrastructure/navigation/navigation_utils.dart';
@@ -41,8 +39,9 @@ class OverviewWidget extends GetView<StationDetailsController> {
                 _OverviewDetailsWidget(
                     station: controller.stationDetails.value),
                 const SizedBox(height: 20),
-                controller.stationDetails.value.amenities!.isNotEmpty ?
-                const _AmenitiesWidget():const SizedBox(),
+                controller.stationDetails.value.amenities!.isNotEmpty
+                    ? const _AmenitiesWidget()
+                    : const SizedBox(),
                 const SizedBox(height: 20),
               ],
             ),
@@ -187,7 +186,16 @@ class _IconsRow extends StatelessWidget {
           _IconsLabelWidget(
             asset: Assets.iconsShareBig,
             label: LocaleKeys.share,
-            onTap: () {},
+            onTap: () {
+              String shareContent =
+                  "${controller.stationDetails.value.stationName}\n"
+                  " ${controller.stationDetails.value.address?.addressLine1}\n"
+                  " ${controller.stationDetails.value.address?.addressLine2}\n"
+                  " ${controller.stationDetails.value.address?.city}\n"
+                  " ${controller.stationDetails.value.address?.postalCode}\n"
+                  " ${"https://maps.google.com/?q=${controller.stationDetails.value.overview?.latitude},${controller.stationDetails.value.overview?.longitude}"}";
+              _shareDetails(shareContent);
+            },
           ),
           _IconsLabelWidget(
             asset: Assets.iconsCallBig,
@@ -198,16 +206,15 @@ class _IconsRow extends StatelessWidget {
             },
           ),
           Obx(() => FavoritesWidget(
-            loading:controller.isFavoritesLoading.value,
-                    asset: controller.isFavorite.value
-                        ? Assets.iconsFavFillHeart
-                        : Assets.iconsFavouriteBig,
-                    onTap: () {
-                      controller.removeAddFavorite(controller.stationId,
-                          controller.isFavorite.value ? 0 : 1);
-                    },
-                  )
-              )
+                loading: controller.isFavoritesLoading.value,
+                asset: controller.isFavorite.value
+                    ? Assets.iconsFavFillHeart
+                    : Assets.iconsFavouriteBig,
+                onTap: () {
+                  controller.removeAddFavorite(controller.stationId,
+                      controller.isFavorite.value ? 0 : 1);
+                },
+              ))
         ],
       ),
     );
@@ -220,6 +227,10 @@ class _IconsRow extends StatelessWidget {
     );
     await launchUrl(launchUri);
   }
+}
+
+void _shareDetails(String content) {
+  Share.share(content, subject: 'Next Power');
 }
 
 class _IconsLabelWidget extends StatelessWidget {

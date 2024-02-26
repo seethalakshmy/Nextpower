@@ -10,7 +10,7 @@ import '../../../infrastructure/utils/snackbar_utils.dart';
 
 class StationDetailsController extends GetxController {
   int stationId = 0;
-  int connectorId = 0;
+  String connectorId = "";
   String fromQR = "";
   RxBool isLoading = false.obs;
   RxBool isSelectedConnectorView = true.obs;
@@ -26,7 +26,7 @@ class StationDetailsController extends GetxController {
   void onInit() {
     isLoading(true);
     stationId = int.parse((Get.parameters[ParamName.stationId] ?? "0"));
-    connectorId = int.parse((Get.parameters[ParamName.connectorId] ?? "0"));
+    connectorId = Get.parameters[ParamName.connectorId] ?? "0";
     fromQR = Get.parameters[ParamName.from] ?? "";
     getStationDetails();
     getConnectors();

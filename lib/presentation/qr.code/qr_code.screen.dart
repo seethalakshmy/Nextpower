@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:project/infrastructure/navigation/navigation_utils.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
+
 import '../station.details/controllers/station_details.controller.dart';
 import 'controllers/qr_code.controller.dart';
 
@@ -62,16 +63,18 @@ class QrCodeScreen extends GetView<QrCodeController> {
               onDetect: (capture) async {
                 final List<Barcode> barcodes = capture.barcodes;
                 final Uint8List? image = capture.image;
-                // for (final barcode in barcodes) {
-                //   debugPrint('Barcode found! ${barcode.rawValue}');
-                //   // CustomSnackBar.showSuccessSnackBar(
-                //   //     "Barcode found!", "${barcode.rawValue}");
-                // }
+                for (final barcode in barcodes) {
+                  debugPrint('Barcode found! ${barcode.rawValue}');
+                  // CustomSnackBar.showSuccessSnackBar(
+                  //     "Barcode found!", "${barcode.rawValue}");
+                }
                 print("barcode details ${barcodes.first.rawValue}");
+
                 if (!Get.isRegistered<StationDetailsController>()) {
                   Get.lazyPut(() => StationDetailsController());
                   NavigationUtils().callChargingSessionDetailsFromQRCOde(
-                      connectorId: 3, fromQrCode: 'fromQrCode');
+                      connectorId: barcodes.first.rawValue.toString(),
+                      fromQrCode: 'fromQrCode');
                 }
 
                 // if (image != null) {
