@@ -12,7 +12,6 @@ import 'package:project/presentation/my.address/widgets/show_address_widget.dart
 import 'package:project/presentation/station.details/controllers/station_details.controller.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../../infrastructure/navigation/navigation_utils.dart';
 
 class OverviewWidget extends GetView<StationDetailsController> {
@@ -188,12 +187,16 @@ class _IconsRow extends StatelessWidget {
             label: LocaleKeys.share,
             onTap: () {
               String shareContent =
+                  "Next Power \n"
                   "${controller.stationDetails.value.stationName}\n"
-                  " ${controller.stationDetails.value.address?.addressLine1}\n"
-                  " ${controller.stationDetails.value.address?.addressLine2}\n"
-                  " ${controller.stationDetails.value.address?.city}\n"
-                  " ${controller.stationDetails.value.address?.postalCode}\n"
-                  " ${"https://maps.google.com/?q=${controller.stationDetails.value.overview?.latitude},${controller.stationDetails.value.overview?.longitude}"}";
+                  "${controller.stationDetails.value.address?.addressLine1}|"
+                  "${controller.stationDetails.value.address?.addressLine2}"
+                  "${controller.stationDetails.value.address?.city}\n"
+                  "${controller.stationDetails.value.address?.stateName}|"
+                  "${controller.stationDetails.value.address?.countryName}\n"
+                  "Pin:${controller.stationDetails.value.address?.postalCode}\n"
+                  "Contact +91${controller.stationDetails.value.overview?.mobileNumber}\n"
+                  "${"https://maps.google.com/?q=${controller.stationDetails.value.overview?.latitude},${controller.stationDetails.value.overview?.longitude}"}";
               _shareDetails(shareContent);
             },
           ),
@@ -230,7 +233,7 @@ class _IconsRow extends StatelessWidget {
 }
 
 void _shareDetails(String content) {
-  Share.share(content, subject: 'Next Power');
+  Share.share(content);
 }
 
 class _IconsLabelWidget extends StatelessWidget {

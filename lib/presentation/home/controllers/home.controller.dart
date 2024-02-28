@@ -57,7 +57,7 @@ class HomeController extends GetxController {
   RxList<UsageHistoryItem> usageHistoryList = RxList.empty(growable: true);
   final TextEditingController walletBalanceController = TextEditingController();
   String razorPayKey = 'rzp_test_OFcfkX8sEE8TOD';
-
+  int amount = 0;
   @override
   void onInit() async {
     setSelectedIndex(int.parse(
@@ -81,7 +81,7 @@ class HomeController extends GetxController {
   }
 
   void openCheckout() async {
-    int amount = int.parse(walletBalanceController.text) * 100;
+    amount = int.parse(walletBalanceController.text) * 100;
     var options = {
       'key': razorPayKey,
       'amount': amount, //in the smallest currency sub-unit.
@@ -99,12 +99,17 @@ class HomeController extends GetxController {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    CustomSnackBar.showIncompleteSnackBar(
-        LocaleKeys.success.tr, "Payment success  ${response.paymentId}");
-    print("payment id = ${response.paymentId}");
-    print("orderId id = ${response.orderId}");
-    print("signature id = ${response.signature}");
-    print("data id = ${response.data}");
+    int addAmount = int.parse(walletBalanceController.text);
+   WalletDetailProvider().addAmountToWallet(response.paymentId ?? "",addAmount).then((value) {
+     if (value.status!=null&&value.status == true){
+       getWalletData();
+       CustomSnackBar.showIncompleteSnackBar(
+           LocaleKeys.success.tr, "Payment success  ${response.paymentId}");
+     }else{
+       CustomSnackBar.showErrorSnackBar(
+           LocaleKeys.error.tr, "Payment failed  ${value.message}");
+     }
+   });
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -245,7 +250,6 @@ class HomeController extends GetxController {
     FavoriteProvider().getFavoritesList().then((response) {
       if (response.status == true) {
         favoritesList.value = response.favorites!;
-        print("ggggg ${favoritesList.value[0].stationId}");
       } else {
         CustomSnackBar.showErrorSnackBar(
             LocaleKeys.failed.tr, response.message ?? "");
@@ -261,6 +265,7 @@ class HomeController extends GetxController {
       if (response.status == true) {
         CustomSnackBar.showSuccessSnackBar(
             LocaleKeys.success.tr, response.message ?? "");
+        favoritesList.clear();
         getFavoritesList();
       } else {
         CustomSnackBar.showErrorSnackBar(

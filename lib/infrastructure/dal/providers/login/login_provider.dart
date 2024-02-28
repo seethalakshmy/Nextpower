@@ -7,6 +7,8 @@ import 'package:project/infrastructure/dal/models/validate_otp/VerifyOtpResponse
 import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../storage/app_storage.dart';
+
 class LoginProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
@@ -62,14 +64,25 @@ class LoginProvider extends GetConnect {
       }
       ) async {
     try {
+      String userId = AppStorage().getUserId();
+      Map<String,dynamic> params = {};
+
+      if (userId == ""){
+        params.addAll({'country_code': countryCode,
+            'phone_number': phoneNumber,
+            'otp': otp
+        });
+      }else{
+        params.addAll({'country_code': countryCode,
+          'phone_number': phoneNumber,
+          'otp': otp,
+          'user_id':userId});
+      }
+
       http.Response response =
       await _apiService.apiRequest(
         endPoint: 'verify_otp',
-        params: {
-          'country_code': countryCode,
-          'phone_number': phoneNumber,
-          'otp': otp,
-        }
+        params: params
       );
 
       VerifyOtpResponse data =

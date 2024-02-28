@@ -6,15 +6,18 @@ import 'package:project/infrastructure/dal/models/validate_otp/VerifyOtpResponse
 import 'package:project/infrastructure/dal/services/api_service.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../storage/app_storage.dart';
+
 class ChangeMobileNumberProvider extends GetConnect {
   final ApiService _apiService = Get.find<ApiService>();
 
   Future<LoginResponse> changePhoneNumber(
       {required String phoneNumber, required String countryCode}) async {
     try {
+      String userId = AppStorage().getUserId();
       http.Response response = await _apiService.apiRequest(
           endPoint: 'change_phone_number',
-          params: {'country_code': countryCode, 'phone_number': phoneNumber});
+          params: {'country_code': countryCode, 'phone_number': phoneNumber,"user_id":userId});
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
       return data;
