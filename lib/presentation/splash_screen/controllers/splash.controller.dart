@@ -82,7 +82,7 @@ class SplashScreenController extends GetxController {
         onPositiveTap: () async {
           if (isAndroid) {
             Uri url = Uri.parse(
-                "https://play.google.com/store/apps/details?id=com.ae.unidoc");
+                "https://play.google.com/store/apps");
             if (await canLaunchUrl(url)) {
               await launchUrl(url);
             } else {
@@ -90,7 +90,7 @@ class SplashScreenController extends GetxController {
             }
           } else {
             Uri url = Uri.parse(
-                "https://itunes.apple.com/in/app/unidoc-doctor-appointment/id1527263282?mt=8");
+                "https://itunes.apple.com/in/app");
             if (await canLaunchUrl(url)) {
               await launchUrl(url);
             } else {
