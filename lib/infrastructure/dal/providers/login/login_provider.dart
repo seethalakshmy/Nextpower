@@ -29,10 +29,24 @@ class LoginProvider extends GetConnect {
 
   Future<LoginResponse> resendOtp(
       {required String phoneNumber, required String countryCode}) async {
+
+    String userId = AppStorage().getUserId();
+    Map<String,dynamic> params = {};
+
+    if (userId == ""||userId.isEmpty){
+      params.addAll({'country_code': countryCode,
+        'phone_number': phoneNumber,
+      });
+    }else{
+      params.addAll({'country_code': countryCode,
+        'phone_number': phoneNumber,
+        'user_id':userId});
+    }
+
     try {
       http.Response response = await _apiService.apiRequest(
           endPoint: 'resend_otp',
-          params: {'country_code': countryCode, 'phone_number': phoneNumber});
+          params:params);
 
       LoginResponse data = LoginResponse.fromJson(json.decode(response.body));
       return data;
