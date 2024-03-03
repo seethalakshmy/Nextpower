@@ -29,7 +29,8 @@ class UsageHistoryView extends GetView<HomeController> {
                 : controller.usageHistoryList.isNotEmpty
                     ? const _ListContentSection()
                     : EmptyListView(
-                        subTitle: 'No Histories yet', title: "Oops"),
+                subTitle: translate(LocaleKeys.noDataFound),
+                title: translate(LocaleKeys.sorry)),
           ),
         )
       ],

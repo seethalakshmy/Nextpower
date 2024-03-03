@@ -184,7 +184,7 @@ class _VehicleNumberAndEditWidget extends StatelessWidget {
             SvgImageUtils().showSvgFromAsset(Assets.iconsCarIcon),
             const SizedBox(width: 10),
             Text(
-              controller.vehiclesList[index].vehicleNumber ?? "",
+              controller.vehiclesList[index].vehicleNumber?.toUpperCase() ?? "",
               style: TextStyle(fontSize: 18, color: AppColors.labelColor2),
             ),
           ],

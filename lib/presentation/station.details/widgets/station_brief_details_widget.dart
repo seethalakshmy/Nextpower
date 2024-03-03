@@ -99,14 +99,14 @@ class ContentItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 14, color: AppColors.labelTextColor4),
+              style: TextStyle(fontSize: 14/MediaQuery.of(context).textScaleFactor, color: AppColors.labelTextColor4),
             ),
             Text(
               value,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
+                  fontSize: 14/MediaQuery.of(context).textScaleFactor, fontWeight: FontWeight.w700, color: textColor),
             )
           ],
         ),

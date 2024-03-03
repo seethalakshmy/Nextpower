@@ -182,7 +182,7 @@ class WalletView extends GetView<HomeController> {
     } else {
       return EmptyListView(
           subTitle: translate(LocaleKeys.somethingWentWrongPleaseTryAgainLater),
-          title: translate(LocaleKeys.sorry));
+          title: translate(LocaleKeys.oops));
     }
   }
 }

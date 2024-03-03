@@ -18,7 +18,7 @@ class QrCodeScreen extends GetView<QrCodeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('QrCodeScreen'),
+          title: const Text('Scan QR Code'),
           centerTitle: true,
           actions: [
             IconButton(

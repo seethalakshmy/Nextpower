@@ -36,7 +36,8 @@ class OverviewWidget extends GetView<StationDetailsController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _OverviewDetailsWidget(
-                    station: controller.stationDetails.value),
+                  station: controller.stationDetails.value,
+                ),
                 const SizedBox(height: 20),
                 controller.stationDetails.value.amenities!.isNotEmpty
                     ? const _AmenitiesWidget()
@@ -50,7 +51,7 @@ class OverviewWidget extends GetView<StationDetailsController> {
     } else {
       return EmptyListView(
           subTitle: translate(LocaleKeys.noDataFound),
-          title: translate(LocaleKeys.oops));
+          title: translate(LocaleKeys.sorry));
     }
   }
 }
@@ -105,18 +106,61 @@ class _OverviewDetailsWidget extends StatelessWidget {
           label: station.overview?.openTime ?? "",
         ),
         const SizedBox(height: 10),
-        SmallIconLabelWidget(
-          assetPath: Assets.iconsCallBig,
-          label: station.overview?.mobileNumber ?? "",
+        Row(
+          children: [
+            SvgImageUtils()
+                .showSvgFromAsset(Assets.iconsCallBig, width: 20, height: 20),
+            const SizedBox(width: 10),
+            InkWell(
+                onTap: () {
+                  _makePhoneCall(station.overview?.mobileNumber ?? "");
+                },
+                child: Text(
+                  station.overview?.mobileNumber ?? "",
+                  style: const TextStyle(color: Colors.blue, fontSize: 16),
+                )),
+          ],
         ),
         const SizedBox(height: 10),
-        SmallIconLabelWidget(
-          assetPath: Assets.iconsEmail,
-          label: station.mailId ?? "",
+        Row(
+          children: [
+            SvgImageUtils()
+                .showSvgFromAsset(Assets.iconsEmail, width: 20, height: 20),
+            const SizedBox(width: 10),
+            InkWell(
+                onTap: () {
+                  _redirectToMail(station.mailId ?? "");
+                },
+                child: Text(
+                  station.mailId ?? "",
+                  style: const TextStyle(color: Colors.blue, fontSize: 16),
+                )),
+          ],
         ),
+        // SmallIconLabelWidget(
+        //   assetPath: Assets.iconsEmail,
+        //   label: station.mailId ?? "",
+        // ),
       ],
     );
   }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  Future<void> _redirectToMail(String mailId) async {
+    final Uri launchUri = Uri(
+      scheme: 'mailto',
+      path: mailId,
+    );
+    await launchUrl(launchUri);
+  }
+
 }
 
 class SmallIconLabelWidget extends StatelessWidget {
@@ -186,8 +230,7 @@ class _IconsRow extends StatelessWidget {
             asset: Assets.iconsShareBig,
             label: LocaleKeys.share,
             onTap: () {
-              String shareContent =
-                  "Next Power \n"
+              String shareContent = "Next Power \n"
                   "${controller.stationDetails.value.stationName}\n"
                   "${controller.stationDetails.value.address?.addressLine1}|"
                   "${controller.stationDetails.value.address?.addressLine2}"

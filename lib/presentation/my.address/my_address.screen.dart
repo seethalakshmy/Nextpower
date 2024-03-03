@@ -43,7 +43,7 @@ class MyAddressScreen extends GetView<MyAddressController> {
             : controller.address.isEmpty
                 ? EmptyListView(
                     subTitle: 'Kindly please add address',
-                    title: 'Oops! No Address found')
+                    title: 'Sorry No Address found')
                 : ListView(
                     children: [
                       const SizedBox(height: 10),

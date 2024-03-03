@@ -8,12 +8,11 @@ import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/views/custom_alert_view.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_outline_button.dart';
 import 'package:project/infrastructure/widgets/buttons/rounded_rectangle_button.dart';
-import 'package:project/infrastructure/widgets/combo_widgets/title_power_status_combo_widget.dart';
 import 'package:project/presentation/empty_list_view.dart';
 import 'package:project/presentation/home/controllers/home.controller.dart';
-import 'package:project/presentation/station.details/widgets/station_brief_details_widget.dart';
 
 import '../../../infrastructure/dal/models/favorites/favorites_model.dart';
+import '../../../infrastructure/widgets/text/title_widget.dart';
 
 class FavouritesView extends GetView<HomeController> {
   const FavouritesView({super.key});
@@ -37,13 +36,25 @@ class FavouritesView extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: TitlePowerStatusComboWidget(
-                                  title: favorites.stationName ?? "",
-                                  titleFontSize: 18,
-                                  power: "",
-                                  status: favorites.stationStatus ?? ""),
-                            ),
+                            Expanded(child:TitleWidget(
+                              title: favorites.stationName ?? "",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: AppColors.textTitleColor,
+                            ), ),
+                            Expanded(child:TitleWidget(
+                              title: favorites.stationName ?? "",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: AppColors.textTitleColor,
+                            ), ),
+                            // Expanded(
+                            //   child: TitlePowerStatusComboWidget(
+                            //       title: favorites.stationName ?? "",
+                            //       titleFontSize: 18,
+                            //       power: "",
+                            //       status: favorites.stationStatus ?? ""),
+                            // ),
                             IconButton(
                                 padding: const EdgeInsets.only(
                                     top: 8, left: 8, bottom: 8),
@@ -71,36 +82,36 @@ class FavouritesView extends GetView<HomeController> {
                         ),
                         const SizedBox(height: 10),
                         const Divider(),
-                        Row(
-                          children: [
-                            ContentItem(
-                              title: translate(LocaleKeys.distance),
-                              value: "",
-                              bgColor: Colors.transparent,
-                              textColor: AppColors.btmTextColor,
-                              alignment: Alignment.centerLeft,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                            ),
-                            const SizedBox(width: 5),
-                            ContentItem(
-                              title: translate(LocaleKeys.free),
-                              value: "", //(favorites.free ?? 0).toString(),
-                              bgColor: Colors.transparent,
-                              textColor: AppColors.btmTextColor,
-                              alignment: Alignment.centerLeft,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                            ),
-                            const SizedBox(width: 5),
-                            ContentItem(
-                              title: translate(LocaleKeys.active),
-                              value: "", // (favorites.active ?? 0).toString(),
-                              bgColor: Colors.transparent,
-                              textColor: AppColors.btmTextColor,
-                              alignment: Alignment.centerLeft,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     ContentItem(
+                        //       title: translate(LocaleKeys.distance),
+                        //       value: "",
+                        //       bgColor: Colors.transparent,
+                        //       textColor: AppColors.btmTextColor,
+                        //       alignment: Alignment.centerLeft,
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //     ),
+                        //     const SizedBox(width: 5),
+                        //     ContentItem(
+                        //       title: translate(LocaleKeys.free),
+                        //       value: "", //(favorites.free ?? 0).toString(),
+                        //       bgColor: Colors.transparent,
+                        //       textColor: AppColors.btmTextColor,
+                        //       alignment: Alignment.centerLeft,
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //     ),
+                        //     const SizedBox(width: 5),
+                        //     ContentItem(
+                        //       title: translate(LocaleKeys.active),
+                        //       value: "", // (favorites.active ?? 0).toString(),
+                        //       bgColor: Colors.transparent,
+                        //       textColor: AppColors.btmTextColor,
+                        //       alignment: Alignment.centerLeft,
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //     )
+                        //   ],
+                        // ),
                         const SizedBox(height: 20),
                         Row(
                           children: [

@@ -24,23 +24,23 @@ class LoginScreen extends GetView<LoginController> {
           if (controller.count.value > 1) {
             controller.canPop.value = true;
           }
-          if (controller.count.value == 1) {
-            Get.snackbar(
-              "",
-              "",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.transparent,
-              colorText: Colors.black,
-              messageText: const Text(
-                "Press Again To Exit",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-            );
-          }
+          // if (controller.count.value == 1) {
+          //   Get.snackbar(
+          //     "",
+          //     "",
+          //     snackPosition: SnackPosition.BOTTOM,
+          //     backgroundColor: Colors.transparent,
+          //     colorText: Colors.black,
+          //     messageText: const Text(
+          //       "Press Again To Exit",
+          //       style: TextStyle(
+          //           fontSize: 16,
+          //           fontWeight: FontWeight.normal,
+          //           color: Colors.grey),
+          //       textAlign: TextAlign.center,
+          //     ),
+          //   );
+          // }
         },
         canPop: controller.canPop.value,
         child: Scaffold(

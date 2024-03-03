@@ -41,7 +41,7 @@ class MyVehiclesAddEditScreen extends GetView<MyVehiclesAddEditController> {
                             children: [
                               CommonTextFieldWidget(
                                   initialValue:
-                                      controller.vehicle.vehicleNumber,
+                                      controller.vehicle.vehicleNumber.toUpperCase(),
                                   title:
                                       "${translate(LocaleKeys.vehicle)} ${translate(LocaleKeys.number).toLowerCase()}",
                                   onChanged: (value) {

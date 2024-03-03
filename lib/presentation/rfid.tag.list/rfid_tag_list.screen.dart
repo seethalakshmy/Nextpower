@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:project/generated/assets.dart';
 import 'package:project/generated/locales.g.dart';
 import 'package:project/infrastructure/theme/app_colors.dart';
-import 'package:project/infrastructure/utils/snackbar_utils.dart';
 import 'package:project/infrastructure/utils/svg_util.dart';
 import 'package:project/infrastructure/utils/translation_util.dart';
 import 'package:project/infrastructure/widgets/appbar/custom_appbar.dart';
@@ -12,6 +11,7 @@ import 'package:project/infrastructure/widgets/card/custom_card_view.dart';
 import 'package:project/infrastructure/widgets/loaders/loading_widget.dart';
 import 'package:project/infrastructure/widgets/text/title_widget.dart';
 import 'package:project/presentation/station.details/widgets/title_subtitle_column_row.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../infrastructure/dal/models/rfid/rfid_response.dart';
 import '../../infrastructure/widgets/text/subtitle_widget.dart';
 import '../empty_list_view.dart';
@@ -25,9 +25,14 @@ class RfidTagListScreen extends GetView<RfidTagListController> {
     return Scaffold(
         appBar: CustomAppbar(title: translate(LocaleKeys.rfidTag)),
         bottomNavigationBar: GestureDetector(
-          onTap: () {
-            // CustomSnackBar.showSuccessSnackBar(
-            //     'Success', "Successfully requested new RFID tag");
+          onTap: () async {
+            const String url = "https://nextpowerworld.com/rfid/";
+            Uri launchUri = Uri.parse(url);
+            if (await canLaunchUrl(launchUri)) {
+              await launchUrl(launchUri);
+            } else {
+              throw 'Could not launch $url';
+            }
           },
           child: Container(
               height: 62,

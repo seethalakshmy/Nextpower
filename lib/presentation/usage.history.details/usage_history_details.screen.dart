@@ -97,8 +97,8 @@ class UsageHistoryDetailsScreen extends GetView<UsageHistoryDetailsController> {
                     )
                   : EmptyListView(
                       subTitle: translate(
-                          LocaleKeys.somethingWentWrongPleaseTryAgainLater),
-                      title: translate(LocaleKeys.error)),
+                          LocaleKeys.noDataFound),
+                      title: translate(LocaleKeys.sorry)),
         ));
   }
 }

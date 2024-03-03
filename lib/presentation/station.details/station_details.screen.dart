@@ -26,7 +26,7 @@ class StationDetailsScreen extends GetView<StationDetailsController> {
           : controller.stationDetails.value.stationId == null
               ? EmptyListView(
                   subTitle: translate(LocaleKeys.noSuchStationsFound),
-                  title: translate(LocaleKeys.oops))
+                  title: translate(LocaleKeys.sorry))
               : RefreshIndicator(
                   onRefresh: () async {
                     if (controller.isSelectedConnectorView.value) {
