@@ -20,7 +20,7 @@ Future<FavoritesModelResponse> getFavoritesList() async {
     return data;
   } catch (e) {
     debugPrint("Api issue in provider : ${e.toString()}");
-    return FavoritesModelResponse(status: false, message: e.toString());
+    return FavoritesModelResponse(status: false, message: e.toString(), favorites: []);
   }
 }
 
